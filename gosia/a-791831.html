@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Myślenie krytyczne – kurs</title>
+<style>
+body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:#f5f5f5;color:#212121}
+.h{max-width:24rem;margin:12vh auto;background:#fff;border-radius:11px;padding:2rem 1.5rem;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+.h p.k{margin:0;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:#890c58;font-weight:700}
+.h h1{font-size:1.4rem;margin:.3rem 0 1.2rem}
+label{display:block;font-weight:600;margin-bottom:.4rem}
+input[type=password]{width:100%;font:inherit;padding:.55rem .7rem;border:1px solid #8a8a8a;border-radius:6px}
+.z{display:flex;gap:.5rem;align-items:center;margin:.8rem 0 1.2rem;font-size:.9rem}
+button{font:inherit;font-weight:600;padding:.55rem 1.2rem;border-radius:6px;border:0;background:#cc0c61;color:#fff;cursor:pointer}
+:focus-visible{outline:3px solid #0f6cbf;outline-offset:2px}
+#b{color:#b00020;min-height:1.5em;margin:.8rem 0 0}
+</style></head><body>
+<main class="h"><p class="k">Myślenie krytyczne</p><h1>Kurs dla prowadzącej</h1>
+<form id="f"><label for="p">Hasło</label><input type="password" id="p" autocomplete="current-password" required>
+<div class="z"><input type="checkbox" id="pam"><label for="pam" style="margin:0;font-weight:400">Pamiętaj na tym komputerze</label></div>
+<button type="submit">Otwórz kurs</button><p id="b" role="alert"></p></form></main>
+<script>
+(function(){
+var D={"iv": "QHM9yKtAfwz5ixWR", "ct": "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", "sol": "KKMlLWgnTZ2sJCROZLwgmQ==", "it": 250000}, K='mk-gosia-klucz';
+function bin(s){var x=atob(s),u=new Uint8Array(x.length);for(var i=0;i<x.length;i++)u[i]=x.charCodeAt(i);return u;}
+function pokaz(raw){
+  return crypto.subtle.importKey('raw',raw,'AES-GCM',false,['decrypt']).then(function(k){
+    return crypto.subtle.decrypt({name:'AES-GCM',iv:bin(D.iv)},k,bin(D.ct));
+  }).then(function(b){
+    var h=new TextDecoder().decode(b); document.open(); document.write(h); document.close();
+  });
+}
+function zapamietany(){ try{ return sessionStorage.getItem(K)||localStorage.getItem(K); }catch(e){ return null; } }
+var z=zapamietany(), h=document.querySelector('main');
+if(z){
+  h.hidden=true;
+  var start=function(){ setTimeout(function(){ pokaz(bin(z)).catch(function(){
+    h.hidden=false; try{sessionStorage.removeItem(K);localStorage.removeItem(K);}catch(e){} }); },0); };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+}
+document.getElementById('f').addEventListener('submit',function(e){
+  e.preventDefault(); var b=document.getElementById('b'); b.textContent='Otwieram…';
+  var p=new TextEncoder().encode(document.getElementById('p').value);
+  crypto.subtle.importKey('raw',p,'PBKDF2',false,['deriveBits']).then(function(m){
+    return crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-256',salt:bin(D.sol),iterations:D.it},m,256);
+  }).then(function(bits){
+    var raw=new Uint8Array(bits), s=btoa(String.fromCharCode.apply(null,raw));
+    return pokaz(raw).then(function(){
+      try{ sessionStorage.setItem(K,s); }catch(e){}
+      try{ if(window.__pam) localStorage.setItem(K,s); }catch(e){}
+    });
+  }).catch(function(){ b.textContent='Nieprawidłowe hasło.'; });
+});
+document.getElementById('pam').addEventListener('change',function(e){ window.__pam=e.target.checked; });
+})();
+</script></body></html>
