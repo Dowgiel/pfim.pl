@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Sprawdź swoje przeczucie</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Sprawdź swoje przeczucie</h1>
+<div class="mk mk-hipoteza" id="mk-hipoteza">Ćwiczenie „Sprawdź swoje przeczucie” — osiem tropów do sprawdzenia hipotezy, odkryć wolno najwyżej trzy. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-scena > * + *{margin-top:14px}\n.mk-nrsyt{font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#4a4e55;font-weight:700}\n.mk-nrsyt:focus{outline:none}\n.mk-hipoteza{font-size:17px;font-weight:600;line-height:1.5;border-left:3px solid #16181c;\n background:#fff;padding:10px 14px}\n.mk-talia{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:10px;\n min-width:0}\n.mk-pole{border:1px solid #7d838a;border-radius:3px;background:#fff;overflow:hidden;min-width:0}\n.mk-pole.mk-otw{border-color:#16181c;border-width:2px}\n.mk-kafel{display:flex;align-items:flex-start;flex-wrap:wrap;column-gap:4px;row-gap:2px;width:100%;\n font:inherit;text-align:left;background:#fff;border:0;border-left:4px solid #b4322b;padding:12px 13px;\n cursor:pointer;min-height:44px;color:#16181c}\n.mk-kafel:hover{background:#eef0ee}\n.mk-kafel:focus-visible{outline:3px solid #b4322b;outline-offset:-3px}\n.mk-kafel[aria-expanded=\"true\"]{background:#16181c;color:#f4f4f2;border-left-color:#e8a49f}\n.mk-kafel[aria-disabled=\"true\"]{background:#ececea;color:#3a3d42;border-left-color:#7d838a;\n cursor:not-allowed}\n.mk-nr{font-weight:700}\n.mk-pytanie{font-weight:600;line-height:1.35}\n.mk-stan{font-weight:400;font-style:italic}\n.mk-tresc{padding:12px 13px 14px;border-top:1px solid #c9ccc8;background:#fbfbfa}\n.mk-tresc > * + *{margin-top:8px}\n.mk-odp{font-weight:600}\n.mk-typ{font-weight:700;font-size:14px}\n.mk-typ-potwierdz{color:#96261f}\n.mk-typ-podwaz{color:#245a40}\n.mk-typ-obojetna{color:#4a4e55}\n.mk-uzasad{color:#31353d}\n.mk-blok:focus{outline:none}\n";
+var D = {"nad": "Ćwiczenie · efekt potwierdzenia", "tytul": "Sprawdź swoje przeczucie", "lid": "Poniżej przeczucie i osiem tropów, które można sprawdzić — ale odkryć wolno najwyżej trzy. Wybór potrafi dużo powiedzieć o tym, jak umysł sam sobie potwierdza to, w co już wierzy.", "limit": 3, "licznik": "Odkryte: {0} z {1}", "limitInfo": "Sprawdzanie jest już zakończone, ta karta się nie odkryje. Podsumowanie wyboru jest niżej.", "koniecBtn": "Kończę sprawdzanie", "typy": {"potwierdz": "Mogła tylko potwierdzić przeczucie.", "podwaz": "Mogła podważyć przeczucie.", "obojetna": "Obojętna wobec przeczucia."}, "naglAnaliza": "Twój wybór", "wynikP": "Mogły tylko potwierdzić przeczucie: {0} z {1} odkrytych.", "wynikW": "Mogły je podważyć: {0} z {1} odkrytych.", "wynikO": "Obojętne wobec przeczucia: {0} z {1} odkrytych.", "komZero": "Żadna karta nie została odkryta. Przeczucie zostaje niesprawdzone — ani potwierdzone, ani podważone.", "komWiecejP": "Częsty wzorzec: łatwiej sięgnąć po trop, który i tak potwierdzi to, w co się już wierzy, niż po taki, który mógłby to podważyć.", "komWiecejW": "Ten wybór idzie pod prąd częstego wzorca: częściej sięgnięto po trop, który mógł podważyć przeczucie, niż po taki, który mógł je tylko potwierdzić.", "komRowno": "Wybór wyszedł wyrównany: tyle samo tropów mogło potwierdzić przeczucie, co je podważyć.", "pokazBtn": "Pokaż wszystkie karty", "wszystkieTytul": "Wszystkie tropy", "wyjasnienieTytul": "Co pokazuje to ćwiczenie", "wyjasnienieAkapity": ["Psycholog Raymond Nickerson, w obszernym przeglądzie badań z 1998 roku, opisał efekt potwierdzenia jako szukanie i interpretowanie informacji w sposób, który sprzyja temu, w co się już wierzy. W praktyce chodzi o coś prostszego: informacje zgodne z przeczuciem łatwiej się zauważa i chętniej zapamiętuje, a te, które mu przeczą, sprawdza się surowiej i łatwiej znajduje w nich słabe punkty.", "W tym ćwiczeniu żadna karta nie kłamała — każda pokazywała prawdziwą informację. Różnica polegała na tym, które tropy w ogóle dawały szansę na podważenie przeczucia, a które z góry mogły tylko je potwierdzić. Przy trzech dostępnych odkryciach łatwo, bez złej woli, wybrać te drugie — brzmią zachęcająco i nie grożą rozczarowaniem.", "Sama znajomość tego mechanizmu nie daje na niego odporności. Nie chodzi o to, żeby nigdy nie mieć przeczuć — tylko o to, żeby świadomie sprawdzać też tropy, które mogłyby je podważyć, nie tylko te, które je potwierdzą."], "nowaSytuacjaBtn": "Nowa sytuacja", "restartBtn": "Zacznij od nowa", "nrSytuacji": "Sytuacja {0} z {1}", "sytuacje": [{"hipoteza": "Od trzech tygodni nauka wygląda inaczej: zamiast powtarzać notatki, robisz fiszki. Coraz mocniej wydaje się, że nowy sposób działa lepiej niż stary. Zanim to się uzna za pewnik, można sprawdzić najwyżej trzy z ośmiu tropów poniżej.", "karty": [{"pytanie": "Czy fiszki wydają się przyjemniejsze niż notatki?", "odpowiedz": "Zdecydowanie tak — krótkie i dają poczucie postępu.", "typ": "potwierdz", "wyjasnienie": "Pytanie o odczucie, nie o wynik. Odpowiedź „tak” nic nie mówi o tym, czy w pamięci zostaje więcej — i prawie zawsze wypadnie na korzyść metody wybranej z własnej woli."}, {"pytanie": "Porównaj wynik ostatniego testu z wynikiem sprzed miesiąca.", "odpowiedz": "Ostatni wynik: 65 procent. Miesiąc wcześniej, przy notatkach: 78 procent.", "typ": "podwaz", "wyjasnienie": "To porównanie mogło wyjść w obie strony. Tym razem wypadło gorzej dla nowej metody — taki wynik naprawdę może podważyć przeczucie."}, {"pytanie": "Czy łatwiej usiąść do nauki, odkąd są fiszki?", "odpowiedz": "Tak, dużo łatwiej się zebrać do nauki.", "typ": "potwierdz", "wyjasnienie": "Chęć do nauki to nie to samo co skuteczność zapamiętywania. Nawet gdyby fiszki nic nie poprawiały w wynikach, mogłyby i tak być przyjemniejsze — trudno, żeby to pytanie wyszło na niekorzyść metody."}, {"pytanie": "Sprawdź, ile fiszek zrobiono w tym tygodniu.", "odpowiedz": "112 fiszek.", "typ": "obojetna", "wyjasnienie": "Liczba fiszek mówi o zaangażowaniu, nie o skuteczności. Duża liczba nie dowodzi ani tego, że metoda działa lepiej, ani że działa gorzej."}, {"pytanie": "Zapytaj o wynik osobę uczącą się starą metodą.", "odpowiedz": "Jej ostatni wynik: 74 procent, podobny do jej średniej z całego semestru.", "typ": "podwaz", "wyjasnienie": "To niezależny punkt odniesienia. Gdyby jej wynik nagle spadł, sugerowałoby to, że test był po prostu trudniejszy dla wszystkich — a nie że to fiszki gorzej działają. Jej wynik jest jednak taki jak zwykle — to raczej osłabia przeczucie."}, {"pytanie": "Czy fiszki wyglądają na nowocześniejszy sposób nauki?", "odpowiedz": "Zdecydowanie — kojarzą się z metodą polecaną w poradnikach.", "typ": "potwierdz", "wyjasnienie": "„Nowocześniejszy” i „skuteczniejszy” to nie to samo. Skojarzenie z nowoczesnością nic nie mówi o wyniku — i trudno nim wykazać, że metoda działa gorzej."}, {"pytanie": "Sprawdź, ilu osobom w grupie podobają się fiszki.", "odpowiedz": "Mniej więcej połowie grupy, według nieformalnej rozmowy.", "typ": "obojetna", "wyjasnienie": "Popularność metody wśród innych osób nic nie mówi o tym, czy akurat tu działa lepiej niż notatki."}, {"pytanie": "Sprawdź, ile fiszek zapamiętano tydzień później, bez podglądania.", "odpowiedz": "16 z 20 poprawnie (80 procent) — podobnie jak wcześniejszy wynik przy notatkach, 78 procent.", "typ": "podwaz", "wyjasnienie": "To bezpośredni test pamięci po czasie. Wynik zbliżony do starej metody nie potwierdza przewagi nowej — a mógł równie dobrze wyjść wyraźnie lepiej albo gorzej."}]}, {"hipoteza": "Ulubiona knajpka w okolicy działa od lat. Przy ostatnich wizytach coraz mocniej wydaje się, że gotują tam gorzej niż kiedyś. Zanim to się uzna za pewnik, można sprawdzić najwyżej trzy z ośmiu tropów poniżej.", "karty": [{"pytanie": "Czy ostatnie dania smakowały gorzej niż wspomnienie sprzed roku?", "odpowiedz": "Tak, wyraźnie gorzej, niż to zapamiętano.", "typ": "potwierdz", "wyjasnienie": "Porównanie z odległym wspomnieniem jest zawodne — pamięć smaku blaknie i upiększa. Trudno, żeby taka odpowiedź wyszła na korzyść lokalu."}, {"pytanie": "Sprawdź zdjęcia dań z trzech ostatnich wizyt w tym roku.", "odpowiedz": "Dwie wizyty: dania oceniane wysoko. Jedna: danie zwrócone jako niedogotowane.", "typ": "podwaz", "wyjasnienie": "To zapis z bliskiego okresu, nie odległe wspomnienie. W większości wypadło dobrze — taki wynik osłabia przeczucie, choć nie całkowicie."}, {"pytanie": "Sprawdź, czy lokal zmienił wystrój sali.", "odpowiedz": "Tak, wnętrze odnowiono w zeszłym miesiącu.", "typ": "obojetna", "wyjasnienie": "Wystrój sali nie ma związku z tym, co dzieje się w kuchni. To ciekawostka, nie dowód na jakość jedzenia."}, {"pytanie": "Czy to miejsce jest teraz mniej modne niż kiedyś?", "odpowiedz": "Rzeczywiście, mniej się teraz o nim mówi.", "typ": "potwierdz", "wyjasnienie": "Popularność w rozmowach nie mówi nic o jakości jedzenia. Spadek „bycia na topie” łatwo pomylić ze spadkiem jakości, bo akurat to pasuje do przeczucia."}, {"pytanie": "Sprawdź aktualne oceny lokalu na kilku niezależnych stronach.", "odpowiedz": "Średnia ocena: 4,4 na 5 — podobna do średniej sprzed roku.", "typ": "podwaz", "wyjasnienie": "Niezależne oceny wielu gości to mocny punkt odniesienia. Wynik zbliżony do zeszłorocznego raczej podważa przeczucie o pogorszeniu."}, {"pytanie": "Sprawdź, czy zmienił się cennik.", "odpowiedz": "Tak, ceny wzrosły o kilkanaście procent — podobnie jak w wielu innych lokalach w tym czasie.", "typ": "obojetna", "wyjasnienie": "Wyższa cena kusi, żeby pomyśleć „skoro drożej, to pewnie oszczędzają na jedzeniu” — to ten sam skrót co przy spadku popularności. Różnica: taka podwyżka dotyczy naraz wielu lokali, więc ma raczej przyczyny niezwiązane z tą konkretną kuchnią (czynsz, prąd, towar) — bez dodatkowych informacji niewiele mówi o jakości dań."}, {"pytanie": "Czy uczucie zawodu pojawia się teraz częściej niż kiedyś?", "odpowiedz": "Owszem, ostatnio częściej kończy się to niezadowoleniem.", "typ": "potwierdz", "wyjasnienie": "To znowu wrażenie, nie pomiar — a wrażenia łatwo dopasowują się do tego, czego się już szuka. Pytanie, które z góry zakłada zawód, nie może wyjść na korzyść lokalu."}, {"pytanie": "Poproś towarzyszącą osobę o osobną ocenę dania, bez podpowiadania niczego.", "odpowiedz": "Oceniła danie jako bardzo dobre, bez zastrzeżeń.", "typ": "podwaz", "wyjasnienie": "Niezależna ocena kogoś, kto nie zna przeczucia, to realny sprawdzian. Mogła wypaść równie dobrze negatywnie — i wtedy przeczucie by się potwierdziło."}]}]};
+function ensure(){
+  var w = document.getElementById('mk-hipoteza') || document.querySelector('.mk-hipoteza');
+  if(!w) return null;
+  w.id='mk-hipoteza'; w.className='mk mk-hipoteza';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-hipoteza"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-hipoteza');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var LIMIT = D.limit;
+  c.appendChild(el('p','mk-lid', D.lid));
+  var scena = el('div','mk-scena');
+  c.appendChild(scena);
+
+  function renderuj(n, fokusNaglowek){
+    scena.innerHTML = '';
+    var s = D.sytuacje[n];
+    var odkryte = 0;
+    var typyOdkryte = {potwierdz: 0, podwaz: 0, obojetna: 0};
+    var zakonczono = false;
+    var karty = [];
+
+    var naglowek = el('h4','mk-nrsyt',
+      D.nrSytuacji.split('{0}').join(String(n + 1)).split('{1}').join(String(D.sytuacje.length)));
+    naglowek.setAttribute('tabindex','-1');
+    scena.appendChild(naglowek);
+    scena.appendChild(el('p','mk-hipoteza', s.hipoteza));
+
+    var licz = el('p','mk-licz');
+    licz.setAttribute('role','status');
+    licz.textContent = D.licznik.split('{0}').join('0').split('{1}').join(String(LIMIT));
+    scena.appendChild(licz);
+
+    function licznik(){
+      licz.textContent = D.licznik.split('{0}').join(String(odkryte)).split('{1}').join(String(LIMIT));
+    }
+
+    var glos = el('p','mk-sr');
+    glos.setAttribute('role','status');
+    scena.appendChild(glos);
+
+    var talia = el('div','mk-talia');
+    talia.setAttribute('role','list');
+    scena.appendChild(talia);
+
+    function odslon(rec){
+      rec.revealed = true;
+      rec.tr.hidden = false;
+      rec.btn.setAttribute('aria-expanded','true');
+      rec.poz.className = 'mk-pole mk-otw';
+      rec.stan.textContent = ' — odkryta';
+      odkryte++;
+      typyOdkryte[rec.k.typ]++;
+      licznik();
+      glos.textContent = '';
+      if(odkryte >= LIMIT){
+        zakonczRunde();
+      }
+    }
+
+    s.karty.forEach(function(k, i){
+      var poz = el('div','mk-pole');
+      poz.setAttribute('role','listitem');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'mk-kafel';
+      btn.setAttribute('aria-expanded','false');
+      var nr = el('span','mk-nr', 'Karta ' + (i + 1) + '. ');
+      var pyt = el('span','mk-pytanie', k.pytanie);
+      var stan = el('span','mk-stan','');
+      btn.appendChild(nr); btn.appendChild(pyt); btn.appendChild(stan);
+
+      var idT = 'mk-tr-' + n + '-' + i;
+      var tr = el('div','mk-tresc');
+      tr.id = idT;
+      tr.hidden = true;
+      btn.setAttribute('aria-controls', idT);
+      tr.appendChild(el('p','mk-odp', k.odpowiedz));
+      tr.appendChild(el('p','mk-typ mk-typ-' + k.typ, D.typy[k.typ]));
+      tr.appendChild(el('p','mk-uzasad', k.wyjasnienie));
+
+      poz.appendChild(btn); poz.appendChild(tr);
+      talia.appendChild(poz);
+
+      var rec = {btn: btn, tr: tr, stan: stan, poz: poz, k: k, revealed: false};
+      karty.push(rec);
+
+      btn.addEventListener('click', function(){
+        if(rec.revealed){ return; }
+        if(zakonczono){
+          glos.textContent = D.limitInfo;
+          return;
+        }
+        odslon(rec);
+      });
+    });
+
+    var koniecBtn = el('button','mk-btn mk-btn2', D.koniecBtn);
+    koniecBtn.type = 'button';
+    scena.appendChild(koniecBtn);
+    koniecBtn.addEventListener('click', function(){
+      if(zakonczono){ return; }
+      zakonczRunde();
+    });
+
+    function zakonczRunde(){
+      zakonczono = true;
+      karty.forEach(function(rec){
+        if(!rec.revealed){ rec.btn.setAttribute('aria-disabled','true'); }
+      });
+      koniecBtn.hidden = true;
+      pokazAnalize();
+    }
+
+    function pokazAnalize(){
+      var blok = el('div','mk-blok mk-analiza');
+      blok.setAttribute('tabindex','-1');
+      blok.appendChild(el('h4', null, D.naglAnaliza));
+      if(odkryte > 0){
+        var ul = el('ul','mk-lista');
+        ul.appendChild(el('li', null, D.wynikP.split('{0}').join(String(typyOdkryte.potwierdz))
+          .split('{1}').join(String(odkryte))));
+        ul.appendChild(el('li', null, D.wynikW.split('{0}').join(String(typyOdkryte.podwaz))
+          .split('{1}').join(String(odkryte))));
+        ul.appendChild(el('li', null, D.wynikO.split('{0}').join(String(typyOdkryte.obojetna))
+          .split('{1}').join(String(odkryte))));
+        blok.appendChild(ul);
+      }
+
+      var kom;
+      if(odkryte === 0){ kom = D.komZero; }
+      else if(typyOdkryte.potwierdz > typyOdkryte.podwaz){ kom = D.komWiecejP; }
+      else if(typyOdkryte.potwierdz < typyOdkryte.podwaz){ kom = D.komWiecejW; }
+      else { kom = D.komRowno; }
+      blok.appendChild(el('p', null, kom));
+
+      var pokazBtn = el('button','mk-btn', D.pokazBtn);
+      pokazBtn.type = 'button';
+      blok.appendChild(pokazBtn);
+      scena.appendChild(blok);
+      blok.focus();
+
+      pokazBtn.addEventListener('click', function(){
+        pokazBtn.hidden = true;
+        blok.appendChild(el('h4','mk-wsztyt', D.wszystkieTytul));
+        karty.forEach(function(rec){
+          if(!rec.revealed){
+            rec.revealed = true;
+            rec.tr.hidden = false;
+            rec.btn.setAttribute('aria-expanded','true');
+            rec.btn.removeAttribute('aria-disabled');
+            rec.poz.className = 'mk-pole mk-otw';
+            rec.stan.textContent = ' — odkryta';
+          }
+        });
+        pokazWyjasnienie();
+      });
+    }
+
+    function pokazWyjasnienie(){
+      var w = el('div','mk-blok mk-wyjasnienie');
+      w.setAttribute('tabindex','-1');
+      w.appendChild(el('h4', null, D.wyjasnienieTytul));
+      D.wyjasnienieAkapity.forEach(function(a){ w.appendChild(el('p', null, a)); });
+      scena.appendChild(w);
+
+      var btny = el('div','mk-btny');
+      var dalej = el('button','mk-btn', D.nowaSytuacjaBtn);
+      dalej.type = 'button';
+      dalej.addEventListener('click', function(){
+        renderuj((n + 1) % D.sytuacje.length, true);
+      });
+      btny.appendChild(dalej);
+      var again = el('button','mk-btn mk-btn2', D.restartBtn);
+      again.type = 'button';
+      again.addEventListener('click', function(){ renderuj(0, true); });
+      btny.appendChild(again);
+      scena.appendChild(btny);
+      w.focus();
+    }
+
+    if(fokusNaglowek){ naglowek.focus(); }
+  }
+
+  renderuj(0, false);
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

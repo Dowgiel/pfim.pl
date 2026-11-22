@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Słownik pojęć</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Słownik pojęć</h1>
+<div class="mk mk-slownik" id="mk-slownik">Słownik pojęć — 42 hasła z wyszukiwarką. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-narz{display:flex;flex-direction:column;gap:12px}\n.mk-pole-sz{display:flex;flex-direction:column;gap:5px}\n.mk-lab{font-weight:700;font-size:14px}\n.mk-input{font:inherit;font-size:16px;padding:11px 13px;border:2px solid #7d838a;\n border-radius:3px;background:#fff;color:#16181c;min-height:44px;width:100%;max-width:420px}\n.mk-input:focus-visible{outline:3px solid #b4322b;outline-offset:1px;border-color:#16181c}\n.mk-filtry{display:flex;flex-wrap:wrap;gap:7px}\n.mk-fbtn{font:inherit;font-size:14px;font-weight:600;padding:8px 13px;border-radius:3px;\n border:1px solid #7d838a;background:#fff;color:#16181c;cursor:pointer;min-height:44px}\n.mk-fbtn:hover{background:#eef0ee}\n.mk-fbtn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-fakt{background:#16181c;color:#f4f4f2;border-color:#16181c}\n.mk-fakt:hover{background:#31353d}\n.mk-hasla{display:flex;flex-direction:column;gap:9px}\n.mk-haslo{border:1px solid #c9ccc8;border-left:4px solid #b4322b;background:#fbfbfa;\n border-radius:3px;padding:13px 15px}\n.mk-haslo > * + *{margin-top:7px}\n.mk-hglowa{display:flex;flex-wrap:wrap;gap:5px 11px;align-items:baseline}\n.mk-hnaz{font-size:16px;font-weight:700}\n.mk-hkat{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#4a4e55;\n font-weight:700;border:1px solid #7d838a;border-radius:2px;padding:1px 7px}\n.mk-huwaga{color:#31353d;border-top:1px solid #dcdedb;padding-top:7px}\n.mk-brak{padding:16px;text-align:center;color:#4a4e55;border:1px dashed #7d838a;border-radius:3px}\n";
+var D = {"nad": "Ćwiczenie · słownik pojęć", "tytul": "Słownik pojęć", "hasla": [{"h": "Autorytet deontyczny", "k": "pojęcia", "d": "Autorytet przełożonego: ktoś może wydawać polecenia, bo od tego zależy osiągnięcie celu.", "u": "Bocheński uznaje za zabobon przekonanie, że kto jest autorytetem deontycznym, ten automatycznie jest też epistemicznym."}, {"h": "Autorytet epistemiczny", "k": "pojęcia", "d": "Autorytet znawcy: ktoś wie w danej dziedzinie więcej i mamy podstawy mu w niej wierzyć.", "u": "Rozróżnienie pochodzi od Józefa Bocheńskiego."}, {"h": "Bańka filtrująca", "k": "mechanizmy", "d": "Termin Eli Parisera z 2011 roku na mechanizm głównie techniczny: spersonalizowane algorytmy dobierają treść na podstawie wcześniejszych wyborów osoby korzystającej z serwisu, stopniowo i w dużej mierze niewidocznie zawężając dostęp do informacji sprzecznych z tym, co już wybierała.", "u": "Różni się od komory pogłosowej, która jest zjawiskiem społecznym, nie algorytmicznym — w tym kursie obie nazywa się łącznie bańką informacyjną."}, {"h": "Bańka informacyjna", "k": "mechanizmy", "d": "Stan, w którym docierają do nas głównie treści zgodne z tym, co już myślimy — bo algorytm podsuwa to, co nas zatrzymuje, a my sami dobieramy znajomych i źródła.", "u": "Bańka nie powstaje przez czyjąś złą wolę: składa się z naszych własnych kliknięć."}, {"h": "Cherry-picking", "k": "zabiegi", "d": "Po polsku dobór wybiórczy: przedstawienie wyłącznie tych danych albo przykładów, które potwierdzają tezę, i przemilczenie tych, które jej przeczą, bez ujawnienia odbiorcy, że coś pominięto.", "u": "To coś innego niż nieświadomy błąd — bywa świadomą techniką retoryczną nadawcy, a przy danych liczbowych prowadzi wprost do fałszywej równowagi."}, {"h": "Clickbait", "k": "zabiegi", "d": "Nagłówek zbudowany tak, żeby wywołać kliknięcie, a nie przekazać informację. Zwykle zostawia lukę („nie uwierzysz, co…”), którą wypełnia dopiero treść.", "u": "Sprawdzian: czy z samego nagłówka dowiaduję się, o co chodzi? Jeśli nie — to nie jest nagłówek."}, {"h": "Debunking", "k": "narzędzia", "d": "Reaktywne obalanie już rozpowszechnionej dezinformacji albo konkretnego fałszywego twierdzenia — działanie po tym, jak odbiorca miał z nim kontakt.", "u": "Fact-checking jest jednym z jego narzędzi, obok korekty algorytmicznej platformy czy korekty społecznościowej."}, {"h": "Deepfake", "k": "zabiegi", "d": "Obraz, dźwięk albo nagranie wideo wygenerowane lub zmanipulowane przez sztuczną inteligencję tak, by przypominało istniejącą osobę, miejsce lub wydarzenie i sprawiało wrażenie autentycznego — tak definiuje je unijne rozporządzenie o sztucznej inteligencji.", "u": "W badaniu na 210 osobach trafność rozpoznania wyniosła zaledwie 57,6 procent — ledwie więcej niż rzut monetą, a pewność siebie oceniających nie szła w parze z trafnością."}, {"h": "Dezinformacja", "k": "mechanizmy", "d": "Fałszywa informacja tworzona i rozpowszechniana świadomie, z zamiarem wyrządzenia szkody.", "u": "Różni się od **misinformacji**, czyli nieprawdy przekazywanej w dobrej wierze przez kogoś, kto sam dał się nabrać."}, {"h": "Dobieranie kart", "k": "zabiegi", "d": "Pokazywanie wyłącznie faktów wygodnych dla tezy i pomijanie niewygodnych ({en:card stacking}) — każde pojedyncze zdanie może być prawdziwe, a obraz całości i tak wychodzi fałszywy.", "u": "Opisane już w 1937 roku przez Institute for Propaganda Analysis jako jedna z siedmiu klasycznych technik propagandy."}, {"h": "Efekt aureoli", "k": "błędy poznawcze", "d": "Przenoszenie wrażenia z jednej wyrazistej cechy na ocenę cech, o których nic konkretnego nie wiadomo — kto wydaje się sympatyczny, wydaje się też kompetentny i uczciwy.", "u": "Nazwę nadał zjawisku Edward Thorndike (1920). Nisbett i Wilson (1977) pokazali, że działa bez udziału świadomości: osoby badane nie dostrzegały, że sympatia do wykładowcy z nagrania zabarwiła ich ocenę jego wyglądu i akcentu."}, {"h": "Efekt Barnuma", "k": "błędy poznawcze", "d": "Skłonność do uznawania ogólnych, pasujących do każdego opisów za trafny portret nas samych.", "u": "Nazwa pochodzi od cyrkowca P.T. Barnuma."}, {"h": "Efekt ciągłego wpływu", "k": "błędy poznawcze", "d": "Fałszywa informacja nadal wpływa na wnioski odbiorcy, nawet gdy już wie, że ją sprostowano — sprostowanie rzadko usuwa ten wpływ w całości.", "u": "Dlatego stare, już sprostowane opowieści i fałszywki wciąż potrafią wracać w rozmowach."}, {"h": "Efekt Dunninga i Krugera", "k": "błędy poznawcze", "d": "Prawidłowość opisana przez Justina Krugera i Davida Dunninga (1999): osoby najsłabiej kompetentne w danej dziedzinie najbardziej przeceniają swoje umiejętności — bo do oceny własnych braków potrzeba tej samej wiedzy, której im brakuje.", "u": "Spór trwa: reanaliza Gignaca i Zajenkowskiego (2020) nie potwierdza nieproporcjonalnego zawyżania ocen akurat u najsłabszych. W 2023 roku Hiller opublikował do niej kontrargument, a autorzy odpowiedzieli, że i po zaproponowanej przez niego poprawce efektu nie widać."}, {"h": "Efekt odwrotny", "k": "błędy poznawcze", "d": "Sytuacja, w której korekta błędnego przekonania paradoksalnie je wzmacnia, zamiast osłabiać (Nyhan i Reifler, 2010).", "u": "Nowsze, systematyczne próby zmierzenia tego zjawiska pokazują, że jest ono rzadkie — sam współtwórca koncepcji przyznał później, że teza była przesadzona."}, {"h": "Efekt potwierdzenia", "k": "błędy poznawcze", "d": "Szukanie i lepsze zapamiętywanie informacji zgodnych z własnym przekonaniem, przy jednoczesnym surowszym traktowaniu tych sprzecznych.", "u": "Najsilniejszy z błędów poznawczych i najtrudniejszy do zauważenia u siebie."}, {"h": "Fact-checking", "k": "narzędzia", "d": "Systematyczne sprawdzanie prawdziwości twierdzeń publicznych, z podaniem źródeł i metody.", "u": "Rzetelna organizacja fact-checkingowa publikuje metodologię i pozwala prześledzić swoje kroki."}, {"h": "Fake news", "k": "zabiegi", "d": "Materiał udający wiadomość, świadomie fałszywy. Termin bywa nadużywany jako etykieta na niewygodne doniesienia — dlatego badacze i badaczki rozróżniają zamiast tego misinformację, dezinformację i malinformację, patrząc na intencję nadawcy.", "u": "Gdy ktoś nazywa fake newsem każdy tekst, który mu się nie podoba, sam używa zabiegu."}, {"h": "Fałszywa alternatywa", "k": "zabiegi", "d": "Przedstawienie sprawy jako wyboru między dwiema możliwościami, choć istnieją inne — albo choć obie można mieć naraz.", "u": "„Postawili na nowy parking zamiast na żłobek” działa nawet wtedy, gdy oba wydatki pochodzą z osobnych, niewymiennych źródeł."}, {"h": "Fałszywa równowaga", "k": "zabiegi", "d": "Przedstawianie dwóch stanowisk jako równorzędnych, gdy dowody rozkładają się nierówno.", "u": "„Naukowcy są podzieleni” przy zgodzie 97 do 3 nie jest równowagą, tylko zniekształceniem."}, {"h": "Fragmentaryczna ekspertyza", "k": "pojęcia", "d": "Sytuacja, w której ta sama osoba jest naprawdę biegła w jednej części swojej pracy, a zawodna w innej.", "u": "Termin z artykułu Daniela Kahnemana i Gary'ego Kleina (2009) — {en:fractionated expertise}. Autorzy uważają ją za regułę, nie wyjątek: trafność w jednym rodzaju zadań nie świadczy o trafności w innym."}, {"h": "Framing", "k": "zabiegi", "d": "Dobór ramy, w której podajemy informację — ten sam fakt w innej ramie prowadzi do innej oceny.", "u": "„Dziewięćdziesiąt procent powodzenia” i „dziesięć procent niepowodzeń” to jedna liczba."}, {"h": "Heurystyka afektu", "k": "błędy poznawcze", "d": "Ocenianie ryzyka i korzyści na podstawie jednego ogólnego wrażenia — „podoba mi się” albo „nie podoba mi się” — zamiast osobnego namysłu nad jednym i drugim.", "u": "Stąd paradoks: to, co wydaje się korzystne, wydaje się też mniej groźne, choć w rzeczywistości korzyść i ryzyko nie muszą iść w przeciwne strony (Finucane i in., 2000; Slovic i in., 2007)."}, {"h": "Heurystyka dostępności", "k": "błędy poznawcze", "d": "Ocenianie prawdopodobieństwa po tym, jak łatwo przychodzi nam do głowy przykład.", "u": "Dlatego po serii doniesień o przestępstwach ludzie oceniają przestępczość jako rosnącą, nawet gdy statystyki spadają."}, {"h": "Kaskada dostępności", "k": "mechanizmy", "d": "Samonapędzający się proces, w którym opinia o zagrożeniu zyskuje wiarygodność wraz z tym, jak często wraca w debacie publicznej — a nie dlatego, że przybywa dowodów.", "u": "Opisali go Timur Kuran i Cass Sunstein (1999). Sama kaskada nie mówi, czy alarm jest słuszny, czy wyolbrzymiony — wzmacnia uwagę w obu przypadkach."}, {"h": "Komora pogłosowa", "k": "mechanizmy", "d": "Starsze i szersze pojęcie niż bańka filtrująca: środowisko społeczne, w którym odbiorca styka się głównie z ludźmi i treściami podzielającymi jego poglądy, a stanowiska odmienne są nieobecne albo ignorowane.", "u": "Mechanizm jest tu społeczny — chodzi o to, kogo się obserwuje i do jakiej grupy się należy, nie tylko o to, co podsuwa algorytm."}, {"h": "Kryptoreklama", "k": "zabiegi", "d": "Przekaz reklamowy udający treść dziennikarską albo prywatną opinię.", "u": "W Polsce wymaga oznaczenia. Brak oznaczenia jest naruszeniem prawa, nie tylko etyki — kryptoreklama jest wprost zakazana w ustawie z 2007 roku o przeciwdziałaniu nieuczciwym praktykom rynkowym (art. 7 pkt 11)."}, {"h": "Malinformacja", "k": "mechanizmy", "d": "Informacja prawdziwa, użyta po to, by zaszkodzić — na przykład fakt wyrwany w złej wierze z kontekstu albo prywatne dane upublicznione bez zgody.", "u": "Jedyna część trójpodziału z dezinformacją i misinformacją, w której sama treść jest prawdziwa — o szkodliwości decyduje wyłącznie cel jej użycia."}, {"h": "Manipulacja", "k": "mechanizmy", "d": "Wpływanie na czyjeś przekonania lub decyzje w sposób, który omija albo osłabia racjonalną ocenę — zamiast przekonywać rzetelnymi racjami. Odróżnia się ją zarówno od perswazji, jak i od przymusu.", "u": "Czy manipulacja musi być ukryta, to sprawa sporna. Część badaczy i badaczek definiuje ją jako wpływ ukryty, wykorzystujący słabości w podejmowaniu decyzji (Susser, Roessler i Nissenbaum, 2019). Inni zwracają uwagę, że jawne naciski — presja grupy, nagabywanie, wpędzanie w poczucie winy — też bywają manipulacją."}, {"h": "Misinformacja", "k": "mechanizmy", "d": "Fałsz rozpowszechniany bez intencji wyrządzenia szkody — ktoś sam dał się nabrać i przekazuje dalej w dobrej wierze.", "u": "Razem z dezinformacją i malinformacją tworzy trójpodział, w którym granicę wyznacza intencja nadawcy, nie sama treść."}, {"h": "Postprawda", "k": "mechanizmy", "d": "Stan debaty publicznej, w którym fakty ważą mniej niż emocje i przekonania odbiorcy.", "u": "Słowo roku Oxford Dictionaries 2016."}, {"h": "Prebunking", "k": "narzędzia", "d": "Proaktywna strategia, która uodparnia odbiorcę na manipulację, zanim ją napotka — ostrzega przed spodziewaną techniką i pokazuje jej osłabioną wersję, na wzór szczepionki.", "u": "Badania pokazują, że działa niezależnie od poglądów politycznych odbiorcy, choć debunking ma nad nim niewielką przewagę."}, {"h": "Propaganda", "k": "mechanizmy", "d": "Systematyczny, zorganizowany przekaz nastawiony na ukształtowanie postaw wobec sprawy publicznej, zwykle na rzecz jednej strony.", "u": "Nie musi kłamać — wystarczy, że dobiera prawdy."}, {"h": "Przebodźcowanie", "k": "mechanizmy", "d": "Nadmiar bodźców informacyjnych, który obniża zdolność do analizy i sprzyja reagowaniu emocjonalnemu zamiast namysłu.", "u": "Bywa techniką: zalanie odbiorcy przekazem tak, by nie zdążył niczego sprawdzić."}, {"h": "Sprawdzenie krzyżowe", "k": "narzędzia", "d": "Weryfikacja tej samej informacji w kilku niezależnych źródłach.", "u": "Uwaga na pozorną niezależność: trzy portale przedrukowujące jedną depeszę to jedno źródło."}, {"h": "Strefa komfortu", "k": "mechanizmy", "d": "Potoczne, nie ściśle naukowe określenie obszaru treści i poglądów, w którym nie musimy nic rewidować. Wyjście z niej bywa nazywane warunkiem myślenia krytycznego, a nie jego efektem ubocznym.", "u": ""}, {"h": "Szum", "k": "pojęcia", "d": "Niepożądana zmienność ocen, które powinny być jednakowe: te same dane prowadzą do różnych ocen — u różnych osób albo u tej samej osoby w różnych chwilach — a rozrzut nie ma wspólnego kierunku.", "u": "Różni się od **błędu systematycznego**, który przesuwa wszystkie oceny w tę samą stronę. Oba rodzaje błędu rozróżniają Daniel Kahneman, Olivier Sibony i Cass R. Sunstein w książce „Szum” (wyd. pol. 2022)."}, {"h": "Ślepota na własne uprzedzenia", "k": "błędy poznawcze", "d": "Zdolność do dostrzegania zniekształceń w myśleniu innych przy jednoczesnym niedostrzeganiu ich u siebie.", "u": "Dotyczy także osób, które właśnie przeczytały listę błędów poznawczych."}, {"h": "Wolność od fałszu", "k": "pojęcia", "d": "Za Izydorą Dąmbską: możność trafnego rozpoznawania prawdy. Kłamstwo narzucane przez propagandę narusza tę wolność, a nie tylko normy etyczne.", "u": "Wątek rozwija rozdział Gadacza o wolności myślenia."}, {"h": "WYSIATI", "k": "błędy poznawcze", "d": "Skrót Daniela Kahnemana od {en:what you see is all there is} — „to, co widzisz, to wszystko, co jest”. Szybkie myślenie buduje spójną historię z tego, co akurat ma pod ręką, i nie liczy się z tym, czego brakuje.", "u": "Pewność bierze się ze spójności historii, a nie z ilości i jakości danych — dlatego niewiele informacji potrafi dać dużo pewności."}, {"h": "Zakotwiczenie", "k": "błędy poznawcze", "d": "Wpływ pierwszej usłyszanej liczby na wszystkie późniejsze oceny — także wtedy, gdy wiemy, że była przypadkowa.", "u": "Stąd „było 899, jest 499”."}, {"h": "Złudzenie prawdy", "k": "błędy poznawcze", "d": "Zdanie powtarzane wielokrotnie zaczyna brzmieć prawdziwiej, niezależnie od treści.", "u": "Dlatego dementowanie plotki przez jej cytowanie bywa skuteczniejsze w utrwalaniu niż w prostowaniu."}], "kategorie": ["wszystkie", "błędy poznawcze", "zabiegi", "mechanizmy", "narzędzia", "pojęcia"], "szukaj_etyk": "Szukaj w słowniku", "szukaj_ph": "np. bańka, autorytet, framing", "brak": "Nie znaleziono hasła. Spróbuj krótszego fragmentu.", "licznik": "Widoczne hasła: {0} z {1}"};
+function ensure(){
+  var w = document.getElementById('mk-slownik') || document.querySelector('.mk-slownik');
+  if(!w) return null;
+  w.id='mk-slownik'; w.className='mk mk-slownik';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-slownik"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-slownik');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var N = D.hasla.length, kat = 'wszystkie', fraza = '';
+  c.appendChild(el('p','mk-lid',
+    'Hasła są ułożone alfabetycznie. Filtr działa od pierwszej wpisanej litery.'));
+
+  var narz = el('div','mk-narz');
+  var lab = document.createElement('label');
+  lab.className='mk-lab'; lab.setAttribute('for','mk-szuk');
+  lab.textContent = D.szukaj_etyk;
+  var inp = document.createElement('input');
+  inp.type='search'; inp.id='mk-szuk'; inp.className='mk-input';
+  inp.setAttribute('placeholder', D.szukaj_ph);
+  inp.setAttribute('autocomplete','off');
+  var polelab = el('div','mk-pole-sz');
+  polelab.appendChild(lab); polelab.appendChild(inp);
+  narz.appendChild(polelab);
+
+  var fk = el('div','mk-filtry'); fk.setAttribute('role','group');
+  fk.setAttribute('aria-label','Filtr kategorii');
+  D.kategorie.forEach(function(k, i){
+    var b=document.createElement('button'); b.type='button';
+    b.className='mk-fbtn' + (i===0 ? ' mk-fakt':'');
+    b.textContent = k; b.setAttribute('aria-pressed', i===0 ? 'true':'false');
+    b.addEventListener('click', function(){
+      kat = k;
+      [].forEach.call(fk.querySelectorAll('button'), function(x){
+        var on = (x === b);
+        x.setAttribute('aria-pressed', on ? 'true':'false');
+        x.className = 'mk-fbtn' + (on ? ' mk-fakt':'');
+      });
+      rysuj();
+    });
+    fk.appendChild(b);
+  });
+  narz.appendChild(fk);
+  c.appendChild(narz);
+
+  var licz = el('p','mk-licz'); licz.setAttribute('role','status'); c.appendChild(licz);
+  var lista = el('div','mk-hasla'); c.appendChild(lista);
+
+  inp.addEventListener('input', function(){ fraza = inp.value.toLowerCase().trim(); rysuj(); });
+
+  function bez(s){
+    return s.toLowerCase()
+      .split('ą').join('a').split('ć').join('c').split('ę').join('e')
+      .split('ł').join('l').split('ń').join('n').split('ó').join('o')
+      .split('ś').join('s').split('ź').join('z').split('ż').join('z');
+  }
+
+  function czyst(s){ return s.split('**').join('').replace(/\{en:([^}]*)\}/g, '$1'); }
+  function wstaw(p, s){
+    s.split(/(\*\*[^*]+\*\*|\{en:[^}]+\})/).forEach(function(cz){
+      if(!cz) return;
+      if(cz.indexOf('**') === 0){
+        var b=document.createElement('strong'); b.textContent=cz.slice(2,-2); p.appendChild(b);
+      } else if(cz.indexOf('{en:') === 0){
+        var e=document.createElement('span'); e.setAttribute('lang','en');
+        e.textContent=cz.slice(4,-1); p.appendChild(e);
+      } else p.appendChild(document.createTextNode(cz));
+    });
+  }
+
+  function rysuj(){
+    lista.innerHTML='';
+    var f = bez(fraza), widz = 0;
+    D.hasla.forEach(function(h){
+      if(kat !== 'wszystkie' && h.k !== kat) return;
+      if(f && bez(h.h).indexOf(f) < 0 && bez(czyst(h.d)).indexOf(f) < 0) return;
+      widz++;
+      var art=document.createElement('article'); art.className='mk-haslo';
+      var g=el('div','mk-hglowa');
+      g.appendChild(el('h4','mk-hnaz', h.h));
+      g.appendChild(el('span','mk-hkat', h.k));
+      art.appendChild(g);
+      var pd=document.createElement('p'); wstaw(pd, h.d); art.appendChild(pd);
+      if(h.u){
+        var p=el('p','mk-huwaga'); wstaw(p, h.u); art.appendChild(p);
+      }
+      lista.appendChild(art);
+    });
+    if(!widz) lista.appendChild(el('p','mk-brak', D.brak));
+    licz.textContent = D.licznik.split('{0}').join(String(widz)).split('{1}').join(String(N));
+  }
+  rysuj();
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

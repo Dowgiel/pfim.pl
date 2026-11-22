@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Dwa komunikaty z tych samych faktów</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Dwa komunikaty z tych samych faktów</h1>
+<div class="mk mk-karty" id="mk-karty">Ćwiczenie „Dwa komunikaty z tych samych faktów” — złóż komunikat o sukcesie i o klęsce z tych samych prawdziwych zdań. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-etapy > * + *{margin-top:18px}\n.mk-etap > * + *{margin-top:12px}\n.mk-etaptyt{font-size:17px}\n.mk-etaptyt:focus{outline:none}\n.mk-fs{border:1px solid #c9ccc8;border-radius:3px;padding:12px 14px;background:#fbfbfa;margin:0;min-width:0}\n.mk-fs > * + *{margin-top:8px}\n.mk-pol{font-weight:600}\n.mk-opcja{display:flex;align-items:flex-start;gap:10px;border:1px solid #7d838a;border-radius:3px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-check:checked){border-color:#16181c;border-width:2px;padding:8px 11px}\n.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-check{width:18px;height:18px;accent-color:#b4322b;margin:3px 0 0;flex:none}\n.mk-cyt{margin:0;border-left:3px solid #16181c;background:#fff;padding:10px 14px;font-size:16px;line-height:1.55}\n.mk-cyt strong{display:block;font-size:18px;margin-bottom:4px}\n.mk-pad{padding:10px 14px;background:#fff}\n.mk-pad > * + *{margin-top:6px}\n.mk-pomin{font-weight:700}\n.mk-blok:focus{outline:none}\n";
+var D = {"nad": "Ćwiczenie · propaganda nie musi kłamać", "tytul": "Dwa komunikaty z tych samych faktów", "lid": "Wierzbogród to miasto wymyślone na potrzeby ćwiczenia. Poniżej osiem prawdziwych faktów z jednego roku jego życia. Najpierw złóż z nich komunikat o sukcesie władz, potem — komunikat o ich klęsce. W każdym wybierz dokładnie trzy fakty.", "fakty": [{"t": "Otwarto nowy basen miejski.", "znak": "+"}, {"t": "Bezrobocie spadło z 8 do 6 procent.", "znak": "+"}, {"t": "Zamknięto jedyną przychodnię dziecięcą.", "znak": "-"}, {"t": "Dług miasta wzrósł o jedną trzecią.", "znak": "-"}, {"t": "Wyremontowano 12 kilometrów dróg.", "znak": "+"}, {"t": "Budowa basenu kosztowała dwa razy więcej, niż planowano.", "znak": "-"}, {"t": "Na miejski festiwal przyszło rekordowe 20 tysięcy osób.", "znak": "+"}, {"t": "Z miasta wyprowadziło się 900 młodych osób.", "znak": "-"}], "etapy": [{"tytul": "Komunikat 1: sukces władz", "polecenie": "Wybierz trzy fakty, które pokażą władze miasta w najlepszym świetle.", "naglowek": "Wierzbogród rośnie w siłę!", "chce": "+", "zly": "ten fakt psuje obraz sukcesu — autor komunikatu propagandowego by go pominął."}, {"tytul": "Komunikat 2: klęska władz", "polecenie": "Teraz wybierz trzy fakty, które pokażą te same władze w najgorszym świetle.", "naglowek": "Wierzbogród na równi pochyłej!", "chce": "-", "zly": "ten fakt osłabia obraz klęski — autor komunikatu propagandowego by go pominął."}], "final": "Oba komunikaty składają się wyłącznie z prawdziwych zdań. Żaden nie mówi prawdy o mieście, bo każdy pomija połowę faktów. Tak działa dobieranie kart — i dlatego propaganda nie musi kłamać: wystarczy, że wybiera."};
+function ensure(){
+  var w = document.getElementById('mk-karty') || document.querySelector('.mk-karty');
+  if(!w) return null;
+  w.id='mk-karty'; w.className='mk mk-karty';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-karty"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-karty');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  c.appendChild(el('p','mk-lid', D.lid));
+  var zlozone = [];
+  var kontener = el('div','mk-etapy');
+  c.appendChild(kontener);
+  var koniec = el('div','mk-blok mk-ok');
+  koniec.hidden = true;
+  c.appendChild(koniec);
+
+  function finisz(){
+    koniec.innerHTML = '';
+    koniec.hidden = false;
+    koniec.appendChild(el('h4', null, 'Dwa komunikaty, jedno miasto'));
+    [0, 1].forEach(function(i){
+      if(zlozone[i]){
+        var q = document.createElement('blockquote');
+        q.className = 'mk-cyt';
+        q.textContent = zlozone[i];
+        koniec.appendChild(q);
+      }
+    });
+    koniec.appendChild(el('p', null, D.final));
+  }
+
+  function etap(n){
+    var e = D.etapy[n];
+    var sek = document.createElement('section');
+    sek.className = 'mk-etap';
+    var h = el('h4','mk-etaptyt', e.tytul);
+    h.id = 'mk-et-' + n;
+    h.setAttribute('tabindex','-1');
+    sek.setAttribute('aria-labelledby', h.id);
+    sek.appendChild(h);
+
+    var fs = document.createElement('fieldset');
+    fs.className = 'mk-fs';
+    var lg = document.createElement('legend');
+    lg.className = 'mk-sr';
+    lg.textContent = e.polecenie;
+    fs.appendChild(lg);
+    var pol = el('p','mk-pol', e.polecenie);
+    pol.setAttribute('aria-hidden','true');
+    fs.appendChild(pol);
+    var boxy = [];
+    D.fakty.forEach(function(f, j){
+      var id = 'mk-f' + n + '-' + j;
+      var lab = document.createElement('label');
+      lab.className = 'mk-opcja';
+      lab.setAttribute('for', id);
+      var inp = document.createElement('input');
+      inp.type = 'checkbox'; inp.id = id; inp.className = 'mk-check';
+      inp.addEventListener('change', licz);
+      lab.appendChild(inp);
+      lab.appendChild(el('span', null, f.t));
+      fs.appendChild(lab);
+      boxy.push(inp);
+    });
+    sek.appendChild(fs);
+
+    var stanP = el('p','mk-licz');
+    stanP.id = 'mk-lz-' + n;
+    sek.appendChild(stanP);
+    var b = el('button','mk-btn','Złóż komunikat');
+    b.type = 'button';
+    b.setAttribute('aria-describedby', stanP.id);
+    sek.appendChild(b);
+    var glos = el('p','mk-sr');
+    glos.setAttribute('role','status');
+    sek.appendChild(glos);
+    var out = el('div','mk-blok');
+    out.hidden = true;
+    out.setAttribute('tabindex','-1');
+    sek.appendChild(out);
+
+    function wybrane(){
+      var w = [];
+      boxy.forEach(function(x, j){ if(x.checked){ w.push(j); } });
+      return w;
+    }
+    function licz(){
+      var k = wybrane().length;
+      stanP.textContent = 'Wybrane fakty: ' + k + ' z 3';
+      b.setAttribute('aria-disabled', k === 3 ? 'false' : 'true');
+    }
+    licz();
+
+    b.addEventListener('click', function(){
+      var w = wybrane();
+      if(w.length !== 3){
+        glos.textContent = w.length < 3
+          ? ('Wybierz jeszcze ' + (3 - w.length) + '. Przenoszę kursor do listy faktów.')
+          : 'Wybrano za dużo faktów — zostaw dokładnie trzy. Przenoszę kursor do listy faktów.';
+        boxy[0].focus();
+        return;
+      }
+      glos.textContent = '';
+      out.innerHTML = '';
+      out.hidden = false;
+      out.appendChild(el('h4', null, 'Twój komunikat'));
+      var q = document.createElement('blockquote');
+      q.className = 'mk-cyt';
+      q.appendChild(el('strong', null, e.naglowek));
+      q.appendChild(document.createTextNode(' ' + w.map(function(j){ return D.fakty[j].t; }).join(' ')));
+      out.appendChild(q);
+      var psujace = w.filter(function(j){ return D.fakty[j].znak !== e.chce; });
+      if(psujace.length){
+        var u = el('div','mk-uwaga mk-pad');
+        psujace.forEach(function(j){ u.appendChild(el('p', null, '„' + D.fakty[j].t + '” — ' + e.zly)); });
+        out.appendChild(u);
+      }
+      out.appendChild(el('p','mk-pomin','Czego ten komunikat nie mówi:'));
+      var ul = el('ul','mk-lista');
+      D.fakty.forEach(function(f, j){ if(w.indexOf(j) < 0){ ul.appendChild(el('li', null, f.t)); } });
+      out.appendChild(ul);
+      zlozone[n] = e.naglowek + ' ' + w.map(function(j){ return D.fakty[j].t; }).join(' ');
+      if(n === 0 && !document.getElementById('mk-et-1')){
+        var dalej = el('button','mk-btn mk-btn2','Przejdź do komunikatu 2');
+        dalej.type = 'button';
+        out.appendChild(dalej);
+        dalej.addEventListener('click', function(){
+          dalej.hidden = true;
+          etap(1);
+          document.getElementById('mk-et-1').focus();
+        });
+      }
+      if(n === 1){
+        out.appendChild(el('p','mk-licz','Oba komunikaty obok siebie — poniżej.'));
+      }
+      if(zlozone[0] && zlozone[1]){ finisz(); }
+      out.focus();
+    });
+    kontener.appendChild(sek);
+  }
+  etap(0);
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

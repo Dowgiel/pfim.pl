@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Plansza błędów poznawczych</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Plansza błędów poznawczych</h1>
+<div class="mk mk-bledy" id="mk-bledy">Plansza „Błędy poznawcze” — dwanaście pułapek myślenia. Jeśli ćwiczenie się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-plansza{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}\n.mk-pole{border:1px solid #7d838a;border-radius:3px;background:#fff;overflow:hidden}\n.mk-pole.mk-otw{border-color:#16181c;border-width:2px}\n.mk-kafel{display:flex;align-items:center;gap:11px;width:100%;font:inherit;text-align:left;\n background:#fff;border:0;border-left:4px solid #b4322b;padding:13px 14px;cursor:pointer;\n min-height:52px;color:#16181c}\n.mk-kafel:hover{background:#eef0ee}\n.mk-kafel:focus-visible{outline:3px solid #b4322b;outline-offset:-3px}\n.mk-kafel[aria-expanded=\"true\"]{background:#16181c;color:#f4f4f2;border-left-color:#e8a49f}\n.mk-nr{font-weight:700;font-variant-numeric:tabular-nums;min-width:22px;font-size:15px}\n.mk-nazwa{font-weight:600;line-height:1.3}\n.mk-tresc{padding:13px 14px 15px;border-top:1px solid #c9ccc8;background:#fbfbfa}\n.mk-tresc > * + *{margin-top:9px}\n.mk-ang{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:#4a4e55;\n letter-spacing:.02em}\n.mk-przyk{border-left:3px solid #c9ccc8;padding-left:11px;color:#31353d}\n";
+var D = {"nad": "Ćwiczenie · błędy poznawcze", "tytul": "Plansza błędów poznawczych", "bledy": [{"nazwa": "Efekt potwierdzenia", "ang": "confirmation bias", "opis": "Szukamy i lepiej zapamiętujemy to, co pasuje do tego, w co już wierzymy. Informacje sprzeczne przeglądamy pobieżnie i łatwiej znajdujemy w nich dziury.", "przyklad": "Ten sam artykuł o wynikach badania jedni czytają jako „w końcu to udowodnili”, drudzy jako „znowu naciągane”. Tekst jest ten sam."}, {"nazwa": "Dostępność umysłowa", "ang": "availability heuristic", "opis": "Oceniamy, jak coś jest prawdopodobne, po tym, jak łatwo przychodzi nam do głowy przykład. A do głowy przychodzi to, co widzieliśmy ostatnio i co było dramatyczne.", "przyklad": "Po głośnej katastrofie lotniczej ludzie boją się latać bardziej niż jeździć samochodem — choć ryzyko jest odwrotne. Katastrofy są w wiadomościach, wypadki drogowe nie."}, {"nazwa": "Zakotwiczenie", "ang": "anchoring", "opis": "Pierwsza liczba, którą usłyszymy, zmienia wszystkie następne oceny — nawet gdy wiemy, że jest przypadkowa.", "przyklad": "„Było 899 zł, teraz 499 zł”. Bez pierwszej liczby 499 to po prostu cena. Z nią — okazja."}, {"nazwa": "Efekt sformułowania", "ang": "framing", "opis": "Ta sama informacja podana inaczej prowadzi do innej decyzji, choć fakty się nie zmieniły.", "przyklad": "„Zabieg kończy się powodzeniem w 90 procentach przypadków” i „w 10 procentach kończy się niepowodzeniem” to jedna liczba. Zgoda pacjentów i pacjentek bywa różna."}, {"nazwa": "Efekt aureoli", "ang": "halo effect", "opis": "Jedna pozytywna cecha rozlewa się na ocenę całości — wygląd, sympatyczność albo sukces w jednej dziedzinie każą nam zakładać kompetencję w innych.", "przyklad": "Ktoś bardzo bogaty wypowiada się o epidemiologii, a słuchamy go uważniej niż osób, które zajmują się nią zawodowo, bo „skoro zbudował firmę, to musi wiedzieć”."}, {"nazwa": "Efekt Dunninga i Krugera", "ang": "Dunning-Kruger effect", "opis": "Reanaliza z 2020 roku (Gignac i Zajenkowski) nie potwierdza wyraźnego efektu akurat u najsłabszych — spór trwa. Potocznie mówi się: im mniej ktoś wie o dziedzinie, tym trudniej mu to ocenić, bo do oceny potrzeba tej samej wiedzy, której brakuje.", "przyklad": "Najpewniejsze siebie komentarze pod artykułem naukowym rzadko pochodzą od osób z tej dziedziny."}, {"nazwa": "Złudzenie prawdy", "ang": "illusory truth effect", "opis": "Zdanie powtórzone wiele razy zaczyna brzmieć prawdziwiej — samo powtórzenie jest sygnałem wiarygodności, niezależnie od treści.", "przyklad": "Dementowanie plotki przez jej cytowanie utrwala ją. Ludzie zapamiętują zdanie, a zapominają, że było zaprzeczone."}, {"nazwa": "Myślenie grupowe", "ang": "groupthink", "opis": "W zgranej grupie dążenie do zgody wypiera sprawdzanie. Wątpliwości się nie zgłasza, żeby nie psuć nastroju — i nikt nie wie, że inni też je mają.", "przyklad": "Zespół publikuje materiał, w który nikt do końca nie wierzył, bo każdy zakładał, że pozostali są przekonani."}, {"nazwa": "Koszt utopiony", "ang": "sunk cost fallacy", "opis": "Brniemy dalej, bo już dużo zainwestowaliśmy — choć wydane pieniądze i czas nie wrócą niezależnie od tego, co zrobimy teraz.", "przyklad": "Dokańczamy serial, który przestał się podobać, „bo obejrzałem już cztery sezony”."}, {"nazwa": "Błąd atrybucji", "ang": "fundamental attribution error", "opis": "Cudze zachowanie tłumaczymy charakterem, własne — okolicznościami.", "przyklad": "Ktoś się spóźnił, bo jest niesolidny. Ja się spóźniłem, bo były korki."}, {"nazwa": "Ślepota na własne uprzedzenia", "ang": "bias blind spot", "opis": "Widzimy zniekształcenia w myśleniu innych, a u siebie ich nie zauważamy — i ta asymetria dotyczy także osób, które o błędach poznawczych wiedzą dużo.", "przyklad": "Przeczytawszy tę planszę, łatwiej rozpoznasz te błędy u znajomych niż u siebie. To jest właśnie ten błąd."}, {"nazwa": "Efekt pierwszeństwa", "ang": "primacy effect", "opis": "To, co usłyszeliśmy najpierw, waży najwięcej — kolejne informacje dopasowujemy do pierwszego wrażenia zamiast zaczynać od zera.", "przyklad": "Nagłówek czytają wszyscy, sprostowanie na dalszej stronie prawie nikt."}], "postep": "Odkryte: {0} z {1}", "koniec": "Wszystkie dwanaście odkryte. Żaden z nich nie znika od tego, że się go zna — ale nazwany błąd łatwiej zauważyć w cudzym tekście i we własnym."};
+function ensure(){
+  var w = document.getElementById('mk-bledy') || document.querySelector('.mk-bledy');
+  if(!w) return null;
+  w.id='mk-bledy'; w.className='mk mk-bledy';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-bledy"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-bledy');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var odkryte = 0, N = D.bledy.length;
+  c.appendChild(el('p','mk-lid',
+    'Kliknij pole, żeby poznać błąd. Możesz wracać — nic się nie zamyka i nic nie jest oceniane.'));
+
+  var licz = el('p','mk-licz'); licz.id='mk-licz';
+  licz.textContent = D.postep.split('{0}').join('0').split('{1}').join(String(N));
+  c.appendChild(licz);
+  var glos = el('p','mk-sr'); glos.setAttribute('role','status'); c.appendChild(glos);
+
+  var siatka = el('div','mk-plansza');
+  siatka.setAttribute('role','list');
+  D.bledy.forEach(function(b, i){
+    var poz = el('div','mk-pole'); poz.setAttribute('role','listitem');
+    var btn = document.createElement('button');
+    btn.type='button'; btn.className='mk-kafel';
+    btn.setAttribute('aria-expanded','false');
+    btn.id = 'mk-kaf-' + i;
+    var nr = el('span','mk-nr', String(i+1));
+    var nm = el('span','mk-nazwa', b.nazwa);
+    btn.appendChild(nr); btn.appendChild(nm);
+    var tr = el('div','mk-tresc'); tr.id='mk-tr-'+i; tr.hidden = true;
+    tr.appendChild(el('p','mk-ang', b.ang));
+    tr.appendChild(el('p',null, b.opis));
+    var pk = el('p','mk-przyk');
+    var s = document.createElement('strong'); s.textContent = 'Jak to wygląda: ';
+    pk.appendChild(s); pk.appendChild(document.createTextNode(b.przyklad));
+    tr.appendChild(pk);
+    btn.setAttribute('aria-controls', tr.id);
+    btn.addEventListener('click', function(){
+      var byl = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', byl ? 'false' : 'true');
+      tr.hidden = byl;
+      poz.className = 'mk-pole' + (byl ? '' : ' mk-otw');
+      if(!byl && !btn.getAttribute('data-odkr')){
+        btn.setAttribute('data-odkr','1');
+        odkryte++;
+        licz.textContent = D.postep.split('{0}').join(String(odkryte)).split('{1}').join(String(N));
+        if(odkryte === N){
+          glos.textContent = D.koniec;
+          var k = el('div','mk-blok mk-ok'); k.id='mk-koniec';
+          k.appendChild(el('p',null, D.koniec));
+          c.appendChild(k);
+        }
+      }
+    });
+    poz.appendChild(btn); poz.appendChild(tr);
+    siatka.appendChild(poz);
+  });
+  c.appendChild(siatka);
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

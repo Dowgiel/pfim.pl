@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Co to mówi o wiarygodności</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Co to mówi o wiarygodności</h1>
+<div class="mk mk-autor" id="mk-autor">Ćwiczenie „Co to mówi o wiarygodności” — dziesięć sytuacji do dopasowania do pięciu znaczeń. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk ul.mk-lista.mk-lista-krotka{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px 16px}\n.mk-karta{border:1px solid #c9ccc8;border-left:4px solid #16181c;border-radius:3px;background:#fbfbfa;padding:14px 16px}\n.mk-karta > * + *{margin-top:10px}\n.mk-nr{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#4a4e55;font-weight:700}\n.mk-przekaz{font-size:17px;line-height:1.5;font-weight:600}\n.mk-wiersz{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}\n.mk-etyk{font-weight:600}\n.mk-sel{font:inherit;font-size:16px;color:#16181c;background:#fff;border:1px solid #6b7078;border-radius:3px;\n padding:8px 10px;min-height:44px;max-width:100%}\n.mk-sel:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-fb{padding:11px 14px;border-radius:3px;background:#fff;border:1px solid #c9ccc8}\n.mk-fb > * + *{margin-top:6px}\n.mk-fb-ok{border-left:4px solid #2c6a4c}\n.mk-fb-nie{border-left:4px solid #b4322b}\n.mk-werd{font-weight:700}\n.mk-fb-ok .mk-werd{color:#245a40}\n.mk-fb-nie .mk-werd{color:#96261f}\n.mk-blok:focus{outline:none}\n";
+var D = {"nad": "Ćwiczenie · ocena autora i źródła", "tytul": "Co to mówi o wiarygodności", "lid": "Dziesięć sytuacji i pięć znaczeń. Przy każdej sytuacji wybierz, co ona mówi o wiarygodności autora albo źródła, a potem sprawdź wszystko naraz. Więcej niż jedna sytuacja może mieć to samo znaczenie.", "znaczenia": [["kompetencja", "Potwierdza kompetencje w tej dziedzinie"], ["przejrzystosc", "Wzmacnia przejrzystość — łatwo to sprawdzić"], ["brak_rzetelnosci", "Wskazuje na możliwy brak rzetelności"], ["bezstronnosc", "Budzi wątpliwości co do bezstronności"], ["neutralne", "Samo w sobie nic nie przesądza"]], "pozycje": [{"k": "kompetencja", "t": "Autorka ma doktorat z wirusologii i od dziesięciu lat publikuje w recenzowanych czasopismach na temat szczepionek.", "w": "Wykształcenie i wieloletni dorobek publikacyjny dokładnie w tej dziedzinie to najmocniejszy dostępny sygnał kompetencji — taki dorobek sprawdzisz w Google Scholar albo ORCID."}, {"k": "przejrzystosc", "t": "Pod artykułem podano pełną listę źródeł z odnośnikami, które każdy może samodzielnie sprawdzić.", "w": "Odnośniki do źródeł same z siebie nie dowodzą, że treść jest prawdziwa, ale pozwalają to sprawdzić — a to już bardzo dużo."}, {"k": "bezstronnosc", "t": "Firma produkująca lek finansowała badanie jego skuteczności, a artykuł o wynikach nigdzie o tym nie wspomina.", "w": "Samo finansowanie przez producenta nie przekreśla badania — ale przemilczenie tego finansowania jest już poważnym sygnałem, że coś ukryto."}, {"k": "neutralne", "t": "Komentator ma milion obserwujących na swoim profilu.", "w": "Liczba obserwujących mówi, ilu ludzi go czyta, a nie czy zna się na temacie, o którym pisze."}, {"k": "brak_rzetelnosci", "t": "Tekst podpisano wyłącznie pseudonimem, bez możliwości ustalenia, kim naprawdę jest autor ani z jaką instytucją jest związany.", "w": "Bez zidentyfikowania autora nie da się sprawdzić ani jego kompetencji, ani jego powiązań — a to uniemożliwia rzetelną ocenę."}, {"k": "przejrzystosc", "t": "Recenzent pracy naukowej sam poinformował redakcję, że od lat rywalizuje z autorami o ten sam grant badawczy.", "w": "To także rodzaj konfliktu interesów, tyle że niefinansowego. Ujawnienie go redakcji z wyprzedzeniem jest właśnie tym, czego oczekuje dobra praktyka naukowa."}, {"k": "neutralne", "t": "Autor komentujący politykę zagraniczną powołuje się na swój dyplom z zarządzania i doświadczenie w prowadzeniu firmy.", "w": "Wykształcenie i doświadczenie są prawdziwe, ale z zupełnie innej dziedziny niż temat wypowiedzi. Sam ten fakt nie dowodzi nieuczciwości — tylko nie potwierdza kompetencji akurat w tej sprawie, bo kompetencja nie przenosi się automatycznie między dziedzinami."}, {"k": "przejrzystosc", "t": "Trzy niezależne od siebie redakcje, o różnych profilach i różnych właścicielach, opisują to samo wydarzenie w zgodny sposób.", "w": "Zgodność niezależnych źródeł to jeden z najsilniejszych dostępnych sygnałów — trudno, żeby kilku niepowiązanych ze sobą nadawców pomyliło się identycznie."}, {"k": "brak_rzetelnosci", "t": "Autor bloga kasuje komentarze z pytaniami o źródło przytoczonych liczb i nie odpowiada na nie.", "w": "Unikanie pytań o źródła danych to sygnał, że tych źródeł najpewniej nie ma — albo że autor nie chce, by ktoś je sprawdził."}, {"k": "bezstronnosc", "t": "Producent kosmetyków publikuje wynik testu skuteczności swojego kremu, wykonanego we własnym laboratorium, bez udziału niezależnej strony.", "w": "Firma testująca własny produkt ma oczywisty interes w konkretnym wyniku. To nie znaczy, że wynik jest fałszywy — znaczy, że potrzebuje potwierdzenia z niezależnego źródła."}], "komplet": "Komplet. Zwróć uwagę, że to dwa osobne pytania, nie trzy: kompetencja to jedno, a przejrzystość i bezstronność to sygnały drugiego — uczciwości intencji, nie osobna, trzecia sprawa.", "niekomplet": "Przejrzyj wyjaśnienia przy sytuacjach, w których wybór się nie zgodził. Kompetencja i bezstronność łatwo się mylą: ktoś może naprawdę znać się na rzeczy i jednocześnie mieć powód, żeby nie być bezstronnym."};
+function ensure(){
+  var w = document.getElementById('mk-autor') || document.querySelector('.mk-autor');
+  if(!w) return null;
+  w.id='mk-autor'; w.className='mk mk-autor';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-autor"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-autor');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var N = D.pozycje.length;
+  c.appendChild(el('p','mk-lid', D.lid));
+
+  var leg = el('div','mk-blok');
+  leg.appendChild(el('h4', null, 'Znaczenia do wyboru'));
+  var ul = el('ul','mk-lista mk-lista-krotka');
+  D.znaczenia.forEach(function(z){ ul.appendChild(el('li', null, z[1])); });
+  leg.appendChild(ul);
+  c.appendChild(leg);
+
+  var postep = el('p','mk-licz');
+  postep.id = 'mk-postep';
+  c.appendChild(postep);
+
+  var selekty = [], fbs = [];
+  D.pozycje.forEach(function(p, i){
+    var k = el('div','mk-karta');
+    var nr = el('p','mk-nr', 'Sytuacja ' + (i + 1) + ' z ' + N);
+    nr.id = 'mk-nr-' + i;
+    var tx = el('p','mk-przekaz', p.t);
+    tx.id = 'mk-tx-' + i;
+    k.appendChild(nr);
+    k.appendChild(tx);
+    var wiersz = el('div','mk-wiersz');
+    var lab = el('label','mk-etyk','To znaczy:');
+    lab.setAttribute('for', 'mk-s-' + i);
+    var s = document.createElement('select');
+    s.id = 'mk-s-' + i;
+    s.className = 'mk-sel';
+    s.setAttribute('aria-describedby', 'mk-nr-' + i + ' mk-tx-' + i);
+    var o0 = document.createElement('option');
+    o0.value = '';
+    o0.textContent = 'wybierz znaczenie';
+    s.appendChild(o0);
+    D.znaczenia.forEach(function(z){
+      var o = document.createElement('option');
+      o.value = z[0];
+      o.textContent = z[1];
+      s.appendChild(o);
+    });
+    s.addEventListener('change', odswiez);
+    wiersz.appendChild(lab);
+    wiersz.appendChild(s);
+    k.appendChild(wiersz);
+    var fb = el('div','mk-fb');
+    fb.hidden = true;
+    k.appendChild(fb);
+    c.appendChild(k);
+    selekty.push(s);
+    fbs.push(fb);
+  });
+
+  var btny = el('div','mk-btny');
+  var bSpr = el('button','mk-btn','Sprawdź wszystkie');
+  bSpr.type = 'button';
+  bSpr.setAttribute('aria-describedby','mk-postep');
+  var bRes = el('button','mk-btn mk-btn2','Zacznij od nowa');
+  bRes.type = 'button';
+  btny.appendChild(bSpr);
+  btny.appendChild(bRes);
+  c.appendChild(btny);
+  var glos = el('p','mk-sr');
+  glos.setAttribute('role','status');
+  c.appendChild(glos);
+  var wynik = el('div','mk-blok mk-ok');
+  wynik.hidden = true;
+  wynik.setAttribute('tabindex','-1');
+  c.appendChild(wynik);
+
+  var sprawdzone = false;
+  function ileWybranych(){
+    var n = 0;
+    selekty.forEach(function(s){ if(s.value){ n++; } });
+    return n;
+  }
+  function odswiez(){
+    var n = ileWybranych();
+    postep.textContent = 'Wybrane: ' + n + ' z ' + N;
+    bSpr.setAttribute('aria-disabled', n === N ? 'false' : 'true');
+    if(sprawdzone){
+      glos.textContent = 'Zmieniono odpowiedź — sprawdź ponownie, żeby zobaczyć aktualny wynik.';
+    }
+  }
+  odswiez();
+
+  bSpr.addEventListener('click', function(){
+    if(bSpr.getAttribute('aria-disabled') === 'true'){
+      var brak = null;
+      for(var j = 0; j < selekty.length; j++){ if(!selekty[j].value){ brak = selekty[j]; break; } }
+      glos.textContent = 'Nie można jeszcze sprawdzić: brakuje odpowiedzi przy ' + (N - ileWybranych()) +
+        ' sytuacjach. Przenoszę kursor do pierwszej z nich.';
+      if(brak){ brak.focus(); }
+      return;
+    }
+    var traf = 0;
+    D.pozycje.forEach(function(p, i){
+      var ok = (selekty[i].value === p.k);
+      if(ok){ traf++; }
+      var nazwa = '';
+      D.znaczenia.forEach(function(z){ if(z[0] === p.k){ nazwa = z[1]; } });
+      var fb = fbs[i];
+      fb.innerHTML = '';
+      fb.hidden = false;
+      fb.className = 'mk-fb ' + (ok ? 'mk-fb-ok' : 'mk-fb-nie');
+      fb.appendChild(el('p','mk-werd', ok ? ('Trafnie: ' + nazwa + '.') : ('Tu chodzi o: ' + nazwa + '.')));
+      fb.appendChild(el('p', null, p.w));
+    });
+    sprawdzone = true;
+    glos.textContent = '';
+    wynik.innerHTML = '';
+    wynik.hidden = false;
+    wynik.appendChild(el('h4', null, 'Zgodne wybory: ' + traf + ' z ' + N));
+    wynik.appendChild(el('p', null, traf === N ? D.komplet : D.niekomplet));
+    wynik.focus();
+  });
+
+  bRes.addEventListener('click', function(){
+    selekty.forEach(function(s){ s.value = ''; });
+    fbs.forEach(function(f){ f.hidden = true; f.innerHTML = ''; });
+    wynik.hidden = true;
+    wynik.innerHTML = '';
+    sprawdzone = false;
+    glos.textContent = '';
+    odswiez();
+    selekty[0].focus();
+  });
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

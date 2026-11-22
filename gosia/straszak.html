@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Zbuduj apel do strachu</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Zbuduj apel do strachu</h1>
+<div class="mk mk-straszak" id="mk-straszak">Ćwiczenie „Zbuduj apel do strachu” — złóż komunikat i zobacz przewidywaną reakcję odbiorcy. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-dwa{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}\n.mk-fs{border:1px solid #c9ccc8;border-radius:3px;padding:12px 14px;background:#fbfbfa;margin:0;min-width:0}\n.mk-fs > * + *{margin-top:8px}\n.mk-krok{font-weight:700}\n.mk-opcja{display:flex;align-items:flex-start;gap:10px;border:1px solid #7d838a;border-radius:3px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-radio:checked){border-color:#16181c;border-width:2px;padding:8px 11px}\n.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-radio{width:18px;height:18px;accent-color:#b4322b;margin:3px 0 0;flex:none}\n.mk-opt{display:flex;flex-direction:column;gap:2px}\n.mk-optnazwa{font-weight:700}\n.mk-opttekst{color:#4a4e55;font-style:italic}\n.mk-cyt{margin:0;border-left:3px solid #16181c;background:#fff;padding:10px 14px;font-size:17px;line-height:1.5;font-weight:600}\n.mk-reakcja{font-weight:700;padding:6px 10px;border-radius:3px;display:inline-block}\n.mk-r-dzialanie{background:#e2efe7;color:#245a40}\n.mk-r-strach{background:#f6e3e1;color:#96261f}\n.mk-r-propaganda{background:#fbf0d9;color:#6e4700}\n.mk-kom{color:#4a4e55;border-top:1px solid #c9ccc8;padding-top:10px}\n.mk-wynik{min-height:60px}\n";
+var D = {"nad": "Ćwiczenie · emocje w propagandzie", "tytul": "Zbuduj apel do strachu", "lid": "Złóż komunikat z dwóch części i zobacz, jak według modelu Witte zareaguje odbiorca. Zmieniaj wybory, ile chcesz — wynik przelicza się od razu.", "krok1": "Krok 1. Jak opisujesz zagrożenie?", "krok2": "Krok 2. Co proponujesz odbiorcy?", "zagrozenie": [{"k": "rzecz", "etyk": "Rzeczowo", "tekst": "W ostatnim roku w naszej dzielnicy wzrosła liczba włamań do piwnic.", "kom": "Zagrożenie opisane rzeczowo: wiadomo, czego dotyczy i gdzie. Da się to sprawdzić."}, {"k": "wyolb", "etyk": "Z wyolbrzymieniem", "tekst": "Nikt z nas nie jest już bezpieczny we własnym domu!", "kom": "Zagrożenie wyolbrzymione i bez konkretów — typowy znak straszaka. W modelu liczy się to, jak groźne zagrożenie wydaje się odbiorcy, a nie to, jak groźne jest naprawdę. Tę lukę wykorzystuje propaganda."}], "zalecenie": [{"k": "brak", "etyk": "Nic — komunikat kończy się na zagrożeniu", "tekst": "", "typ": "strach", "reakcja": "radzenie sobie ze strachem zamiast działania", "opis": "Model przewiduje działanie tylko wtedy, gdy obok zagrożenia pojawia się coś, co wydaje się skuteczne. Bez takiej wskazówki zostaje sam lęk — i sposoby radzenia sobie z nim: zaprzeczanie, unikanie tematu, odwracanie wzroku."}, {"k": "dzialanie", "etyk": "Konkretne, wykonalne działanie", "tekst": "Sprawdź zamek w drzwiach piwnicy i dołącz do sąsiedzkiej grupy, która zgłasza podejrzane sytuacje.", "typ": "dzialanie", "reakcja": "działanie zgodne z zaleceniem", "opis": "Zagrożenie wydaje się poważne, a działanie — możliwe i skuteczne. Według modelu odbiorca zmienia wtedy zachowanie tak, jak mu zalecono."}, {"k": "bezsilne", "etyk": "Działanie, które wydaje się bezsilne", "tekst": "Niestety, w tej sytuacji niewiele da się zrobić.", "typ": "strach", "reakcja": "radzenie sobie ze strachem zamiast działania", "opis": "Poważne zagrożenie i przekonanie, że nic nie pomoże: według modelu odbiorca nie działa, tylko uspokaja własny lęk — zaprzecza, dystansuje się, unika tematu."}, {"k": "poparcie", "etyk": "Poparcie nadawcy jako jedyne rozwiązanie", "tekst": "Tylko nasza lista zapewni wam bezpieczeństwo. Głosujcie na nas!", "typ": "propaganda", "reakcja": "działanie — tyle że w interesie nadawcy", "opis": "Jeśli odbiorca uzna poparcie nadawcy za skuteczne działanie, model przewiduje, że zrobi to, co mu zalecono. Tak apel do strachu staje się narzędziem propagandy: nadawca sam wzbudza lęk i sam podsuwa jedyne „lekarstwo”."}], "pusty": "Wybierz obie części, żeby zobaczyć komunikat i przewidywaną reakcję odbiorcy.", "zrodlo": ["Model: Witte, K. (1992). ", "Putting the fear back into fear appeals: The extended parallel process model", ". ", "Communication Monographs", ", 59(4), 329–349."]};
+function ensure(){
+  var w = document.getElementById('mk-straszak') || document.querySelector('.mk-straszak');
+  if(!w) return null;
+  w.id='mk-straszak'; w.className='mk mk-straszak';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-straszak"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-straszak');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  c.appendChild(el('p','mk-lid', D.lid));
+  var stan = {z: null, a: null};
+  var dwa = el('div','mk-dwa');
+  c.appendChild(dwa);
+
+  function grupa(tytul, nazwa, lista, klucz){
+    var fs = document.createElement('fieldset');
+    fs.className = 'mk-fs';
+    var lg = document.createElement('legend');
+    lg.className = 'mk-sr';
+    lg.textContent = tytul;
+    fs.appendChild(lg);
+    var widoczny = el('p','mk-krok', tytul);
+    widoczny.setAttribute('aria-hidden','true');
+    fs.appendChild(widoczny);
+    lista.forEach(function(o, j){
+      var id = 'mk-' + nazwa + '-' + j;
+      var lab = document.createElement('label');
+      lab.className = 'mk-opcja';
+      lab.setAttribute('for', id);
+      var inp = document.createElement('input');
+      inp.type = 'radio'; inp.name = 'mk-' + nazwa; inp.id = id; inp.value = o.k;
+      inp.className = 'mk-radio';
+      inp.addEventListener('change', function(){ stan[klucz] = o; pokaz(); });
+      var box = el('span','mk-opt');
+      box.appendChild(el('span','mk-optnazwa', o.etyk));
+      if(o.tekst){ box.appendChild(el('span','mk-opttekst', '„' + o.tekst + '”')); }
+      lab.appendChild(inp);
+      lab.appendChild(box);
+      fs.appendChild(lab);
+    });
+    return fs;
+  }
+  dwa.appendChild(grupa(D.krok1, 'z', D.zagrozenie, 'z'));
+  dwa.appendChild(grupa(D.krok2, 'a', D.zalecenie, 'a'));
+
+  var wyn = el('div','mk-blok mk-wynik');
+  wyn.setAttribute('aria-live','polite');
+  c.appendChild(wyn);
+  var pz = el('p','mk-licz');
+  D.zrodlo.forEach(function(cz, i){
+    if(i % 2){ var s=document.createElement('span'); s.setAttribute('lang','en'); s.textContent=cz; pz.appendChild(s); }
+    else pz.appendChild(document.createTextNode(cz));
+  });
+  c.appendChild(pz);
+
+  function pokaz(){
+    wyn.innerHTML = '';
+    if(!stan.z || !stan.a){
+      wyn.appendChild(el('p','mk-licz', D.pusty));
+      return;
+    }
+    wyn.appendChild(el('h4', null, 'Twój komunikat'));
+    var q = document.createElement('blockquote');
+    q.className = 'mk-cyt';
+    q.textContent = '„' + stan.z.tekst + (stan.a.tekst ? ' ' + stan.a.tekst : '') + '”';
+    wyn.appendChild(q);
+    wyn.appendChild(el('p','mk-reakcja mk-r-' + stan.a.typ, 'Przewidywana reakcja: ' + stan.a.reakcja));
+    wyn.appendChild(el('p', null, stan.a.opis));
+    wyn.appendChild(el('p','mk-kom', stan.z.kom));
+  }
+  pokaz();
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

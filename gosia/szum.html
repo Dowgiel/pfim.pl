@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Błąd czy szum?</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Błąd czy szum?</h1>
+<div class="mk mk-szum" id="mk-szum">Ćwiczenie „Błąd czy szum?” — osiem sytuacji do rozstrzygnięcia. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-fs{border:1px solid #c9ccc8;border-radius:3px;padding:14px 16px;background:#fbfbfa;margin:0}\n.mk-poz{border-left:4px solid #16181c}\n.mk-nag{font-size:17px;font-weight:600;line-height:1.4;margin-bottom:12px}\n.mk-kat{display:flex;flex-wrap:wrap;gap:8px}\n.mk-opcja{display:flex;align-items:center;gap:9px;border:1px solid #7d838a;border-radius:3px;\n padding:9px 13px;cursor:pointer;background:#fff;min-height:44px}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-radio:checked){border-color:#16181c;border-width:2px;padding:8px 12px}\n.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-mini{font-weight:600}\n.mk-radio{width:18px;height:18px;accent-color:#b4322b;margin:0;flex:none}\n.mk-fb{margin-top:12px;padding:11px 14px;border-radius:3px;background:#fff;\n border:1px solid #c9ccc8}\n.mk-fb > * + *{margin-top:7px}\n.mk-fb-ok{border-left:4px solid #2c6a4c}\n.mk-fb-nie{border-left:4px solid #b4322b}\n.mk-werd{font-weight:700}\n.mk-fb-ok .mk-werd{color:#245a40}\n.mk-fb-nie .mk-werd{color:#96261f}\n";
+var D = {"nad": "Ćwiczenie · błąd czy szum", "tytul": "Błąd czy szum?", "kategorie": [["blad", "Błąd systematyczny", "Wynik przesunięty zawsze w tę samą stronę — do przewidzenia i do poprawienia jedną poprawką."], ["szum", "Szum", "Te same dane albo ta sama sytuacja dają różne oceny, rozrzucone w obie strony, bez wspólnego kierunku."]], "pozycje": [{"t": "Domowa waga łazienkowa pokazuje wynik zawsze o dwa kilogramy wyższy niż rzeczywisty — u każdej osoby, która na nią wejdzie.", "k": "blad", "w": "To **błąd systematyczny**: odchylenie jest stałe i idzie za każdym razem w tę samą stronę. Znając je, łatwo je poprawić — wystarczy zawsze odjąć te same dwa kilogramy. Rozrzutu tu nie ma, bo wynik przesuwa się identycznie przy każdym pomiarze."}, {"t": "Czworo radiologów ogląda dokładnie to samo zdjęcie i każde z nich stawia inną diagnozę, choć wszyscy pracują starannie.", "k": "szum", "w": "To **szum**: te same dane trafiają do czterech ocen, które się od siebie rozjeżdżają, bez wspólnego kierunku odchylenia. Nie da się z góry przewidzieć, w którą stronę pomyli się kolejna osoba — a przecież zdjęcie się nie zmienia."}, {"t": "Ten sam egzaminator ocenia identyczne prace pisemne wyraźnie wyżej rano niż tuż przed końcem dnia.", "k": "szum", "w": "To wciąż **szum** — tylko źródłem rozrzutu jest jedna osoba w różnych chwilach, a nie kilka różnych osób. O tym, czy praca trafi na poranek, czy na koniec dnia, decyduje przypadek, więc oceny rozjeżdżają się bez związku z jakością prac. Ta sama praca powinna dostać tę samą ocenę bez względu na porę dnia."}, {"t": "Zespół rekrutacyjny pewnej firmy ocenia kandydatów i kandydatki z jednej konkretnej uczelni wyżej niż resztę — niezależnie od tego, co faktycznie umieją.", "k": "blad", "w": "To **błąd systematyczny**: ocena przesuwa się w jedną, stałą stronę u wszystkich osób z tej samej grupy. To rodzaj stronniczości, nie przypadkowy rozrzut — dlatego da się to wychwycić, porównując wyniki grupowo."}, {"t": "Dwoje rzeczoznawców wycenia dokładnie to samo mieszkanie: jedno na 420 000 zł, drugie na 510 000 zł, a różnicy nie tłumaczy nic, co widać w mieszkaniu.", "k": "szum", "w": "To **szum**: te same dane, czyli to samo mieszkanie, prowadzą do bardzo różnych wycen, a różnica nie ma wspólnego kierunku ani uzasadnienia w tym, co widać. Gdyby to był błąd systematyczny, obie wyceny odchylałyby się w tę samą stronę."}, {"t": "Zegar na dworcowej hali spóźnia się dokładnie o pięć minut — codziennie, bez wyjątku.", "k": "blad", "w": "**Błąd systematyczny** — stałe przesunięcie w jedną stronę, które da się wykryć, porównując ten zegar z innym, i łatwo poprawić, przestawiając wskazówki raz a porządnie."}, {"t": "Jury konkursu kulinarnego próbuje tej samej potrawy, a noty wahają się od trzech do dziewięciu na dziesięć punktów.", "k": "szum", "w": "To **szum**: ta sama potrawa trafia do bardzo różnych ocen, rozrzuconych w obie strony, bez wspólnego kierunku. Gdyby całe jury zaniżało albo zawyżało oceny w tę samą stronę, byłby to błąd systematyczny, a nie szum."}, {"t": "Sklep internetowy przy każdym zamówieniu nalicza opłatę za dostawę zawyżoną o dokładnie trzy złote względem własnego cennika.", "k": "blad", "w": "**Błąd systematyczny**: odchylenie jest stałe, przewidywalne i idzie zawsze w tę samą stronę — to znak, że w systemie jest do znalezienia jedna konkretna usterka, a nie przypadkowa zmienność."}], "postep": "Rozstrzygnięte: {0} z {1}", "trafnie": "Trafnie.", "nietrafnie": "Tu chodziło o coś innego.", "podsumowanie": "Ta sama różnica dzieli błąd systematyczny od szumu wszędzie tam, gdzie ktoś ocenia, mierzy albo wycenia. Błąd przesuwa wynik zawsze w tę samą, przewidywalną stronę — wystarczy jedna poprawka, żeby go usunąć. Szum rozrzuca oceny w różne strony bez wspólnego kierunku, więc jedna poprawka nie wystarczy — trzeba zmniejszyć sam rozrzut, na przykład ujednolicając sposób oceniania."};
+function ensure(){
+  var w = document.getElementById('mk-szum') || document.querySelector('.mk-szum');
+  if(!w) return null;
+  w.id='mk-szum'; w.className='mk mk-szum';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-szum"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-szum');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var N = D.pozycje.length, zrobione = 0;
+  c.appendChild(el('p','mk-lid',
+    'Przy każdej sytuacji wybierz jedną z dwóch odpowiedzi. Wyjaśnienie pojawia się od razu.'));
+
+  var leg = el('div','mk-blok');
+  leg.appendChild(el('h4',null,'Dwa pojęcia'));
+  var ul = el('ul','mk-lista');
+  D.kategorie.forEach(function(k){
+    var li=document.createElement('li');
+    var s=document.createElement('strong'); s.textContent = k[1] + ' — ';
+    li.appendChild(s); li.appendChild(document.createTextNode(k[2]));
+    ul.appendChild(li);
+  });
+  leg.appendChild(ul); c.appendChild(leg);
+
+  var licz = el('p','mk-licz');
+  licz.textContent = D.postep.split('{0}').join('0').split('{1}').join(String(N));
+  c.appendChild(licz);
+
+  D.pozycje.forEach(function(p, i){
+    var fs = document.createElement('fieldset'); fs.className='mk-fs mk-poz';
+    var lg = document.createElement('legend'); lg.className='mk-sr';
+    lg.textContent = 'Sytuacja ' + (i+1) + ' z ' + N; fs.appendChild(lg);
+    var nag = el('p','mk-nag');
+    nag.textContent = p.t;
+    fs.appendChild(nag);
+    var row = el('div','mk-kat');
+    D.kategorie.forEach(function(k, j){
+      var id='mk-p'+i+'-'+j;
+      var lab=document.createElement('label'); lab.className='mk-opcja mk-mini';
+      lab.setAttribute('for', id);
+      var inp=document.createElement('input');
+      inp.type='radio'; inp.name='mk-poz-'+i; inp.id=id; inp.value=k[0]; inp.className='mk-radio';
+      lab.appendChild(inp); lab.appendChild(el('span',null,k[1]));
+      inp.addEventListener('change', function(){ oceny(i, p, k[0], fs); });
+      row.appendChild(lab);
+    });
+    fs.appendChild(row);
+    var fb = el('div','mk-fb'); fb.id='mk-fb-'+i; fb.hidden=true;
+    fb.setAttribute('role','status');
+    fs.appendChild(fb);
+    c.appendChild(fs);
+  });
+
+  function oceny(i, p, wybor, fs){
+    var fb = document.getElementById('mk-fb-'+i);
+    var traf = (wybor === p.k);
+    fb.innerHTML=''; fb.hidden=false;
+    fb.className = 'mk-fb ' + (traf ? 'mk-fb-ok' : 'mk-fb-nie');
+    var w = el('p','mk-werd');
+    w.textContent = traf ? D.trafnie : D.nietrafnie;
+    fb.appendChild(w);
+    var wyj = el('p');
+    p.w.split('**').forEach(function(cz, k){
+      if(k % 2){ var s=document.createElement('strong'); s.textContent=cz; wyj.appendChild(s); }
+      else wyj.appendChild(document.createTextNode(cz));
+    });
+    fb.appendChild(wyj);
+    if(!fs.getAttribute('data-zrob')){
+      fs.setAttribute('data-zrob','1'); zrobione++;
+      licz.textContent = D.postep.split('{0}').join(String(zrobione)).split('{1}').join(String(N));
+    }
+  }
+
+  var podsum = el('div','mk-blok mk-ok');
+  podsum.appendChild(el('h4',null,'Czego uczy to ćwiczenie'));
+  podsum.appendChild(el('p',null, D.podsumowanie));
+  c.appendChild(podsum);
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

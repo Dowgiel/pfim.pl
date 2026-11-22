@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Złudzenie prawdy</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Złudzenie prawdy</h1>
+<div class="mk mk-iluzja" id="mk-iluzja">Ćwiczenie „Złudzenie prawdy” — dwuetapowa ocena zdań z odsłonięciem wyniku. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-czesc > * + *{margin-top:14px}\n.mk-fs{border:1px solid #c9ccc8;border-radius:3px;padding:14px 16px;background:#fbfbfa;margin:0;min-width:0}\n.mk-fs > * + *{margin-top:11px}\n.mk-pyt{font-weight:600;line-height:1.4}\n.mk-skala{display:flex;flex-direction:column;gap:7px}\n.mk-opcja{display:flex;align-items:flex-start;gap:10px;border:1px solid #7d838a;border-radius:3px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-radio:checked){border-color:#16181c;border-width:2px;padding:8px 11px}\n.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-radio{width:18px;height:18px;accent-color:#b4322b;margin:3px 0 0;flex:none}\n.mk-zdtekst{font-weight:700;line-height:1.4}\n.mk-znacz{font-size:13px;color:#4a4e55}\n.mk-podsum{font-weight:600}\n.mk-zastrz{font-style:italic;color:#31353d}\n.mk ul.mk-lista > li{padding:12px 0 12px 18px;border-bottom:1px solid #e3e3e0}\n.mk ul.mk-lista > li:last-child{border-bottom:0}\n.mk ul.mk-lista > li > * + *{margin-top:6px}\n";
+var D = {"nad": "Ćwiczenie · powtórzenie i poczucie prawdy", "tytul": "Złudzenie prawdy", "lid": "Ćwiczenie ma dwa etapy i zajmuje około dziesięciu, dwunastu minut. Wynik zobaczysz dopiero po ocenie wszystkich zdań w drugim etapie.", "etap1_naglowek": "Etap pierwszy — przeczytaj", "etap1_polecenie": "Przeczytaj poniższe zdania. Na tym etapie niczego nie oceniasz — po prostu przeczytaj każde przynajmniej raz.", "dalej": "Dalej", "etap2_naglowek": "Etap drugi — oceń", "etap2_polecenie": "Poniżej większy zestaw zdań: kilka sprzed chwili i kilka nowych, wymieszanych. Przy każdym zaznacz, na ile wydaje się prawdziwe. Odpowiadaj z pierwszego wrażenia, bez sprawdzania w internecie — nie ma tu dobrych ani złych odpowiedzi.", "skala": ["na pewno fałsz", "raczej fałsz", "nie mam zdania", "raczej prawda", "na pewno prawda"], "postep": "Ocenione zdania: {0} z {1}", "brak": "Nie wszystkie zdania mają ocenę (brakuje: {0}). Fokus przechodzi do pierwszego nieocenionego zdania.", "przycisk_wynik": "Zobacz wynik", "zdania": [{"id": "everest", "tekst": "Mount Everest leży na granicy Nepalu i Chin.", "prawda": true, "nowe": true, "wyjasnienie": "Prawda — szczyt leży dokładnie na granicy między Nepalem a Tybetańskim Regionem Autonomicznym Chin."}, {"id": "sahara", "tekst": "Sahara jest największą pustynią na świecie.", "prawda": false, "nowe": false, "wyjasnienie": "Fałsz — pustynię definiuje się przez niskie opady, nie temperaturę czy piasek, a pod tym względem największą pustynią świata jest Antarktyda. Sahara jest największą pustynią gorącą, ale nie największą w ogóle."}, {"id": "wieloryby", "tekst": "Wieloryby są ssakami, nie rybami.", "prawda": true, "nowe": false, "wyjasnienie": "Prawda — wieloryby oddychają płucami i karmią młode mlekiem, tak jak inne ssaki."}, {"id": "nietoperze", "tekst": "Nietoperze są ślepe.", "prawda": false, "nowe": true, "wyjasnienie": "Fałsz — większość gatunków nietoperzy widzi, niektóre nawet bardzo dobrze. Do orientacji w locie dodatkowo wykorzystują echolokację, ale nie dlatego, że nie mają wzroku."}, {"id": "strus", "tekst": "Struś, gdy się przestraszy, chowa głowę w piasek.", "prawda": false, "nowe": false, "wyjasnienie": "Fałsz — to popularny mit. Przestraszony struś ucieka albo kładzie się nisko przy ziemi, żeby się z nią zlać, ale głowy w piasek nie chowa."}, {"id": "kolibry", "tekst": "Kolibry potrafią latać do tyłu.", "prawda": true, "nowe": true, "wyjasnienie": "Prawda — kolibry poruszają skrzydłami tak, że siła nośna powstaje przy ruchu w obie strony, dzięki czemu potrafią zawisnąć w miejscu i lecieć do tyłu."}, {"id": "kleopatra", "tekst": "Kleopatra żyła bliżej w czasie do lądowania człowieka na Księżycu niż do budowy Wielkiej Piramidy w Gizie.", "prawda": true, "nowe": false, "wyjasnienie": "Prawda — Wielką Piramidę w Gizie wzniesiono około 2560 roku przed naszą erą, Kleopatra żyła w I wieku przed naszą erą (69–30 p.n.e.), a człowiek wylądował na Księżycu w 1969 roku: bliżej jej więc do lądowania niż do budowy piramidy."}, {"id": "wieza", "tekst": "Wieża Eiffla jest wyższa niż nowojorski Empire State Building.", "prawda": false, "nowe": true, "wyjasnienie": "Fałsz — Empire State Building mierzy z iglicą około 443 metrów, Wieża Eiffla około 330 metrów. Różnica to ponad 100 metrów na korzyść budynku w Nowym Jorku."}, {"id": "mur", "tekst": "Wielki Mur Chiński to jedyna budowla, którą da się zobaczyć gołym okiem z kosmosu.", "prawda": false, "nowe": false, "wyjasnienie": "Fałsz — z Księżyca gołym okiem nie widać go wcale, a z niskiej orbity okołoziemskiej bywa co najwyżej ledwie dostrzegalny. Łatwiej zobaczyć stamtąd na przykład duże miasta czy lotniska."}, {"id": "miod", "tekst": "Miód przechowywany w szczelnie zamkniętym naczyniu może pozostać jadalny po tysiącach lat.", "prawda": true, "nowe": false, "wyjasnienie": "Prawda — archeolodzy znajdowali w egipskich grobowcach miód sprzed ponad trzech tysięcy lat, wciąż nadający się do spożycia. Niska zawartość wody i kwaśne środowisko nie sprzyjają rozwojowi drobnoustrojów."}], "odslona": {"tytul": "Co pokazuje ta ocena", "wstep": "Wśród dziesięciu ocenianych zdań sześć pojawiło się już w etapie pierwszym, a cztery były nowe; pięć zdań było prawdziwych, pięć fałszywych. Poniżej każde z nich razem z Twoją oceną i krótkim sprostowaniem albo potwierdzeniem.", "podsumowanie": "Średnia ocena zdań powtórzonych: {0} (skala od -2 do 2). Średnia ocena zdań nowych: {1} (ta sama skala).", "wyjasnienie": ["To, co się przed chwilą wydarzyło, nauka nazywa złudzeniem prawdy: samo powtórzenie zdania podnosi poczucie, że jest ono prawdziwe, niezależnie od tego, czy naprawdę jest. Zjawisko po raz pierwszy opisali Hasher, Goldstein i Toppino (1977) — zdania oceniane ponownie po pewnym czasie dostawały wyższe oceny prawdziwości niż zdania nowe, i to zarówno wśród zdań prawdziwych, jak i fałszywych.", "Fazio, Brashier, Payne i Marsh (2015) sprawdzili, czy wiedza przed tym chroni, i pokazali, że nie w pełni: powtórzenie podnosiło ocenę prawdziwości nawet u osób badanych, które w osobnym teście wiedzy potrafiły wskazać poprawną odpowiedź. Nazwali to zaniedbaniem wiedzy — łatwość, z jaką coś się czyta, potrafi przeważyć nad tym, co się już wie."], "zastrzezenie": "Dziesięć zdań ocenionych raz to demonstracja mechanizmu, nie jego pomiar: prawdziwe badanie potrzebuje dziesiątek osób badanych, kontroli kolejności i odstępu czasu między powtórzeniami. Kierunek, w którym mogły przesunąć się oceny w tym ćwiczeniu, jest jednak tym samym kierunkiem, który opisują te badania."}};
+function ensure(){
+  var w = document.getElementById('mk-iluzja') || document.querySelector('.mk-iluzja');
+  if(!w) return null;
+  w.id='mk-iluzja'; w.className='mk mk-iluzja';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-iluzja"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-iluzja');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var glos = el('p','mk-sr'); glos.setAttribute('role','status'); c.appendChild(glos);
+  c.appendChild(el('p','mk-lid', D.lid));
+
+  var strefa1 = el('div','mk-czesc');
+  c.appendChild(strefa1);
+  var strefa2 = el('div','mk-czesc');
+  strefa2.hidden = true;
+  c.appendChild(strefa2);
+  var wynik = el('div','mk-blok mk-ok');
+  wynik.hidden = true;
+  wynik.setAttribute('tabindex','-1');
+  c.appendChild(wynik);
+
+  var pola = [];
+
+  function etap1(){
+    var h = el('h4', null, D.etap1_naglowek);
+    strefa1.appendChild(h);
+    strefa1.appendChild(el('p', null, D.etap1_polecenie));
+    var lista = el('ul','mk-lista');
+    D.zdania.forEach(function(z){
+      if(!z.nowe){ lista.appendChild(el('li', null, z.tekst)); }
+    });
+    strefa1.appendChild(lista);
+    var btn = el('button','mk-btn', D.dalej);
+    btn.type = 'button';
+    strefa1.appendChild(btn);
+    btn.addEventListener('click', function(){
+      strefa1.innerHTML = '';
+      strefa1.hidden = true;
+      etap2();
+    });
+  }
+
+  function przelicz(){
+    var k = pola.filter(function(p){ return p.inputy.some(function(i){ return i.checked; }); }).length;
+    strefa2.querySelector('.mk-licz').textContent =
+      D.postep.split('{0}').join(String(k)).split('{1}').join(String(pola.length));
+    return k;
+  }
+
+  function etap2(){
+    strefa2.hidden = false;
+    var h = el('h4', null, D.etap2_naglowek);
+    h.id = 'mk-h2'; h.setAttribute('tabindex','-1');
+    strefa2.appendChild(h);
+    strefa2.appendChild(el('p', null, D.etap2_polecenie));
+
+    D.zdania.forEach(function(z, i){
+      var fs = document.createElement('fieldset');
+      fs.className = 'mk-fs';
+      var lg = document.createElement('legend');
+      lg.className = 'mk-sr';
+      lg.textContent = 'Zdanie ' + (i + 1) + ' z ' + D.zdania.length + ': ' + z.tekst;
+      fs.appendChild(lg);
+      var widoczne = el('p','mk-pyt', z.tekst);
+      widoczne.setAttribute('aria-hidden','true');
+      fs.appendChild(widoczne);
+
+      var skala = el('div','mk-skala');
+      var inputy = [];
+      D.skala.forEach(function(etykieta, j){
+        var id = 'mk-z' + i + '-' + j;
+        var lab = document.createElement('label');
+        lab.className = 'mk-opcja';
+        lab.setAttribute('for', id);
+        var inp = document.createElement('input');
+        inp.type = 'radio'; inp.name = 'mk-z' + i; inp.id = id; inp.value = String(j);
+        inp.className = 'mk-radio';
+        inp.addEventListener('change', przelicz);
+        lab.appendChild(inp);
+        lab.appendChild(el('span', null, etykieta));
+        skala.appendChild(lab);
+        inputy.push(inp);
+      });
+      fs.appendChild(skala);
+      strefa2.appendChild(fs);
+      pola.push({z: z, inputy: inputy});
+    });
+
+    var stanP = el('p','mk-licz');
+    strefa2.appendChild(stanP);
+    var btn = el('button','mk-btn', D.przycisk_wynik);
+    btn.type = 'button';
+    strefa2.appendChild(btn);
+
+    btn.addEventListener('click', function(){
+      var k = przelicz();
+      if(k < pola.length){
+        glos.textContent = D.brak.split('{0}').join(String(pola.length - k));
+        var brakujace = pola.filter(function(p){ return !p.inputy.some(function(i){ return i.checked; }); });
+        brakujace[0].inputy[0].focus();
+        return;
+      }
+      glos.textContent = '';
+      pokazWynik();
+    });
+
+    przelicz();
+    h.focus();
+  }
+
+  function polowa(){ return (D.skala.length - 1) / 2; }
+  function wartosc(p){
+    var wyb = -1;
+    p.inputy.forEach(function(inp, j){ if(inp.checked){ wyb = j; } });
+    return wyb - polowa();
+  }
+  function formatuj(n){
+    var s = String(Math.round(n * 100) / 100);
+    return s.split('.').join(',');
+  }
+
+  function pokazWynik(){
+    wynik.innerHTML = '';
+    wynik.hidden = false;
+    wynik.appendChild(el('h4', null, D.odslona.tytul));
+    wynik.appendChild(el('p', null, D.odslona.wstep));
+
+    var lista = el('ul','mk-lista');
+    pola.forEach(function(p){
+      var z = p.z;
+      var etykieta = D.skala[wartosc(p) + polowa()];
+      var li = el('li');
+      li.appendChild(el('p','mk-zdtekst', z.tekst));
+      var znacz = (z.nowe ? 'nowe zdanie' : 'powtórzone z etapu pierwszego') + ' · w rzeczywistości ' +
+        (z.prawda ? 'prawda' : 'fałsz') + ' · ocena: „' + etykieta + '”';
+      li.appendChild(el('p','mk-znacz', znacz));
+      li.appendChild(el('p', null, z.wyjasnienie));
+      lista.appendChild(li);
+    });
+    wynik.appendChild(lista);
+
+    var powt = pola.filter(function(p){ return !p.z.nowe; });
+    var nowe = pola.filter(function(p){ return p.z.nowe; });
+    var sredniaP = powt.reduce(function(s, p){ return s + wartosc(p); }, 0) / powt.length;
+    var sredniaN = nowe.reduce(function(s, p){ return s + wartosc(p); }, 0) / nowe.length;
+    wynik.appendChild(el('p','mk-podsum',
+      D.odslona.podsumowanie.split('{0}').join(formatuj(sredniaP)).split('{1}').join(formatuj(sredniaN))));
+
+    D.odslona.wyjasnienie.forEach(function(akapit){ wynik.appendChild(el('p', null, akapit)); });
+    wynik.appendChild(el('p','mk-zastrz', D.odslona.zastrzezenie));
+
+    wynik.focus();
+  }
+
+  etap1();
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Złóż definicję</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Złóż definicję</h1>
+<div class="mk mk-definicja" id="mk-definicja">Ćwiczenie „Złóż definicję” — trzy definicje krytycznego myślenia z lukami do uzupełnienia. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-def{border:1px solid #c9ccc8;border-left:4px solid #16181c;border-radius:3px;padding:14px 16px;background:#fbfbfa;margin:0;min-width:0}\n.mk-def > * + *{margin-top:12px}\n.mk-def h4{font-size:17px;font-weight:700}\n.mk-kontekst{color:#4a4e55;font-size:14px}\n.mk-zdanie{font-size:17px;line-height:2.7;margin:0}\n.mk-luka{font:inherit;font-size:15px;font-weight:700;color:#16181c;background:#fff;\n border:2px solid #6b7078;border-radius:3px;padding:4px 8px;margin:2px 3px;max-width:100%;vertical-align:middle}\n.mk-luka:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-fb2{padding:12px 14px;border-radius:3px;background:#fff;border:1px solid #c9ccc8}\n.mk-fb2:focus{outline:none}\n.mk-fb2 > * + *{margin-top:14px}\n.mk-lfb > * + *{margin-top:5px}\n.mk-werd{font-weight:700}\n.mk-lfb-ok .mk-werd{color:#245a40}\n.mk-lfb-nie .mk-werd{color:#96261f}\n.mk-wspolny:focus{outline:none}\n.mk-wspolny h4{font-size:17px}\n";
+var D = {"nad": "Ćwiczenie · krytyczne myślenie", "tytul": "Złóż definicję", "lid": "Trzy klasyczne definicje krytycznego myślenia — z brakującymi słowami. Przy każdej wybierz z listy, co pasuje w lukę, a potem sprawdź całe zdanie. Wybór można zmienić i sprawdzić ponownie.", "definicje": [{"id": "ennis", "autor": "Robert Ennis", "kontekst": "Robert Ennis, University of Illinois:", "segmenty": [{"tekst": "Krytyczne myślenie to rozsądne i "}, {"luka": {"opcje": ["refleksyjne", "szybkie", "podejrzliwe"], "poprawna": 0, "wyjasnienie": "Ennis pisze o myśleniu refleksyjnym, czyli namyśle — nie o szybkiej reakcji ani o nieufności wobec wszystkiego."}}, {"tekst": " myślenie, którego celem jest "}, {"luka": {"opcje": ["decyzja: wierzyć czy działać", "duża wiedza o temacie", "szybka odpowiedź"], "poprawna": 0, "wyjasnienie": "Chodzi o decyzję, w co wierzyć i jak działać — nie o zasób wiedzy ani o czas reakcji."}}, {"tekst": "."}]}, {"id": "facione", "autor": "Peter Facione", "kontekst": "Peter Facione, raport delficki 1990 (American Philosophical Association):", "segmenty": [{"tekst": "Krytyczne myślenie to "}, {"luka": {"opcje": ["celowy", "szybki", "podejrzliwy"], "poprawna": 0, "wyjasnienie": "„Celowy” znaczy świadomie skierowany na cel — to nie to samo, co szybki odruch albo podejrzliwość wobec wszystkiego."}}, {"tekst": ", "}, {"luka": {"opcje": ["samoregulujący się", "wszechwiedzący", "błyskawiczny"], "poprawna": 0, "wyjasnienie": "„Samoregulujący się” znaczy, że osąd sam siebie koryguje — to nie kwestia rozległej wiedzy ani tempa."}}, {"tekst": " osąd, który prowadzi do "}, {"luka": {"opcje": ["analizy i wnioskowania", "zapamiętanych faktów", "podejrzeń wobec wszystkiego"], "poprawna": 0, "wyjasnienie": "Raport delficki wymienia analizę i wnioskowanie jako efekt takiego osądu — nie zbiór zapamiętanych faktów ani podejrzliwość."}}, {"tekst": "."}]}, {"id": "paul-elder", "autor": "Richard Paul i Linda Elder", "kontekst": "Richard Paul i Linda Elder, Foundation for Critical Thinking:", "segmenty": [{"tekst": "Krytyczne myślenie to myślenie "}, {"luka": {"opcje": ["samokierowane", "wszechwiedzące", "błyskawiczne"], "poprawna": 0, "wyjasnienie": "„Samokierowane” znaczy, że myślący sam sobą kieruje — to nie kwestia wiedzy ani szybkości."}}, {"tekst": " i "}, {"luka": {"opcje": ["samokorygujące się", "podejrzliwe", "oczytane"], "poprawna": 0, "wyjasnienie": "„Samokorygujące się” myślenie samo poprawia własne błędy — to nie to samo, co być podejrzliwym albo bardzo oczytanym."}}, {"tekst": " — takie, które samo siebie poprawia."}]}], "wspolny": {"tytul": "Wspólny rdzeń", "tresc": ["Trzy różne słowa, jeden rdzeń: każda definicja opisuje proces celowy i refleksyjny, nie odruch.", "Żadna nie utożsamia krytycznego myślenia z podejrzliwością wobec wszystkiego ani z samą wiedzą — to częste pomyłki, nie to, co piszą klasycy.", "I każda dodaje drugi warunek: same umiejętności analizy nie wystarczą. Potrzebna jest jeszcze gotowość, żeby ich naprawdę używać."]}};
+function ensure(){
+  var w = document.getElementById('mk-definicja') || document.querySelector('.mk-definicja');
+  if(!w) return null;
+  w.id='mk-definicja'; w.className='mk mk-definicja';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-definicja"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-definicja');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  c.appendChild(el('p','mk-lid', D.lid));
+
+  var stanSprawdzone = {};
+  var wspolny = el('div','mk-blok mk-ok mk-wspolny');
+  wspolny.hidden = true;
+  wspolny.setAttribute('tabindex','-1');
+  var wspolnyPokazany = false;
+
+  function sprawdzWspolny(){
+    if(wspolnyPokazany){ return; }
+    for(var k = 0; k < D.definicje.length; k++){
+      if(!stanSprawdzone[D.definicje[k].id]){ return; }
+    }
+    wspolnyPokazany = true;
+    wspolny.innerHTML = '';
+    wspolny.appendChild(el('h4', null, D.wspolny.tytul));
+    D.wspolny.tresc.forEach(function(t){ wspolny.appendChild(el('p', null, t)); });
+    wspolny.hidden = false;
+    wspolny.focus();
+  }
+
+  D.definicje.forEach(function(dfn, di){
+    var sek = document.createElement('section');
+    sek.className = 'mk-def';
+    var hId = 'mk-h-' + di;
+    var h = el('h4', null, dfn.autor);
+    h.id = hId;
+    sek.setAttribute('aria-labelledby', hId);
+    sek.appendChild(h);
+    sek.appendChild(el('p','mk-kontekst', dfn.kontekst));
+
+    var zd = el('p','mk-zdanie');
+    var luki = [];
+    var liczbaLuk = 0;
+    dfn.segmenty.forEach(function(seg){ if(seg.luka){ liczbaLuk++; } });
+
+    dfn.segmenty.forEach(function(seg){
+      if(seg.luka === undefined){
+        zd.appendChild(document.createTextNode(seg.tekst));
+        return;
+      }
+      var nr = luki.length + 1;
+      var idSel = 'mk-sel-' + di + '-' + nr;
+      var lab = el('label','mk-sr',
+        'Luka ' + nr + ' z ' + liczbaLuk + ', definicja: ' + dfn.autor + '.');
+      lab.setAttribute('for', idSel);
+      zd.appendChild(lab);
+      var s = document.createElement('select');
+      s.id = idSel;
+      s.className = 'mk-luka';
+      var o0 = document.createElement('option');
+      o0.value = '';
+      o0.textContent = 'wybierz słowo';
+      s.appendChild(o0);
+      seg.luka.opcje.forEach(function(txt, oi){
+        var o = document.createElement('option');
+        o.value = String(oi);
+        o.textContent = txt;
+        s.appendChild(o);
+      });
+      zd.appendChild(s);
+      var wpis = {sel: s, dane: seg.luka};
+      luki.push(wpis);
+      s.addEventListener('change', function(){ odswiez(); });
+    });
+    sek.appendChild(zd);
+
+    var btn = el('button','mk-btn','Sprawdź definicję');
+    btn.type = 'button';
+    btn.setAttribute('aria-disabled','true');
+    sek.appendChild(btn);
+
+    var glos = el('p','mk-sr');
+    glos.setAttribute('role','status');
+    sek.appendChild(glos);
+
+    var fb = el('div','mk-fb2');
+    fb.hidden = true;
+    fb.setAttribute('tabindex','-1');
+    sek.appendChild(fb);
+
+    var sprawdzanoRaz = false;
+
+    function odswiez(){
+      var brak = false;
+      luki.forEach(function(x){ if(!x.sel.value){ brak = true; } });
+      btn.setAttribute('aria-disabled', brak ? 'true' : 'false');
+      if(sprawdzanoRaz){
+        glos.textContent = 'Zmieniono wybór — sprawdź ponownie, żeby zobaczyć aktualny wynik.';
+      }
+    }
+    odswiez();
+
+    btn.addEventListener('click', function(){
+      var pierwszyBrak = null;
+      luki.forEach(function(x){ if(!x.sel.value && !pierwszyBrak){ pierwszyBrak = x.sel; } });
+      if(pierwszyBrak){
+        glos.textContent = 'Uzupełnij najpierw wszystkie luki w tym zdaniu. Przenoszę kursor do pustej luki.';
+        pierwszyBrak.focus();
+        return;
+      }
+      glos.textContent = '';
+      fb.innerHTML = '';
+      luki.forEach(function(x, i){
+        var wyb = parseInt(x.sel.value, 10);
+        var ok = (wyb === x.dane.poprawna);
+        var grupa = el('div','mk-lfb ' + (ok ? 'mk-lfb-ok' : 'mk-lfb-nie'));
+        var etykieta = 'Luka ' + (i + 1) + ' z ' + luki.length + ': ';
+        var werdykt = ok
+          ? ('✓ trafnie — „' + x.dane.opcje[x.dane.poprawna] + '”.')
+          : ('✗ w zdaniu jest „' + x.dane.opcje[wyb] + '” — poprawne słowo to „' + x.dane.opcje[x.dane.poprawna] + '”.');
+        grupa.appendChild(el('p','mk-werd', etykieta + werdykt));
+        grupa.appendChild(el('p', null, x.dane.wyjasnienie));
+        fb.appendChild(grupa);
+      });
+      fb.hidden = false;
+      fb.focus();
+      sprawdzanoRaz = true;
+      stanSprawdzone[dfn.id] = true;
+      sprawdzWspolny();
+    });
+
+    c.appendChild(sek);
+  });
+
+  c.appendChild(wspolny);
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

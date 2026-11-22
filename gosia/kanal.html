@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Symulator kanału</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Symulator kanału</h1>
+<div class="mk mk-kanal" id="mk-kanal">Ćwiczenie „Symulator kanału” — przełącznik sortowania kanału i polubienia postów. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-zasada{font-size:14px;color:#4a4e55;border-left:3px solid #7d838a;padding:8px 12px;background:#fbfbfa}\n.mk-fs{border:1px solid #c9ccc8;border-radius:3px;padding:12px 14px;background:#fbfbfa;margin:0;min-width:0}\n.mk-fs > * + *{margin-top:8px}\n.mk-pyt{font-weight:700}\n.mk-opcja{display:flex;align-items:flex-start;gap:10px;border:1px solid #7d838a;border-radius:3px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-radio:checked){border-color:#16181c;border-width:2px;padding:8px 11px}\n.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-radio{width:18px;height:18px;accent-color:#b4322b;margin:3px 0 0;flex:none}\n.mk-opt{display:flex;flex-direction:column;gap:2px;min-width:0}\n.mk-optnazwa{font-weight:700}\n.mk-opttekst{color:#4a4e55;font-size:13px}\n.mk-wsk{display:flex;flex-direction:column;gap:8px}\n.mk-wsktekst{font-weight:700;margin:0}\n.mk-svgwrap{max-width:260px}\n.mk-svgwrap svg{display:block;width:100%;height:auto}\n.mk-sekcja{font-size:16px;font-weight:700;padding-top:4px}\n.mk-sekcja:focus{outline:none}\n.mk ul.mk-kanal{list-style:none;display:flex;flex-direction:column;gap:10px;min-width:0}\n.mk-post{border:1px solid #c9ccc8;border-radius:3px;background:#fff;padding:12px 14px;min-width:0}\n.mk-post > * + *{margin-top:6px}\n.mk-phead{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px}\n.mk-autor{font-weight:700}\n.mk-tag{font-size:12px;color:#4a4e55}\n.mk-ptekst{line-height:1.5}\n.mk-like-btn{font:inherit;font-weight:600;background:#fff;color:#16181c;border:2px solid #7d838a;\n border-radius:3px;padding:8px 14px;cursor:pointer;min-height:44px}\n.mk-like-btn:hover{background:#eef0ee}\n.mk-like-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-like-btn[aria-pressed=\"true\"]{border-color:#16181c;border-width:2px;background:#ecece9}\n.mk-wyjasnij{border:1px solid #c9ccc8;background:#fbfbfa;padding:14px 16px;border-radius:3px;min-width:0}\n.mk-wyjasnij > * + *{margin-top:10px}\n.mk-wyjasnij:focus{outline:none}\n.mk-uczy{border-left:3px solid #16181c;background:#fbfbfa;padding:10px 14px;color:#4a4e55}\n";
+var D = {"nad": "Ćwiczenie · algorytmy kanału", "tytul": "Symulator kanału", "lid": "Kanał wymyślonej platformy: dwanaście postów, dwa spierające się obozy — za pracą z biura i za pracą zdalną — oraz kilka wpisów bez związku ze sporem. Przełączaj sortowanie i polub kilka postów, żeby zobaczyć, co się dzieje z kolejnością.", "tryby": [{"k": "nowe", "etyk": "Najnowsze najpierw", "pod": "Kolejność, w jakiej pojawiły się posty"}, {"k": "ang", "etyk": "Najciekawsze dla Ciebie", "pod": "Sortowanie według zaangażowania"}], "zasada": "Zasada trybu „Najciekawsze dla Ciebie”: każde polubienie dodaje jeden punkt wszystkim postom z tego samego obozu. Wyżej trafiają posty z większą liczbą punktów. Przy remisie zostaje kolejność najnowsze-pierwsze.", "posty": [{"autor": "Marek K.", "obz": "a", "tag": "Głos biura", "tekst": "Po dwóch latach zdalnie wróciłem do biura. Dopiero teraz widzę, ile decyzji zapadało przy ekspresie do kawy."}, {"autor": "Kasia W.", "obz": "b", "tag": "Głos zdalnych", "tekst": "Rok pracy zdalnej i odzyskałam dwie godziny dziennie, które wcześniej znikały w korkach."}, {"autor": "Wiktoria N.", "obz": "n", "tag": "Poza sporem", "tekst": "Znalazłam przepis na szarlotkę, która nie zapada się w środku. Podaję link w komentarzu."}, {"autor": "Ola Ż.", "obz": "a", "tag": "Głos biura", "tekst": "Zespół, który widuje się codziennie, szybciej wyłapuje nieporozumienia. Żadna wideorozmowa tego nie zastąpi."}, {"autor": "Tomek P.", "obz": "b", "tag": "Głos zdalnych", "tekst": "Najlepsze raporty piszę rano, w ciszy, zanim ktokolwiek napisze na czacie. W biurze ta godzina zawsze gdzieś ginęła."}, {"autor": "Paweł R.", "obz": "n", "tag": "Poza sporem", "tekst": "Ktoś poleci dobrą szkołę jazdy w naszej okolicy? Kategoria B, najlepiej z automatem."}, {"autor": "Grzegorz T.", "obz": "a", "tag": "Głos biura", "tekst": "Nowi w pracy uczą się najwięcej, podglądając doświadczonych kolegów i koleżanki. W domu nie ma kogo podglądać."}, {"autor": "Ania L.", "obz": "b", "tag": "Głos zdalnych", "tekst": "Firma, która żąda powrotu do biura pięć dni w tygodniu, traci najlepszych ludzi na rzecz tych, które tego nie robią."}, {"autor": "Zofia M.", "obz": "n", "tag": "Poza sporem", "tekst": "Nasz kot nauczył się otwierać drzwi łapą. Nie wiem, czy się cieszyć, czy się bać."}, {"autor": "Hania B.", "obz": "a", "tag": "Głos biura", "tekst": "Biuro daje coś, czego nie da się zmierzyć: zwykłą rozmowę przy drukarce, z której czasem wychodzi najlepszy pomysł."}, {"autor": "Bartek S.", "obz": "b", "tag": "Głos zdalnych", "tekst": "Wspólna sala pełna biurek to najgorszy pomysł dla kogoś, kto musi się skupić dłużej niż dziesięć minut."}, {"autor": "Janek D.", "obz": "n", "tag": "Poza sporem", "tekst": "Wczorajszy mecz skończył się dopiero o jedenastej. Warto było nie spać."}], "wyjasnienie": ["Kolejność w trybie „Najciekawsze dla Ciebie” zależy w tym ćwiczeniu tylko od Twoich polubień — to jawna, uproszczona reguła. W prawdziwych badaniach nad bańką informacyjną zespół badawczy rozłożył podobne zawężanie kontaktu z odmiennymi treściami na trzy osobne etapy (Bakshy, Messing i Adamic, 2015).", "Etap 1 — sieć znajomych. W badaniu 10,1 miliona osób korzystających z Facebooka przeciętnie ponad 20% znajomych miało poglądy przeciwne. Gdyby treści trafiały losowo, przekrojowe (z drugiej strony sporu) byłoby około 45% z nich u osób o poglądach liberalnych i 40% u konserwatywnych. W praktyce sieć znajomych udostępniała już mniej takich treści: 24% u osób o poglądach liberalnych i 35% u konserwatywnych.", "Etap 2 — ranking kanału. Algorytm dodatkowo obniżał szansę zobaczenia treści z drugiej strony: względnie o około 8% u liberałów i 5% u konserwatystów (to spadek w stosunku do poziomu wyjściowego, a nie o tyle punktów procentowych).", "Etap 3 — własny wybór. To, w co ludzie faktycznie klikali, zawężało dostęp jeszcze dalej: względnie o około 6% u liberałów, ale aż o 17% u konserwatystów. Kierunek jest inny w obu grupach — u liberałów mocniej działał ranking, u konserwatystów własny wybór. Nie da się więc powiedzieć, że jeden z tych czynników zawsze ogranicza dostęp mocniej niż drugi. Mimo to pole na kontakt z drugą stroną zostaje duże: przeciętnie klikano zaledwie około 7% wszystkich twardych treści dostępnych w kanale, więc sięgnięcie po odmienne poglądy to w dużej mierze kwestia własnego wyboru.", "Zastrzeżenie: ten symulator to bardzo uproszczony model do nauki, a nie odtworzenie tamtego badania. Osobny, duży eksperyment zamiany kanału na chronologiczny (Guess i in., 2023) pokazał, że sama zmiana kolejności zmieniła to, co widać na ekranie, ale nie zmieniła mierzalnie poglądów ani polaryzacji osób badanych.", "W tym ćwiczeniu obóz, który przesuwa się wyżej, wygrywa dzięki dwóm rzeczom naraz: regule sortowania kanału i Twoim własnym polubieniom. W badaniach nad bańką informacyjną działa podobny mechanizm podwójny: to, co podsuwa ranking, i to, w co klikasz, ograniczają razem kontakt z odmiennymi treściami — żadne z nich osobno nie tłumaczy całości zjawiska."], "uczy": "Czego uczy to ćwiczenie: kolejność, którą widzisz w kanale, to wybór, nie jedyny możliwy porządek. W trybie „Najciekawsze dla Ciebie” tę kolejność częściowo tworzą Twoje własne polubienia, nie tylko ukryty mechanizm platformy."};
+function ensure(){
+  var w = document.getElementById('mk-kanal') || document.querySelector('.mk-kanal');
+  if(!w) return null;
+  w.id='mk-kanal'; w.className='mk mk-kanal';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-kanal"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-kanal');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  function odmiana(n, jeden, kilka, wiele){
+    var m10 = n % 10, m100 = n % 100;
+    if(n === 1){ return jeden; }
+    if(m10 >= 2 && m10 <= 4 && !(m100 >= 12 && m100 <= 14)){ return kilka; }
+    return wiele;
+  }
+  function rowna(a, b){
+    if(a.length !== b.length){ return false; }
+    for(var i = 0; i < a.length; i++){ if(a[i] !== b[i]){ return false; } }
+    return true;
+  }
+
+  c.appendChild(el('p','mk-lid', D.lid));
+
+  var polub = {a:0, b:0, n:0};
+  var polubioneKiedys = {};
+  var tryb = 'nowe';
+  var kolejnosc = D.posty.map(function(_, i){ return i; });
+
+  var glos = el('p','mk-sr');
+  glos.setAttribute('role','status');
+
+  var fsT = document.createElement('fieldset');
+  fsT.className = 'mk-fs';
+  var lgT = document.createElement('legend');
+  lgT.className = 'mk-sr';
+  lgT.textContent = 'Sortowanie kanału';
+  fsT.appendChild(lgT);
+  var pT = el('p','mk-pyt','Sortowanie kanału');
+  pT.setAttribute('aria-hidden','true');
+  fsT.appendChild(pT);
+  var radios = {};
+  D.tryby.forEach(function(t){
+    var id = 'mk-tryb-' + t.k;
+    var lab = document.createElement('label');
+    lab.className = 'mk-opcja';
+    lab.setAttribute('for', id);
+    var inp = document.createElement('input');
+    inp.type = 'radio'; inp.name = 'mk-tryb'; inp.id = id; inp.value = t.k;
+    inp.className = 'mk-radio';
+    if(t.k === 'nowe'){ inp.checked = true; }
+    inp.addEventListener('change', function(){
+      tryb = t.k;
+      przelicz();
+      glos.textContent = '';
+    });
+    var box = el('span','mk-opt');
+    box.appendChild(el('span','mk-optnazwa', t.etyk));
+    box.appendChild(el('span','mk-opttekst', t.pod));
+    lab.appendChild(inp);
+    lab.appendChild(box);
+    fsT.appendChild(lab);
+    radios[t.k] = inp;
+  });
+  c.appendChild(fsT);
+
+  c.appendChild(el('p','mk-zasada', D.zasada));
+
+  var NS = 'http://www.w3.org/2000/svg';
+  var wskBlok = el('div','mk-blok mk-wsk');
+  var wskTekst = el('p','mk-wsktekst');
+  wskTekst.setAttribute('aria-live','polite');
+  wskBlok.appendChild(wskTekst);
+  var svgWrap = el('div','mk-svgwrap');
+  var svg = document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 220 22');
+  svg.setAttribute('role','img');
+  var tlo = document.createElementNS(NS,'rect');
+  tlo.setAttribute('x','0'); tlo.setAttribute('y','3'); tlo.setAttribute('width','170');
+  tlo.setAttribute('height','16'); tlo.setAttribute('rx','3');
+  tlo.setAttribute('fill','#f4f4f2'); tlo.setAttribute('stroke','#c9ccc8');
+  svg.appendChild(tlo);
+  var wyp = document.createElementNS(NS,'rect');
+  wyp.setAttribute('x','0'); wyp.setAttribute('y','3'); wyp.setAttribute('width','0');
+  wyp.setAttribute('height','16'); wyp.setAttribute('rx','3'); wyp.setAttribute('fill','#16181c');
+  svg.appendChild(wyp);
+  var txt = document.createElementNS(NS,'text');
+  txt.setAttribute('x','178'); txt.setAttribute('y','15'); txt.setAttribute('font-size','12');
+  txt.setAttribute('fill','#16181c');
+  svg.appendChild(txt);
+  svgWrap.appendChild(svg);
+  wskBlok.appendChild(svgWrap);
+  c.appendChild(wskBlok);
+  c.appendChild(glos);
+
+  var naglKanal = el('h4','mk-sekcja','Twój kanał');
+  naglKanal.id = 'mk-kanal-tytul';
+  naglKanal.setAttribute('tabindex','-1');
+  c.appendChild(naglKanal);
+
+  var lista = document.createElement('ul');
+  lista.className = 'mk-kanal';
+  lista.setAttribute('aria-labelledby', naglKanal.id);
+  c.appendChild(lista);
+
+  var posty = D.posty.map(function(p, i){
+    var li = document.createElement('li');
+    li.className = 'mk-post';
+    var head = el('div','mk-phead');
+    head.appendChild(el('span','mk-autor', p.autor));
+    head.appendChild(el('span','mk-tag', p.tag));
+    li.appendChild(head);
+    li.appendChild(el('p','mk-ptekst', p.tekst));
+    var btn = el('button','mk-like-btn','Lubię to');
+    btn.type = 'button';
+    btn.setAttribute('aria-pressed','false');
+    btn.setAttribute('aria-label','Lubię to: ' + p.autor);
+    btn.addEventListener('click', function(){
+      var wcisniety = btn.getAttribute('aria-pressed') === 'true';
+      var nowy = !wcisniety;
+      btn.setAttribute('aria-pressed', nowy ? 'true' : 'false');
+      btn.textContent = nowy ? '✓ Polubione' : 'Lubię to';
+      btn.setAttribute('aria-label', (nowy ? 'Polubione: ' : 'Lubię to: ') + p.autor);
+      polub[p.obz] += nowy ? 1 : -1;
+      if(nowy){ polubioneKiedys[i] = true; }
+      var przed = kolejnosc.slice();
+      przelicz();
+      if(tryb === 'ang' && !rowna(przed, kolejnosc)){
+        glos.textContent = 'Kolejność kanału się zmieniła.';
+      } else {
+        glos.textContent = '';
+      }
+      odswiezOdblokowanie();
+    });
+    li.appendChild(btn);
+    return {i:i, obz:p.obz, li:li, btn:btn};
+  });
+
+  function wynikPostu(i){ return polub[D.posty[i].obz]; }
+
+  function obliczKolejnosc(){
+    var idx = D.posty.map(function(_, i){ return i; });
+    if(tryb === 'nowe'){ return idx; }
+    idx.sort(function(x, y){
+      var wx = wynikPostu(x), wy = wynikPostu(y);
+      if(wy !== wx){ return wy - wx; }
+      return x - y;
+    });
+    return idx;
+  }
+
+  function odswiezWskaznik(){
+    var top5 = kolejnosc.slice(0, 5);
+    if(polub.a === polub.b){
+      wskTekst.textContent = 'Polub kilka postów z jednej strony sporu, żeby zobaczyć ten '
+        + 'wskaźnik w akcji.';
+      wyp.setAttribute('width','0');
+      txt.textContent = '–';
+      svg.setAttribute('aria-label','Wskaźnik jeszcze nieaktywny.');
+      return;
+    }
+    var inny = polub.a > polub.b ? 'b' : 'a';
+    var x = 0;
+    top5.forEach(function(idx){ if(D.posty[idx].obz === inny){ x++; } });
+    var rzecz = odmiana(x, 'post', 'posty', 'postów');
+    var zdanie = 'Na pierwszych 5 miejscach: ' + x + ' ' + rzecz + ' z drugiej strony sporu.';
+    wskTekst.textContent = zdanie;
+    wyp.setAttribute('width', String(Math.round(x / 5 * 170)));
+    txt.textContent = x + '/5';
+    svg.setAttribute('aria-label', zdanie);
+  }
+
+  function przelicz(){
+    kolejnosc = obliczKolejnosc();
+    kolejnosc.forEach(function(idx){ lista.appendChild(posty[idx].li); });
+    odswiezWskaznik();
+  }
+
+  var wyjasnijBtn = el('button','mk-btn','Co tu się stało?');
+  wyjasnijBtn.type = 'button';
+  wyjasnijBtn.setAttribute('aria-disabled','true');
+  var restartBtn = el('button','mk-btn mk-btn2','Zacznij od nowa');
+  restartBtn.type = 'button';
+  var btny = el('div','mk-btny');
+  btny.appendChild(wyjasnijBtn);
+  btny.appendChild(restartBtn);
+  c.appendChild(btny);
+
+  var reveal = el('div','mk-wyjasnij');
+  reveal.hidden = true;
+  reveal.setAttribute('tabindex','-1');
+  c.appendChild(reveal);
+
+  function odswiezOdblokowanie(){
+    var n = Object.keys(polubioneKiedys).length;
+    wyjasnijBtn.setAttribute('aria-disabled', n >= 4 ? 'false' : 'true');
+  }
+
+  wyjasnijBtn.addEventListener('click', function(){
+    var n = Object.keys(polubioneKiedys).length;
+    if(n < 4){
+      var brak = 4 - n;
+      glos.textContent = 'Polub jeszcze ' + brak + ' ' + odmiana(brak,'post','posty','postów')
+        + ', żeby odblokować wyjaśnienie.';
+      return;
+    }
+    glos.textContent = '';
+    reveal.innerHTML = '';
+    reveal.hidden = false;
+    reveal.appendChild(el('h4', null, 'Co tu się stało'));
+    D.wyjasnienie.forEach(function(par){ reveal.appendChild(el('p', null, par)); });
+    reveal.focus();
+  });
+
+  restartBtn.addEventListener('click', function(){
+    polub = {a:0, b:0, n:0};
+    polubioneKiedys = {};
+    tryb = 'nowe';
+    radios.nowe.checked = true;
+    radios.ang.checked = false;
+    posty.forEach(function(p){
+      p.btn.setAttribute('aria-pressed','false');
+      p.btn.textContent = 'Lubię to';
+      p.btn.setAttribute('aria-label', 'Lubię to: ' + D.posty[p.i].autor);
+    });
+    przelicz();
+    odswiezOdblokowanie();
+    reveal.hidden = true;
+    reveal.innerHTML = '';
+    glos.textContent = 'Ćwiczenie zaczyna się od nowa.';
+    naglKanal.focus();
+  });
+
+  przelicz();
+
+  c.appendChild(el('p','mk-uczy', D.uczy));
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

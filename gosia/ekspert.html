@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Kiedy ufać intuicji eksperckiej?</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Kiedy ufać intuicji eksperckiej?</h1>
+<div class="mk mk-ekspert" id="mk-ekspert">Ćwiczenie „Kiedy ufać intuicji eksperckiej?” — lista kontrolna warunków dla sześciu przypadków. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-przyp{border:1px solid #c9ccc8;border-left:4px solid #16181c;border-radius:3px;padding:14px 16px;\n background:#fbfbfa;min-width:0}\n.mk-przyp > * + *{margin-top:12px}\n.mk-przyp h4{font-size:17px;font-weight:700;line-height:1.35}\n.mk-fs{border:0;padding:0;margin:0;min-width:0}\n.mk-fs > * + *{margin-top:8px}\n.mk-warunek{font-weight:600}\n.mk-tf{display:flex;flex-wrap:wrap;gap:8px}\n.mk-opcja{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #7d838a;\n border-radius:3px;padding:10px 14px;cursor:pointer;background:#fff;min-height:44px;flex:1 1 110px;min-width:0}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-radio:checked){border-color:#16181c;border-width:2px;padding:9px 13px}\n.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-radio{width:18px;height:18px;accent-color:#b4322b;margin:0;flex:none}\n.mk-fb:focus{outline:none}\n.mk-fb > * + *{margin-top:8px}\n.mk-werd strong{font-weight:700}\n.mk-koniec{border-top:2px solid #16181c}\n";
+var D = {"nad": "Ćwiczenie · zaufanie do intuicji eksperckiej", "tytul": "Kiedy ufać intuicji eksperckiej?", "lid": "Sześć sytuacji, w których ktoś opiera się na intuicji eksperckiej. Przy każdej oceń dwa warunki z artykułu Kahnemana i Kleina: czy środowisko dostarcza trafnych wskazówek i czy ta osoba miała szansę się ich nauczyć. Potem sprawdź, co na ten temat pokazuje analiza przypadku.", "postep": "Sprawdzone przypadki: {0} z {1}", "pytanie_w1": "Czy środowisko pracy w tym przypadku jest wystarczająco regularne, żeby dostarczać trafnych, możliwych do wyuczenia się wskazówek?", "pytanie_w2": "Czy ta osoba miała odpowiednią okazję nauczyć się tych wskazówek — długą praktykę razem z szybką i jednoznaczną informacją zwrotną?", "przypadki": [{"tytul": "Dowódca akcji gaśniczej", "opis": "Doświadczony dowódca akcji gaśniczej wchodzi do płonącego budynku i w ciągu kilku sekund wie, co robić, bez porównywania wariantów. Zespół badawczy, który wypytywał dowódców o ich decyzje, opisał to jako rozpoznawanie znanego wzorca, wypracowane w ciągu ponad dekady gaszenia pożarów.", "w1": true, "w1_wyjasnienie": "Autorzy zaliczają gaszenie pożarów do środowisk o dość wysokiej trafności: są tu stałe związki między tym, co widać, a tym, co zaraz się stanie — na przykład czy budynek się zawali.", "w2": true, "w2_wyjasnienie": "Dowódcy akcji z tego badania mieli za sobą ponad dekadę realnego i wyobrażanego doświadczenia w gaszeniu pożarów, a skutki decyzji widać szybko. To warunki, w których naprawdę można wykształcić umiejętność."}, {"tytul": "Pielęgniarka na oddziale dla wcześniaków", "opis": "Pielęgniarka na oddziale intensywnej terapii noworodków nabiera podejrzeń, że u dziecka rozwija się zakażenie, zanim jeszcze badania krwi cokolwiek pokażą. Zapytana, po czym to poznaje, z początku nie umiała tego nazwać.", "w1": true, "w1_wyjasnienie": "U niemowląt istnieją subtelne, ale rzeczywiste sygnały poprzedzające zakażenie. Środowisko dostarcza trafnych wskazówek, nawet jeśli same pielęgniarki na początku nie potrafiły ich nazwać.", "w2": true, "w2_wyjasnienie": "Doświadczona pielęgniarka widziała wystarczająco wiele przypadków chorych niemowląt, żeby nauczyć się rozpoznawać te oznaki, a wyniki badań potwierdzały albo obalały przeczucie. Zespół badawczy opisał później te sygnały i przygotował na ich podstawie szkolenie dla nowego personelu oddziału."}, {"tytul": "Szachista na poziomie mistrzowskim", "opis": "Szachowy mistrz rzuca okiem na skomplikowaną pozycję i od razu widzi najbardziej obiecujący ruch, podczas gdy ktoś mniej wprawny musiałby go dopiero obliczać.", "w1": true, "w1_wyjasnienie": "Szachy mają stałe, niezmienne reguły. To z definicji środowisko o wysokiej trafności: ten sam układ figur znaczy to samo za każdym razem.", "w2": true, "w2_wyjasnienie": "Szacuje się, że dojście do poziomu mistrzowskiego wymaga około dziesięciu tysięcy godzin nauki i daje w pamięci od pięćdziesięciu do stu tysięcy wzorców rozpoznawanych od razu. To wieloletnia praktyka z jasną informacją zwrotną — wygraną, przegraną, błędem widać od razu."}, {"tytul": "Analiza ceny pojedynczej akcji", "opis": "Analityk giełdowy czuje, że akcje konkretnej spółki za pół roku będą warte wyraźnie więcej, i doradza ich kupno.", "w1": false, "w1_wyjasnienie": "Gdyby publicznie dostępna informacja naprawdę pozwalała przewidzieć przyszłą cenę akcji, cena już by ją uwzględniała. To środowisko bliskie zerowej trafności — nie ma w nim trwałych, możliwych do wyuczenia się prawidłowości.", "w2": false, "w2_wyjasnienie": "Nawet wieloletnia praktyka nie pomaga rozpoznawać sygnałów, których w danym środowisku po prostu nie ma. Praktyka i informacja zwrotna uczą czegoś tylko tam, gdzie istnieją trafne wskazówki do wychwycenia."}, {"tytul": "Prognoza polityczna i gospodarcza na dziesięć lat", "opis": "Komentatorka polityczna z wieloletnim doświadczeniem ocenia, co wydarzy się w polityce międzynarodowej i w gospodarce za dziesięć lat, i przedstawia tę prognozę z dużą pewnością.", "w1": false, "w1_wyjasnienie": "Duże, długoterminowe procesy historyczne są zbyt złożone, żeby dały się przewidzieć. Według autorów artykułu takie zadanie jest po prostu niewykonalne — środowisko nie ma tu trwałych prawidłowości do wychwycenia.", "w2": false, "w2_wyjasnienie": "W badaniu, na które powołują się autorzy, wykształcone i doświadczone osoby z tej dziedziny nie radziły sobie w długoterminowych prognozach lepiej niż ludzie bez przygotowania, którzy po prostu czytają gazety. Lata praktyki nie pomagają, jeśli w środowisku nie ma niczego regularnego do nauczenia się."}, {"tytul": "Rokowania pacjenta za kilka lat", "opis": "Terapeuta dobrze zna swojego pacjenta i trafnie ocenia jego stan z tygodnia na tydzień. Ten sam terapeuta ocenia też, jak potoczy się leczenie tego pacjenta za kilka lat.", "w1": true, "w1_wyjasnienie": "Autorzy nie twierdzą, że w pracy terapeutycznej brakuje prawidłowości — ten terapeuta naprawdę trafnie ocenia stan pacjenta z tygodnia na tydzień. Problem leży w drugim warunku.", "w2": false, "w2_wyjasnienie": "Za oceny krótkoterminowe informacja zwrotna przychodzi często. Ale o pomyłkach w ocenach długoterminowych, jak piszą autorzy, dowiaduje się późno, rzadko i niejednoznacznie. Na takiej informacji nie da się nauczyć przewidywania odległych skutków.", "dodatek": "Ta sama osoba bywa więc trafna w jednym zadaniu swojej dziedziny, a zawodna w innym. Autorzy artykułu nazywają to zjawisko fragmentaryczną ekspertyzą — i piszą, że dotyczy też pracy w finansach i w analizie wywiadowczej, gdy ocenia się sprawy odległe w czasie."}], "werdykt2": "Oba warunki są spełnione. To sytuacja, w której intuicji eksperckiej można uczciwie zaufać.", "werdykt1": "Spełniony jest tylko jeden z dwóch warunków. To sytuacja pośrednia — coś tu przypomina prawdziwą umiejętność, ale ostrożność się przyda.", "werdykt0": "Żaden z warunków nie jest spełniony. To sygnał, żeby nie polegać na samej intuicji eksperckiej, tylko szukać dodatkowego sprawdzenia.", "koniec": "Sześć przypadków, jeden wzorzec: pytanie, czy ufać intuicji eksperckiej, nie ma jednej odpowiedzi dla całego zawodu. Rozstrzygają dwa warunki — czy środowisko dostarcza trafnych wskazówek i czy dana osoba miała szansę nauczyć się ich z szybką, jednoznaczną informacją zwrotną. Sama pewność siebie, z jaką ktoś wygłasza sąd, o żadnym z tych warunków nic nie mówi."};
+function ensure(){
+  var w = document.getElementById('mk-ekspert') || document.querySelector('.mk-ekspert');
+  if(!w) return null;
+  w.id='mk-ekspert'; w.className='mk mk-ekspert';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-ekspert"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-ekspert');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var N = D.przypadki.length, zrobione = 0;
+  c.appendChild(el('p','mk-lid', D.lid));
+  var licz = el('p','mk-licz');
+  c.appendChild(licz);
+  function licznik(){
+    licz.textContent = D.postep.split('{0}').join(String(zrobione)).split('{1}').join(String(N));
+  }
+  licznik();
+
+  function warunek(nazwa, pytanie, etykieta){
+    var fs = document.createElement('fieldset');
+    fs.className = 'mk-fs';
+    var lg = document.createElement('legend');
+    lg.className = 'mk-sr';
+    lg.textContent = etykieta + ': ' + pytanie;
+    fs.appendChild(lg);
+    var widoczne = el('p','mk-warunek', pytanie);
+    widoczne.setAttribute('aria-hidden','true');
+    fs.appendChild(widoczne);
+    var opcje = el('div','mk-tf');
+    var radia = [];
+    ['tak','nie'].forEach(function(v){
+      var id = nazwa + '-' + v;
+      var lab = document.createElement('label');
+      lab.className = 'mk-opcja';
+      lab.setAttribute('for', id);
+      var inp = document.createElement('input');
+      inp.type = 'radio'; inp.name = nazwa; inp.id = id; inp.value = v;
+      inp.className = 'mk-radio';
+      lab.appendChild(inp);
+      lab.appendChild(el('span', null, v === 'tak' ? 'Tak' : 'Nie'));
+      opcje.appendChild(lab);
+      radia.push(inp);
+    });
+    fs.appendChild(opcje);
+    return {fs: fs, radia: radia};
+  }
+
+  function wybor(radia){
+    var w = null;
+    radia.forEach(function(r){ if(r.checked){ w = r.value; } });
+    return w;
+  }
+
+  D.przypadki.forEach(function(p, i){
+    var sek = document.createElement('section');
+    sek.className = 'mk-przyp';
+    sek.appendChild(el('h4', null, 'Przypadek ' + (i + 1) + ' z ' + N + ': ' + p.tytul));
+    var opisId = 'mk-op' + i;
+    var opis = el('p', null, p.opis);
+    opis.id = opisId;
+    sek.appendChild(opis);
+
+    var w1 = warunek('mk-w1-' + i, D.pytanie_w1, 'Przypadek ' + (i + 1) + ', warunek 1');
+    var w2 = warunek('mk-w2-' + i, D.pytanie_w2, 'Przypadek ' + (i + 1) + ', warunek 2');
+    w1.fs.setAttribute('aria-describedby', opisId);
+    w2.fs.setAttribute('aria-describedby', opisId);
+    sek.appendChild(w1.fs);
+    sek.appendChild(w2.fs);
+
+    var glos = el('p','mk-sr');
+    glos.setAttribute('role','status');
+    sek.appendChild(glos);
+
+    var btn = el('button','mk-btn','Sprawdź ten przypadek');
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Sprawdź przypadek ' + (i + 1) + ': ' + p.tytul);
+    sek.appendChild(btn);
+
+    var fb = el('div','mk-fb');
+    fb.hidden = true;
+    fb.setAttribute('tabindex','-1');
+    sek.appendChild(fb);
+
+    btn.addEventListener('click', function(){
+      var o1 = wybor(w1.radia), o2 = wybor(w2.radia);
+      if(!o1 || !o2){
+        glos.textContent = 'Zaznacz odpowiedź „tak” albo „nie” w obu warunkach. Przenoszę kursor.';
+        (o1 ? w2.radia : w1.radia)[0].focus();
+        return;
+      }
+      glos.textContent = '';
+      var n = (p.w1 ? 1 : 0) + (p.w2 ? 1 : 0);
+      fb.innerHTML = '';
+      fb.hidden = false;
+      fb.className = 'mk-blok mk-fb' + (n === 2 ? ' mk-ok' : (n === 0 ? ' mk-uwaga' : ''));
+
+      var b1 = el('p', null);
+      b1.appendChild(el('strong', null, 'Warunek 1 — środowisko o wysokiej trafności. '));
+      b1.appendChild(document.createTextNode('Zaznaczono: „' + o1 + '”. W tym przypadku warunek jest ' +
+        (p.w1 ? 'spełniony' : 'niespełniony') + '. ' + p.w1_wyjasnienie));
+      fb.appendChild(b1);
+
+      var b2 = el('p', null);
+      b2.appendChild(el('strong', null, 'Warunek 2 — możliwość nauczenia się. '));
+      b2.appendChild(document.createTextNode('Zaznaczono: „' + o2 + '”. W tym przypadku warunek jest ' +
+        (p.w2 ? 'spełniony' : 'niespełniony') + '. ' + p.w2_wyjasnienie));
+      fb.appendChild(b2);
+
+      var w = el('p','mk-werd');
+      w.appendChild(el('strong', null, 'Werdykt: '));
+      w.appendChild(document.createTextNode(n === 2 ? D.werdykt2 : (n === 1 ? D.werdykt1 : D.werdykt0)));
+      fb.appendChild(w);
+
+      if(p.dodatek){ fb.appendChild(el('p', null, p.dodatek)); }
+
+      if(!sek.getAttribute('data-zrob')){
+        sek.setAttribute('data-zrob','1');
+        zrobione++;
+        licznik();
+      }
+      fb.focus();
+    });
+    c.appendChild(sek);
+  });
+
+  var koniec = el('div','mk-blok mk-koniec');
+  koniec.appendChild(el('h4', null, 'Czego uczy to ćwiczenie'));
+  koniec.appendChild(el('p', null, D.koniec));
+  c.appendChild(koniec);
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gra: Bramkarz źródeł</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Gra: Bramkarz źródeł</h1>
+<div class="mk mk-bramkarz" id="mk-bramkarz">Gra „Bramkarz źródeł” — kolejka kart źródeł pod bramką, przy każdej trzeba zdecydować: wpuścić, zatrzymać albo najpierw sprawdzić, co o źródle mówią inni. Jeśli się nie wczyta (na przykład w aplikacji mobilnej Moodle), otwórz tę stronę w przeglądarce internetowej.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-b-ekran{display:flex;flex-direction:column;gap:14px;min-width:0;width:100%;max-width:46rem;\n margin-left:auto;margin-right:auto}\n.mk-b-ekran > *{min-width:0}\n.mk-b-lead{font-size:17px;max-width:62ch}\n.mk p.mk-b-czytnik{font-size:14px;color:#4a4e55;border-left:3px solid #7d838a;padding:8px 12px;background:#fbfbfa}\n.mk-b-pyt{font-weight:700}\n.mk-b-fs{border:1px solid #c9ccc8;border-radius:6px;padding:12px 14px;background:#fbfbfa;margin:0;min-width:0}\n.mk-b-fs > * + *{margin-top:8px}\n.mk-b-opcja{display:flex;align-items:flex-start;gap:10px;border:2px solid #7d838a;border-radius:6px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px;margin:0}\n.mk-b-opcja:hover{background:#eef0ee}\n.mk-b-opcja:has(.mk-b-radio:checked){border-color:#16181c;background:#f4f4f2}\n.mk-b-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-b-radio{width:20px;height:20px;accent-color:#b4322b;margin:2px 0 0;flex:none}\n.mk-b-opt{display:flex;flex-direction:column;gap:2px;min-width:0}\n.mk-b-optnazwa{font-weight:700}\n.mk-b-opttekst{color:#4a4e55;font-size:14px}\n.mk-b-szcz{border:1px solid #c9ccc8;border-radius:6px;background:#fbfbfa;padding:0 14px}\n.mk-b-szcz summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center;\n justify-content:space-between;gap:10px;padding:6px 0;list-style:none}\n.mk-b-szcz summary::-webkit-details-marker{display:none}\n.mk-b-szcz summary::after{content:'';flex:none;width:9px;height:9px;border-right:2px solid #16181c;\n border-bottom:2px solid #16181c;transform:rotate(45deg);margin:-4px 4px 0 10px}\n.mk-b-szcz[open] summary::after{transform:rotate(-135deg);margin-top:4px}\n.mk-b-szcz summary:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-b-szcz ul{padding-bottom:12px}\n.mk-b-start,.mk-b-wynik,.mk-b-dalej{font-size:18px;min-height:52px;width:100%}\n.mk-b-hud{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}\n@media (min-width:560px){.mk-b-hud{grid-template-columns:repeat(4,minmax(0,1fr))}}\n.mk-b-st{border:1px solid #c9ccc8;background:#fbfbfa;border-radius:6px;padding:8px 10px;min-width:0;\n display:flex;flex-direction:column;gap:2px;justify-content:flex-start}\n.mk-b-strz{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}\n.mk-b-stn{font-size:13px;font-weight:700;color:#4a4e55;line-height:20px}\n.mk-b-stw{font-size:22px;font-weight:700;line-height:1.15;color:#16181c}\n.mk-b-stw2{font-size:14px;line-height:1.3}\n.mk-b-mnoz{display:inline-block;background:#b4322b;color:#fff;font-size:12px;font-weight:700;\n padding:1px 8px;border-radius:11px;line-height:18px}\n.mk-b-mnoz-off{visibility:hidden}\n.mk-b-tarcze{display:flex;gap:4px;align-items:center}\n.mk-b-tarcze svg{display:block;width:24px;height:24px}\n.mk-b-czasrz{display:flex;align-items:center;gap:10px}\n.mk-b-pasek{flex:1 1 auto;min-width:0;height:16px;border-radius:8px;background:#e3e3e0;border:1px solid #7d838a;\n overflow:hidden}\n.mk-b-pasek-w{height:100%;width:100%;background:#16181c}\n.mk-b-pasek-w.mk-b-malo{background:#b4322b}\n.mk-b-pauza{flex:none}\n.mk p.mk-b-baner{font-weight:700;font-size:14px;text-align:center;color:#16181c;line-height:1.4;padding:2px 14px;\n border-radius:12px;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto}\n.mk p.mk-b-baner-up{background:#16181c;color:#f4f4f2}\n.mk-b-stos{display:flex;flex-direction:column;min-width:0}\n.mk-b-karta{position:relative;z-index:4;background:#fff;border:2px solid #16181c;border-radius:8px;\n overflow:hidden;min-width:0;display:flex;flex-direction:column}\n.mk-b-nag{background:#16181c;color:#f4f4f2;display:flex;align-items:center;justify-content:space-between;\n gap:10px;padding:6px 12px}\n.mk-b-nr{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#e8a49f;min-width:0}\n.mk-b-szl{display:block;flex:none;width:56px;height:28px}\n.mk-b-ramie{transform-origin:8px 11px}\n.mk-b-szl-otw .mk-b-ramie{transform:rotate(-70deg)}\n.mk-b-pola,.mk-b-pola dd,.mk-b-pola dt{margin:0}\n.mk-b-pola{padding:12px 14px 4px;display:flex;flex-direction:column;gap:10px;min-width:0}\n.mk-b-wiersz{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;min-width:0}\n.mk-b-et{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#4a4e55}\n.mk-b-kto{font-size:17px;font-weight:700;line-height:1.35;overflow-wrap:anywhere}\n.mk-b-tw{font-size:17px;line-height:1.45;overflow-wrap:anywhere}\n.mk-b-cechy-dd{overflow-wrap:anywhere}\n.mk ul.mk-b-cechy{list-style:none;display:flex;flex-direction:column;gap:4px;padding:0;margin:0}\n.mk ul.mk-b-cechy > li{position:relative;padding-left:16px;font-size:16px;line-height:1.4}\n.mk ul.mk-b-cechy > li::before{content:'';position:absolute;left:0;top:.6em;width:7px;height:7px;\n background:#b4322b;border-radius:1px}\n.mk-b-lat{margin:8px 14px 14px;border:2px dashed #7d838a;border-radius:6px;background:#f4f4f2;padding:8px 12px;\n min-width:0}\n.mk-b-lat > * + *{margin-top:2px}\n.mk-b-lat-et{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#4a4e55}\n.mk-b-lat-tx{font-size:16px;line-height:1.45;color:#4a4e55;overflow-wrap:anywhere}\n.mk-b-lat-otw{border:2px solid #16181c;border-left-width:6px;background:#fff}\n.mk-b-lat-otw .mk-b-lat-et{color:#8c3029}\n.mk-b-lat-otw .mk-b-lat-tx{color:#16181c;font-weight:600}\n.mk-b-zapowiedzi{display:flex;flex-direction:column;min-height:84px;margin-top:-2px;min-width:0}\n.mk-b-zap{display:flex;align-items:center;gap:8px;min-width:0;height:28px;background:#ecece9;\n border:2px solid #16181c;border-top-width:0;border-radius:0 0 8px 8px;padding:0 12px;font-size:13px;\n color:#4a4e55;position:relative}\n.mk-b-zap:nth-child(1){margin:0 8px;z-index:3}\n.mk-b-zap:nth-child(2){margin:-2px 16px 0;z-index:2}\n.mk-b-zap:nth-child(3){margin:-2px 24px 0;z-index:1}\n.mk-b-zap-nr{flex:none;font-weight:700;color:#16181c}\n.mk-b-zap-tx{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n.mk-b-pauzainfo{background:#fff;border:2px solid #16181c;border-radius:8px;min-height:150px;display:flex;\n align-items:center;justify-content:center;padding:16px;text-align:center;font-weight:700}\n.mk-b-akcje{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}\n.mk-b-dec{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-size:19px;\n font-weight:700;min-height:64px;padding:10px 8px;border:3px solid #16181c;border-radius:10px;cursor:pointer;\n text-align:center;margin:0;min-width:0}\n.mk-b-dec svg{flex:none}\n.mk-b-dec-z{background:#fff;color:#8c3029;border-color:#b4322b}\n.mk-b-dec-w{background:#2c6a4c;color:#fff;border-color:#2c6a4c}\n.mk-b-dec-z:hover{background:#f7e6e4}\n.mk-b-dec-w:hover{background:#245a40;border-color:#245a40}\n.mk-b-czyt{grid-column:1 / -1;display:flex;flex-direction:column;align-items:center;justify-content:center;\n gap:2px;font:inherit;font-weight:700;font-size:17px;min-height:60px;padding:8px 12px;border:3px solid #16181c;\n border-radius:10px;background:#f4f4f2;color:#16181c;cursor:pointer;margin:0;min-width:0;text-align:center}\n.mk-b-czyt:hover{background:#e3e3e0}\n.mk-b-czyt-w{display:inline-flex;align-items:center;gap:8px}\n.mk-b-czyt-w svg{flex:none}\n.mk-b-koszt{font-size:13px;font-weight:400;color:#4a4e55}\n.mk-b-dec:focus-visible,.mk-b-czyt:focus-visible{outline:3px solid #16181c;outline-offset:3px}\n.mk-b-dec[aria-disabled=\"true\"],.mk-b-czyt[aria-disabled=\"true\"]{cursor:not-allowed;background:#ecece9;\n color:#4a4e55;border-color:#7d838a}\n.mk-b-wer{border-left:5px solid #7d838a;background:#ecece9;border-radius:3px;padding:8px 12px;min-height:56px;\n font-weight:600}\n.mk-b-wer-ok{border-left-color:#2c6a4c;background:#e6f0ea}\n.mk-b-wer-zle{border-left-color:#b4322b;background:#f7e6e4}\n.mk-b-wer-pass{border-left-color:#7d838a;background:#ecece9}\n.mk-b-wer-brak{border-left-color:transparent;background:transparent}\n.mk-b-werp{color:#4a4e55;font-weight:700}\n.mk-b-podp{font-size:14px;color:#4a4e55}\n.mk-b-koniec{display:flex;flex-direction:column;gap:14px;min-width:0}\n.mk-b-koniec > *{min-width:0}\n.mk-b-wynik-h{font-size:22px;font-weight:700;line-height:1.25}\n.mk-b-wynik-h:focus{outline:none}\n.mk-b-wynik-h:focus-visible{outline:2px solid #16181c;outline-offset:3px}\n.mk h4.mk-b-sekcja{font-size:17px;font-weight:700;padding-top:6px}\n.mk-b-rekord{font-weight:700;color:#2c6a4c}\n.mk-b-tab{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;margin:0;color:#16181c}\n.mk-b-tab caption{caption-side:top;text-align:left;font-weight:700;padding:0 0 6px;font-size:15px;color:#16181c}\n.mk-b-tab th,.mk-b-tab td{border:1px solid #c9ccc8;padding:6px 4px;text-align:center;vertical-align:middle;\n overflow-wrap:anywhere;color:#16181c;font-size:inherit;line-height:1.35}\n.mk-b-tab thead th{background:#ecece9;font-weight:700;font-size:12px}\n.mk-b-tab thead th:nth-child(1){width:34%}\n.mk-b-tab thead th:nth-child(2){width:24%}\n.mk-b-tab thead th:nth-child(3){width:20%}\n.mk-b-tab thead th:nth-child(4){width:22%}\n.mk-b-tab tbody th{text-align:left;background:#fbfbfa;font-weight:700}\n.mk-b-tab td{background:#fff}\n.mk ul.mk-lista.mk-b-pom{gap:14px}\n.mk-b-pom li > * + *{margin-top:4px}\n.mk-b-opis{font-size:14px;color:#4a4e55}\n.mk-b-wyj{color:#16181c}\n.mk p.mk-b-gratulacje{border-left:4px solid #2c6a4c;background:#fbfbfa;padding:10px 14px}\n@media (min-width:560px){\n .mk-b-wiersz{grid-template-columns:8.5rem minmax(0,1fr);gap:12px;align-items:baseline}\n .mk-b-pola{padding:14px 16px 6px}\n .mk-b-lat{margin:8px 16px 16px}\n .mk-b-tab{font-size:14px}\n .mk-b-tab thead th{font-size:13px}\n}\n@media (max-width:420px){\n .mk-b-ekran{gap:10px}\n .mk-b-dec svg{display:none}\n .mk-b-dec{font-size:17px;padding:10px 6px}\n .mk-b-kto,.mk-b-tw{font-size:16px}\n .mk ul.mk-b-cechy > li{font-size:15px}\n .mk-b-st{padding:6px 8px}\n .mk-b-stw{font-size:20px}\n .mk-b-stw2{font-size:14px}\n .mk-b-pola{padding:10px 12px 4px}\n .mk-b-lat{margin:6px 12px 12px}\n .mk-b-zapowiedzi{min-height:56px}\n .mk-b-zap:nth-child(3){display:none}\n .mk-b-nr-f{display:none}\n}\n@media (prefers-reduced-motion: no-preference){\n .mk-b-karta.mk-b-nowa{animation:mk-b-wjazd .2s ease-out}\n .mk-b-ramie{transition:transform .25s ease-out}\n}\n@keyframes mk-b-wjazd{from{transform:translateY(14px)}to{transform:none}}\n@media (forced-colors: active){\n .mk-b-pasek{border-color:CanvasText}\n .mk-b-pasek-w{background:Highlight;forced-color-adjust:none}\n .mk-b-wer{border-left-color:CanvasText}\n}\n";
+var D = {"nad": "Gra", "tytul": "Bramkarz źródeł", "tryby": [{"k": "bez", "etyk": "Bez limitu czasu", "pod": "Bez odliczania: karta czeka na Twoją decyzję. Czytanie lateralne kosztuje tylko punkty."}, {"k": "czas", "etyk": "Z limitem czasu", "pod": "Czas na kartę zależy od tego, ile jest na niej do przeczytania: od 21,5 do 37 s (fala 1: od 29 do 37 s, fala 2: od 28 do 29 s, fala 3: od 21,5 do 23,5 s). Pasek pokazuje, ile czasu zostało. Po każdej decyzji zegar staje: informację zwrotną czytasz w swoim tempie i idziesz dalej przyciskiem „Dalej”."}], "fale": [{"min": 29.0, "max": 37.0}, {"min": 28.0, "max": 29.0}, {"min": 21.5, "max": 23.5}], "ust": {"rep": 4, "pktP": 10, "pktL": 6, "czasLat": 3000}, "karty": [{"fala": 1, "karta": "w", "prawda": "w", "kto": "dr Alicja K., dietetyczka kliniczna z poradni w Jarzębinie", "tw": "Regularne posiłki pomagają dzieciom skupić się na lekcjach.", "cechy": ["Jej wcześniejsze artykuły o żywieniu dzieci są podpisane nazwiskiem.", "Pod tekstem ujawnia, że artykuł sfinansowała uczelnia."], "lat": "Jej wcześniejsze prace o żywieniu dzieci cytują inne osoby z tej dziedziny. Finansowanie zgadza się z jej opisem.", "podstawa": "wykształcenie pasuje do tematu, a finansowanie jest ujawnione", "kryterium": "Kompetencje i ujawnione powiązania", "skrot": "twierdzenie o posiłkach dzieci", "wyj": "Wykształcenie i praktyka pasują do tematu, jest sprawdzalna historia publikacji, a finansowanie ujawniono. To komplet z materiału: czy się zna i czy można jej ufać.", "czas": 34.5, "zapas": 18.3}, {"fala": 1, "karta": "z", "prawda": "z", "kto": "konto bez nazwiska, sam pseudonim", "tw": "Zwykły napar ziołowy zastępuje leki na ciśnienie, ale „oni” o tym milczą.", "cechy": ["Nagłówek obiecuje szokującą rewelację, a pod nim nie ma żadnego dowodu.", "Tekst opiera się na „podobno” i „ktoś mi mówił”."], "lat": "Nikt nie przyznaje się do autorstwa. Żadne wiarygodne źródło nie podaje tej informacji.", "podstawa": "ukryta tożsamość, „podobno” zamiast źródeł i sensacyjny nagłówek naraz", "kryterium": "Kilka sygnałów ostrzegawczych naraz", "skrot": "napar zamiast leków", "wyj": "Ukryta tożsamość, „podobno” zamiast źródeł pierwotnych i sensacyjny nagłówek to kilka sygnałów naraz. Każdy z osobna zaprasza do sprawdzenia, razem dają poważny powód do nieufności.", "czas": 37.0, "zapas": 15.3}, {"fala": 1, "karta": "w", "prawda": "w", "kto": "inż. Krzysztof B., konstruktor mostów", "tw": "Most w Jarzębinie przeszedł przegląd techniczny i jest bezpieczny dla ruchu.", "cechy": ["Odsyła do protokołu przeglądu, który można przeczytać w całości.", "Jego wcześniejsze prace o mostach są podpisane nazwiskiem."], "lat": "Protokół przeglądu istnieje i mówi to samo. O jego pracach przy mostach piszą też inne osoby z branży.", "podstawa": "doświadczenie pasuje do tematu, a twierdzenie da się sprawdzić w pierwotnym dokumencie", "kryterium": "Źródło pierwotne i dorobek", "skrot": "przegląd mostu", "wyj": "Doświadczenie zawodowe pasuje do tematu, a twierdzenie da się sprawdzić w pierwotnym dokumencie, a nie w czyimś streszczeniu. Sprawdzalny jest też dorobek.", "czas": 34.5, "zapas": 18.3}, {"fala": 1, "karta": "z", "prawda": "z", "kto": "strona z poradami zdrowotnymi, bez informacji, kto ją prowadzi", "tw": "Ta bransoletka z magnesami poprawia sen każdej osobie, która ją nosi.", "cechy": ["Pod każdą poradą przycisk „Kup teraz”.", "Brak stopki, nazwisk i jakichkolwiek źródeł."], "lat": "Strona należy do sklepu, który sprzedaje te bransoletki. Poza nią nikt nie potwierdza takiego działania.", "podstawa": "nie wiadomo, kto prowadzi stronę i po co, a źródeł brak", "kryterium": "Niejasny cel publikacji", "skrot": "bransoletka na sen", "wyj": "Nie wiadomo, kto prowadzi stronę ani po co: informuje czy sprzedaje? Do tego brak źródeł. Niejasny cel i ukryta tożsamość razem to wyraźny sygnał ostrzegawczy.", "czas": 33.5, "zapas": 16.5}, {"fala": 1, "karta": "w", "prawda": "z", "kto": "dr hab. Piotr N., profesor uczelni, autor przeglądu o słodzikach", "tw": "Nowy słodzik w napojach jest bezpieczny i nie szkodzi zdrowiu.", "cechy": ["Od lat publikuje o żywieniu pod własnym nazwiskiem.", "Tekst wygląda jak rzetelny przegląd, z przypisami."], "lat": "Przegląd opłaciła organizacja producentów napojów. W tekście nigdzie tego nie ujawniono.", "podstawa": "przegląd opłaciła branża, a tekst tego nie ujawnia", "kryterium": "Nieujawnione finansowanie", "skrot": "przegląd o słodzikach", "wyj": "Kompetencje się zgadzały, ale to dopiero połowa pytania. Nieujawnione finansowanie potrafi przechylić wnioski, nawet gdy tekst napisała osoba naprawdę kompetentna, a z samej karty nie dało się tego wyczytać.", "czas": 35.5, "zapas": 14.1}, {"fala": 1, "karta": "z", "prawda": "w", "kto": "konto bez nazwiska, sam pseudonim", "tw": "Nocą w Modrzewinie pękła duża rura wodociągowa i woda zalała ulice.", "cechy": ["Opis spokojny i rzeczowy: miejsce, pora dnia, przebieg zdarzenia."], "lat": "Awarię potwierdzają komunikat urzędu i niezależne od siebie redakcje. Zdjęcia z wpisu pokazują to samo miejsce.", "podstawa": "informację potwierdzają niezależne źródła, choć konto jest anonimowe", "kryterium": "Jeden sygnał to nie wyrok", "skrot": "awaria wodociągu", "wyj": "Sam pseudonim to sygnał, żeby sprawdzić dokładniej, a nie dowód fałszu. Informację potwierdziły niezależne źródła i urząd, więc dało się ją wpuścić. Z samej karty nie dało się tego zobaczyć.", "czas": 29.0, "zapas": 17.1}, {"fala": 2, "karta": "z", "prawda": "z", "kto": "prof. Leszek G., ekonomista, wiele publikacji o rynkach i podatkach", "tw": "Nowa tabletka na ból pleców działa lepiej niż dotychczasowe.", "cechy": ["Wszystkie jego publikacje dotyczą ekonomii.", "O lekach pisze po raz pierwszy."], "lat": "Nie ma żadnych prac z medycyny ani farmakologii. Jego dorobek dotyczy wyłącznie ekonomii.", "podstawa": "wykształcenie i dorobek nie pasują do tematu", "kryterium": "Wiedza z innej dziedziny", "skrot": "tabletka na ból pleców", "wyj": "Tytuł naukowy nie czyni nikogo kompetentnym w każdej dziedzinie. Wykształcenie i dorobek muszą pasować do tematu, a ekonomia nie uczy o lekach.", "czas": 28.5, "zapas": 15.3}, {"fala": 2, "karta": "w", "prawda": "w", "kto": "dr Ewa P., hydrolożka z uczelni w Modrzewinie", "tw": "Filtr do wody dzbankowej usuwa z niej osady.", "cechy": ["Pod tekstem ujawnia, że testy sfinansował producent filtra.", "Opisuje, jak je przeprowadziła, i udostępnia wyniki."], "lat": "Wyniki testów są publicznie dostępne. O jej wcześniejszych pracach o wodzie piszą też inne osoby z tej dziedziny.", "podstawa": "finansowanie jest ujawnione, więc tekst da się zważyć", "kryterium": "Ujawnione powiązania nie dyskwalifikują", "skrot": "testy filtra do wody", "wyj": "Finansowanie przez producenta to powód, żeby ważyć wnioski ostrożnie, ale samo w sobie nie dyskwalifikuje. Dyskwalifikuje brak ujawnienia. Tu powiązanie podano wprost, więc tekst da się ocenić.", "czas": 29.0, "zapas": 18.3}, {"fala": 2, "karta": "z", "prawda": "z", "kto": "serwis informacyjny bez stopki redakcyjnej", "tw": "Burmistrz Jarzębina zamierza zamknąć szkołę, jak ujawniła osoba z jego otoczenia.", "cechy": ["Jedyne oparcie to osoba, która prosi o anonimowość.", "Ani dokumentu, ani nagrania, ani drugiej strony."], "lat": "Urząd miasta zaprzecza. Żadna inna redakcja nie potwierdza tej informacji.", "podstawa": "jedyne oparcie to anonimowa osoba, bez dokumentu i drugiej strony", "kryterium": "Wyłącznie anonimowe źródła", "skrot": "plotka o zamknięciu szkoły", "wyj": "Twierdzenie opiera się na jednej anonimowej osobie i nie da się go niezależnie sprawdzić. Brak dokumentu i drugiej strony to kolejne sygnały, a kilka naraz znaczy więcej niż jeden.", "czas": 29.0, "zapas": 13.5}, {"fala": 2, "karta": "w", "prawda": "z", "kto": "fundacja na rzecz zdrowego żywienia, raport z przypisami", "tw": "Ten rodzaj suplementu jest niezbędny w diecie osób dorosłych.", "cechy": ["Poważnie brzmiąca nazwa i estetyczny raport.", "Strona opisuje misję fundacji: edukację zdrowotną."], "lat": "Rejestr pokazuje, że fundację założyła firma sprzedająca ten suplement, a w zarządzie zasiadają osoby z tej firmy.", "podstawa": "za fundacją stoi firma sprzedająca ten suplement", "kryterium": "Kto naprawdę stoi za instytucją", "skrot": "raport fundacji o suplemencie", "wyj": "Gdy strona podpisuje się jako fundacja albo instytut, rejestr pokazuje, kto naprawdę za nią stoi. Tu stała firma sprzedająca suplement. Nazwa i estetyka raportu niczego nie dowodziły.", "czas": 28.0, "zapas": 17.7}, {"fala": 2, "karta": "z", "prawda": "w", "kto": "Zofia H., autorka prostego bloga o rzekach", "tw": "Wiosenne podtopienia w Jarzębinie wynikają z zabudowy brzegów rzeki.", "cechy": ["Strona wygląda staroświecko: bez zdjęć, z literówkami.", "Brak informacji o wykształceniu i pracy."], "lat": "Jest hydrolożką z wieloletnim dorobkiem. Jej prace o rzekach są podpisane nazwiskiem i cytowane przez inne osoby z tej dziedziny.", "podstawa": "ma sprawdzalny dorobek w tej dziedzinie, choć strona wygląda skromnie", "kryterium": "Wygląd strony to nie dorobek", "skrot": "podtopienia i zabudowa brzegów", "wyj": "O kompetencji decyduje wykształcenie zgodne z tematem i sprawdzalna historia publikacji, a nie wygląd strony ani popularność. Tego nie było na karcie, dopiero w innym źródle.", "czas": 28.0, "zapas": 19.5}, {"fala": 2, "karta": "z", "prawda": "w", "kto": "Beata L., mieszkanka bloku w Modrzewinie", "tw": "W moim bloku przez kilka dni nie było ogrzewania, a nikt nie reagował.", "cechy": ["Wpis pełen wykrzykników i oburzenia.", "Nie dołączono zdjęć ani dokumentów."], "lat": "Awarię potwierdza komunikat spółdzielni mieszkaniowej oraz relacje innych osób z tego bloku. Wpis zgadza się z ich opisem.", "podstawa": "awarię potwierdzają niezależne źródła, choć wpis jest emocjonalny", "kryterium": "Emocje to nie dowód fałszu", "skrot": "awaria ogrzewania w bloku", "wyj": "Silne emocje to sygnał, żeby sprawdzić dokładniej, a nie dowód, że relacja jest nieprawdziwa. Prawdziwe relacje osób poszkodowanych też bywają pełne emocji. Rozstrzygnęło sprawdzenie poza wpisem.", "czas": 28.0, "zapas": 18.3}, {"fala": 3, "karta": "w", "prawda": "z", "kto": "wiadomość podana w wielu serwisach informacyjnych naraz", "tw": "Popularny napój wycofano ze sklepów w Modrzewinie z powodu skażenia.", "cechy": ["Identyczne zdania widać w wielu serwisach.", "Każdy dopisuje: „według ustaleń redakcji”."], "lat": "Wszystkie serwisy przedrukowały jeden tekst. Nikt nie podaje oryginalnego dokumentu ani nie potwierdził informacji samodzielnie.", "podstawa": "to jedno źródło powtórzone w wielu miejscach", "kryterium": "Przedruki to jedno źródło", "skrot": "wycofany napój", "wyj": "Wiarygodną informację potwierdzają różne media niezależne od siebie, a nie kolejne przedruki jednego tekstu. Wiele miejsc z jednym źródłem to nadal jedno źródło.", "czas": 23.5, "zapas": 16.5}, {"fala": 3, "karta": "w", "prawda": "w", "kto": "Roman T., mechanik z warsztatu w Modrzewinie, wieloletnie doświadczenie", "tw": "Klocki hamulcowe warto wymieniać parami na jednej osi.", "cechy": ["Odsyła do instrukcji producenta pojazdu, w której można to sprawdzić."], "lat": "Instrukcja producenta mówi to samo. Warsztat jest prowadzony pod jego nazwiskiem.", "podstawa": "doświadczenie pasuje do tematu, a twierdzenie da się sprawdzić w instrukcji", "kryterium": "Doświadczenie pasuje do tematu", "skrot": "wymiana klocków hamulcowych", "wyj": "Doświadczenie zawodowe pasuje do tematu, a twierdzenie da się sprawdzić w pierwotnym dokumencie. Nie widać tu żadnego sygnału ostrzegawczego.", "czas": 23.0, "zapas": 14.1}, {"fala": 3, "karta": "w", "prawda": "z", "kto": "Tadeusz Z., analityk rynku nieruchomości, mówi bardzo pewnie", "tw": "Ceny mieszkań w Jarzębinie na pewno spadną w przyszłym roku.", "cechy": ["Bez cienia wahania: „na pewno”, „nigdy się nie mylę”."], "lat": "Nikt nigdy nie sprawdził, jak często jego pewne prognozy miały pokrycie w faktach.", "podstawa": "pewność siebie nie dowodzi trafności, a nikt nie sprawdził jego prognoz", "kryterium": "Pewność siebie to nie trafność", "skrot": "prognoza cen mieszkań", "wyj": "Pewność często bierze się ze spójności informacji, na których ktoś opiera sąd, a nie z ich jakości, więc z zewnątrz brzmi tak samo, gdy ktoś ma rację i gdy jej nie ma. Pytaj nie o to, jak bardzo ktoś jest pewny, tylko skąd miałby wiedzieć.", "czas": 23.0, "zapas": 15.3}, {"fala": 3, "karta": "z", "prawda": "w", "kto": "Irena R., meteorolożka z Modrzewina", "tw": "Jutro w Jarzębinie możliwe burze, ale przy burzach prognoza bywa mniej pewna.", "cechy": ["Mówi ostrożnie i zaznacza, czego nie wie."], "lat": "Jej prognozy co dzień porównuje się z tym, co faktycznie się wydarzyło, więc trafność wychodzi na jaw szybko.", "podstawa": "trafność jej prognoz sprawdza się na bieżąco, a ostrożny ton nie jest wadą", "kryterium": "Ostrożny ton to nie brak kompetencji", "skrot": "prognoza burz", "wyj": "Nie licz na to, że rozpoznasz kompetencję po tonie głosu albo braku wahania. Liczy się, czy ta osoba miała okazję się nauczyć przez długą praktykę i szybką, jednoznaczną informację zwrotną o tym, czy jej oceny się sprawdzały.", "czas": 21.5, "zapas": 18.3}, {"fala": 3, "karta": "w", "prawda": "w", "kto": "Marta K., redaktorka lokalnej gazety w Jarzębinie", "tw": "Rada miasta Jarzębina przyjęła uchwałę o nowych godzinach pracy biblioteki.", "cechy": ["Cytuje uchwałę w całości i wskazuje, gdzie leży oryginał."], "lat": "Oryginał uchwały jest w dokumentach miasta i brzmi tak samo. Tę samą informację podaje niezależnie inna redakcja.", "podstawa": "twierdzenie da się sprawdzić w pierwotnym dokumencie, a tekst jest podpisany", "kryterium": "Źródło pierwotne i podpis", "skrot": "uchwała o bibliotece", "wyj": "Tekst odsyła do pierwotnego dokumentu zamiast do czyjegoś streszczenia, a autorka jest podpisana nazwiskiem. To odwrotność tekstów opartych na „podobno”.", "czas": 22.5, "zapas": 17.7}, {"fala": 3, "karta": "z", "prawda": "z", "kto": "artykuł w portalu „Bystre Zdrowie”, podpisany tylko „redakcja”", "tw": "Nagłówek ostrzega, że popularny owoc niszczy wątrobę.", "cechy": ["Sam tekst opisuje tylko, jak wybierać dojrzałe owoce.", "Brak nazwiska i źródeł."], "lat": "Poza tym portalem nikt nie potwierdza tego ostrzeżenia, a kto napisał tekst, nie wiadomo.", "podstawa": "nagłówek obiecuje więcej, niż pokazuje tekst, a autorstwo i źródła są ukryte", "kryterium": "Nagłówek obiecuje więcej niż tekst", "skrot": "ostrzeżenie o owocu", "wyj": "Sensacyjny nagłówek obiecuje rewelację, której treść nie potwierdza, a tekst nie ma ani nazwiska, ani źródeł. Kilka sygnałów naraz to poważny powód do nieufności.", "czas": 23.0, "zapas": 15.9}], "t": {"start": "Stoisz przy bramce, pod którą czeka kolejka źródeł: osób, instytucji i stron. Przy każdej karcie zdecyduj, czy je wpuścić (źródło jest wiarygodne w tej sprawie), czy zatrzymać (jest podejrzane), czy najpierw przeczytać lateralnie, czyli sprawdzić poza kartą, co o źródle mówią inni. Kart jest 18, w trzech falach po sześć. W trybie z limitem czasu każda fala jest szybsza od poprzedniej.", "trybLegend": "Tryb gry", "czytnik": "Osoby korzystające z czytnika ekranu powinny wybrać tryb bez limitu czasu.", "zacznij": "Zacznij", "zasadyTytul": "Jak liczymy punkty", "zasady": ["„Wpuść” znaczy: to źródło jest wiarygodne w tej sprawie. „Zatrzymaj” znaczy: jest podejrzane. Trafna decyzja daje 10 punktów, a seria rośnie o jeden.", "„Czytaj lateralnie” odsłania jedną linijkę z zewnątrz: co o tym źródle mówią inni. Kosztuje 4 punkty (trafna decyzja daje wtedy 6 zamiast 10), a w trybie z limitem także 3 sekundy. Seria trwa, ale nie rośnie. Po odsłonięciu zawsze zostaje Ci czas na przeczytanie tej linijki i decyzję: co najmniej 7,5 s plus 0,6 s na każde słowo linijki.", "Wpuszczenie źródła, które nie było wiarygodne w tej sprawie, kosztuje jeden z 4 punktów reputacji bramki i przerywa serię. Gdy reputacja spadnie do zera, gra się kończy.", "Zatrzymanie źródła, które było wiarygodne w tej sprawie, to też pomyłka: 0 punktów i przerwana seria, ale bez straty reputacji.", "Brak decyzji przed końcem czasu: karta odchodzi bez kontroli, 0 punktów, seria przerwana.", "Gdy seria wynosi co najmniej trzy, kolejne punkty liczą się podwójnie (Seria ×2). Pomyłka i brak decyzji zerują serię."], "hudEtyk": "Stan gry", "punkty": "Punkty", "seria": "Seria", "mnoz": "Seria ×2", "reputacja": "Reputacja bramki: {r} z {max}", "fala": "Fala {f} z {ile}", "kartaNr": "Karta {n} z {ile}", "baner": "Fala {f} z {ile} · {t} s na tę kartę", "banerUp": "Fala przyspiesza! {t} s na tę kartę", "banerBez": "Fala {f} z {ile} · bez limitu", "falaOgl": "Fala {f} z {ile}: czas na kartę {t}.", "falaOglBez": "Fala {f} z {ile}.", "zatrzymaj": "Zatrzymaj", "wpusc": "Wpuść", "czytaj": "Czytaj lateralnie", "czytano": "Sprawdzono poza kartą", "kosztCzas": "3 sekundy i 4 punkty", "kosztBez": "4 punkty", "pauza": "Pauza", "wznow": "Wznów", "pauzaInfoR": "Gra wstrzymana. Naciśnij „Wznów”, żeby wrócić do karty.", "pauzaInfoK": "Gra wstrzymana, bo karta przeglądarki była ukryta. Naciśnij „Wznów”, żeby wrócić do karty.", "pauzaOgl": "Gra wstrzymana.", "wznowOgl": "Gra wznowiona.", "podpowiedz": "Podpowiedź: strzałka w lewo to „Zatrzymaj”, strzałka w prawo to „Wpuść”, strzałka w dół to „Czytaj lateralnie”. Skróty działają, gdy fokus jest w grze.", "kartaEtyk": "Karta {n} z {ile}", "etKto": "Kto mówi", "etTw": "Twierdzenie", "etCechy": "Widać na karcie", "latEt": "Co piszą o tym źródle gdzie indziej", "latEtOtw": "Z zewnątrz: co piszą o tym źródle gdzie indziej", "latPrzedCzas": "Jeszcze nie sprawdzono. „Czytaj lateralnie” odsłoni jedną linijkę z zewnątrz. Koszt: 3 sekundy i 4 punkty.", "latPrzedBez": "Jeszcze nie sprawdzono. „Czytaj lateralnie” odsłoni jedną linijkę z zewnątrz. Koszt: 4 punkty.", "latOgl": "Czytanie lateralne. Co piszą o tym źródle gdzie indziej: {t}", "oglKarta": "Karta {n} z {ile}. Kto mówi: {kto} Twierdzenie: {tw} Widać na karcie: {cechy}", "zobaczWynik": "Zobacz wynik", "dalej": "Dalej", "werPrefiks": "Karta {n}:", "wOk": "Wpuszczone. Słusznie: {p}.", "zOk": "Zatrzymane. Słusznie: {p}.", "wOkL": "Wpuszczone po sprawdzeniu poza kartą. Słusznie: {p}.", "zOkL": "Zatrzymane po sprawdzeniu poza kartą. Słusznie: {p}.", "wZle": "Wpuściłeś/aś źródło, które nie było wiarygodne w tej sprawie: {p}.", "zZle": "Zatrzymałeś/aś źródło, które było wiarygodne w tej sprawie: {p}.", "brak": "Brak decyzji: źródło odeszło spod bramki bez kontroli. 0 punktów, seria przerwana.", "pkt": "+{p} punktów", "pktMnoz": "+{p} punktów ({m})", "serieTrwa": "Seria trwa, ale nie rośnie.", "repSpadla": "Reputacja bramki spada: {r} z {max}. 0 punktów, seria przerwana.", "zeroSeria": "0 punktów, seria przerwana.", "koniecH": "Koniec gry. Wynik: {p} punktów.", "koniecHWczesnie": "Koniec gry: reputacja bramki spadła do zera. Wynik: {p} punktów.", "trybNazwy": {"czas": "z limitem czasu", "bez": "bez limitu czasu"}, "trybInfo": "Tryb gry: {t}.", "lPunkty": "Punkty", "lSeria": "Najlepsza seria", "lRekord": "Rekord w tym trybie", "lLat": "Czytanie lateralne zmieniło decyzję", "nowyRekord": "Nowy rekord!", "rekordBrakZapisu": "Ta przeglądarka nie pozwala zapisać rekordu na stałe, więc obowiązuje on tylko do zamknięcia strony.", "tabCap": "Wyniki po falach", "kol": ["Fala i czas na kartę", "Trafne decyzje", "Po|myłki", "Bez de|cyzji"], "wiersz": "Fala {p} ({t})", "czasZakres": "od {a} do {b} s", "czasJeden": "{a} s", "bezLimitu": "bez limitu", "nieRozegrano": "nie rozegrano", "tabNota": "Do trafnych decyzji liczą się też te po czytaniu lateralnym. Pomyłka to wpuszczenie źródła podejrzanego albo zatrzymanie wiarygodnego.", "latH": "Czytanie lateralne", "latBrak": "Nie użyłeś/aś czytania lateralnego ani razu.", "latUzyto": "Użyłeś/aś czytania lateralnego {n} {razy}.", "latZmienilo": "W {m} z nich odsłonięta linijka odwróciła to, co sugerowała sama karta, a Twoja decyzja była trafna.", "latNieZmienilo": "W żadnym z tych przypadków odsłonięta linijka nie odwróciła tego, co sugerowała sama karta.", "latPulapki": "Karty, które z samej karty prowadziły do złej decyzji: {t}.", "latPulapkiOk": "Przy żadnej z nich nie dałeś/aś się zwieść.", "latPulapkiBlad": "Przy {b} z nich zdecydowałeś/aś bez sprawdzenia poza kartą i się pomyliłeś/aś.", "latZbedne": "W {u} {przyp} sprawdzałeś/aś poza kartą, choć wystarczyła sama karta. To kosztowało {koszt}.", "latKosztCzas": "czas i punkty", "latKosztBez": "punkty", "wnH": "Co z tego wynika o wiarygodności źródła", "wnA": "Materiał „Kto mówi” uczy dwóch osobnych pytań: czy ta osoba się zna na temacie i czy można jej ufać, że nie przedstawia sprawy nieuczciwie. Odpowiedź „tak” na jedno nie daje odpowiedzi na drugie: kompetentna osoba może mieć powód, żeby przedstawić sprawę nieuczciwie, a uczciwa osoba bez wiedzy może się szczerze mylić.", "wnNic": "Wszystkie karty odeszły spod bramki bez Twojej decyzji, więc ta rozgrywka nie pokazuje, jak oceniasz źródła. Zagraj jeszcze raz i zdecyduj przy każdej karcie.", "wnPulapka": "Na {k} {kart} zdecydowałeś/aś na podstawie samej karty i się pomyliłeś/aś. To pułapka, o której ostrzega materiał o czytaniu lateralnym: można rzetelnie odpowiedzieć na wszystkie pytania, patrząc tylko na wygląd i deklaracje strony, i nadal dać się oszukać, bo strona może po prostu kłamać o sobie samej. Osoby zawodowo weryfikujące fakty oceniały strony szybciej i trafniej, bo od razu wychodziły poza stronę.", "wnNadmiar": "Źródła wiarygodne w tej sprawie, które zatrzymałeś/aś: {k}. Materiał przypomina, że jeden sygnał ostrzegawczy to zaproszenie do sprawdzenia, a nie wyrok. Emocjonalny ton to sygnał, żeby sprawdzić fakty dokładniej, a nie dowód, że są sfałszowane. Powiązania finansowe same w sobie nie dyskwalifikują: dyskwalifikuje dopiero brak ich ujawnienia.", "wnSygnaly": "Źródła z wyraźnymi sygnałami ostrzegawczymi na karcie, które wpuściłeś/aś: {k}. Kilka sygnałów naraz, na przykład ukryta tożsamość, brak źródeł pierwotnych i język, który ma zastąpić dowody, to już poważny powód do nieufności. Podobnie z kompetencją: tytuł naukowy nie czyni nikogo kompetentnym w dziedzinie, której nie obejmuje jego wykształcenie ani dorobek.", "wnBezBledow": "Nie pomyliłeś/aś się ani razu.", "wnBezBledowLat": "Czytanie lateralne pomogło tam, gdzie sama karta niczego nie rozstrzygała.", "wnZaDuzo": "Czytania lateralnego użyłeś/aś także tam, gdzie wystarczyła sama karta: {k} {razy}. W materiale to ruch na sytuacje, w których samej strony nie da się ocenić, bo ile by nie czytać, dostaje się tylko to, co źródło samo chce pokazać. Pytania o kompetencje, powiązania i sygnały ostrzegawcze nadal się przydają, zawodzą dopiero jako jedyna metoda.", "wnZakon": "Sprawdzanie nie daje pewności, że tekst jest uczciwy. Daje coś skromniejszego i realnego: pokazuje, czy źródło w ogóle mówi, kto mu płaci. Pytanie, które wraca w całym module: czego tu nie widzę?", "pomH": "Pomyłki przy bramce", "pomBrak": "Gratulacje: każda podjęta decyzja była trafna, więc nie ma pomyłek do omówienia.", "pomNic": "Żadna karta nie dostała Twojej decyzji, więc nie ma pomyłek do omówienia.", "pomWpuszczone": "Wpuściłeś/aś to źródło.", "pomZatrzymane": "Zatrzymałeś/aś to źródło.", "pomCzyt": "Czytanie lateralne: użyłeś/aś.", "pomBezCzyt": "Czytanie lateralne: nie użyłeś/aś.", "pomLat": "Co pisano o tym źródle gdzie indziej:", "jeszcze": "Zagraj jeszcze raz", "zmien": "Zmień tryb"}};
+function ensure(){
+  var w = document.getElementById('mk-bramkarz') || document.querySelector('.mk-bramkarz');
+  if(!w) return null;
+  w.id='mk-bramkarz'; w.className='mk mk-bramkarz';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-bramkarz"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-bramkarz');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var T = D.t;
+  var U = D.ust;
+  var FALE = D.fale;
+  var NS = 'http://www.w3.org/2000/svg';
+  var KLUCZ = {czas: 'mk-bramkarz-rekord-czas', bez: 'mk-bramkarz-rekord-bez'};
+  var TARCZA = 'M12 2.5l8 3v5.8c0 4.9-3.3 8.9-8 10.7-4.7-1.8-8-5.8-8-10.7V5.5l8-3z';
+
+  var ekran = el('div','mk-b-ekran');
+  var glos = el('div','mk-sr');
+  glos.setAttribute('aria-live','polite');
+  glos.setAttribute('aria-atomic','true');
+  c.appendChild(ekran);
+  c.appendChild(glos);
+
+  var stan = 'start';          // start | gra | koniec
+  var tryb = 'bez';            // czas | bez (domyślnie bez limitu czasu)
+  var gra = null;
+  var ui = null;
+  var zegar = null;
+  var wstrzymane = null;
+  var rekordPamiec = {czas: 0, bez: 0};
+  var ostSzer = 0;
+  var tmResize = 0;
+  var ruchOgr = false;
+  try { ruchOgr = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  catch(e1){ ruchOgr = false; }
+
+  // ---------------------------------------------------------- pomocnicze
+  function wstaw(s, m){
+    var out = s;
+    for(var k in m){
+      if(Object.prototype.hasOwnProperty.call(m, k)){ out = out.split('{' + k + '}').join(String(m[k])); }
+    }
+    return out;
+  }
+  function wielka(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+  function kropka(s){
+    var k = s.charAt(s.length - 1);
+    return (k === '.' || k === '!' || k === '?' || k === '”') ? s : s + '.';
+  }
+  function forma(n, jeden, wiele){ return n === 1 ? jeden : wiele; }
+  function sekTxt(x){ return String(x).replace('.', ','); }
+  // czas na kartę w danej fali: zakres (czasy kart liczy generator ze słów na karcie), a gdy wszystkie równe, jedna liczba
+  function zakresCzasu(f){
+    return f.min === f.max ? wstaw(T.czasJeden, {a: sekTxt(f.min)})
+                           : wstaw(T.czasZakres, {a: sekTxt(f.min), b: sekTxt(f.max)});
+  }
+  function tasuj(tab){
+    var a = tab.slice();
+    for(var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function ulozKolejke(){
+    var k = [];
+    for(var f = 0; f < FALE.length; f++){
+      var grupa = [];
+      for(var i = 0; i < D.karty.length; i++){ if(D.karty[i].fala === f + 1){ grupa.push(i); } }
+      k = k.concat(tasuj(grupa));
+    }
+    return k;
+  }
+  function oglos(tekst, opoznienie){
+    if(opoznienie){ setTimeout(function(){ glos.textContent = tekst; }, opoznienie); }
+    else { glos.textContent = tekst; }
+  }
+  function svg(w, h, vb){
+    var s = document.createElementNS(NS, 'svg');
+    s.setAttribute('width', String(w)); s.setAttribute('height', String(h));
+    s.setAttribute('viewBox', vb);
+    s.setAttribute('aria-hidden', 'true'); s.setAttribute('focusable', 'false');
+    return s;
+  }
+  function elSvg(nazwa, atr){
+    var e = document.createElementNS(NS, nazwa);
+    for(var k in atr){ if(Object.prototype.hasOwnProperty.call(atr, k)){ e.setAttribute(k, atr[k]); } }
+    return e;
+  }
+  function ikonaStop(){
+    var s = svg(24, 24, '0 0 24 24');
+    s.appendChild(elSvg('circle', {cx: '12', cy: '12', r: '9', fill: 'none', stroke: 'currentColor',
+                                   'stroke-width': '2.4'}));
+    s.appendChild(elSvg('path', {d: 'M7.5 12h9', fill: 'none', stroke: 'currentColor', 'stroke-width': '2.6',
+                                 'stroke-linecap': 'round'}));
+    return s;
+  }
+  function ikonaWpusc(){
+    var s = svg(24, 24, '0 0 24 24');
+    s.appendChild(elSvg('path', {d: 'M4 12h14M13 6l6 6-6 6', fill: 'none', stroke: 'currentColor',
+                                 'stroke-width': '2.6', 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}));
+    return s;
+  }
+  function ikonaCzyt(){
+    var s = svg(22, 22, '0 0 24 24');
+    s.appendChild(elSvg('path', {d: 'M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5',
+                                 fill: 'none', stroke: 'currentColor', 'stroke-width': '2.2',
+                                 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}));
+    return s;
+  }
+  function tarcza(pelna){
+    var s = svg(24, 24, '0 0 24 24');
+    s.appendChild(elSvg('path', {d: TARCZA, fill: pelna ? '#16181c' : 'none',
+                                 stroke: pelna ? '#16181c' : '#4a4e55', 'stroke-width': '2',
+                                 'stroke-linejoin': 'round'}));
+    return s;
+  }
+  function szlaban(){
+    var s = svg(56, 28, '0 0 56 28');
+    s.setAttribute('class', 'mk-b-szl');
+    s.appendChild(elSvg('rect', {x: '3', y: '4', width: '5', height: '22', fill: '#f4f4f2'}));
+    s.appendChild(elSvg('rect', {x: '48', y: '14', width: '5', height: '12', fill: '#f4f4f2'}));
+    var r = elSvg('g', {'class': 'mk-b-ramie'});
+    r.appendChild(elSvg('rect', {x: '8', y: '9', width: '40', height: '5', fill: '#e8a49f'}));
+    r.appendChild(elSvg('rect', {x: '16', y: '9', width: '5', height: '5', fill: '#16181c'}));
+    r.appendChild(elSvg('rect', {x: '28', y: '9', width: '5', height: '5', fill: '#16181c'}));
+    r.appendChild(elSvg('rect', {x: '40', y: '9', width: '5', height: '5', fill: '#16181c'}));
+    s.appendChild(r);
+    return s;
+  }
+
+  // ---------------------------------------------------------- rekord (localStorage, każdy dostęp w try/catch)
+  function odczytajRekord(tr){
+    try {
+      var v = window.localStorage.getItem(KLUCZ[tr]);
+      var n = parseInt(v, 10);
+      return (isNaN(n) || n < 0) ? 0 : n;
+    } catch(e2){ return 0; }
+  }
+  function zapiszRekord(tr, n){
+    try { window.localStorage.setItem(KLUCZ[tr], String(n)); return true; }
+    catch(e3){ return false; }
+  }
+
+  // ---------------------------------------------------------- zegar (setTimeout + Date.now; w ukrytej karcie klatki animacji stoją)
+  function krokZegara(){ return ruchOgr ? 500 : 100; }
+  function zegarStop(){
+    if(zegar){ clearTimeout(zegar.tm); zegar = null; }
+  }
+  function zegarPlanuj(){
+    if(!zegar){ return; }
+    var z = zegar;
+    var ile = z.koniec - Date.now();
+    if(ile <= 0){
+      zegar = null;
+      if(z.tykaj){ z.tykaj(0, z.calosc); }
+      z.cb();
+      return;
+    }
+    if(z.tykaj){ z.tykaj(ile, z.calosc); }
+    z.tm = setTimeout(zegarPlanuj, Math.max(15, Math.min(krokZegara(), ile)));
+  }
+  function zegarStart(ms, cb, tykaj, calosc){
+    zegarStop();
+    zegar = {koniec: Date.now() + ms, cb: cb, tykaj: tykaj, calosc: calosc || ms, tm: 0};
+    zegarPlanuj();
+  }
+  function zegarWstrzymaj(){
+    if(!zegar){ return null; }
+    clearTimeout(zegar.tm);
+    var p = {pozostalo: Math.max(0, zegar.koniec - Date.now()), cb: zegar.cb, tykaj: zegar.tykaj,
+             calosc: zegar.calosc};
+    zegar = null;
+    return p;
+  }
+  // czytanie lateralne zabiera czas, ale po odsłonięciu zawsze zostaje co najmniej "zapas" ms (zapas z danych karty:
+  // czas na przeczytanie odsłoniętej linijki i decyzję); gdy do końca zostawało mniej niż zapas, czas wydłuża się do zapasu
+  function zegarSkroc(koszt, zapas){
+    if(!zegar || !zegar.tykaj){ return; }
+    var ile = zegar.koniec - Date.now();
+    var nowe = Math.max(ile - koszt, zapas);
+    clearTimeout(zegar.tm);
+    zegar.koniec = Date.now() + nowe;
+    zegarPlanuj();
+  }
+  function tykajPasek(ile, calosc){
+    if(!ui || !ui.pasekW){ return; }
+    var proc = Math.max(0, Math.min(100, Math.round(ile / calosc * 100)));
+    ui.pasekW.style.width = proc + '%';
+    if(proc <= 30){ ui.pasekW.classList.add('mk-b-malo'); } else { ui.pasekW.classList.remove('mk-b-malo'); }
+  }
+
+  // ---------------------------------------------------------- ekran startowy
+  function ekranStart(){
+    zegarStop();
+    wstrzymane = null;
+    gra = null;
+    ui = null;
+    stan = 'start';
+    ekran.innerHTML = '';
+    ekran.appendChild(el('p','mk-b-lead', T.start));
+
+    var fs = document.createElement('fieldset');
+    fs.className = 'mk-b-fs';
+    var lg = document.createElement('legend');
+    lg.className = 'mk-sr';
+    lg.textContent = T.trybLegend;
+    fs.appendChild(lg);
+    var pt = el('p','mk-b-pyt', T.trybLegend);
+    pt.setAttribute('aria-hidden','true');
+    fs.appendChild(pt);
+    D.tryby.forEach(function(t){
+      var id = 'mk-b-tryb-' + t.k;
+      var lab = document.createElement('label');
+      lab.className = 'mk-b-opcja';
+      lab.setAttribute('for', id);
+      var inp = document.createElement('input');
+      inp.type = 'radio'; inp.name = 'mk-b-tryb'; inp.id = id; inp.value = t.k;
+      inp.className = 'mk-b-radio';
+      if(t.k === tryb){ inp.checked = true; }
+      inp.addEventListener('change', function(){ if(inp.checked){ tryb = t.k; } });
+      var box = el('span','mk-b-opt');
+      box.appendChild(el('span','mk-b-optnazwa', t.etyk));
+      box.appendChild(el('span','mk-b-opttekst', t.pod));
+      lab.appendChild(inp);
+      lab.appendChild(box);
+      fs.appendChild(lab);
+    });
+    ekran.appendChild(fs);
+    ekran.appendChild(el('p','mk-b-czytnik', T.czytnik));
+
+    var det = document.createElement('details');
+    det.className = 'mk-b-szcz';
+    var sum = document.createElement('summary');
+    sum.textContent = T.zasadyTytul;
+    det.appendChild(sum);
+    var ul = el('ul','mk-lista');
+    T.zasady.forEach(function(z){ ul.appendChild(el('li', null, z)); });
+    det.appendChild(ul);
+    ekran.appendChild(det);
+
+    var btn = el('button','mk-btn mk-b-start', T.zacznij);
+    btn.type = 'button';
+    btn.addEventListener('click', zacznij);
+    ekran.appendChild(btn);
+  }
+
+  // ---------------------------------------------------------- ekran gry
+  function przycisk(kod, napis, ikona, skrot){
+    var b = el('button','mk-b-dec mk-b-dec-' + kod);
+    b.type = 'button';
+    b.setAttribute('aria-keyshortcuts', skrot);
+    b.appendChild(ikona);
+    b.appendChild(el('span', null, napis));
+    b.addEventListener('click', function(){ decyduj(kod); });
+    return b;
+  }
+  function kafel(etykieta, wartosc){
+    var k = el('div','mk-b-st');
+    var e = el('span','mk-b-stn', etykieta);
+    k.appendChild(e);
+    var w = null;
+    if(wartosc !== null){ w = el('span','mk-b-stw', wartosc); k.appendChild(w); }
+    return {k: k, e: e, w: w};
+  }
+  function budujEkranGry(){
+    ekran.innerHTML = '';
+    ui = {};
+    var hud = el('div','mk-b-hud');
+    hud.setAttribute('role','group');
+    hud.setAttribute('aria-label', T.hudEtyk);
+    var kP = kafel(T.punkty, '0');
+    ui.punkty = kP.w;
+    hud.appendChild(kP.k);
+    var kS = el('div','mk-b-st');
+    var wS = el('div','mk-b-strz');
+    wS.appendChild(el('span','mk-b-stn', T.seria));
+    ui.mnoz = el('span','mk-b-mnoz mk-b-mnoz-off', T.mnoz);
+    wS.appendChild(ui.mnoz);
+    kS.appendChild(wS);
+    ui.seria = el('span','mk-b-stw','0');
+    kS.appendChild(ui.seria);
+    hud.appendChild(kS);
+    var kR = kafel('', null);
+    ui.rep = kR.e;
+    ui.tarcze = el('span','mk-b-tarcze');
+    ui.tarcze.setAttribute('aria-hidden','true');
+    kR.k.appendChild(ui.tarcze);
+    hud.appendChild(kR.k);
+    var kF = kafel('', '');
+    ui.fala = kF.e;
+    ui.kartaNr = kF.w;
+    ui.kartaNr.className = 'mk-b-stw mk-b-stw2';
+    hud.appendChild(kF.k);
+    ekran.appendChild(hud);
+
+    if(tryb === 'czas'){
+      var wiersz = el('div','mk-b-czasrz');
+      var pasek = el('div','mk-b-pasek');
+      pasek.setAttribute('aria-hidden','true');
+      ui.pasekW = el('div','mk-b-pasek-w');
+      pasek.appendChild(ui.pasekW);
+      wiersz.appendChild(pasek);
+      ui.pauza = el('button','mk-btn mk-btn2 mk-b-pauza', T.pauza);
+      ui.pauza.type = 'button';
+      ui.pauza.addEventListener('click', function(){
+        if(ui.pauza.getAttribute('aria-disabled') === 'true'){ return; }
+        if(gra && gra.pauza){ wznow(); } else { pauza('reczna'); }
+      });
+      wiersz.appendChild(ui.pauza);
+      ekran.appendChild(wiersz);
+    }
+
+    ui.baner = el('p','mk-b-baner');
+    ui.baner.setAttribute('aria-hidden','true');
+    ekran.appendChild(ui.baner);
+
+    ui.stos = el('div','mk-b-stos');
+    ui.karta = el('article','mk-b-karta');
+    var nag = el('div','mk-b-nag');
+    ui.nr = el('span','mk-b-nr');
+    ui.nrK = el('span', null);
+    ui.nrF = el('span','mk-b-nr-f');
+    ui.nr.appendChild(ui.nrK);
+    ui.nr.appendChild(ui.nrF);
+    nag.appendChild(ui.nr);
+    ui.szl = szlaban();
+    nag.appendChild(ui.szl);
+    ui.karta.appendChild(nag);
+    var pola = document.createElement('dl');
+    pola.className = 'mk-b-pola';
+    function wiersz2(etyk, klasa){
+      var w = el('div','mk-b-wiersz');
+      w.appendChild(el('dt','mk-b-et', etyk));
+      var dd = document.createElement('dd');
+      dd.className = klasa;
+      w.appendChild(dd);
+      pola.appendChild(w);
+      return dd;
+    }
+    ui.kto = wiersz2(T.etKto, 'mk-b-kto');
+    ui.tw = wiersz2(T.etTw, 'mk-b-tw');
+    var ddC = wiersz2(T.etCechy, 'mk-b-cechy-dd');
+    ui.cechy = el('ul','mk-b-cechy');
+    ddC.appendChild(ui.cechy);
+    ui.karta.appendChild(pola);
+    ui.lat = el('div','mk-b-lat');
+    ui.latEt = el('p','mk-b-lat-et');
+    ui.latTx = el('p','mk-b-lat-tx');
+    ui.latTx.id = 'mk-b-lat-tx';
+    ui.lat.appendChild(ui.latEt);
+    ui.lat.appendChild(ui.latTx);
+    ui.karta.appendChild(ui.lat);
+    ui.stos.appendChild(ui.karta);
+    ui.zapowiedzi = el('div','mk-b-zapowiedzi');
+    ui.zapowiedzi.setAttribute('aria-hidden','true');
+    ui.stos.appendChild(ui.zapowiedzi);
+    ekran.appendChild(ui.stos);
+    ui.pauzaInfo = el('div','mk-b-pauzainfo');
+    ui.pauzaInfo.hidden = true;
+    ui.pauzaTxt = el('p', null);
+    ui.pauzaInfo.appendChild(ui.pauzaTxt);
+    ekran.appendChild(ui.pauzaInfo);
+
+    ui.akcje = el('div','mk-b-akcje');
+    ui.z = przycisk('z', T.zatrzymaj, ikonaStop(), 'ArrowLeft');
+    ui.w = przycisk('w', T.wpusc, ikonaWpusc(), 'ArrowRight');
+    ui.akcje.appendChild(ui.z);
+    ui.akcje.appendChild(ui.w);
+    ui.czyt = el('button','mk-b-czyt');
+    ui.czyt.type = 'button';
+    ui.czyt.setAttribute('aria-keyshortcuts','ArrowDown');
+    ui.czyt.setAttribute('aria-describedby','mk-b-lat-tx');
+    var rz = el('span','mk-b-czyt-w');
+    rz.appendChild(ikonaCzyt());
+    ui.czytEt = el('span', null, T.czytaj);
+    rz.appendChild(ui.czytEt);
+    ui.czyt.appendChild(rz);
+    ui.koszt = el('span','mk-b-koszt', tryb === 'czas' ? T.kosztCzas : T.kosztBez);
+    ui.czyt.appendChild(ui.koszt);
+    ui.czyt.addEventListener('click', czytaj);
+    ui.akcje.appendChild(ui.czyt);
+    ekran.appendChild(ui.akcje);
+
+    ui.wynikBtn = el('button','mk-btn mk-b-wynik', T.zobaczWynik);
+    ui.wynikBtn.type = 'button';
+    ui.wynikBtn.hidden = true;
+    ui.wynikBtn.addEventListener('click', koniecGry);
+    ekran.appendChild(ui.wynikBtn);
+
+    ui.dalej = el('button','mk-btn mk-b-dalej', T.dalej);
+    ui.dalej.type = 'button';
+    ui.dalej.hidden = true;
+    ui.dalej.addEventListener('click', dalej);
+    ekran.appendChild(ui.dalej);
+
+    ui.wer = el('div','mk-b-wer');
+    ui.wer.setAttribute('aria-hidden','true');
+    ekran.appendChild(ui.wer);
+
+    ekran.appendChild(el('p','mk-b-podp', T.podpowiedz));
+    wyrownajWysokosc();
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){ if(stan === 'gra' && ui){ wyrownajWysokosc(); } });
+    }
+  }
+
+  function ustawLat(k, otwarte){
+    if(otwarte){
+      ui.lat.className = 'mk-b-lat mk-b-lat-otw';
+      ui.latEt.textContent = T.latEtOtw;
+      ui.latTx.textContent = k.lat;
+    } else {
+      ui.lat.className = 'mk-b-lat';
+      ui.latEt.textContent = T.latEt;
+      ui.latTx.textContent = tryb === 'czas' ? T.latPrzedCzas : T.latPrzedBez;
+    }
+  }
+  function wypelnijKarte(k, otwarte){
+    ui.kto.textContent = k.kto;
+    ui.tw.textContent = k.tw;
+    ui.cechy.innerHTML = '';
+    k.cechy.forEach(function(t){ ui.cechy.appendChild(el('li', null, t)); });
+    ustawLat(k, otwarte);
+  }
+  // wszystkie karty mają zajmować tyle samo miejsca (z odsłoniętą linijką i bez), żeby przyciski nie skakały
+  function wyrownajWysokosc(){
+    if(!ui || !ui.karta){ return; }
+    var byl = ui.stos.hidden;
+    ui.stos.hidden = false;
+    ui.karta.style.minHeight = '';
+    var maks = 0;
+    for(var i = 0; i < D.karty.length; i++){
+      for(var o = 0; o < 2; o++){
+        wypelnijKarte(D.karty[i], o === 1);
+        var h = ui.karta.offsetHeight;
+        if(h > maks){ maks = h; }
+      }
+    }
+    if(gra && gra.biezacy){ wypelnijKarte(gra.biezacy, gra.czytane); }
+    if(maks > 80){
+      ui.karta.style.minHeight = maks + 'px';
+      ui.pauzaInfo.style.minHeight = (maks + ui.zapowiedzi.offsetHeight) + 'px';
+    }
+    ui.stos.hidden = byl;
+    ostSzer = ekran.clientWidth;
+  }
+  window.addEventListener('resize', function(){
+    clearTimeout(tmResize);
+    tmResize = setTimeout(function(){
+      if(stan === 'gra' && ui && ekran.clientWidth !== ostSzer){ wyrownajWysokosc(); }
+    }, 150);
+  });
+
+  function czytReset(){
+    ui.czytEt.textContent = T.czytaj;
+    ui.koszt.hidden = false;
+    ui.koszt.textContent = tryb === 'czas' ? T.kosztCzas : T.kosztBez;
+  }
+  function ustawPrzyciski(aktywne){
+    ui.z.setAttribute('aria-disabled', aktywne ? 'false' : 'true');
+    ui.w.setAttribute('aria-disabled', aktywne ? 'false' : 'true');
+    var moze = aktywne && !(gra && gra.czytane);
+    ui.czyt.setAttribute('aria-disabled', moze ? 'false' : 'true');
+  }
+  // przycisk pauzy działa tylko, gdy odlicza się czas karty (w tej chwili informacji zwrotnej zegar stoi)
+  function ustawPauze(aktywna){
+    if(ui && ui.pauza){ ui.pauza.setAttribute('aria-disabled', aktywna ? 'false' : 'true'); }
+  }
+  function aktualizujHud(){
+    ui.punkty.textContent = String(gra.punkty);
+    ui.seria.textContent = String(gra.seria);
+    ui.mnoz.className = 'mk-b-mnoz' + (gra.seria >= 3 ? '' : ' mk-b-mnoz-off');
+    ui.rep.textContent = wstaw(T.reputacja, {r: gra.rep, max: U.rep});
+    ui.tarcze.innerHTML = '';
+    for(var i = 0; i < U.rep; i++){ ui.tarcze.appendChild(tarcza(i < gra.rep)); }
+    var k = gra.biezacy;
+    ui.fala.textContent = wstaw(T.fala, {f: k ? k.fala : 1, ile: FALE.length});
+    ui.kartaNr.textContent = wstaw(T.kartaNr, {n: gra.n + 1, ile: gra.kolejka.length});
+  }
+  function renderZapowiedzi(){
+    ui.zapowiedzi.innerHTML = '';
+    for(var i = 1; i <= 3; i++){
+      var idx = gra.n + i;
+      if(idx >= gra.kolejka.length){ break; }
+      var kk = D.karty[gra.kolejka[idx]];
+      var z = el('div','mk-b-zap');
+      z.appendChild(el('span','mk-b-zap-nr', String(idx + 1)));
+      z.appendChild(el('span','mk-b-zap-tx', kk.kto));
+      ui.zapowiedzi.appendChild(z);
+    }
+  }
+  function tekstKarty(k, n){
+    var ce = k.cechy.map(function(t){ return kropka(t); }).join(' ');
+    return wstaw(T.oglKarta, {n: n, ile: gra.kolejka.length, kto: kropka(k.kto), tw: kropka(k.tw), cechy: ce});
+  }
+  function pokazWerdykt(klasa, tekst, nrKarty){
+    ui.wer.innerHTML = '';
+    ui.wer.className = 'mk-b-wer mk-b-wer-' + klasa;
+    if(!tekst){ return; }
+    ui.wer.appendChild(el('span','mk-b-werp', wstaw(T.werPrefiks, {n: nrKarty})));
+    ui.wer.appendChild(document.createTextNode(' ' + tekst));
+  }
+
+  function pokazKarte(pierwszy){
+    var k = D.karty[gra.kolejka[gra.n]];
+    var poprz = gra.n > 0 ? D.karty[gra.kolejka[gra.n - 1]] : null;
+    var nowaFala = !poprz || poprz.fala !== k.fala;
+    var czas = k.czas;
+    gra.faza = 'karta';
+    gra.biezacy = k;
+    gra.czytane = false;
+    var et = wstaw(T.kartaEtyk, {n: gra.n + 1, ile: gra.kolejka.length});
+    ui.karta.setAttribute('aria-label', et);
+    ui.nrK.textContent = et;
+    ui.nrF.textContent = ' · ' + wstaw(T.fala, {f: k.fala, ile: FALE.length});
+    wypelnijKarte(k, false);
+    ui.szl.classList.remove('mk-b-szl-otw');
+    ui.karta.classList.remove('mk-b-nowa');
+    void ui.karta.offsetWidth;
+    ui.karta.classList.add('mk-b-nowa');
+    czytReset();
+    var przysp = tryb === 'czas' && nowaFala && k.fala > 1;
+    if(tryb === 'czas'){
+      ui.baner.textContent = przysp ? wstaw(T.banerUp, {t: sekTxt(czas)})
+                                    : wstaw(T.baner, {f: k.fala, ile: FALE.length, t: sekTxt(czas)});
+    } else {
+      ui.baner.textContent = wstaw(T.banerBez, {f: k.fala, ile: FALE.length});
+    }
+    ui.baner.className = 'mk-b-baner' + (przysp ? ' mk-b-baner-up' : '');
+    aktualizujHud();
+    renderZapowiedzi();
+    ustawPrzyciski(true);
+    ustawPauze(true);
+    if(gra.ostatniWerdykt){
+      pokazWerdykt(gra.ostatniWerdykt.klasa, gra.ostatniWerdykt.tekst, gra.ostatniWerdykt.nr);
+    } else {
+      pokazWerdykt('brak', '', 0);
+    }
+
+    var ogl = '';
+    if(gra.ostatniaInfo){ ogl += gra.ostatniaInfo + ' '; gra.ostatniaInfo = ''; }
+    if(nowaFala){
+      ogl += (tryb === 'czas' ? wstaw(T.falaOgl, {f: k.fala, ile: FALE.length, t: zakresCzasu(FALE[k.fala - 1])})
+                              : wstaw(T.falaOglBez, {f: k.fala, ile: FALE.length})) + ' ';
+    }
+    ogl += tekstKarty(k, gra.n + 1);
+    oglos(ogl, pierwszy ? 350 : 0);
+
+    if(tryb === 'czas'){
+      ui.pasekW.style.width = '100%';
+      ui.pasekW.classList.remove('mk-b-malo');
+      zegarStart(czas * 1000, przewin, tykajPasek, czas * 1000);
+    }
+  }
+
+  function przewin(){ decyduj('brak'); }
+
+  // ---------------------------------------------------------- czytanie lateralne: odsłania linijkę, kosztuje czas i punkty
+  function czytaj(){
+    if(!gra || stan !== 'gra' || gra.faza !== 'karta' || gra.pauza || gra.czytane){ return; }
+    gra.czytane = true;
+    var k = gra.biezacy;
+    ustawLat(k, true);
+    ui.czyt.setAttribute('aria-disabled','true');
+    ui.czytEt.textContent = T.czytano;
+    ui.koszt.textContent = '';
+    ui.koszt.hidden = true;
+    if(tryb === 'czas'){ zegarSkroc(U.czasLat, Math.round(k.zapas * 1000)); }
+    oglos(wstaw(T.latOgl, {t: k.lat}));
+  }
+
+  function decyduj(co){
+    if(!gra || stan !== 'gra' || gra.faza !== 'karta' || gra.pauza){ return; }
+    zegarStop();
+    var k = gra.biezacy;
+    var czyt = gra.czytane;
+    var mn = gra.seria >= 3 ? 2 : 1;
+    var pkt = 0, msg = '', klasa = '', dodatek = '';
+    if(co === 'brak'){
+      gra.seria = 0; msg = T.brak; klasa = 'pass';
+    } else if(co === k.prawda){
+      pkt = (czyt ? U.pktL : U.pktP) * mn;
+      if(!czyt){ gra.seria++; }
+      msg = wstaw(co === 'w' ? (czyt ? T.wOkL : T.wOk) : (czyt ? T.zOkL : T.zOk), {p: k.podstawa});
+      klasa = 'ok';
+    } else if(co === 'w'){
+      gra.rep--; gra.seria = 0;
+      msg = wstaw(T.wZle, {p: k.podstawa}); klasa = 'zle';
+      dodatek = wstaw(T.repSpadla, {r: gra.rep, max: U.rep});
+      gra.pomylki.push({k: k, dec: co, czyt: czyt});
+    } else {
+      gra.seria = 0;
+      msg = wstaw(T.zZle, {p: k.podstawa}); klasa = 'zle';
+      dodatek = T.zeroSeria;
+      gra.pomylki.push({k: k, dec: co, czyt: czyt});
+    }
+    if(gra.seria > gra.najSeria){ gra.najSeria = gra.seria; }
+    gra.punkty += pkt;
+    if(pkt > 0){
+      dodatek = kropka(wstaw(mn === 2 ? T.pktMnoz : T.pkt, {p: pkt, m: T.mnoz}));
+      if(czyt){ dodatek += ' ' + T.serieTrwa; }
+    }
+    gra.log.push({fala: k.fala, dec: co, czyt: czyt, karta: k.karta, prawda: k.prawda, pkt: pkt});
+    if(co === 'w'){ ui.szl.classList.add('mk-b-szl-otw'); } else { ui.szl.classList.remove('mk-b-szl-otw'); }
+    var tekst = msg + (dodatek ? ' ' + dodatek : '');
+    var nr = gra.n + 1;
+    var pelny = wstaw(T.werPrefiks, {n: nr}) + ' ' + tekst;
+    gra.faza = 'info';
+    gra.ostatniWerdykt = {klasa: klasa, tekst: tekst, nr: nr};
+    aktualizujHud();
+    pokazWerdykt(klasa, tekst, nr);
+    ustawPrzyciski(false);
+    ustawPauze(false);
+    var koniec = gra.rep <= 0 || gra.n >= gra.kolejka.length - 1;
+    gra.ostatniaInfo = pelny;
+    if(koniec){
+      // koniec gry (ostatnia karta albo reputacja 0): przycisk wyniku, tak samo w obu trybach
+      oglos(pelny);
+      gra.ostatniaInfo = '';
+      ui.akcje.hidden = true;
+      ui.wynikBtn.hidden = false;
+      ui.wynikBtn.focus();
+    } else if(tryb === 'czas'){
+      // zegar stoi: informacja zwrotna zostaje na ekranie, ogłoszona od razu, a następna karta rusza po „Dalej”
+      oglos(pelny);
+      gra.ostatniaInfo = '';
+      var wys = ui.akcje.offsetHeight;
+      ui.akcje.hidden = true;
+      if(wys > 0){ ui.dalej.style.minHeight = wys + 'px'; }
+      ui.dalej.hidden = false;
+      ui.dalej.focus();
+    } else {
+      nastepny();
+    }
+  }
+  function dalej(){
+    if(!gra || stan !== 'gra' || gra.faza !== 'info' || gra.pauza){ return; }
+    ui.dalej.hidden = true;
+    ui.akcje.hidden = false;
+    nastepny();
+    ui.z.focus();
+  }
+  function nastepny(){
+    gra.n++;
+    pokazKarte(false);
+  }
+
+  // ---------------------------------------------------------- pauza (WCAG 2.2.1 / 2.2.2)
+  function pauza(powod){
+    if(!gra || stan !== 'gra' || tryb !== 'czas' || gra.pauza || gra.faza !== 'karta'){ return; }
+    wstrzymane = zegarWstrzymaj();
+    gra.pauza = true;
+    ui.stos.hidden = true;
+    ui.pauzaInfo.hidden = false;
+    ui.pauzaTxt.textContent = powod === 'karta' ? T.pauzaInfoK : T.pauzaInfoR;
+    ui.pauza.textContent = T.wznow;
+    ustawPrzyciski(false);
+    oglos(T.pauzaOgl);
+  }
+  function wznow(){
+    if(!gra || !gra.pauza){ return; }
+    gra.pauza = false;
+    ui.stos.hidden = false;
+    ui.pauzaInfo.hidden = true;
+    ui.pauza.textContent = T.pauza;
+    ustawPrzyciski(gra.faza === 'karta');
+    var ogl = T.wznowOgl;
+    if(gra.faza === 'karta'){ ogl += ' ' + tekstKarty(gra.biezacy, gra.n + 1); }
+    oglos(ogl);
+    if(wstrzymane){
+      var w = wstrzymane;
+      wstrzymane = null;
+      zegarStart(w.pozostalo, w.cb, w.tykaj, w.calosc);
+    }
+  }
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden || document.visibilityState === 'hidden'){ pauza('karta'); }
+  });
+
+  // ---------------------------------------------------------- klawiatura: tylko wewnątrz gry (WCAG 2.1.4)
+  c.addEventListener('keydown', function(e){
+    if(stan !== 'gra' || !gra){ return; }
+    if(e.altKey || e.ctrlKey || e.metaKey || e.shiftKey){ return; }
+    var k = e.key;
+    if(k === 'ArrowLeft' || k === 'Left'){
+      e.preventDefault();
+      if(!e.repeat){ decyduj('z'); }
+    } else if(k === 'ArrowRight' || k === 'Right'){
+      e.preventDefault();
+      if(!e.repeat){ decyduj('w'); }
+    } else if(k === 'ArrowDown' || k === 'Down'){
+      e.preventDefault();
+      if(!e.repeat){ czytaj(); }
+    } else if((k === 'Enter' || k === ' ' || k === 'Spacebar') && e.repeat){
+      e.preventDefault();
+    }
+  });
+
+  // ---------------------------------------------------------- start / koniec
+  function zacznij(){
+    gra = {kolejka: ulozKolejke(), n: 0, punkty: 0, seria: 0, najSeria: 0, rep: U.rep, log: [], pomylki: [],
+           faza: 'karta', pauza: false, ostatniaInfo: '', ostatniWerdykt: null, biezacy: null, czytane: false};
+    wstrzymane = null;
+    stan = 'gra';
+    budujEkranGry();
+    pokazKarte(true);
+    ui.z.focus();
+  }
+
+  function podsumuj(){
+    var per = FALE.map(function(f){ return {min: f.min, max: f.max, ile: 0, trafne: 0, bledy: 0, przew: 0}; });
+    gra.log.forEach(function(r){
+      var s = per[r.fala - 1];
+      s.ile++;
+      if(r.dec === 'brak'){ s.przew++; }
+      else if(r.dec === r.prawda){ s.trafne++; }
+      else { s.bledy++; }
+    });
+    return per;
+  }
+  function statystyki(){
+    var s = {dec: 0, przew: 0, bledy: 0, czyt: 0, zmienilo: 0, czytBezPotrzeby: 0, pulapki: 0, pulapkiDecyd: 0,
+             pulapkiBledySpr0: 0, wpuszczono: 0, zatrzymano: 0, wpuszczonoProste: 0};
+    gra.log.forEach(function(r){
+      var pulapka = r.karta !== r.prawda;
+      if(r.czyt){ s.czyt++; }
+      if(pulapka){ s.pulapki++; }
+      if(r.dec === 'brak'){ s.przew++; return; }
+      s.dec++;
+      var blad = r.dec !== r.prawda;
+      if(pulapka){ s.pulapkiDecyd++; }
+      if(blad){
+        s.bledy++;
+        if(r.dec === 'w'){ s.wpuszczono++; if(!pulapka){ s.wpuszczonoProste++; } } else { s.zatrzymano++; }
+        if(pulapka && !r.czyt){ s.pulapkiBledySpr0++; }
+      }
+      if(r.czyt && pulapka && !blad){ s.zmienilo++; }
+      if(r.czyt && !pulapka){ s.czytBezPotrzeby++; }
+    });
+    return s;
+  }
+  function wniosek(st){
+    var out = [T.wnA];
+    if(st.dec === 0){
+      out.push(T.wnNic);
+    } else {
+      if(st.pulapkiBledySpr0 > 0){
+        out.push(wstaw(T.wnPulapka, {k: st.pulapkiBledySpr0, kart: forma(st.pulapkiBledySpr0, 'karcie', 'kartach')}));
+      }
+      if(st.zatrzymano > 0){ out.push(wstaw(T.wnNadmiar, {k: st.zatrzymano})); }
+      if(st.wpuszczonoProste > 0){ out.push(wstaw(T.wnSygnaly, {k: st.wpuszczonoProste})); }
+      if(st.bledy === 0){ out.push(T.wnBezBledow + (st.czyt > 0 ? ' ' + T.wnBezBledowLat : '')); }
+      if(st.czytBezPotrzeby >= 3){
+        out.push(wstaw(T.wnZaDuzo, {k: st.czytBezPotrzeby, razy: forma(st.czytBezPotrzeby, 'raz', 'razy')}));
+      }
+    }
+    out.push(T.wnZakon);
+    return out;
+  }
+  function sekcjaLat(st){
+    var lp = [];
+    if(st.czyt === 0){
+      lp.push(T.latBrak);
+    } else {
+      lp.push(wstaw(T.latUzyto, {n: st.czyt, razy: forma(st.czyt, 'raz', 'razy')}) + ' '
+              + (st.zmienilo > 0 ? wstaw(T.latZmienilo, {m: st.zmienilo}) : T.latNieZmienilo));
+    }
+    if(st.pulapkiDecyd > 0){
+      lp.push(wstaw(T.latPulapki, {t: st.pulapkiDecyd}) + ' '
+              + (st.pulapkiBledySpr0 === 0 ? T.latPulapkiOk : wstaw(T.latPulapkiBlad, {b: st.pulapkiBledySpr0})));
+    }
+    if(st.czytBezPotrzeby > 0){
+      lp.push(wstaw(T.latZbedne, {u: st.czytBezPotrzeby, przyp: forma(st.czytBezPotrzeby, 'przypadku', 'przypadkach'),
+                                  koszt: tryb === 'czas' ? T.latKosztCzas : T.latKosztBez}));
+    }
+    return lp;
+  }
+
+  function koniecGry(){
+    zegarStop();
+    wstrzymane = null;
+    stan = 'koniec';
+    var per = podsumuj();
+    var st = statystyki();
+    var wczesnie = gra.rep <= 0;
+    var tr = tryb;
+    var poprzedni = Math.max(odczytajRekord(tr), rekordPamiec[tr]);
+    var nowy = gra.punkty > 0 && gra.punkty > poprzedni;
+    var zapisano = true;
+    if(gra.punkty > poprzedni){
+      rekordPamiec[tr] = gra.punkty;
+      zapisano = zapiszRekord(tr, gra.punkty);
+    }
+    var rekord = Math.max(poprzedni, gra.punkty);
+
+    ekran.innerHTML = '';
+    ui = null;
+    var wyn = el('div','mk-b-koniec');
+    var h = el('h4','mk-b-wynik-h', wstaw(wczesnie ? T.koniecHWczesnie : T.koniecH, {p: gra.punkty}));
+    h.setAttribute('tabindex','-1');
+    wyn.appendChild(h);
+    wyn.appendChild(el('p', null, wstaw(T.trybInfo, {t: T.trybNazwy[tr]})));
+
+    var liczby = el('div','mk-b-hud');
+    var k1 = kafel(T.lPunkty, String(gra.punkty));
+    var k2 = kafel(T.lSeria, String(gra.najSeria));
+    var k3 = kafel(T.lRekord, String(rekord));
+    var k4 = kafel(T.lLat, String(st.zmienilo));
+    liczby.appendChild(k1.k); liczby.appendChild(k2.k); liczby.appendChild(k3.k); liczby.appendChild(k4.k);
+    wyn.appendChild(liczby);
+    if(nowy){ wyn.appendChild(el('p','mk-b-rekord', T.nowyRekord)); }
+    if(!zapisano){ wyn.appendChild(el('p','mk-licz', T.rekordBrakZapisu)); }
+
+    var tab = document.createElement('table');
+    tab.className = 'mk-b-tab';
+    var cap = document.createElement('caption');
+    cap.textContent = T.tabCap;
+    tab.appendChild(cap);
+    var thead = document.createElement('thead');
+    var trh = document.createElement('tr');
+    T.kol.forEach(function(nazwa){
+      var th = document.createElement('th');
+      th.setAttribute('scope','col');
+      th.textContent = nazwa.split('|').join('­');
+      trh.appendChild(th);
+    });
+    thead.appendChild(trh);
+    tab.appendChild(thead);
+    var tbody = document.createElement('tbody');
+    per.forEach(function(s, i){
+      var tr2 = document.createElement('tr');
+      var th2 = document.createElement('th');
+      th2.setAttribute('scope','row');
+      var czasTxt = tr === 'czas' ? zakresCzasu(s) : T.bezLimitu;
+      th2.textContent = wstaw(T.wiersz, {p: i + 1, t: czasTxt});
+      tr2.appendChild(th2);
+      var wart = s.ile === 0 ? null : [s.trafne + ' z ' + s.ile, String(s.bledy), s.przew + ' z ' + s.ile];
+      for(var j = 0; j < 3; j++){
+        var td = document.createElement('td');
+        if(wart){ td.textContent = wart[j]; }
+        else {
+          td.appendChild(document.createTextNode('—'));
+          td.appendChild(el('span','mk-sr', ' ' + T.nieRozegrano));
+        }
+        tr2.appendChild(td);
+      }
+      tbody.appendChild(tr2);
+    });
+    tab.appendChild(tbody);
+    wyn.appendChild(tab);
+    wyn.appendChild(el('p','mk-licz', T.tabNota));
+
+    wyn.appendChild(el('h4','mk-b-sekcja', T.latH));
+    sekcjaLat(st).forEach(function(par){ wyn.appendChild(el('p', null, par)); });
+
+    wyn.appendChild(el('h4','mk-b-sekcja', T.wnH));
+    wniosek(st).forEach(function(par){ wyn.appendChild(el('p', null, par)); });
+
+    wyn.appendChild(el('h4','mk-b-sekcja', T.pomH));
+    if(gra.pomylki.length === 0){
+      wyn.appendChild(el('p','mk-b-gratulacje', st.dec === 0 ? T.pomNic : T.pomBrak));
+    } else {
+      var ul = el('ul','mk-lista mk-b-pom');
+      gra.pomylki.forEach(function(p){
+        var li = document.createElement('li');
+        var p1 = el('p', null);
+        p1.appendChild(el('strong', null, wielka(p.k.kryterium)));
+        p1.appendChild(document.createTextNode(' — ' + p.k.skrot + ' (' + p.k.kto.split(',')[0] + ')'));
+        li.appendChild(p1);
+        li.appendChild(el('p','mk-b-opis', (p.dec === 'w' ? T.pomWpuszczone : T.pomZatrzymane) + ' '
+                                              + (p.czyt ? T.pomCzyt : T.pomBezCzyt)));
+        li.appendChild(el('p','mk-b-opis', T.pomLat + ' ' + p.k.lat));
+        li.appendChild(el('p','mk-b-wyj', p.k.wyj));
+        ul.appendChild(li);
+      });
+      wyn.appendChild(ul);
+    }
+
+    var btny = el('div','mk-btny');
+    var jeszcze = el('button','mk-btn', T.jeszcze);
+    jeszcze.type = 'button';
+    jeszcze.addEventListener('click', zacznij);
+    var zmien = el('button','mk-btn mk-btn2', T.zmien);
+    zmien.type = 'button';
+    zmien.addEventListener('click', function(){
+      ekranStart();
+      var r = ekran.querySelector('input[type="radio"]:checked');
+      if(r){ r.focus(); }
+    });
+    btny.appendChild(jeszcze);
+    btny.appendChild(zmien);
+    wyn.appendChild(btny);
+    ekran.appendChild(wyn);
+    oglos('');
+    h.focus();
+  }
+
+  ekranStart();
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

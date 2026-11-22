@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gra: Memory pułapek umysłu</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Gra: Memory pułapek umysłu</h1>
+<div class="mk mk-memory" id="mk-memory">Gra „Memory pułapek umysłu” — sześć par kart: nazwa pułapki umysłu i pasująca do niej sytuacja z życia. Jeśli się nie wczyta (na przykład w aplikacji mobilnej Moodle), otwórz tę stronę w przeglądarce internetowej.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-m-ekran{display:flex;flex-direction:column;gap:14px;min-width:0;width:100%;max-width:46rem;\n margin-left:auto;margin-right:auto;container-type:inline-size}\n.mk-m-ekran > *{min-width:0}\n.mk-m-lead{font-size:17px;max-width:62ch}\n.mk p.mk-m-czytnik{font-size:14px;color:#4a4e55;border-left:3px solid #7d838a;padding:8px 12px;background:#fbfbfa}\n.mk-m-pyt{font-weight:700}\n.mk-m-fs{border:1px solid #c9ccc8;border-radius:6px;padding:12px 14px;background:#fbfbfa;margin:0;min-width:0}\n.mk-m-fs > * + *{margin-top:8px}\n.mk-m-opcja{display:flex;align-items:flex-start;gap:10px;border:2px solid #7d838a;border-radius:6px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px;margin:0}\n.mk-m-opcja:hover{background:#eef0ee}\n.mk-m-opcja:has(.mk-m-radio:checked){border-color:#16181c;background:#f4f4f2}\n.mk-m-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-m-radio{width:20px;height:20px;accent-color:#b4322b;margin:2px 0 0;flex:none}\n.mk-m-opt{display:flex;flex-direction:column;gap:2px;min-width:0}\n.mk-m-optnazwa{font-weight:700}\n.mk-m-opttekst{color:#4a4e55;font-size:14px}\n.mk-m-szcz{border:1px solid #c9ccc8;border-radius:6px;background:#fbfbfa;padding:0 14px}\n.mk-m-szcz summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center;\n justify-content:space-between;gap:10px;padding:6px 0;list-style:none}\n.mk-m-szcz summary::-webkit-details-marker{display:none}\n.mk-m-szcz summary::after{content:'';flex:none;width:9px;height:9px;border-right:2px solid #16181c;\n border-bottom:2px solid #16181c;transform:rotate(45deg);margin:-4px 4px 0 10px}\n.mk-m-szcz[open] summary::after{transform:rotate(-135deg);margin-top:4px}\n.mk-m-szcz summary:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-m-szcz ul{padding-bottom:12px}\n.mk-m-start,.mk-m-wynik,.mk-m-pbox-btn{font-size:18px;min-height:52px;width:100%}\n.mk-m-pbox{display:flex;flex-direction:column;gap:10px;border:1px solid #c9ccc8;border-left:4px solid #b4322b;\n border-radius:6px;background:#fbfbfa;padding:12px 14px}\n.mk p.mk-m-pbox-t{font-size:16px;font-weight:700;color:#16181c;margin:0}\n.mk-m-hud{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}\n.mk-m-hud3{grid-template-columns:repeat(3,minmax(0,1fr))}\n@container (min-width:28rem){.mk-m-hud4{grid-template-columns:repeat(4,minmax(0,1fr))}}\n.mk-m-st{border:1px solid #c9ccc8;background:#fbfbfa;border-radius:6px;padding:8px 10px;min-width:0;\n display:flex;flex-direction:column;gap:2px;justify-content:flex-start}\n.mk-m-stn{font-size:13px;font-weight:700;color:#4a4e55;line-height:20px}\n.mk-m-stw{font-size:22px;font-weight:700;line-height:1.15;color:#16181c}\n.mk-m-gw{display:flex;align-items:center;flex-wrap:wrap;gap:2px 3px}\n.mk-m-gw svg{display:block;width:22px;height:22px;flex:none}\n.mk-m-gwtxt{font-size:14px;font-weight:700;margin-left:2px}\n.mk p.mk-m-baner{font-size:14px;color:#4a4e55;font-weight:700}\n.mk-m-ster{display:flex;flex-wrap:wrap;gap:8px}\n.mk-m-ster .mk-btn{flex:1 1 120px}\n.mk-m-ster .mk-m-wynik{flex-basis:100%}\n.mk-m-pasek{height:12px;border-radius:6px;background:#e3e3e0;border:1px solid #7d838a;overflow:hidden}\n.mk-m-pasek-w{height:100%;width:0;background:#16181c}\n.mk-m-pasek-w.mk-m-malo{background:#b4322b}\n.mk-m-dymek{position:relative;border:2px solid #7d838a;background:#fbfbfa;border-radius:14px;padding:9px 14px;\n margin-bottom:6px;color:#16181c;font-size:15px;line-height:1.45}\n.mk-m-dymek::after{content:'';position:absolute;left:28px;bottom:-9px;width:14px;height:14px;background:#fbfbfa;\n border-right:2px solid #7d838a;border-bottom:2px solid #7d838a;transform:rotate(45deg)}\n.mk-m-dymek-ok{border-color:#2c6a4c;background:#e6f0ea}\n.mk-m-dymek-ok::after{background:#e6f0ea;border-color:#2c6a4c}\n.mk-m-dymek-zle{border-color:#b4322b;background:#f7e6e4}\n.mk-m-dymek-zle::after{background:#f7e6e4;border-color:#b4322b}\n.mk-m-plansza{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:8px}\n@container (min-width:28rem){.mk-m-plansza{grid-template-columns:repeat(3,minmax(0,1fr))}}\n@container (min-width:40rem){.mk-m-plansza{grid-template-columns:repeat(4,minmax(0,1fr))}}\n.mk-m-karta{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:88px;\n margin:0;padding:15px 8px 8px;font:inherit;text-align:center;border:3px solid #16181c;border-radius:10px;\n background:#16181c;color:#f4f4f2;cursor:pointer;overflow-wrap:anywhere;\n box-shadow:inset 0 0 0 3px #16181c,inset 0 0 0 5px #4a4e55}\n.mk-m-karta.mk-m-zakryta:hover{background:#31353d;border-color:#31353d;box-shadow:inset 0 0 0 3px #31353d,inset 0 0 0 5px #7d838a}\n.mk-m-karta.mk-m-zakryta[aria-disabled=\"true\"]{cursor:not-allowed}\n.mk-m-karta:focus-visible{outline:3px solid #b4322b;outline-offset:3px}\n.mk-m-karta.mk-m-odkryta{background:#fff;color:#16181c;border-color:#b4322b;box-shadow:none}\n.mk-m-karta.mk-m-podglad{background:#fff;color:#16181c;border-color:#4a4e55;box-shadow:none;cursor:default}\n.mk-m-karta.mk-m-para{background:#e6f0ea;color:#16181c;border-color:#2c6a4c;box-shadow:none;cursor:default}\n.mk-m-tresc{display:block;font-size:14px;line-height:1.35;font-weight:400}\n.mk-m-k-nazwa .mk-m-tresc{font-size:15px;font-weight:700;line-height:1.3}\n.mk-m-zakryta .mk-m-tresc{visibility:hidden}\n.mk-m-nr{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;\n font-size:26px;font-weight:700;color:#f4f4f2}\n.mk-m-karta:not(.mk-m-zakryta) .mk-m-nr{display:none}\n.mk-m-ptak{position:absolute;top:4px;right:5px;display:none;color:#2c6a4c}\n.mk-m-para .mk-m-ptak{display:block}\n.mk-m-pauzainfo{background:#fff;border:1px solid #c9ccc8;border-radius:10px;min-height:180px;display:flex;\n align-items:center;justify-content:center;padding:16px;text-align:center;font-weight:700}\n.mk-m-podp{font-size:14px;color:#4a4e55}\n.mk-m-koniec{display:flex;flex-direction:column;gap:14px;min-width:0}\n.mk-m-koniec > *{min-width:0}\n.mk-m-wynik-h{font-size:22px;font-weight:700;line-height:1.25}\n.mk-m-wynik-h:focus{outline:none}\n.mk-m-wynik-h:focus-visible{outline:2px solid #16181c;outline-offset:3px}\n.mk h4.mk-m-sekcja{font-size:17px;font-weight:700;padding-top:6px}\n.mk-m-rekord{font-weight:700;color:#2c6a4c}\n.mk ul.mk-lista.mk-m-pary{gap:14px}\n.mk-m-pary li > * + *{margin-top:4px}\n.mk-m-wyj{color:#4a4e55}\n@media (max-width:420px){\n .mk-m-ekran{gap:10px}\n .mk-m-st{padding:6px 8px}\n .mk-m-stw{font-size:20px}\n .mk-m-dymek{padding:8px 12px}\n}\n@media (prefers-reduced-motion: no-preference){\n .mk-m-karta.mk-m-obrot{animation:mk-m-obrot .22s ease-out}\n}\n@keyframes mk-m-obrot{from{transform:perspective(520px) rotateY(80deg)}to{transform:none}}\n@media (forced-colors: active){\n .mk-m-pasek{border-color:CanvasText}\n .mk-m-pasek-w{background:Highlight;forced-color-adjust:none}\n .mk-m-karta{border-color:CanvasText}\n .mk-m-dymek{border-color:CanvasText}\n}\n";
+var D = {"nad": "Gra", "tytul": "Memory pułapek umysłu", "ilePar": 6, "szybki": {"baza": 2500, "znak": 40}, "gwiazdki": {"trzy": 12, "dwie": 16}, "tryby": [{"k": "bez", "etyk": "Bez pośpiechu", "pod": "Dwie karty, które nie tworzą pary, zostają odsłonięte, dopóki nie naciśniesz „Zakryj”. Masz tyle czasu na czytanie, ile potrzebujesz. Na start widzisz wszystkie karty odkryte, tak długo, jak chcesz."}, {"k": "szybki", "etyk": "Szybki", "pod": "Dwie karty, które nie tworzą pary, zakrywają się same po 3–5 sekundach: im dłuższy tekst na kartach, tym dłużej. Na start widzisz wszystkie karty odkryte, ale stoper liczy już ten podgląd."}], "pary": [{"id": "potwierdzenie", "nazwa": "Efekt potwierdzenia", "przyklad": "Ola K. uważnie czyta tylko teksty zgodne z tym, w co już wierzy.", "wyjasnienie": "Wolimy informacje zgodne z własnymi przekonaniami: łatwiej je zauważamy, chętniej zapamiętujemy i rzadziej poddajemy w wątpliwość.", "dodatek": "Psycholog Raymond Nickerson zdefiniował go jako „poszukiwanie lub interpretowanie dowodów w sposób stronniczy wobec istniejących przekonań, oczekiwań lub hipotezy w toku”."}, {"id": "aureola", "nazwa": "Efekt aureoli", "przyklad": "Ładne opakowanie: Zofia L. uznała, że i skład musi być dobry.", "wyjasnienie": "Jedna wyrazista cecha (tu: opakowanie) rozlewa się na ocenę cech, o których nic konkretnego nie wiadomo (tu: składu).", "dodatek": "Działa bez udziału świadomości: osoby badane nie zauważały, że ogólne wrażenie o wykładowcy zabarwiło ocenę jego wyglądu i akcentu."}, {"id": "wysiati", "nazwa": "WYSIATI", "przyklad": "Kuba S. znał tylko jedną wersję zdarzeń i był pewien, jak było.", "wyjasnienie": "To zasada „widzisz tylko to, co widzisz”: umysł składa spójną historię z tego, co ma, i nie sygnalizuje, że czegoś w niej brakuje.", "dodatek": "Dlatego obok pytania „czy to prawda?” trzeba zadać drugie: czego tu nie widzę?"}, {"id": "slepota", "nazwa": "Ślepota na własne uprzedzenia", "przyklad": "Wiktor S. wytyka innym stronniczość, a siebie uważa za obiektywnego.", "wyjasnienie": "To łatwiejsze dostrzeganie błędów poznawczych u kogoś innego niż u siebie, także u osób, które sporo o nich wiedzą.", "dodatek": "Pomaga patrzeć na to, co faktycznie robisz, a nie na odczucia, i zapytać kogoś, kto się z Tobą nie zgadza, ale komu ufasz."}, {"id": "zludzenie", "nazwa": "Złudzenie prawdy", "przyklad": "Im częściej Iga M. słyszała to hasło, tym prawdziwiej brzmiało.", "wyjasnienie": "Zdanie usłyszane wielokrotnie zaczyna brzmieć prawdziwiej, niezależnie od treści.", "dodatek": "To jeden z najlepiej udokumentowanych mechanizmów w psychologii, wielokrotnie potwierdzany w kolejnych badaniach."}, {"id": "zakotwiczenie", "nazwa": "Zakotwiczenie", "przyklad": "Przekreślona stara cena sprawiła, że Marek T. uznał nową za okazję.", "wyjasnienie": "To trzymanie się pierwszej napotkanej liczby (tu: przekreślonej ceny) przy dalszych szacunkach.", "dodatek": "To jeden z trzech skrótów myślowych (heurystyk) opisanych w pracy z 1974 roku, dziś przypisywany szybkiemu myśleniu, czyli Systemowi 1."}, {"id": "dostepnosc", "nazwa": "Heurystyka dostępności", "przyklad": "Po dwóch głośnych wypadkach Paweł D. sądzi, że zdarzają się stale.", "wyjasnienie": "To ocenianie, jak często coś się zdarza, po tym, jak łatwo przychodzi do głowy przykład.", "dodatek": "Tversky i Kahneman nazwali tę heurystykę w 1974 roku, a później sprawdzano ją w wielu badaniach."}, {"id": "emocje", "nazwa": "Poleganie na emocjach", "przyklad": "Oburzenie po nagłówku: Ania P. udostępniła wpis, nie czytając tekstu.", "wyjasnienie": "Gdy emocja zastępuje sprawdzenie faktów, rośnie wiara w fałszywe informacje, a zachęta do namysłu ją zmniejsza.", "dodatek": "Emocje nie są przeciwieństwem myślenia, tylko jego częścią, ale kłopot zaczyna się, gdy zastępują sprawdzenie, a nie mu towarzyszą."}, {"id": "stres", "nazwa": "Stres i presja czasu", "przyklad": "Termin gonił, więc Tomek B. kliknął link z SMS-a bez namysłu.", "wyjasnienie": "Nawet krótkotrwały, niekontrolowany stres potrafi szybko osłabić funkcje mózgu odpowiedzialne za analityczne myślenie.", "dodatek": "Gdy komunikat sam narzuca presję czasu, na przykład „w ciągu 24 godzin”, to sygnał, żeby zwolnić."}], "t": {"start": "Przed Tobą dwanaście kart: sześć nazw pułapek umysłu i sześć krótkich sytuacji z życia. Najpierw zobaczysz je wszystkie odkryte, potem się zakryją. Odkrywaj po dwie karty i łącz nazwę pułapki z sytuacją, która ją ilustruje. Przy każdej znalezionej parze zobaczysz jedno zdanie wyjaśnienia.", "trybLegend": "Poziom gry", "trybPyt": "Poziom", "czytnik": "Osoby korzystające z czytnika ekranu powinny wybrać poziom „Bez pośpiechu”.", "zacznij": "Zacznij", "zasadyTytul": "Jak liczymy wynik", "zasady": ["Ruch to odkrycie dwóch kart. Para zostaje odkryta, a dwie karty bez pary trzeba zakryć i szukać dalej.", "Stoper rusza z pierwszą odkrytą kartą (na poziomie „Szybki” już na początku podglądu), idzie w górę i nie ma limitu. Zatrzymuje się po znalezieniu ostatniej pary oraz na czas pauzy.", "Gwiazdki zależą od liczby ruchów: do 12 ruchów trzy gwiazdki, do 16 ruchów dwie, a przy większej liczbie jedna.", "Rekord to najkrótszy czas w danym poziomie. Zapisuje się w tej przeglądarce."], "hudEtyk": "Stan gry", "czas": "Czas", "ruchy": "Ruchy", "pary": "Pary", "paryWart": "{n} z {ile}", "banerBez": "Poziom: Bez pośpiechu", "banerSzybki": "Poziom: Szybki", "zakryj": "Zakryj", "pauza": "Pauza", "wznow": "Wznów", "zobaczWynik": "Zobacz wynik", "pauzaInfoR": "Gra wstrzymana. Stoper stoi, a karty są schowane. Naciśnij „Wznów”, żeby wrócić do gry.", "pauzaInfoK": "Gra wstrzymana, bo karta przeglądarki była ukryta. Stoper stoi, a karty są schowane. Naciśnij „Wznów”, żeby wrócić do gry.", "pauzaOgl": "Gra wstrzymana.", "wznowOgl": "Gra wznowiona.", "planszaEtyk": "Plansza z dwunastoma kartami", "kartaZakryta": "Karta {n}, zakryta", "kartaOdkryta": "Karta {n}: {t}", "kartaPara": "Karta {n}: {t}, para znaleziona", "podglad": "Podgląd: wszystkie karty są odkryte. Przyjrzyj się im, a kiedy zapamiętasz układ, naciśnij „Zakryj karty i graj”.", "podgladBtn": "Zakryj karty i graj", "dymekStart": "Odkryj dwie karty. Szukaj nazwy pułapki i pasującej do niej sytuacji.", "dymekJedna": "Odkryj drugą kartę.", "dymekZle": "To nie jest para. Naciśnij „Zakryj” i szukaj dalej.", "dymekZleSzybki": "To nie jest para. Karty zakryją się same, możesz też nacisnąć „Zakryj”.", "dymekZakryte": "Karty zakryte. Odkryj dwie kolejne.", "dymekPara": "Para znaleziona: {nazwa}.", "ogStart": "Plansza gotowa: dwanaście zakrytych kart. Odkryj dwie karty.", "ogOdkryta": "Karta {n} odkryta: {t}", "ogPara": "Karta {n} odkryta: {t} Para znaleziona: {nazwa}. {w} Pary: {p} z {ile}.", "ogZle": "Karta {n} odkryta: {t} To nie jest para. Naciśnij „Zakryj”.", "ogZleSzybki": "Karta {n} odkryta: {t} To nie jest para. Karty zakryją się za chwilę.", "ogZakryte": "Karty zakryte.", "ogNajpierw": "Najpierw zakryj odkryte karty: naciśnij „Zakryj”.", "ogCzekaj": "Poczekaj, aż karty się zakryją, albo naciśnij „Zakryj”.", "ogJuzOdkryta": "Karta {n} jest już odkryta.", "ogJuzPara": "Karta {n} należy do znalezionej pary.", "ogKoniecRundy": "Wszystkie pary znalezione. Naciśnij „Zobacz wynik”.", "podpowiedz": "Podpowiedź: strzałki oraz klawisze Home i End przechodzą między kartami, Enter albo Spacja odkrywa kartę, klawisz Z zakrywa dwie odkryte karty. Skróty działają, gdy fokus jest w grze.", "koniecH": "Koniec gry. Czas: {czas}, ruchy: {ruchy}, gwiazdki: {g} z 3.", "trybNazwy": {"bez": "Bez pośpiechu", "szybki": "Szybki"}, "trybInfo": "Poziom: {t}.", "lCzas": "Czas", "lRuchy": "Ruchy", "lGwiazdki": "Gwiazdki", "lRekord": "Rekord w tym poziomie", "gwiazdkiWart": "{g} z 3", "nowyRekord": "Nowy rekord!", "rekordBrakZapisu": "Ta przeglądarka nie pozwala zapisać rekordu na stałe, więc obowiązuje on tylko do zamknięcia strony.", "parH": "Wszystkie pary z tej rundy", "parLid": "Kolejność jest taka, w jakiej je znalazłeś/aś.", "wnH": "Co z tego wynika o pułapkach umysłu", "wn": ["Według materiałów z tego modułu błąd poznawczy to nie oznaka głupoty, tylko produkt uboczny skrótów myślowych, które zwykle się sprawdzają.", "Sama znajomość listy takich błędów nie daje odporności: łatwiej je zauważyć u kogoś innego niż u siebie. Pomaga pytanie, które wraca w całym module: czego tu nie widzę?", "Najtrudniej myśleć krytycznie wtedy, gdy działa stres i gdy treść pasuje do tego, co już myślisz. Wtedy warto zwolnić i sprawdzić, zamiast ufać pierwszemu wrażeniu."], "jeszcze": "Zagraj jeszcze raz", "zmien": "Zmień poziom"}};
+function ensure(){
+  var w = document.getElementById('mk-memory') || document.querySelector('.mk-memory');
+  if(!w) return null;
+  w.id='mk-memory'; w.className='mk mk-memory';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-memory"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-memory');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var T = D.t;
+  var P = D.pary;
+  var ILE = D.ilePar;
+  var NS = 'http://www.w3.org/2000/svg';
+  var KLUCZ = {bez: 'mk-memory-rekord-bez', szybki: 'mk-memory-rekord-szybki'};
+  var GWIAZDA = 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z';
+
+  var ekran = el('div','mk-m-ekran');
+  var glos = el('div','mk-sr');
+  glos.setAttribute('aria-live','polite');
+  glos.setAttribute('aria-atomic','true');
+  c.appendChild(ekran);
+  c.appendChild(glos);
+
+  var stan = 'start';          // start | gra | koniec (w grze: gra.faza = podglad | wybor | zle | koniec)
+  var tryb = 'bez';            // bez | szybki
+  var gra = null;
+  var ui = null;
+  var tmCzas = 0;              // stoper (setTimeout)
+  var zZak = null;             // zegar samoczynnego zakrywania: {koniec, calosc, tm}
+  var wstrz = null;            // zegar zakrywania zatrzymany pauzą: {pozostalo, calosc}
+  var rekordPamiec = {bez: 0, szybki: 0};
+  var ostSzer = 0;
+  var tmResize = 0;
+  var tmOgl = 0;               // opóźnione ogłoszenie (anulowane przez każde kolejne)
+  var ruchOgr = false;
+  try { ruchOgr = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  catch(e1){ ruchOgr = false; }
+
+  // ---------------------------------------------------------- pomocnicze
+  function wstaw(s, m){
+    var out = s;
+    for(var k in m){
+      if(Object.prototype.hasOwnProperty.call(m, k)){ out = out.split('{' + k + '}').join(String(m[k])); }
+    }
+    return out;
+  }
+  function kropka(t){
+    var k = t.charAt(t.length - 1);
+    return (k === '.' || k === '!' || k === '?' || k === '”') ? t : t + '.';
+  }
+  function bezKropki(t){ return t.charAt(t.length - 1) === '.' ? t.slice(0, t.length - 1) : t; }
+  function tasuj(tab){
+    var a = tab.slice();
+    for(var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function odmiana(n, a, b2, c2){
+    var m10 = n % 10, m100 = n % 100;
+    if(n === 1){ return a; }
+    if(m10 >= 2 && m10 <= 4 && !(m100 >= 12 && m100 <= 14)){ return b2; }
+    return c2;
+  }
+  function fmtCzas(ms){
+    var s = Math.floor(ms / 1000);
+    var m = Math.floor(s / 60);
+    s = s % 60;
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+  function czasSlowami(ms){
+    var s = Math.floor(ms / 1000);
+    var m = Math.floor(s / 60);
+    s = s % 60;
+    var out = '';
+    if(m > 0){ out = m + ' ' + odmiana(m, 'minuta', 'minuty', 'minut'); }
+    if(s > 0 || m === 0){ out += (out ? ' i ' : '') + s + ' ' + odmiana(s, 'sekunda', 'sekundy', 'sekund'); }
+    return out;
+  }
+  function oglos(tekst, opoznienie){
+    clearTimeout(tmOgl);
+    if(opoznienie){ tmOgl = setTimeout(function(){ glos.textContent = tekst; }, opoznienie); }
+    else { glos.textContent = tekst; }
+  }
+  function svg(w, h, vb){
+    var s = document.createElementNS(NS, 'svg');
+    s.setAttribute('width', String(w)); s.setAttribute('height', String(h));
+    s.setAttribute('viewBox', vb);
+    s.setAttribute('aria-hidden', 'true'); s.setAttribute('focusable', 'false');
+    return s;
+  }
+  function elSvg(nazwa, atr){
+    var e = document.createElementNS(NS, nazwa);
+    for(var k in atr){ if(Object.prototype.hasOwnProperty.call(atr, k)){ e.setAttribute(k, atr[k]); } }
+    return e;
+  }
+  function ikonaPtak(){
+    var s = svg(16, 16, '0 0 24 24');
+    s.setAttribute('class', 'mk-m-ptak');
+    s.appendChild(elSvg('path', {d: 'M4.5 12.5l5 5L19.5 6.5', fill: 'none', stroke: 'currentColor',
+                                 'stroke-width': '3.4', 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}));
+    return s;
+  }
+  function ikonaGwiazda(pelna){
+    var s = svg(26, 26, '0 0 24 24');
+    s.appendChild(elSvg('path', {d: GWIAZDA, fill: pelna ? '#b4322b' : 'none',
+                                 stroke: pelna ? '#b4322b' : '#4a4e55', 'stroke-width': '1.8',
+                                 'stroke-linejoin': 'round'}));
+    return s;
+  }
+
+  // ---------------------------------------------------------- rekord (localStorage, każdy dostęp w try/catch)
+  function odczytajRekord(tr){
+    try {
+      var v = window.localStorage.getItem(KLUCZ[tr]);
+      var n = parseInt(v, 10);
+      return (isNaN(n) || n < 1) ? 0 : n;
+    } catch(e2){ return 0; }
+  }
+  function zapiszRekord(tr, n){
+    try { window.localStorage.setItem(KLUCZ[tr], String(n)); return true; }
+    catch(e3){ return false; }
+  }
+
+  // ---------------------------------------------------------- stoper (rosnący, bez limitu; Date.now + setTimeout)
+  function czasGry(){
+    if(!gra){ return 0; }
+    return gra.czasMs + (gra.czasOd ? Date.now() - gra.czasOd : 0);
+  }
+  function pokazCzas(){
+    if(ui && ui.czas){
+      var t = fmtCzas(czasGry());
+      if(ui.czas.textContent !== t){ ui.czas.textContent = t; }
+    }
+  }
+  function stoperTyk(){
+    tmCzas = 0;
+    if(!gra || !gra.czasOd){ return; }
+    pokazCzas();
+    var ms = czasGry();
+    tmCzas = setTimeout(stoperTyk, Math.max(40, 1000 - (ms % 1000) + 10));
+  }
+  function stoperStart(){
+    if(!gra || gra.czasOd){ return; }
+    gra.czasOd = Date.now();
+    clearTimeout(tmCzas);
+    stoperTyk();
+  }
+  function stoperStop(){
+    clearTimeout(tmCzas);
+    tmCzas = 0;
+    if(gra && gra.czasOd){ gra.czasMs += Date.now() - gra.czasOd; gra.czasOd = 0; }
+    pokazCzas();
+  }
+
+  // ---------------------------------------------------------- zegar samoczynnego zakrywania (poziom „Szybki”)
+  function krokZegara(){ return ruchOgr ? 500 : 100; }
+  function tykajPasek(ile, calosc){
+    if(!ui || !ui.pasekW){ return; }
+    var proc = Math.max(0, Math.min(100, Math.round(ile / calosc * 100)));
+    ui.pasekW.style.width = proc + '%';
+    if(proc <= 30){ ui.pasekW.classList.add('mk-m-malo'); } else { ui.pasekW.classList.remove('mk-m-malo'); }
+  }
+  function zZakStop(){
+    if(zZak){ clearTimeout(zZak.tm); zZak = null; }
+    tykajPasek(0, 1);
+  }
+  function zZakTyk(){
+    if(!zZak){ return; }
+    var z = zZak;
+    var ile = z.koniec - Date.now();
+    if(ile <= 0){
+      zZak = null;
+      tykajPasek(0, z.calosc);
+      zakryj(true);
+      return;
+    }
+    tykajPasek(ile, z.calosc);
+    z.tm = setTimeout(zZakTyk, Math.max(15, Math.min(krokZegara(), ile)));
+  }
+  function zZakStart(ms, calosc){
+    if(zZak){ clearTimeout(zZak.tm); }
+    zZak = {koniec: Date.now() + ms, calosc: calosc || ms, tm: 0};
+    zZakTyk();
+  }
+
+  // ---------------------------------------------------------- ekran startowy
+  function ekranStart(){
+    zZakStop();
+    stoperStop();
+    wstrz = null;
+    gra = null;
+    ui = null;
+    stan = 'start';
+    ekran.innerHTML = '';
+    ekran.appendChild(el('p','mk-m-lead', T.start));
+
+    var fs = document.createElement('fieldset');
+    fs.className = 'mk-m-fs';
+    var lg = document.createElement('legend');
+    lg.className = 'mk-sr';
+    lg.textContent = T.trybLegend;
+    fs.appendChild(lg);
+    var pt = el('p','mk-m-pyt', T.trybPyt);
+    pt.setAttribute('aria-hidden','true');
+    fs.appendChild(pt);
+    D.tryby.forEach(function(t){
+      var id = 'mk-m-tryb-' + t.k;
+      var lab = document.createElement('label');
+      lab.className = 'mk-m-opcja';
+      lab.setAttribute('for', id);
+      var inp = document.createElement('input');
+      inp.type = 'radio'; inp.name = 'mk-m-tryb'; inp.id = id; inp.value = t.k;
+      inp.className = 'mk-m-radio';
+      if(t.k === tryb){ inp.checked = true; }
+      inp.addEventListener('change', function(){ if(inp.checked){ tryb = t.k; } });
+      var box = el('span','mk-m-opt');
+      box.appendChild(el('span','mk-m-optnazwa', t.etyk));
+      box.appendChild(el('span','mk-m-opttekst', t.pod));
+      lab.appendChild(inp);
+      lab.appendChild(box);
+      fs.appendChild(lab);
+    });
+    ekran.appendChild(fs);
+    ekran.appendChild(el('p','mk-m-czytnik', T.czytnik));
+
+    var det = document.createElement('details');
+    det.className = 'mk-m-szcz';
+    var sum = document.createElement('summary');
+    sum.textContent = T.zasadyTytul;
+    det.appendChild(sum);
+    var ul = el('ul','mk-lista');
+    T.zasady.forEach(function(z){ ul.appendChild(el('li', null, z)); });
+    det.appendChild(ul);
+    ekran.appendChild(det);
+
+    var btn = el('button','mk-btn mk-m-start', T.zacznij);
+    btn.type = 'button';
+    btn.addEventListener('click', function(ev){ zacznij(!!ev && ev.detail > 0); });
+    ekran.appendChild(btn);
+  }
+
+  // ---------------------------------------------------------- ekran gry
+  function kafel(etykieta, wartosc){
+    var k = el('div','mk-m-st');
+    var e = el('span','mk-m-stn', etykieta);
+    k.appendChild(e);
+    var w = null;
+    if(wartosc !== null){ w = el('span','mk-m-stw', wartosc); k.appendChild(w); }
+    return {k: k, e: e, w: w};
+  }
+  function budujEkranGry(){
+    ekran.innerHTML = '';
+    ui = {karty: []};
+    var hud = el('div','mk-m-hud mk-m-hud3');
+    hud.setAttribute('role','group');
+    hud.setAttribute('aria-label', T.hudEtyk);
+    var kC = kafel(T.czas, '0:00');
+    ui.czas = kC.w;
+    hud.appendChild(kC.k);
+    var kR = kafel(T.ruchy, '0');
+    ui.ruchy = kR.w;
+    hud.appendChild(kR.k);
+    var kP = kafel(T.pary, wstaw(T.paryWart, {n: 0, ile: ILE}));
+    ui.pary = kP.w;
+    hud.appendChild(kP.k);
+    ekran.appendChild(hud);
+
+    ekran.appendChild(el('p','mk-m-baner', tryb === 'szybki' ? T.banerSzybki : T.banerBez));
+
+    var ster = el('div','mk-m-ster');
+    ui.zakryj = el('button','mk-btn mk-m-zakryj', T.zakryj);
+    ui.zakryj.type = 'button';
+    ui.zakryj.setAttribute('aria-keyshortcuts', 'Z');
+    ui.zakryj.setAttribute('aria-disabled', 'true');
+    ui.zakryj.addEventListener('click', function(){ zakryj(false); });
+    ster.appendChild(ui.zakryj);
+    ui.pauza = el('button','mk-btn mk-btn2 mk-m-pauza', T.pauza);
+    ui.pauza.type = 'button';
+    ui.pauza.addEventListener('click', function(){
+      if(ui.pauza.getAttribute('aria-disabled') === 'true'){ return; }
+      if(gra && gra.pauza){ wznow(); } else { pauza('reczna'); }
+    });
+    ster.appendChild(ui.pauza);
+    ui.wynikBtn = el('button','mk-btn mk-m-wynik', T.zobaczWynik);
+    ui.wynikBtn.type = 'button';
+    ui.wynikBtn.hidden = true;
+    ui.wynikBtn.addEventListener('click', koniecGry);
+    ster.appendChild(ui.wynikBtn);
+    ekran.appendChild(ster);
+
+    if(tryb === 'szybki'){
+      var pasek = el('div','mk-m-pasek');
+      pasek.setAttribute('aria-hidden','true');
+      ui.pasekW = el('div','mk-m-pasek-w');
+      pasek.appendChild(ui.pasekW);
+      ekran.appendChild(pasek);
+    }
+
+    ui.pbox = el('div','mk-m-pbox');
+    ui.pbox.appendChild(el('p','mk-m-pbox-t', T.podglad));
+    ui.pbtn = el('button','mk-btn mk-m-pbox-btn', T.podgladBtn);
+    ui.pbtn.type = 'button';
+    ui.pbtn.setAttribute('aria-keyshortcuts', 'Z');
+    ui.pbtn.addEventListener('click', function(ev){ zakryjPodglad(!!ev && ev.detail > 0); });
+    ui.pbox.appendChild(ui.pbtn);
+    ui.pbox.hidden = gra.faza !== 'podglad';
+    ekran.appendChild(ui.pbox);
+
+    ui.dymek = el('div','mk-m-dymek');
+    ekran.appendChild(ui.dymek);
+
+    ui.plansza = el('div','mk-m-plansza');
+    ui.plansza.setAttribute('role','group');
+    ui.plansza.setAttribute('aria-label', T.planszaEtyk);
+    gra.karty.forEach(function(k, i){
+      var b = el('button','mk-m-karta');
+      b.type = 'button';
+      b.appendChild(el('span','mk-m-nr', String(i + 1)));
+      b.appendChild(el('span','mk-m-tresc', k.tekst));
+      b.appendChild(ikonaPtak());
+      b.firstChild.setAttribute('aria-hidden','true');
+      b.childNodes[1].setAttribute('aria-hidden','true');
+      b.addEventListener('click', function(){ klik(i); });
+      b.addEventListener('animationend', function(){ b.classList.remove('mk-m-obrot'); });
+      ui.karty.push(b);
+      ui.plansza.appendChild(b);
+      odswiezKarte(i, false);
+    });
+    ekran.appendChild(ui.plansza);
+
+    ui.pauzaInfo = el('div','mk-m-pauzainfo');
+    ui.pauzaInfo.hidden = true;
+    ui.pauzaTxt = el('p', null);
+    ui.pauzaInfo.appendChild(ui.pauzaTxt);
+    ekran.appendChild(ui.pauzaInfo);
+
+    ekran.appendChild(el('p','mk-m-podp', T.podpowiedz));
+    pokazDymek('', '', T.dymekStart);
+    wyrownajDymek();
+    if(gra.faza === 'podglad'){
+      ui.dymek.hidden = true;
+      if(tryb !== 'szybki'){ ui.pauza.setAttribute('aria-disabled', 'true'); }
+    }
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){ if(stan === 'gra' && ui){ wyrownajDymek(); } });
+    }
+  }
+
+  // dymek ma zawsze tyle samo miejsca, żeby plansza nie skakała po znalezieniu pary
+  function pokazDymek(klasa, naglowek, tekst){
+    ui.dymek.className = 'mk-m-dymek' + (klasa ? ' mk-m-dymek-' + klasa : '');
+    ui.dymek.innerHTML = '';
+    var akapit = el('p','mk-m-dymek-t');
+    if(naglowek){
+      akapit.appendChild(el('strong', null, naglowek));
+      akapit.appendChild(document.createTextNode(' ' + tekst));
+    } else { akapit.textContent = tekst; }
+    ui.dymek.appendChild(akapit);
+    if(gra){ gra.dymek = {klasa: klasa, n: naglowek, t: tekst}; }
+  }
+  function wyrownajDymek(){
+    if(!ui || !ui.dymek){ return; }
+    var teraz = gra && gra.dymek ? gra.dymek : {klasa: '', n: '', t: T.dymekStart};
+    var bylUkryty = ui.dymek.hidden;
+    ui.dymek.hidden = false;           // schowany dymek ma wysokość 0, więc na czas pomiaru go pokazujemy
+    var kand = [['', '', T.dymekStart], ['', '', T.dymekJedna], ['zle', '', T.dymekZle], ['zle', '', T.dymekZleSzybki],
+                ['', '', T.dymekZakryte]];
+    P.forEach(function(p){ kand.push(['ok', wstaw(T.dymekPara, {nazwa: p.nazwa}), p.wyjasnienie]); });
+    ui.dymek.style.minHeight = '';
+    var maks = 0;
+    kand.forEach(function(k){
+      pokazDymek(k[0], k[1], k[2]);
+      var h = ui.dymek.offsetHeight;
+      if(h > maks){ maks = h; }
+    });
+    pokazDymek(teraz.klasa, teraz.n, teraz.t);
+    if(maks > 40){ ui.dymek.style.minHeight = maks + 'px'; }
+    ui.dymek.hidden = bylUkryty;
+    ostSzer = ekran.clientWidth;
+  }
+  window.addEventListener('resize', function(){
+    clearTimeout(tmResize);
+    tmResize = setTimeout(function(){
+      if(stan === 'gra' && ui && ekran.clientWidth !== ostSzer){ wyrownajDymek(); }
+    }, 150);
+  });
+
+  // ---------------------------------------------------------- karty
+  function odswiezKarte(i, animuj){
+    var k = gra.karty[i];
+    var b = ui.karty[i];
+    var byl = b.classList.contains('mk-m-obrot');
+    b.className = 'mk-m-karta mk-m-k-' + k.rodzaj + ' mk-m-' + k.stan + (byl ? ' mk-m-obrot' : '');
+    var etyk;
+    if(k.stan === 'zakryta'){ etyk = wstaw(T.kartaZakryta, {n: i + 1}); }
+    else if(k.stan === 'odkryta' || k.stan === 'podglad'){ etyk = wstaw(T.kartaOdkryta, {n: i + 1, t: k.tekst}); }
+    else { etyk = wstaw(T.kartaPara, {n: i + 1, t: bezKropki(k.tekst)}); }
+    b.setAttribute('aria-label', etyk);
+    var nieaktywna = k.stan === 'para' || k.stan === 'podglad' || (k.stan === 'zakryta' && (gra.faza !== 'wybor' || gra.pauza));
+    b.setAttribute('aria-disabled', nieaktywna ? 'true' : 'false');
+    if(animuj){
+      b.classList.remove('mk-m-obrot');
+      void b.offsetWidth;
+      b.classList.add('mk-m-obrot');
+    }
+  }
+  function odswiezWszystkie(){
+    for(var i = 0; i < gra.karty.length; i++){ odswiezKarte(i, false); }
+  }
+  function aktualizujHud(){
+    ui.ruchy.textContent = String(gra.ruchy);
+    ui.pary.textContent = wstaw(T.paryWart, {n: gra.znalezione.length, ile: ILE});
+    pokazCzas();
+  }
+  function ustawZakryj(aktywny){
+    ui.zakryj.setAttribute('aria-disabled', aktywny ? 'false' : 'true');
+  }
+
+  function klik(i){
+    if(!gra || stan !== 'gra' || gra.pauza || gra.faza === 'koniec' || gra.faza === 'podglad'){ return; }
+    var k = gra.karty[i];
+    if(k.stan === 'para'){ oglos(wstaw(T.ogJuzPara, {n: i + 1})); return; }
+    if(k.stan === 'odkryta'){ oglos(wstaw(T.ogJuzOdkryta, {n: i + 1})); return; }
+    if(gra.faza === 'zle'){
+      if(tryb === 'bez'){ oglos(T.ogNajpierw); ui.zakryj.focus(); }
+      else { oglos(T.ogCzekaj); }
+      return;
+    }
+    odkryj(i);
+  }
+
+  function odkryj(i){
+    var k = gra.karty[i];
+    if(!gra.czasStart){ gra.czasStart = true; stoperStart(); }
+    k.stan = 'odkryta';
+    gra.odkryte.push(i);
+    odswiezKarte(i, true);
+    if(gra.odkryte.length === 1){
+      pokazDymek('', '', T.dymekJedna);
+      oglos(wstaw(T.ogOdkryta, {n: i + 1, t: kropka(k.tekst)}));
+      return;
+    }
+    gra.ruchy++;
+    var a = gra.karty[gra.odkryte[0]];
+    if(a.par === k.par){ znalezionoPare(a, k, i); }
+    else { niePara(a, k, i); }
+  }
+
+  function znalezionoPare(a, b, i){
+    var p = P[a.par];
+    a.stan = 'para';
+    b.stan = 'para';
+    gra.odkryte = [];
+    gra.znalezione.push(a.par);
+    gra.faza = gra.znalezione.length >= ILE ? 'koniec' : 'wybor';
+    odswiezWszystkie();
+    aktualizujHud();
+    var nagl = wstaw(T.dymekPara, {nazwa: p.nazwa});
+    pokazDymek('ok', nagl, p.wyjasnienie);
+    var ogl = wstaw(T.ogPara, {n: i + 1, t: kropka(b.tekst), nazwa: p.nazwa, w: p.wyjasnienie, p: gra.znalezione.length, ile: ILE});
+    if(gra.faza === 'koniec'){
+      stoperStop();
+      zZakStop();
+      ui.zakryj.hidden = true;
+      ui.pauza.hidden = true;
+      ui.wynikBtn.hidden = false;
+      ui.wynikBtn.focus();
+      oglos(ogl + ' ' + T.ogKoniecRundy);
+    } else {
+      oglos(ogl);
+    }
+  }
+
+  function niePara(a, b, i){
+    gra.faza = 'zle';
+    odswiezWszystkie();
+    aktualizujHud();
+    ustawZakryj(true);
+    if(tryb === 'szybki'){
+      pokazDymek('zle', '', T.dymekZleSzybki);
+      oglos(wstaw(T.ogZleSzybki, {n: i + 1, t: kropka(b.tekst)}));
+      var ms = D.szybki.baza + D.szybki.znak * Math.max(a.tekst.length, b.tekst.length);
+      zZakStart(ms, ms);
+    } else {
+      pokazDymek('zle', '', T.dymekZle);
+      oglos(wstaw(T.ogZle, {n: i + 1, t: kropka(b.tekst)}));
+      ui.zakryj.focus();
+    }
+  }
+
+  function zakryj(auto){
+    if(!gra || stan !== 'gra' || gra.faza !== 'zle' || gra.pauza){ return; }
+    zZakStop();
+    var ost = gra.odkryte[gra.odkryte.length - 1];
+    gra.odkryte.forEach(function(i){ gra.karty[i].stan = 'zakryta'; });
+    var rusz = gra.odkryte.slice();
+    gra.odkryte = [];
+    gra.faza = 'wybor';
+    odswiezWszystkie();
+    rusz.forEach(function(i){ odswiezKarte(i, true); });
+    ustawZakryj(false);
+    pokazDymek('', '', T.dymekZakryte);
+    oglos(T.ogZakryte);
+    if(!auto){ ui.karty[ost].focus(); }
+  }
+
+  // ---------------------------------------------------------- koniec podglądu: karty się zakrywają, zaczyna się gra
+  function zakryjPodglad(wskaznik){
+    if(!gra || stan !== 'gra' || gra.faza !== 'podglad' || gra.pauza){ return; }
+    gra.faza = 'wybor';
+    gra.karty.forEach(function(k){ k.stan = 'zakryta'; });
+    ui.pbox.hidden = true;
+    ui.dymek.hidden = false;
+    ui.pauza.setAttribute('aria-disabled', 'false');
+    pokazDymek('', '', T.dymekStart);
+    for(var i = 0; i < gra.karty.length; i++){ odswiezKarte(i, true); }
+    if(wskaznik){ ui.karty[0].focus({preventScroll: true}); } else { ui.karty[0].focus(); }
+    oglos(T.ogStart, 350);
+  }
+
+  // ---------------------------------------------------------- pauza (WCAG 2.2.1 / 2.2.2)
+  function pauza(powod){
+    if(!gra || stan !== 'gra' || gra.pauza || gra.faza === 'koniec'){ return; }
+    if(gra.faza === 'podglad' && tryb !== 'szybki'){ return; }   // w podglądzie „Bez pośpiechu” nic nie biegnie
+    gra.pauza = true;
+    stoperStop();
+    if(zZak){
+      wstrz = {pozostalo: Math.max(0, zZak.koniec - Date.now()), calosc: zZak.calosc};
+      clearTimeout(zZak.tm);
+      zZak = null;
+    } else { wstrz = null; }
+    ui.pauzaInfo.style.minHeight = ui.plansza.offsetHeight + 'px';
+    ui.plansza.hidden = true;
+    if(gra.faza === 'podglad'){ ui.pbox.hidden = true; }
+    ui.pauzaInfo.hidden = false;
+    ui.pauzaTxt.textContent = powod === 'karta' ? T.pauzaInfoK : T.pauzaInfoR;
+    ui.pauza.textContent = T.wznow;
+    ustawZakryj(false);
+    odswiezWszystkie();
+    oglos(T.pauzaOgl);
+  }
+  function wznow(){
+    if(!gra || !gra.pauza){ return; }
+    gra.pauza = false;
+    ui.plansza.hidden = false;
+    if(gra.faza === 'podglad'){ ui.pbox.hidden = false; }
+    ui.pauzaInfo.hidden = true;
+    ui.pauza.textContent = T.pauza;
+    ustawZakryj(gra.faza === 'zle');
+    odswiezWszystkie();
+    oglos(T.wznowOgl);
+    if(gra.czasStart && gra.faza !== 'koniec'){ stoperStart(); }
+    if(wstrz){
+      var w = wstrz;
+      wstrz = null;
+      zZakStart(w.pozostalo, w.calosc);
+    }
+  }
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden || document.visibilityState === 'hidden'){ pauza('karta'); }
+  });
+
+  // ---------------------------------------------------------- klawiatura: tylko wewnątrz gry (WCAG 2.1.4)
+  function kolumny(){
+    var gora = ui.karty[0].offsetTop;
+    var n = 0;
+    for(var i = 0; i < ui.karty.length; i++){
+      if(ui.karty[i].offsetTop === gora){ n++; } else { break; }
+    }
+    return Math.max(1, n);
+  }
+  c.addEventListener('keydown', function(e){
+    if(stan !== 'gra' || !gra || !ui){ return; }
+    if(e.altKey || e.ctrlKey || e.metaKey){ return; }
+    var k = e.key;
+    if(k === 'z' || k === 'Z'){
+      e.preventDefault();
+      if(!e.repeat){ if(gra.faza === 'podglad'){ zakryjPodglad(false); } else { zakryj(false); } }
+      return;
+    }
+    if(e.shiftKey){ return; }
+    if((k === 'Enter' || k === ' ' || k === 'Spacebar') && e.repeat){ e.preventDefault(); return; }
+    var idx = ui.karty.indexOf(e.target);
+    if(idx < 0){ return; }
+    var n = ui.karty.length;
+    var kol = kolumny();
+    var cel = -1;
+    if(k === 'ArrowRight' || k === 'Right'){ cel = Math.min(n - 1, idx + 1); }
+    else if(k === 'ArrowLeft' || k === 'Left'){ cel = Math.max(0, idx - 1); }
+    else if(k === 'ArrowDown' || k === 'Down'){ cel = Math.min(n - 1, idx + kol); }
+    else if(k === 'ArrowUp' || k === 'Up'){ cel = Math.max(0, idx - kol); }
+    else if(k === 'Home'){ cel = 0; }
+    else if(k === 'End'){ cel = n - 1; }
+    if(cel >= 0){
+      e.preventDefault();
+      if(cel !== idx){ ui.karty[cel].focus(); }
+    }
+  });
+
+  // ---------------------------------------------------------- start / koniec
+  function zacznij(wskaznik){
+    zZakStop();
+    stoperStop();
+    var ids = tasuj(P.map(function(p, i){ return i; })).slice(0, ILE);
+    var karty = [];
+    ids.forEach(function(pi){
+      karty.push({par: pi, rodzaj: 'nazwa', tekst: P[pi].nazwa, stan: 'podglad'});
+      karty.push({par: pi, rodzaj: 'przyklad', tekst: P[pi].przyklad, stan: 'podglad'});
+    });
+    gra = {karty: tasuj(karty), odkryte: [], ruchy: 0, znalezione: [], faza: 'podglad', pauza: false,
+           czasMs: 0, czasOd: 0, czasStart: false, dymek: null};
+    wstrz = null;
+    stan = 'gra';
+    budujEkranGry();
+    if(tryb === 'szybki'){ gra.czasStart = true; stoperStart(); }   // „Szybki”: podgląd liczy się do czasu
+    if(wskaznik){ ui.karty[0].focus({preventScroll: true}); } else { ui.karty[0].focus(); }
+    oglos(T.podglad, 350);
+  }
+
+  function koniecGry(){
+    zZakStop();
+    stoperStop();
+    wstrz = null;
+    stan = 'koniec';
+    var czas = Math.max(1, gra.czasMs);
+    var ruchy = gra.ruchy;
+    var gw = ruchy <= D.gwiazdki.trzy ? 3 : (ruchy <= D.gwiazdki.dwie ? 2 : 1);
+    var tr = tryb;
+    var poprzedni = rekordPamiec[tr];
+    var zap = odczytajRekord(tr);
+    if(zap > 0 && (poprzedni === 0 || zap < poprzedni)){ poprzedni = zap; }
+    var nowy = poprzedni === 0 || czas < poprzedni;
+    var zapisano = true;
+    if(nowy){
+      rekordPamiec[tr] = czas;
+      zapisano = zapiszRekord(tr, czas);
+    }
+    var rekord = nowy ? czas : poprzedni;
+    var znalezione = gra.znalezione.slice();
+
+    ekran.innerHTML = '';
+    ui = null;
+    var wyn = el('div','mk-m-koniec');
+    var h = el('h4','mk-m-wynik-h', wstaw(T.koniecH, {czas: czasSlowami(czas), ruchy: ruchy, g: gw}));
+    h.setAttribute('tabindex','-1');
+    wyn.appendChild(h);
+    wyn.appendChild(el('p', null, wstaw(T.trybInfo, {t: T.trybNazwy[tr]})));
+
+    var liczby = el('div','mk-m-hud mk-m-hud4');
+    var k1 = kafel(T.lCzas, fmtCzas(czas));
+    var k2 = kafel(T.lRuchy, String(ruchy));
+    var k3 = el('div','mk-m-st');
+    k3.appendChild(el('span','mk-m-stn', T.lGwiazdki));
+    var w3 = el('span','mk-m-stw mk-m-gw');
+    for(var g = 0; g < 3; g++){ w3.appendChild(ikonaGwiazda(g < gw)); }
+    w3.appendChild(el('span','mk-m-gwtxt', wstaw(T.gwiazdkiWart, {g: gw})));
+    k3.appendChild(w3);
+    var k4 = kafel(T.lRekord, fmtCzas(rekord));
+    liczby.appendChild(k1.k); liczby.appendChild(k2.k); liczby.appendChild(k3); liczby.appendChild(k4.k);
+    wyn.appendChild(liczby);
+    if(nowy){ wyn.appendChild(el('p','mk-m-rekord', T.nowyRekord)); }
+    if(!zapisano){ wyn.appendChild(el('p','mk-licz', T.rekordBrakZapisu)); }
+
+    wyn.appendChild(el('h4','mk-m-sekcja', T.parH));
+    wyn.appendChild(el('p','mk-licz', T.parLid));
+    var ul = el('ul','mk-lista mk-m-pary');
+    znalezione.forEach(function(pi){
+      var p = P[pi];
+      var li = document.createElement('li');
+      var p1 = el('p', null);
+      p1.appendChild(el('strong', null, p.nazwa));
+      p1.appendChild(document.createTextNode(' — ' + p.przyklad));
+      li.appendChild(p1);
+      li.appendChild(el('p','mk-m-wyj', p.wyjasnienie + ' ' + p.dodatek));
+      ul.appendChild(li);
+    });
+    wyn.appendChild(ul);
+
+    wyn.appendChild(el('h4','mk-m-sekcja', T.wnH));
+    T.wn.forEach(function(par){ wyn.appendChild(el('p', null, par)); });
+
+    var btny = el('div','mk-btny');
+    var jeszcze = el('button','mk-btn', T.jeszcze);
+    jeszcze.type = 'button';
+    jeszcze.addEventListener('click', function(ev){ zacznij(!!ev && ev.detail > 0); });
+    var zmien = el('button','mk-btn mk-btn2', T.zmien);
+    zmien.type = 'button';
+    zmien.addEventListener('click', function(){
+      ekranStart();
+      var r = ekran.querySelector('input[type="radio"]:checked');
+      if(r){ r.focus(); }
+    });
+    btny.appendChild(jeszcze);
+    btny.appendChild(zmien);
+    wyn.appendChild(btny);
+    ekran.appendChild(wyn);
+    oglos('');
+    h.focus();
+  }
+
+  ekranStart();
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

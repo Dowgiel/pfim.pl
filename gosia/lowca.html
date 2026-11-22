@@ -1,0 +1,994 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gra: Łowca technik</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Gra: Łowca technik</h1>
+<div class="mk mk-lowca" id="mk-lowca">Gra „Łowca technik” — w okienkach wyskakują krótkie hasła, a Ty łowisz tylko te, które pasują do wskazanej techniki manipulacji. Jeśli się nie wczyta (na przykład w aplikacji mobilnej Moodle), otwórz tę stronę w przeglądarce internetowej.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-l-ekran{display:flex;flex-direction:column;gap:14px;min-width:0;width:100%;max-width:46rem;\n margin-left:auto;margin-right:auto;container-type:inline-size;container-name:mkl}\n.mk-l-ekran > *{min-width:0}\n.mk-l-lead{font-size:17px;max-width:62ch}\n.mk p.mk-l-czytnik{font-size:14px;color:#4a4e55;border-left:3px solid #7d838a;padding:8px 12px;background:#fbfbfa}\n.mk-l-pyt{font-weight:700}\n.mk-l-fs{border:1px solid #c9ccc8;border-radius:6px;padding:12px 14px;background:#fbfbfa;margin:0;min-width:0}\n.mk-l-fs > * + *{margin-top:8px}\n.mk-l-opcja{display:flex;align-items:flex-start;gap:10px;border:2px solid #7d838a;border-radius:6px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px;margin:0}\n.mk-l-opcja:hover{background:#eef0ee}\n.mk-l-opcja:has(.mk-l-radio:checked){border-color:#16181c;background:#f4f4f2}\n.mk-l-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-l-radio{width:20px;height:20px;accent-color:#b4322b;margin:2px 0 0;flex:none}\n.mk-l-opt{display:flex;flex-direction:column;gap:2px;min-width:0}\n.mk-l-optnazwa{font-weight:700}\n.mk-l-opttekst{color:#4a4e55;font-size:14px}\n.mk-l-szcz{border:1px solid #c9ccc8;border-radius:6px;background:#fbfbfa;padding:0 14px}\n.mk-l-szcz summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center;\n justify-content:space-between;gap:10px;padding:6px 0;list-style:none}\n.mk-l-szcz summary::-webkit-details-marker{display:none}\n.mk-l-szcz summary::after{content:'';flex:none;width:9px;height:9px;border-right:2px solid #16181c;\n border-bottom:2px solid #16181c;transform:rotate(45deg);margin:-4px 4px 0 10px}\n.mk-l-szcz[open] summary::after{transform:rotate(-135deg);margin-top:4px}\n.mk-l-szcz summary:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-l-szcz ul{padding-bottom:12px}\n.mk-l-start,.mk-l-wynik,.mk-l-odpstart{font-size:18px;min-height:52px;width:100%}\n.mk-l-hud{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}\n.mk-l-hud3{grid-template-columns:repeat(3,minmax(0,1fr))}\n@container mkl (min-width:34rem){.mk-l-hud{grid-template-columns:repeat(4,minmax(0,1fr))}\n .mk-l-hud3{grid-template-columns:repeat(3,minmax(0,1fr))}}\n.mk-l-kaf{border:1px solid #c9ccc8;background:#fbfbfa;border-radius:6px;padding:8px 10px;min-width:0;\n display:flex;flex-direction:column;gap:2px;justify-content:flex-start}\n.mk-l-strz{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}\n.mk-l-kafn{font-size:13px;font-weight:700;color:#4a4e55;line-height:20px}\n.mk-l-kafw{font-size:22px;font-weight:700;line-height:1.15;color:#16181c}\n.mk-l-kafw2{font-size:14px;line-height:1.3}\n.mk-l-mnoz{display:inline-block;background:#b4322b;color:#fff;font-size:12px;font-weight:700;\n padding:1px 8px;border-radius:11px;line-height:18px}\n.mk-l-mnoz-off{visibility:hidden}\n.mk-l-tarcze{display:flex;gap:3px;align-items:center;min-height:24px}\n.mk-l-tarcze svg{display:block;width:22px;height:22px}\n.mk-l-cel{border-left:5px solid #b4322b;background:#ecece9;border-radius:3px;padding:10px 14px 12px}\n.mk-l-cel > * + *{margin-top:2px}\n.mk-l-cel-gora{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:20px}\n.mk p.mk-l-cel-etyk{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8c3029;font-weight:700}\n.mk p.mk-l-cel-nazwa{font-size:24px;font-weight:700;line-height:1.2;color:#16181c}\n.mk p.mk-l-cel-def{font-size:16px;color:#16181c}\n.mk-l-pauza{flex:none;min-width:96px}\n.mk-l-plansza{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;\n background:#16181c;padding:10px;border-radius:10px;min-width:0}\n.mk-l-plansza > .mk-l-okno:nth-child(9){display:none}\n@container mkl (min-width:30rem){\n .mk-l-plansza{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:14px}\n .mk-l-plansza > .mk-l-okno:nth-child(9){display:flex}\n}\n.mk-l-okno{position:relative;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;\n min-height:var(--mk-l-wys,120px);margin:0;padding:8px 8px 24px;font:inherit;font-size:14px;line-height:1.28;\n text-align:left;color:#16181c;border-radius:8px;cursor:pointer;min-width:0;overflow:hidden;\n -webkit-appearance:none;appearance:none}\n.mk-l-okno[aria-disabled=\"true\"]{cursor:default}\n.mk-l-puste{background:#23262c;border:2px dashed #7d838a}\n.mk-l-haslo{background:#fbfbfa;border:3px solid #fbfbfa;border-top:6px solid #b4322b}\n.mk-l-haslo:hover{background:#fff}\n.mk-l-wok{background:#e6f0ea;border:3px solid #2c6a4c;justify-content:center}\n.mk-l-wzle{background:#f7e6e4;border:3px solid #b4322b;justify-content:center}\n.mk-l-wneu{background:#ecece9;border:3px solid #7d838a;justify-content:center}\n.mk-l-okno:focus-visible{outline:3px solid #fbfbfa;outline-offset:3px}\n.mk-l-tekst{display:block;overflow-wrap:anywhere}\n.mk-l-lont{position:absolute;left:8px;right:8px;bottom:7px;height:10px;border-radius:5px;background:#e3e3e0;\n border:1px solid #7d838a;overflow:hidden}\n.mk-l-lont-w{display:block;height:100%;width:100%;background:#16181c}\n.mk-l-malo{background:#b4322b}\n.mk-l-stempel{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;\n text-align:center;flex:1 1 auto;padding:2px 0 14px}\n.mk-l-stp-a{display:inline-flex;align-items:center;gap:4px;font-weight:700;font-size:16px;color:#16181c}\n.mk-l-stp-a svg{flex:none}\n.mk-l-stp-b{font-weight:700;font-size:14px;color:#16181c;overflow-wrap:break-word;max-width:100%}\n.mk-l-karty{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13.5rem),1fr));gap:12px;\n background:#16181c;padding:12px;border-radius:10px;min-width:0;position:relative}\n.mk-l-karta{display:flex;flex-direction:column;gap:10px;background:#fbfbfa;border-top:6px solid #b4322b;\n border-radius:8px;padding:12px;min-height:var(--mk-l-wys,150px);min-width:0;color:#16181c}\n.mk-l-karta .mk-l-tekst{font-size:17px;line-height:1.35;flex:1 1 auto}\n.mk-l-dec{display:flex;flex-wrap:wrap;gap:8px}\n.mk-l-dec .mk-btn{flex:1 1 8rem;font-size:15px;padding:8px 10px}\n.mk-l-pauzainfo{background:#fbfbfa;border:1px solid #c9ccc8;border-radius:10px;min-height:150px;display:flex;\n align-items:center;justify-content:center;padding:16px;text-align:center;font-weight:700}\n.mk-l-odprawa{border:1px solid #c9ccc8;background:#fbfbfa;border-radius:6px;padding:14px 16px;display:flex;\n flex-direction:column;gap:10px}\n.mk-l-wer{border-left:5px solid #7d838a;background:#ecece9;border-radius:3px;padding:8px 12px;min-height:78px;\n font-weight:600}\n@container mkl (min-width:30rem){.mk-l-wer{min-height:58px}}\n.mk-l-wer-ok{border-left-color:#2c6a4c;background:#e6f0ea}\n.mk-l-wer-zle{border-left-color:#b4322b;background:#f7e6e4}\n.mk-l-wer-neu{border-left-color:#7d838a;background:#ecece9}\n.mk-l-wer-brak{border-left-color:transparent;background:transparent}\n.mk-l-podp{font-size:14px;color:#4a4e55}\n.mk-l-koniec{display:flex;flex-direction:column;gap:14px;min-width:0}\n.mk-l-koniec > *{min-width:0}\n.mk-l-wynik-h{font-size:22px;font-weight:700;line-height:1.25}\n.mk-l-wynik-h:focus{outline:none}\n.mk-l-wynik-h:focus-visible{outline:2px solid #16181c;outline-offset:3px}\n.mk h4.mk-l-sekcja{font-size:17px;font-weight:700;padding-top:6px}\n.mk-l-rekord{font-weight:700;color:#2c6a4c}\n.mk-l-tab{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;margin:0;color:#16181c}\n.mk-l-tab caption{caption-side:top;text-align:left;font-weight:700;padding:0 0 6px;font-size:15px;color:#16181c}\n.mk-l-tab th,.mk-l-tab td{border:1px solid #c9ccc8;padding:6px 4px;text-align:center;vertical-align:middle;\n overflow-wrap:break-word;color:#16181c;font-size:inherit;line-height:1.35}\n.mk-l-tab thead th{background:#ecece9;font-weight:700;font-size:12px}\n.mk-l-tab thead th:nth-child(1){width:28%}\n.mk-l-tab thead th:nth-child(2){width:24%}\n.mk-l-tab thead th:nth-child(3){width:26%}\n.mk-l-tab thead th:nth-child(4){width:22%}\n.mk-l-tab tbody th{text-align:left;background:#fbfbfa;font-weight:700}\n.mk-l-tab td{background:#fff}\n.mk ul.mk-lista.mk-l-pomylki{gap:14px}\n.mk-l-pomylki li > * + *{margin-top:4px}\n.mk-l-co{font-size:14px;color:#4a4e55}\n.mk-l-wyj{color:#16181c}\n.mk p.mk-l-gratulacje{border-left:4px solid #2c6a4c;background:#fbfbfa;padding:10px 14px}\n@container mkl (min-width:30rem){\n .mk-l-okno{font-size:17px;line-height:1.3;padding:10px 10px 26px}\n .mk-l-tab{font-size:14px}\n .mk-l-tab thead th{font-size:13px}\n .mk-l-stp-b{font-size:15px}\n}\n@media (max-width:420px){\n .mk-l-ekran{gap:10px}\n .mk-l-kaf{padding:6px 8px}\n .mk-l-kafw{font-size:20px}\n .mk-l-kafw2{font-size:14px}\n .mk-l-karta .mk-l-tekst{font-size:16px}\n}\n@media (prefers-reduced-motion: no-preference){\n .mk-l-haslo.mk-l-wjazd{animation:mk-l-wjazd .18s ease-out}\n}\n@keyframes mk-l-wjazd{from{transform:translateY(14px)}to{transform:none}}\n@media (forced-colors: active){\n .mk-l-lont{border-color:CanvasText}\n .mk-l-lont-w{background:Highlight;forced-color-adjust:none}\n .mk-l-wer{border-left-color:CanvasText}\n .mk-l-okno{border-color:CanvasText}\n}\n";
+var D = {"nad": "Gra", "tytul": "Łowca technik", "tryby": [{"k": "bez", "etyk": "Bez limitu czasu", "pod": "Bez odliczania: hasła czekają na Twoją decyzję. Przy każdym są przyciski „To ta technika” i „Inna technika”."}, {"k": "czas", "etyk": "Z limitem czasu", "pod": "Hasła wyskakują w okienkach i po kilkunastu sekundach znikają. Im więcej słów ma hasło, tym dłużej je widać, a z każdą rundą znikają trochę szybciej. Najpierw widać jedno hasło naraz, potem dwa. Możesz wstrzymać grę."}], "techniki": [{"k": "dys", "nazwa": "Dyskredytowanie", "tab": "Dys|kre|dy|to|wa|nie", "def": "Kiedy pojawia się zarzut, nie odpowiada się na zarzut — atakuje się tego, kto go postawił.", "wsk": "sprawdzanie otwiera pytanie, a dyskredytowanie je zamyka"}, {"k": "emo", "nazwa": "Emocje", "tab": "Emocje", "def": "Celowe podkręcanie emocji, żeby treść poszła dalej. Emocja nie jest tu skutkiem ubocznym, tylko ustawieniem.", "wsk": "emocja jest dziś parametrem, który się ustawia"}, {"k": "pol", "nazwa": "Polaryzacja", "tab": "Po|la|ry|za|cja", "def": "Technika o jednym zadaniu: rozsunąć ludzi od siebie.", "wsk": "nie chodzi o przekonanie kogoś do czegoś, tylko o to, żeby dwie grupy przestały się dogadywać"}, {"k": "pod", "nazwa": "Podszywanie się", "tab": "Pod|szy|wa|nie się", "def": "Udawanie eksperta lub ekspertki, instytucji, znanej osoby albo redakcji.", "wsk": "podszywanie się to najszerszy z sześciu chwytów"}, {"k": "spi", "nazwa": "Spisek", "tab": "Spisek", "def": "Opowieść o prawdzie, którą ktoś ukrywa.", "wsk": "spisek to opowieść o prawdzie, którą ktoś ukrywa"}, {"k": "tro", "nazwa": "Trolling", "tab": "Trol|ling", "def": "Prowokacja rzucona po to, żeby ktoś zareagował.", "wsk": "sama treść bywa nieważna, chodzi o reakcję, bo reakcja niesie ją dalej"}], "hasla": [{"tech": "dys", "tekst": "Zarzut? Ciekawe, kto płaci tej dziennikarce z Jarzębina.", "dlaczego": "To hasło to „Dyskredytowanie”, bo nie odpowiada na zarzut, tylko atakuje tę, która go postawiła. Pytanie o to, kto jej płaci, ma zamknąć sprawę."}, {"tech": "dys", "tekst": "Fact-checking z Modrzewina? Nie ma co czytać, to opłacona redakcja.", "dlaczego": "To hasło to „Dyskredytowanie”, bo zamiast sprawdzić, co ustaliła redakcja fact-checkingowa, atakuje samą redakcję. Sprawdzanie otwiera pytanie, a dyskredytowanie je zamyka."}, {"tech": "dys", "tekst": "Uwagi do remontu? Autorka sama kiedyś narozrabiała, więc je pomińmy.", "dlaczego": "To hasło to „Dyskredytowanie”, bo pomija uwagi do remontu i mówi o tym, co autorka zrobiła kiedyś. To atak na osobę, a nie odpowiedź na zarzut."}, {"tech": "dys", "tekst": "Instytucja, która nas krytykuje, nie ma prawa się wypowiadać.", "dlaczego": "To hasło to „Dyskredytowanie”, bo nie odpowiada na krytykę, tylko odbiera głos instytucji, która ją zgłosiła."}, {"tech": "dys", "tekst": "Po co odpowiadać? Wystarczy pokazać, kim jest autorka tych pytań.", "dlaczego": "To hasło to „Dyskredytowanie”, bo zamiast odpowiedzieć na pytania, proponuje pokazać, kim jest ta, która je zadała. Pytanie zostaje zamknięte, a nie otwarte."}, {"tech": "emo", "tekst": "Aż się gotuję ze złości! Zobacz, co zrobiono w Jarzębinie. Udostępnij!", "dlaczego": "To hasło to „Emocje”, bo składa się ze złości i wezwania „udostępnij”, a nie z informacji, którą da się sprawdzić. Emocja jest tu podkręcona po to, żeby treść poszła dalej."}, {"tech": "emo", "tekst": "Serce pęka: pies z Modrzewina czeka na dom. Udostępnij, płaczę!", "dlaczego": "To hasło to „Emocje”, bo wzbudza współczucie i od razu prosi o udostępnienie. Liczy się wzruszenie, a nie coś, co da się sprawdzić."}, {"tech": "emo", "tekst": "Strach się bać! Co się dzieje w Jarzębinie, odbiera sen. Udostępnij!", "dlaczego": "To hasło to „Emocje”, bo wzbudza strach, nie mówiąc, co dokładnie się dzieje. Strach jest tu narzędziem, a nie dodatkiem do informacji."}, {"tech": "emo", "tekst": "Wreszcie nadzieja! W Jarzębinie czeka nas „nowe otwarcie”. Udostępnij!", "dlaczego": "To hasło to „Emocje”, bo gra nadzieją i obiecuje „nowe otwarcie”, ale nie podaje nic konkretnego. Nadzieja jest tu podkręcona, żeby treść poszła dalej."}, {"tech": "emo", "tekst": "Nie do wiary! Łzy lecą, ręce drżą. Musisz to zobaczyć i podać dalej!", "dlaczego": "To hasło to „Emocje”, bo składa się z reakcji (łzy, drżące ręce), a nie z faktów. Wezwanie „podać dalej” pokazuje cel: żeby treść poszła dalej."}, {"tech": "pol", "tekst": "Jarzębin albo Modrzewin: środka nie ma. Wybierz stronę albo milcz.", "dlaczego": "To hasło to „Polaryzacja”, bo zmusza do wyboru jednej z dwóch stron i odbiera możliwość rozmowy. Jego zadanie to rozsunąć ludzi od siebie, a nie kogoś przekonać."}, {"tech": "pol", "tekst": "Z Modrzewinem nie ma o czym rozmawiać. Nigdy się nie dogadamy.", "dlaczego": "To hasło to „Polaryzacja”, bo ucina rozmowę między dwiema grupami („nigdy się nie dogadamy”). Niczego nie dowodzi, tylko dzieli."}, {"tech": "pol", "tekst": "Kto kupuje chleb w Modrzewinie, ten zdradza Jarzębin.", "dlaczego": "To hasło to „Polaryzacja”, bo zamienia zwykłą czynność w znak przynależności do jednej z dwóch stron. Chodzi o to, żeby dwie grupy przestały się dogadywać."}, {"tech": "pol", "tekst": "Jarzębin i Modrzewin nie mają wspólnego jutra. Dzieli nas wszystko.", "dlaczego": "To hasło to „Polaryzacja”, bo twierdzi, że dwie grupy dzieli wszystko, i nie zostawia miejsca na wspólne sprawy. Chodzi o rozsunięcie ich od siebie."}, {"tech": "pol", "tekst": "Nie podawaj ręki nikomu z Modrzewina. To jest tamta strona.", "dlaczego": "To hasło to „Polaryzacja”, bo zniechęca do kontaktu z drugą grupą i przedstawia ją jako „tamtą stronę”. Dwie grupy mają przestać się dogadywać."}, {"tech": "pod", "tekst": "Komunikat „Urzędu Miasta Modrzewin” (konto założone wczoraj).", "dlaczego": "To hasło to „Podszywanie się”, bo podaje się za komunikat urzędu, ale konto powstało wczoraj i nic nie potwierdza, że należy do urzędu. To podszywanie się pod instytucję."}, {"tech": "pod", "tekst": "Ekspertka radzi: nie pij tej wody. (Bez nazwiska i dyplomu.)", "dlaczego": "To hasło to „Podszywanie się”, bo przedstawia się jako ekspertka, ale nie podaje ani nazwiska, ani dyplomu, więc nie da się tego sprawdzić."}, {"tech": "pod", "tekst": "Przychodnia w Jarzębinie ostrzega! (Wpis z prywatnego konta.)", "dlaczego": "To hasło to „Podszywanie się”, bo wygląda jak ostrzeżenie przychodni, a przyszedł z prywatnego konta. Wpis podaje się za instytucję."}, {"tech": "pod", "tekst": "Znana trenerka poleca ten suplement. (To nie jest jej konto.)", "dlaczego": "To hasło to „Podszywanie się”, bo podaje się za wypowiedź znanej osoby, choć to nie jej konto. Znane nazwisko ma tu uwiarygodnić treść."}, {"tech": "pod", "tekst": "Oświadczenie „dyrekcji szkoły z Modrzewina” (pisał ktoś z zewnątrz).", "dlaczego": "To hasło to „Podszywanie się”, bo przedstawia się jako oświadczenie dyrekcji szkoły, a napisał je ktoś z zewnątrz. Podszywać można się pod eksperta lub ekspertkę, instytucję, znaną osobę albo redakcję."}, {"tech": "spi", "tekst": "Prawdę o wodzie w Jarzębinie ktoś przed nami ukrywa. Dlaczego milczą?", "dlaczego": "To hasło to „Spisek”, bo opowiada o prawdzie, którą ktoś ukrywa, i nie podaje żadnego dowodu. Samo „ktoś ukrywa” ma wystarczyć."}, {"tech": "spi", "tekst": "Awaria w Modrzewinie wcale nie była przypadkiem. Ktoś ukrywa prawdę.", "dlaczego": "To hasło to „Spisek”, bo sugeruje, że awaria miała ukryty powód, który ktoś zataja. To opowieść o prawdzie, którą ktoś ukrywa."}, {"tech": "spi", "tekst": "Oficjalna wersja to przykrywka. Prawdę zna garstka osób i milczy.", "dlaczego": "To hasło to „Spisek”, bo odrzuca oficjalną wersję i twierdzi, że prawdę zna garstka osób, które milczą. To znów prawda, którą ktoś ukrywa."}, {"tech": "spi", "tekst": "Co naprawdę powstaje w Jarzębinie? Ktoś ukrywa to przed nami.", "dlaczego": "To hasło to „Spisek”, bo pyta o „prawdziwe” powody i od razu odpowiada, że ktoś je ukrywa. To opowieść o prawdzie, którą ktoś ukrywa."}, {"tech": "spi", "tekst": "Zdjęcia z Modrzewina zniknęły. Ktoś nie chce, żebyśmy znali prawdę.", "dlaczego": "To hasło to „Spisek”, bo tłumaczy brak zdjęć tym, że ktoś ukrywa prawdę. To opowieść o prawdzie, którą ktoś ukrywa."}, {"tech": "tro", "tekst": "Piszę to tylko po to, żeby ktoś się wściekł. Kto pierwszy?", "dlaczego": "To hasło to „Trolling”, bo sam mówi, że napisano je po to, żeby ktoś się wściekł. To prowokacja rzucona po to, żeby ktoś zareagował."}, {"tech": "tro", "tekst": "Pizza z ananasem to zbrodnia. Kto odważy się mi sprzeciwić?", "dlaczego": "To hasło to „Trolling”, bo rzuca przesadzoną prowokację i zaprasza do sprzeciwu. Treść jest nieważna, liczy się reakcja."}, {"tech": "tro", "tekst": "Kawa bez cukru to strata kawy. Zapraszam do kłótni w komentarzach!", "dlaczego": "To hasło to „Trolling”, bo robi z kawy pretekst. Ma wywołać kłótnię w komentarzach, a reakcja niesie je dalej."}, {"tech": "tro", "tekst": "Założę się, że nikt tu nie umie parkować. Dawajcie, obrażajcie się!", "dlaczego": "To hasło to „Trolling”, bo rzuca zaczepkę i wprost prosi, żeby ktoś się obraził. Sama treść bywa nieważna, chodzi o reakcję."}, {"tech": "tro", "tekst": "Ten wpis na pewno Cię zdenerwuje. No dalej, napisz, że nie!", "dlaczego": "To hasło to „Trolling”, bo z góry zakłada, że wpis kogoś zdenerwuje, i prosi o odpowiedź. To prowokacja rzucona po to, żeby ktoś zareagował."}], "tempo": 1.5, "rundy": [{"baza": 6000, "naSlowo": 500, "naraz": 1, "narazBez": 2, "odstep": 1500, "haslo": 8, "cele": 3, "czasy": [15000, 16500, 16500, 16000, 16500, 17500, 16500, 17500, 16000, 19000, 16500, 17500, 15000, 16500, 16500, 14500, 16500, 15000, 16500, 16000, 17500, 16500, 16500, 16500, 16500, 17500, 16500, 17500, 17500, 17500]}, {"baza": 5000, "naSlowo": 450, "naraz": 2, "narazBez": 3, "odstep": 1500, "haslo": 8, "cele": 4, "czasy": [13000, 14500, 14500, 13500, 14500, 15000, 14500, 15000, 13500, 16500, 14500, 15000, 13000, 14500, 14500, 12000, 14500, 13000, 14500, 13500, 15000, 14500, 14500, 14500, 14500, 15000, 14500, 15000, 15000, 15000]}, {"baza": 4500, "naSlowo": 400, "naraz": 2, "narazBez": 3, "odstep": 1500, "haslo": 8, "cele": 4, "czasy": [11500, 13000, 13000, 12000, 13000, 13500, 13000, 13500, 12000, 14500, 13000, 13500, 11500, 13000, 13000, 11000, 13000, 11500, 13000, 12000, 13500, 13000, 13000, 13000, 13000, 13500, 13000, 13500, 13500, 13500]}], "tarczaMax": 4, "t": {"start": "W okienkach wyskakują krótkie hasła. Łowisz tylko te, które pasują do techniki z celu rundy. Są trzy rundy, w każdej inny cel.", "trybLegend": "Tryb gry", "czytnik": "Osoby korzystające z czytnika ekranu powinny wybrać tryb bez limitu czasu.", "zacznij": "Zacznij", "zasadyTytul": "Jak liczymy punkty", "zasady": ["Trafienie hasła, które pasuje do celu rundy: 10 punktów. Po trzech takich trafieniach z rzędu kolejne punkty liczą się podwójnie (Seria ×2).", "Pominięcie hasła, które nie pasuje do celu, to dobra decyzja. Nie daje punktów, ale seria trwa.", "Trafienie hasła, które nie pasuje do celu, albo przepuszczenie hasła pasującego do celu: tracisz jedną z czterech tarcz, a seria się przerywa. Gdy tarcz zabraknie, gra się kończy.", "W trybie bez limitu czasu „To ta technika” oznacza trafienie hasła, a „Inna technika” oznacza jego pominięcie."], "hudEtyk": "Stan gry", "punkty": "Punkty", "seria": "Seria", "mnoz": "Seria ×2", "tarcza": "Tarcza: {z} z {max}", "runda": "Runda {r} z {ile}", "hasla": "Hasła: {n} z {ile}", "celEtyk": "Cel rundy {r} z {ile}", "pauza": "Pauza", "wznow": "Wznów", "pauzaInfoR": "Gra wstrzymana. Naciśnij „Wznów”, żeby wrócić do planszy.", "pauzaInfoK": "Gra wstrzymana, bo karta przeglądarki była ukryta. Naciśnij „Wznów”, żeby wrócić do planszy.", "pauzaOgl": "Gra wstrzymana.", "wznowOgl": "Gra wznowiona.", "planszaEtyk": "Plansza: dziewięć okienek", "kartyEtyk": "Hasła do oceny", "oknoPuste": "Okienko {n}: puste", "oknoHaslo": "Okienko {n}: {t}", "nowe": "Okienko {n}, nowe hasło: {t}", "kartaNowe": "Nowe hasło: {t}", "tak": "To ta technika", "nie": "Inna technika", "podpCzas": "Klawiatura: Tab przechodzi do okienek z hasłami, strzałki przesuwają po planszy, Enter lub Spacja trafia hasło. Skróty działają, gdy fokus jest na planszy.", "podpBez": "Klawiatura: Tab przechodzi między przyciskami, Enter lub Spacja wybiera przycisk.", "zobaczWynik": "Zobacz wynik", "odpPoprz": "Poprzednia runda: trafione {a} z {b} haseł pasujących do celu, pomyłki: {p}.", "odpInfoCzas1": "Im więcej słów ma hasło, tym dłużej widać je w okienku. Naraz widać najwyżej {n}.", "odpInfoCzasUp": "Tempo rośnie: hasła znikają trochę szybciej niż w poprzedniej rundzie. Naraz widać najwyżej {n}.", "odpInfoBez": "Hasła czekają na Twoją decyzję. Naraz widać {n}.", "odpStart": "Zaczynam rundę {r}", "odpOgl": "Runda {r} z {ile}. Cel: {nazwa}. {def} Naciśnij „Zaczynam rundę {r}”, gdy będziesz gotowy/a.", "rundaStart": "Runda {r} z {ile} rozpoczęta. Cel: {nazwa}.", "stOk": "Trafione", "stZle": "Pomyłka", "stUciek": "Uciekło", "stPomin": "Pominięte", "wOk": "Trafione! To hasło to „{t}”, czyli cel rundy.", "wPom": "Dobra decyzja: to hasło to „{t}”, a celem jest „{c}”.", "wZle": "Pomyłka: to hasło to „{t}”, a celem jest „{c}”.", "wPrzep": "Uciekło: to hasło to „{t}”, czyli cel rundy.", "wPrzepBez": "Pomyłka: to hasło to „{t}”, czyli cel rundy.", "pkt": "+{p} punktów", "pktMnoz": "+{p} punktów ({m})", "tarczaSpadla": "Tracisz tarczę. Tarcza: {z} z {max}.", "koniecH": "Koniec gry. Wynik: {p} punktów.", "koniecHWczesnie": "Koniec gry: tarcza spadła do zera. Wynik: {p} punktów.", "trybNazwy": {"czas": "z limitem czasu", "bez": "bez limitu czasu"}, "trybInfo": "Tryb gry: {t}.", "lPunkty": "Punkty", "lSeria": "Najlepsza seria", "lRekord": "Rekord w tym trybie", "nowyRekord": "Nowy rekord!", "rekordBrakZapisu": "Ta przeglądarka nie pozwala zapisać rekordu na stałe, więc obowiązuje on tylko do zamknięcia strony.", "tabCap": "Trafność po technikach", "kol": ["Technika", "Gdy była celem", "Gdy nie była celem", "Pomyłki"], "tabTrafione": "trafione {a} z {b}", "tabPominiete": "pominięte {a} z {b}", "tabNieCelem": "nie była celem rundy", "tabBrakHasel": "nie pojawiła się", "tabNota": "Pomyłką jest trafienie hasła, które nie pasowało do celu rundy, oraz przepuszczenie hasła, które do celu pasowało.", "wnH": "Co z tego wynika", "wnA": "Miniwykład „Sześć technik, które wrócą jeszcze dwa razy” zbiera techniki dezinformacji w sześć pozycji, bo sześć pozycji mieści się w głowie, a kilkadziesiąt nie. Dzięki temu przejście przez sześć pytań zajmuje kilkanaście sekund.", "wnNic": "Nie wskazałeś/aś żadnego hasła jako pasującego do celu rundy, więc ta rozgrywka nie pokazuje, jak rozpoznajesz techniki. Zagraj jeszcze raz i łów hasła pasujące do celu.", "wnZero": "Tym razem bez pomyłki: każde hasło oceniłeś/aś zgodnie z celem rundy.", "wnNaj": "Najwięcej pomyłek: {t} ({n}).", "wnNajWiele": "Najwięcej pomyłek (po {n}): {t}.", "wnInne": "Tyle samo pomyłek było też przy innych technikach.", "wnZMini": "Z miniwykładu: {w}.", "wnKostiumy": "Miniwykład zwraca też uwagę, że w następnych modułach te same sześć technik wraca w innych kostiumach. To jeden zestaw chwytów, używany przez różnych ludzi w różnych celach.", "wnC": "Co z tym zrobić? Zadanie z miniwykładu: weź jeden przekaz, który Cię ostatnio zdenerwował, i sprawdź, ile z tych sześciu w nim jest. Jeśli więcej niż dwie, to nie przypadek. Materiał o emocjach w propagandzie dodaje, że gdy coś mocno Cię poruszy, najlepiej zatrzymać się i sprawdzić fakty w innych źródłach.", "pomH": "Twoje pomyłki", "pomBrak": "Nie pomyliłeś/aś się ani razu. Gratulacje: każde hasło trafiło tam, gdzie powinno.", "pomZle": "Runda {r}, cel „{c}”: trafiłeś/aś hasło, które nie pasowało do celu.", "pomPrzep": "Runda {r}, cel „{c}”: przepuściłeś/aś hasło, które pasowało do celu.", "jeszcze": "Zagraj jeszcze raz", "zmien": "Zmień tryb"}};
+function ensure(){
+  var w = document.getElementById('mk-lowca') || document.querySelector('.mk-lowca');
+  if(!w) return null;
+  w.id='mk-lowca'; w.className='mk mk-lowca';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-lowca"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-lowca');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var T = D.t;
+  var TECH = D.techniki;
+  var HASLA = D.hasla;
+  var RUNDY = D.rundy;
+  var TARCZA_MAX = D.tarczaMax;
+  var NS = 'http://www.w3.org/2000/svg';
+  var KARA_MS = 1100;
+  var CHWILA = 450;
+  var KLUCZ = {czas: 'mk-lowca-rekord-czas', bez: 'mk-lowca-rekord-bez'};
+  var LICZEBNIK = ['', 'jedno hasło', 'dwa hasła', 'trzy hasła'];
+  var TARCZA = 'M12 2.5L20 5.5V11.5C20 16.2 16.7 19.9 12 21.5C7.3 19.9 4 16.2 4 11.5V5.5L12 2.5Z';
+  var TP = {};
+  TECH.forEach(function(t){ TP[t.k] = t; });
+
+  var ekran = el('div','mk-l-ekran');
+  var glos = el('div','mk-sr');
+  glos.setAttribute('aria-live','polite');
+  glos.setAttribute('aria-atomic','true');
+  c.appendChild(ekran);
+  c.appendChild(glos);
+
+  var stan = 'start';          // start | gra | koniec
+  var tryb = 'bez';            // bez | czas (domyślnie bez limitu czasu)
+  var gra = null;
+  var ui = null;
+  var tick = 0;
+  var rekordPamiec = {czas: 0, bez: 0};
+  var ostSzer = 0;
+  var tmResize = 0;
+  var ruchOgr = false;
+  try { ruchOgr = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  catch(e1){ ruchOgr = false; }
+
+  // ---------------------------------------------------------- pomocnicze
+  function wstaw(s, m){
+    var out = s;
+    for(var k in m){
+      if(Object.prototype.hasOwnProperty.call(m, k)){ out = out.split('{' + k + '}').join(String(m[k])); }
+    }
+    return out;
+  }
+  function tasuj(tab){
+    var a = tab.slice();
+    for(var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function oglos(tekst, opoznienie){
+    if(opoznienie){ setTimeout(function(){ glos.textContent = tekst; }, opoznienie); }
+    else { glos.textContent = tekst; }
+  }
+  function miekkie(s){ return s.split('|').join('­'); }
+  function svg(w, h, vb){
+    var s = document.createElementNS(NS, 'svg');
+    s.setAttribute('width', String(w)); s.setAttribute('height', String(h));
+    s.setAttribute('viewBox', vb);
+    s.setAttribute('aria-hidden', 'true'); s.setAttribute('focusable', 'false');
+    return s;
+  }
+  function elSvg(nazwa, atr){
+    var e = document.createElementNS(NS, nazwa);
+    for(var k in atr){ if(Object.prototype.hasOwnProperty.call(atr, k)){ e.setAttribute(k, atr[k]); } }
+    return e;
+  }
+  function ikonaTarcza(pelna){
+    var s = svg(22, 22, '0 0 24 24');
+    s.appendChild(elSvg('path', {d: TARCZA, fill: pelna ? '#16181c' : 'none',
+                                 stroke: pelna ? '#16181c' : '#4a4e55', 'stroke-width': '2',
+                                 'stroke-linejoin': 'round'}));
+    return s;
+  }
+  function ikonaZnak(typ){
+    var s = svg(20, 20, '0 0 24 24');
+    var d = typ === 'ok' ? 'M5 12.5l4.5 4.5L19 7.5' : (typ === 'zle' ? 'M6 6l12 12M18 6L6 18' : 'M6 12h12');
+    var kol = typ === 'ok' ? '#2c6a4c' : (typ === 'zle' ? '#b4322b' : '#4a4e55');
+    s.appendChild(elSvg('path', {d: d, fill: 'none', stroke: kol, 'stroke-width': '3.2', 'stroke-linecap': 'round',
+                                 'stroke-linejoin': 'round'}));
+    return s;
+  }
+
+  // ---------------------------------------------------------- rekord (localStorage, każdy dostęp w try/catch)
+  function odczytajRekord(tr){
+    try {
+      var v = window.localStorage.getItem(KLUCZ[tr]);
+      var n = parseInt(v, 10);
+      return (isNaN(n) || n < 0) ? 0 : n;
+    } catch(e2){ return 0; }
+  }
+  function zapiszRekord(tr, n){
+    try { window.localStorage.setItem(KLUCZ[tr], String(n)); return true; }
+    catch(e3){ return false; }
+  }
+
+  // ---------------------------------------------------------- plan gry: trzy losowe cele, hasła bez powtórzeń
+  function planuj(){
+    var cele = tasuj(TECH.map(function(t){ return t.k; })).slice(0, RUNDY.length);
+    var zajete = {};
+    var rez = [];
+    cele.forEach(function(tk, r){
+      var pula = tasuj(HASLA.map(function(h, i){ return i; }).filter(function(i){ return HASLA[i].tech === tk; }));
+      var ids = pula.slice(0, RUNDY[r].cele);
+      ids.forEach(function(i){ zajete[i] = true; });
+      rez.push(ids);
+    });
+    return cele.map(function(tk, r){
+      var potrzeba = RUNDY[r].haslo - rez[r].length;
+      var kand = tasuj(HASLA.map(function(h, i){ return i; }).filter(function(i){
+        return !zajete[i] && HASLA[i].tech !== tk;
+      }));
+      var wyb = [];
+      var licz = {};
+      while(wyb.length < potrzeba && kand.length){
+        var naj = 0, nl = 99;
+        for(var q = 0; q < kand.length; q++){
+          var l = licz[HASLA[kand[q]].tech] || 0;
+          if(l < nl){ nl = l; naj = q; }
+        }
+        var id = kand.splice(naj, 1)[0];
+        licz[HASLA[id].tech] = (licz[HASLA[id].tech] || 0) + 1;
+        zajete[id] = true;
+        wyb.push(id);
+      }
+      return {tech: tk, ids: tasuj(rez[r].concat(wyb))};
+    });
+  }
+
+  // ---------------------------------------------------------- ekran startowy
+  function ekranStart(){
+    tickStop();
+    gra = null;
+    ui = null;
+    stan = 'start';
+    ekran.innerHTML = '';
+    ekran.appendChild(el('p','mk-l-lead', T.start));
+
+    var fs = document.createElement('fieldset');
+    fs.className = 'mk-l-fs';
+    var lg = document.createElement('legend');
+    lg.className = 'mk-sr';
+    lg.textContent = T.trybLegend;
+    fs.appendChild(lg);
+    var pt = el('p','mk-l-pyt', T.trybLegend);
+    pt.setAttribute('aria-hidden','true');
+    fs.appendChild(pt);
+    D.tryby.forEach(function(t){
+      var id = 'mk-l-tryb-' + t.k;
+      var lab = document.createElement('label');
+      lab.className = 'mk-l-opcja';
+      lab.setAttribute('for', id);
+      var inp = document.createElement('input');
+      inp.type = 'radio'; inp.name = 'mk-l-tryb'; inp.id = id; inp.value = t.k;
+      inp.className = 'mk-l-radio';
+      if(t.k === tryb){ inp.checked = true; }
+      inp.addEventListener('change', function(){ if(inp.checked){ tryb = t.k; } });
+      var box = el('span','mk-l-opt');
+      box.appendChild(el('span','mk-l-optnazwa', t.etyk));
+      box.appendChild(el('span','mk-l-opttekst', t.pod));
+      lab.appendChild(inp);
+      lab.appendChild(box);
+      fs.appendChild(lab);
+    });
+    ekran.appendChild(fs);
+    ekran.appendChild(el('p','mk-l-czytnik', T.czytnik));
+
+    var det = document.createElement('details');
+    det.className = 'mk-l-szcz';
+    var sum = document.createElement('summary');
+    sum.textContent = T.zasadyTytul;
+    det.appendChild(sum);
+    var ul = el('ul','mk-lista');
+    T.zasady.forEach(function(z){ ul.appendChild(el('li', null, z)); });
+    det.appendChild(ul);
+    ekran.appendChild(det);
+
+    var btn = el('button','mk-btn mk-l-start', T.zacznij);
+    btn.type = 'button';
+    btn.addEventListener('click', zacznij);
+    ekran.appendChild(btn);
+  }
+
+  // ---------------------------------------------------------- ekran gry: budowa
+  function kafel(etykieta, wartosc){
+    var k = el('div','mk-l-kaf');
+    var e = el('span','mk-l-kafn', etykieta);
+    k.appendChild(e);
+    var w = null;
+    if(wartosc !== null){ w = el('span','mk-l-kafw', wartosc); k.appendChild(w); }
+    return {k: k, e: e, w: w};
+  }
+  function przycisk(klasa, napis, fn){
+    var b = el('button', klasa, napis);
+    b.type = 'button';
+    b.addEventListener('click', fn);
+    return b;
+  }
+  function oknoCzas(i){
+    var b = el('button','mk-l-okno mk-l-puste');
+    b.type = 'button';
+    b.setAttribute('data-nr', String(i));
+    b.setAttribute('aria-disabled', 'true');
+    b.setAttribute('tabindex', '-1');
+    b.setAttribute('aria-label', wstaw(T.oknoPuste, {n: i + 1}));
+    var tx = el('span','mk-l-tekst');
+    var lont = el('span','mk-l-lont');
+    lont.setAttribute('aria-hidden', 'true');
+    var lw = el('span','mk-l-lont-w');
+    lont.appendChild(lw);
+    var st = el('span','mk-l-stempel');
+    st.setAttribute('aria-hidden', 'true');
+    var sa = el('span','mk-l-stp-a');
+    var sb = el('span','mk-l-stp-b');
+    st.appendChild(sa);
+    st.appendChild(sb);
+    st.hidden = true;
+    lont.hidden = true;
+    b.appendChild(tx);
+    b.appendChild(lont);
+    b.appendChild(st);
+    b.addEventListener('click', function(){ traf(i); });
+    return {el: b, nr: i, tx: tx, lont: lont, lw: lw, st: st, sa: sa, sb: sb, id: null, faza: 'puste', koniec: 0,
+            dlugosc: 1, stempelDo: 0, wolneOd: 0};
+  }
+  function oknoKarta(i){
+    var d = el('div','mk-l-karta');
+    d.setAttribute('role', 'group');
+    var tx = el('p','mk-l-tekst');
+    tx.id = 'mk-lowca-tx-' + i;
+    d.setAttribute('aria-labelledby', tx.id);
+    var dec = el('div','mk-l-dec');
+    var tak = przycisk('mk-btn mk-l-tak', T.tak, function(){ decyduj(i, true); });
+    var nie = przycisk('mk-btn mk-btn2 mk-l-nie', T.nie, function(){ decyduj(i, false); });
+    tak.setAttribute('aria-describedby', tx.id);
+    nie.setAttribute('aria-describedby', tx.id);
+    dec.appendChild(tak);
+    dec.appendChild(nie);
+    d.appendChild(tx);
+    d.appendChild(dec);
+    d.hidden = true;
+    return {el: d, nr: i, tx: tx, tak: tak, nie: nie, id: null, faza: 'puste'};
+  }
+  function budujPlansze(){
+    var p = el('div', tryb === 'czas' ? 'mk-l-plansza' : 'mk-l-karty');
+    p.setAttribute('role', 'group');
+    p.setAttribute('aria-label', tryb === 'czas' ? T.planszaEtyk : T.kartyEtyk);
+    var n = tryb === 'czas' ? 9 : 3;
+    gra.okna = [];
+    for(var i = 0; i < n; i++){
+      var o = tryb === 'czas' ? oknoCzas(i) : oknoKarta(i);
+      gra.okna.push(o);
+      p.appendChild(o.el);
+    }
+    return p;
+  }
+  function budujEkranGry(){
+    ekran.innerHTML = '';
+    ui = {};
+    var hud = el('div','mk-l-hud');
+    hud.setAttribute('role','group');
+    hud.setAttribute('aria-label', T.hudEtyk);
+    var kP = kafel(T.punkty, '0');
+    ui.punkty = kP.w;
+    hud.appendChild(kP.k);
+    var kS = el('div','mk-l-kaf');
+    var wS = el('div','mk-l-strz');
+    wS.appendChild(el('span','mk-l-kafn', T.seria));
+    ui.mnoz = el('span','mk-l-mnoz mk-l-mnoz-off', T.mnoz);
+    wS.appendChild(ui.mnoz);
+    kS.appendChild(wS);
+    ui.seria = el('span','mk-l-kafw','0');
+    kS.appendChild(ui.seria);
+    hud.appendChild(kS);
+    var kZ = kafel('', null);
+    ui.tarczaE = kZ.e;
+    ui.tarcze = el('span','mk-l-tarcze');
+    ui.tarcze.setAttribute('aria-hidden','true');
+    kZ.k.appendChild(ui.tarcze);
+    hud.appendChild(kZ.k);
+    var kR = kafel('', '');
+    ui.rundaE = kR.e;
+    ui.rundaW = kR.w;
+    ui.rundaW.className = 'mk-l-kafw mk-l-kafw2';
+    hud.appendChild(kR.k);
+    ekran.appendChild(hud);
+
+    ui.cel = el('div','mk-l-cel');
+    var gora = el('div','mk-l-cel-gora');
+    ui.celEtyk = el('p','mk-l-cel-etyk');
+    gora.appendChild(ui.celEtyk);
+    if(tryb === 'czas'){
+      ui.pauza = przycisk('mk-btn mk-btn2 mk-l-pauza', T.pauza, function(){
+        if(gra && gra.pauza){ wznow(); } else { pauza('reczna'); }
+      });
+      ui.pauza.hidden = true;
+      gora.appendChild(ui.pauza);
+    }
+    ui.cel.appendChild(gora);
+    ui.celNazwa = el('p','mk-l-cel-nazwa');
+    ui.celDef = el('p','mk-l-cel-def');
+    ui.cel.appendChild(ui.celNazwa);
+    ui.cel.appendChild(ui.celDef);
+    ekran.appendChild(ui.cel);
+
+    ui.plansza = budujPlansze();
+    ui.plansza.hidden = true;
+    ekran.appendChild(ui.plansza);
+
+    ui.pauzaInfo = el('div','mk-l-pauzainfo');
+    ui.pauzaInfo.hidden = true;
+    ui.pauzaTxt = el('p', null);
+    ui.pauzaInfo.appendChild(ui.pauzaTxt);
+    ekran.appendChild(ui.pauzaInfo);
+
+    ui.odprawa = el('div','mk-l-odprawa');
+    ui.odprawa.hidden = true;
+    ui.odpPoprz = el('p','mk-l-od-txt');
+    ui.odpInfo = el('p','mk-l-od-txt');
+    ui.odpStart = przycisk('mk-btn mk-l-odpstart', '', rozpocznijRunde);
+    ui.odprawa.appendChild(ui.odpPoprz);
+    ui.odprawa.appendChild(ui.odpInfo);
+    ui.odprawa.appendChild(ui.odpStart);
+    ekran.appendChild(ui.odprawa);
+
+    ui.wynikBtn = przycisk('mk-btn mk-l-wynik', T.zobaczWynik, koniecGry);
+    ui.wynikBtn.hidden = true;
+    ekran.appendChild(ui.wynikBtn);
+
+    ui.wer = el('div','mk-l-wer mk-l-wer-brak');
+    ui.wer.setAttribute('aria-hidden','true');
+    ekran.appendChild(ui.wer);
+    ekran.appendChild(el('p','mk-l-podp', tryb === 'czas' ? T.podpCzas : T.podpBez));
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){ if(stan === 'gra' && ui){ wyrownaj(); } });
+    }
+  }
+
+  // wszystkie okienka (karty) mają mieć tyle samo miejsca co najdłuższe hasło, żeby plansza nie skakała
+  function wyrownaj(){
+    if(!ui || !ui.plansza || ui.plansza.hidden || !gra || !gra.okna.length){ return; }
+    var wz = null;
+    for(var i = 0; i < gra.okna.length; i++){ if(!gra.okna[i].el.hidden){ wz = gra.okna[i].el; break; } }
+    if(!wz){ return; }
+    var w = wz.offsetWidth;
+    if(w < 40){ return; }
+    var czas = tryb === 'czas';
+    var sonda = el('div', czas ? 'mk-l-okno mk-l-haslo' : 'mk-l-karta');
+    sonda.setAttribute('aria-hidden', 'true');
+    sonda.style.position = 'absolute';
+    sonda.style.left = '0';
+    sonda.style.top = '0';
+    sonda.style.visibility = 'hidden';
+    sonda.style.width = w + 'px';
+    sonda.style.minHeight = '0';
+    var tx = el('span','mk-l-tekst');
+    sonda.appendChild(tx);
+    if(!czas){
+      var dec = el('div','mk-l-dec');
+      dec.appendChild(el('span','mk-btn', T.tak));
+      dec.appendChild(el('span','mk-btn mk-btn2', T.nie));
+      sonda.appendChild(dec);
+    }
+    ui.plansza.appendChild(sonda);
+    var maks = 0;
+    for(var j = 0; j < HASLA.length; j++){
+      tx.textContent = HASLA[j].tekst;
+      var h = sonda.offsetHeight;
+      if(h > maks){ maks = h; }
+    }
+    ui.plansza.removeChild(sonda);
+    if(maks > 60){ ui.plansza.style.setProperty('--mk-l-wys', maks + 'px'); }
+    ostSzer = ekran.clientWidth;
+  }
+  window.addEventListener('resize', function(){
+    clearTimeout(tmResize);
+    tmResize = setTimeout(function(){
+      if(stan === 'gra' && ui && ekran.clientWidth !== ostSzer){ wyrownaj(); }
+    }, 150);
+  });
+
+  function pokazWerdykt(klasa, tekst){
+    ui.wer.className = 'mk-l-wer mk-l-wer-' + klasa;
+    ui.wer.textContent = tekst || '';
+  }
+  function aktualizujHud(){
+    ui.punkty.textContent = String(gra.punkty);
+    ui.seria.textContent = String(gra.seria);
+    ui.mnoz.className = 'mk-l-mnoz' + (gra.seria >= 3 ? '' : ' mk-l-mnoz-off');
+    ui.tarczaE.textContent = wstaw(T.tarcza, {z: gra.tarcza, max: TARCZA_MAX});
+    ui.tarcze.innerHTML = '';
+    for(var i = 0; i < TARCZA_MAX; i++){ ui.tarcze.appendChild(ikonaTarcza(i < gra.tarcza)); }
+    ui.rundaE.textContent = wstaw(T.runda, {r: gra.r + 1, ile: RUNDY.length});
+    ui.rundaW.textContent = wstaw(T.hasla, {n: gra.rundy[gra.r].rozstrzygniete, ile: RUNDY[gra.r].haslo});
+  }
+  function pokazCel(){
+    var t = TP[gra.plan[gra.r].tech];
+    ui.celEtyk.textContent = wstaw(T.celEtyk, {r: gra.r + 1, ile: RUNDY.length});
+    ui.celNazwa.textContent = t.nazwa;
+    ui.celDef.textContent = t.def;
+  }
+
+  // ---------------------------------------------------------- odprawa przed rundą (nic nie rusza samo)
+  function odprawa(){
+    var r = gra.r, rd = RUNDY[r], t = TP[gra.plan[r].tech];
+    gra.faza = 'odprawa';
+    tickStop();
+    ui.plansza.hidden = true;
+    ui.pauzaInfo.hidden = true;
+    ui.wynikBtn.hidden = true;
+    if(ui.pauza){ ui.pauza.hidden = true; }
+    ui.odprawa.hidden = false;
+    pokazCel();
+    var poprz = '';
+    if(r > 0){
+      var p = gra.rundy[r - 1];
+      poprz = wstaw(T.odpPoprz, {a: p.trafione, b: p.cele, p: p.bledy});
+    }
+    ui.odpPoprz.textContent = poprz;
+    ui.odpPoprz.hidden = !poprz;
+    var info;
+    if(tryb === 'czas'){
+      info = wstaw(r === 0 ? T.odpInfoCzas1 : T.odpInfoCzasUp, {n: LICZEBNIK[rd.naraz]});
+    } else {
+      info = wstaw(T.odpInfoBez, {n: LICZEBNIK[rd.narazBez]});
+    }
+    ui.odpInfo.textContent = info;
+    ui.odpStart.textContent = wstaw(T.odpStart, {r: r + 1});
+    aktualizujHud();
+    oglos((poprz ? poprz + ' ' : '') + wstaw(T.odpOgl, {r: r + 1, ile: RUNDY.length, nazwa: t.nazwa, def: t.def}));
+    ui.odpStart.focus();
+  }
+
+  function rozpocznijRunde(){
+    if(!gra || stan !== 'gra' || gra.faza !== 'odprawa'){ return; }
+    var r = gra.r, rd = RUNDY[r], pl = gra.plan[r];
+    gra.faza = 'runda';
+    gra.kolejka = pl.ids.slice();
+    gra.konczy = false;
+    gra.pauza = false;
+    ui.odprawa.hidden = true;
+    ui.pauzaInfo.hidden = true;
+    ui.plansza.hidden = false;
+    gra.okna.forEach(function(o){
+      if(tryb === 'czas'){ czysc(o); o.wolneOd = 0; } else { ukryjKarte(o); }
+    });
+    if(tryb === 'czas'){
+      ui.pauza.hidden = false;
+      ui.pauza.textContent = T.pauza;
+      gra.t = 0;
+      gra.nastSpawn = 700;
+    } else {
+      for(var i = 0; i < gra.okna.length; i++){
+        if(i < rd.narazBez && gra.kolejka.length){ ustawKarte(gra.okna[i], gra.kolejka.shift()); }
+      }
+    }
+    pokazWerdykt('brak', '');
+    aktualizujHud();
+    wyrownaj();
+    oglos(wstaw(T.rundaStart, {r: r + 1, ile: RUNDY.length, nazwa: TP[pl.tech].nazwa}), 150);
+    if(tryb === 'czas'){
+      gra.okna[0].el.focus();
+      tickStart();
+    } else {
+      gra.okna[0].tak.focus();
+    }
+  }
+
+  // ---------------------------------------------------------- okienka: stany (tryb z limitem)
+  function czysc(o){
+    o.id = null;
+    o.faza = 'puste';
+    o.el.className = 'mk-l-okno mk-l-puste';
+    o.tx.textContent = '';
+    o.tx.hidden = false;
+    o.lont.hidden = true;
+    o.st.hidden = true;
+    o.el.setAttribute('aria-disabled', 'true');
+    o.el.setAttribute('tabindex', '-1');
+    o.el.setAttribute('aria-label', wstaw(T.oknoPuste, {n: o.nr + 1}));
+  }
+  function ustawHaslo(o, id){
+    var h = HASLA[id];
+    o.id = id;
+    o.faza = 'haslo';
+    o.el.className = 'mk-l-okno mk-l-haslo' + (ruchOgr ? '' : ' mk-l-wjazd');
+    o.tx.textContent = h.tekst;
+    o.tx.hidden = false;
+    o.lw.style.width = '100%';
+    o.lw.className = 'mk-l-lont-w';
+    o.lont.hidden = false;
+    o.st.hidden = true;
+    o.el.setAttribute('aria-disabled', 'false');
+    o.el.setAttribute('tabindex', '0');
+    o.el.setAttribute('aria-label', wstaw(T.oknoHaslo, {n: o.nr + 1, t: h.tekst}));
+  }
+  function ustawStempel(o, klasa, etyk, nazwa){
+    o.faza = 'stempel';
+    o.stempelDo = gra.t + KARA_MS;
+    o.el.className = 'mk-l-okno mk-l-w' + klasa;
+    o.tx.hidden = true;
+    o.lont.hidden = true;
+    o.sa.innerHTML = '';
+    o.sa.appendChild(ikonaZnak(klasa));
+    o.sa.appendChild(document.createTextNode(' ' + etyk));
+    o.sb.textContent = miekkie(nazwa);
+    o.st.hidden = false;
+    o.el.setAttribute('aria-disabled', 'true');
+    o.el.setAttribute('tabindex', '-1');
+    o.el.setAttribute('aria-label', wstaw(T.oknoPuste, {n: o.nr + 1}));
+  }
+  function pasek(o, ile){
+    var proc = Math.max(0, Math.min(100, Math.round(ile / o.dlugosc * 100)));
+    o.lw.style.width = proc + '%';
+    o.lw.className = 'mk-l-lont-w' + (proc <= 30 ? ' mk-l-malo' : '');
+  }
+
+  // ---------------------------------------------------------- rozstrzygnięcie jednego hasła (wspólne dla obu trybów)
+  function rozstrzygnij(o, trafil){
+    var id = o.id, h = HASLA[id], rd = gra.plan[gra.r];
+    var cel = h.tech === rd.tech;
+    var ok = trafil === cel;
+    var mn = gra.seria >= 3 ? 2 : 1;
+    var tN = TP[h.tech].nazwa, cN = TP[rd.tech].nazwa;
+    var wr = gra.rundy[gra.r];
+    var klasa, etyk, tekst, pkt = 0, dodatek = '';
+    wr.rozstrzygniete++;
+    if(cel){ wr.cele++; }
+    if(cel && trafil){
+      pkt = 10 * mn;
+      gra.punkty += pkt;
+      gra.seria++;
+      if(gra.seria > gra.najSeria){ gra.najSeria = gra.seria; }
+      wr.trafione++;
+      klasa = 'ok'; etyk = T.stOk;
+      tekst = wstaw(T.wOk, {t: tN});
+      dodatek = wstaw(mn === 2 ? T.pktMnoz : T.pkt, {p: pkt, m: T.mnoz});
+    } else if(!cel && !trafil){
+      klasa = 'neu'; etyk = T.stPomin;
+      tekst = wstaw(T.wPom, {t: tN, c: cN});
+    } else {
+      gra.tarcza--;
+      gra.seria = 0;
+      wr.bledy++;
+      gra.bledy.push({r: gra.r, id: id, typ: cel ? 'przep' : 'zle'});
+      klasa = 'zle';
+      if(cel){
+        etyk = tryb === 'czas' ? T.stUciek : T.stZle;
+        tekst = wstaw(tryb === 'czas' ? T.wPrzep : T.wPrzepBez, {t: tN});
+      } else {
+        etyk = T.stZle;
+        tekst = wstaw(T.wZle, {t: tN, c: cN});
+      }
+      dodatek = wstaw(T.tarczaSpadla, {z: gra.tarcza, max: TARCZA_MAX});
+    }
+    gra.log.push({r: gra.r, id: id, tech: h.tech, cel: cel, trafil: trafil, ok: ok});
+    var pelny = tekst + (dodatek ? ' ' + dodatek : '');
+    aktualizujHud();
+    pokazWerdykt(klasa, pelny);
+    if(gra.tarcza <= 0){ gra.konczy = true; }
+    return {klasa: klasa, etyk: etyk, nazwa: tN, tekst: pelny};
+  }
+
+  // ---------------------------------------------------------- tryb z limitem: zegar, pojawianie się i znikanie haseł
+  function krokMs(){ return ruchOgr ? 250 : 100; }
+  function tickStop(){
+    if(tick){ clearTimeout(tick); tick = 0; }
+  }
+  function tickStart(){
+    tickStop();
+    gra.ostTick = Date.now();
+    tick = setTimeout(tickKrok, krokMs());
+  }
+  function tickKrok(){
+    tick = 0;
+    if(!gra || stan !== 'gra' || gra.faza !== 'runda' || tryb !== 'czas' || gra.pauza){ return; }
+    var teraz = Date.now();
+    var dt = teraz - gra.ostTick;
+    if(dt < 0){ dt = 0; }
+    if(dt > 1000){ dt = 1000; }
+    gra.ostTick = teraz;
+    gra.t += dt;
+    przetworz();
+    if(gra && stan === 'gra' && gra.faza === 'runda' && !gra.pauza && !tick){ tick = setTimeout(tickKrok, krokMs()); }
+  }
+  function widoczne(){
+    var n = 0;
+    gra.okna.forEach(function(o){ if(o.faza === 'haslo'){ n++; } });
+    return n;
+  }
+  function wszystkiePuste(){
+    return gra.okna.every(function(o){ return o.faza === 'puste'; });
+  }
+  function spawn(){
+    var wolne = gra.okna.filter(function(o){ return o.faza === 'puste' && gra.t >= o.wolneOd && o.el.offsetWidth > 0; });
+    if(!wolne.length){ return; }
+    var akt = document.activeElement;
+    var bez = wolne.filter(function(o){ return o.el !== akt; });
+    var pula = bez.length ? bez : wolne;
+    var o = pula[Math.floor(Math.random() * pula.length)];
+    var id = gra.kolejka.shift();
+    var h = HASLA[id], rd = RUNDY[gra.r];
+    var czas = rd.czasy[id];
+    ustawHaslo(o, id);
+    o.dlugosc = czas;
+    o.koniec = gra.t + czas;
+    gra.nastSpawn = gra.t + rd.odstep;
+    oglos(wstaw(T.nowe, {n: o.nr + 1, t: h.tekst}));
+  }
+  function przetworz(){
+    var i, o;
+    for(i = 0; i < gra.okna.length; i++){
+      o = gra.okna[i];
+      if(o.faza === 'haslo'){
+        if(gra.konczy){ czysc(o); continue; }
+        var ile = o.koniec - gra.t;
+        if(ile <= 0){ wygas(o); } else { pasek(o, ile); }
+      } else if(o.faza === 'stempel' && gra.t >= o.stempelDo){
+        czysc(o);
+        o.wolneOd = gra.t + CHWILA;
+      }
+    }
+    if(!gra.konczy && gra.kolejka.length && widoczne() < RUNDY[gra.r].naraz && gra.t >= gra.nastSpawn){ spawn(); }
+    if(wszystkiePuste()){
+      if(gra.konczy){ koniecGry(); }
+      else if(!gra.kolejka.length){ koniecRundy(); }
+    }
+  }
+  function traf(i){
+    if(!gra || stan !== 'gra' || tryb !== 'czas' || gra.faza !== 'runda' || gra.pauza){ return; }
+    var o = gra.okna[i];
+    if(!o || o.faza !== 'haslo'){ return; }
+    var w = rozstrzygnij(o, true);
+    ustawStempel(o, w.klasa, w.etyk, w.nazwa);
+    oglos(w.tekst);
+  }
+  function wygas(o){
+    var w = rozstrzygnij(o, false);
+    ustawStempel(o, w.klasa, w.etyk, w.nazwa);
+    oglos(w.tekst);
+  }
+
+  // ---------------------------------------------------------- pauza (WCAG 2.2.1 / 2.2.2)
+  function pauza(powod){
+    if(!gra || stan !== 'gra' || tryb !== 'czas' || gra.faza !== 'runda' || gra.pauza){ return; }
+    tickStop();
+    gra.pauza = true;
+    ui.plansza.hidden = true;
+    ui.pauzaInfo.hidden = false;
+    ui.pauzaTxt.textContent = powod === 'karta' ? T.pauzaInfoK : T.pauzaInfoR;
+    ui.pauza.textContent = T.wznow;
+    oglos(T.pauzaOgl);
+  }
+  function wznow(){
+    if(!gra || !gra.pauza){ return; }
+    gra.pauza = false;
+    ui.plansza.hidden = false;
+    ui.pauzaInfo.hidden = true;
+    ui.pauza.textContent = T.pauza;
+    oglos(T.wznowOgl);
+    tickStart();
+  }
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden || document.visibilityState === 'hidden'){ pauza('karta'); }
+  });
+
+  // ---------------------------------------------------------- tryb bez limitu: karty z przyciskami
+  function ustawKarte(o, id){
+    var h = HASLA[id];
+    o.id = id;
+    o.faza = 'haslo';
+    o.el.hidden = false;
+    o.tx.textContent = h.tekst;
+  }
+  function ukryjKarte(o){
+    o.id = null;
+    o.faza = 'puste';
+    o.el.hidden = true;
+    o.tx.textContent = '';
+  }
+  function pierwszaKarta(){
+    for(var i = 0; i < gra.okna.length; i++){ if(gra.okna[i].faza === 'haslo'){ return gra.okna[i]; } }
+    return null;
+  }
+  function decyduj(i, trafil){
+    if(!gra || stan !== 'gra' || tryb !== 'bez' || gra.faza !== 'runda'){ return; }
+    var o = gra.okna[i];
+    if(!o || o.faza !== 'haslo'){ return; }
+    var mialFokus = o.el.contains(document.activeElement);
+    var w = rozstrzygnij(o, trafil);
+    if(gra.tarcza <= 0){
+      gra.okna.forEach(ukryjKarte);
+      gra.konczy = true;
+      koniecBez(w.tekst);
+    } else if(gra.kolejka.length){
+      ustawKarte(o, gra.kolejka.shift());
+      oglos(w.tekst + ' ' + wstaw(T.kartaNowe, {t: HASLA[o.id].tekst}));
+    } else {
+      ukryjKarte(o);
+      var inna = pierwszaKarta();
+      if(inna){
+        oglos(w.tekst);
+        if(mialFokus){ inna.tak.focus(); }
+      } else {
+        koniecBez(w.tekst);
+      }
+    }
+  }
+  // koniec rundy albo gry w trybie bez limitu: ostatni werdykt zostaje na ekranie
+  function koniecBez(tekst){
+    if(gra.tarcza <= 0 || gra.r >= RUNDY.length - 1){
+      ui.plansza.hidden = true;
+      ui.wynikBtn.hidden = false;
+      oglos(tekst);
+      ui.wynikBtn.focus();
+    } else {
+      gra.r++;
+      odprawa();
+      oglos(tekst + ' ' + glos.textContent);
+    }
+  }
+  function koniecRundy(){
+    tickStop();
+    if(gra.r >= RUNDY.length - 1){ koniecGry(); return; }
+    gra.r++;
+    odprawa();
+  }
+
+  // ---------------------------------------------------------- start / koniec
+  function zacznij(){
+    var plan = planuj();
+    gra = {plan: plan, r: 0, punkty: 0, seria: 0, najSeria: 0, tarcza: TARCZA_MAX, log: [], bledy: [],
+           rundy: plan.map(function(){ return {cele: 0, trafione: 0, rozstrzygniete: 0, bledy: 0}; }),
+           faza: 'odprawa', pauza: false, konczy: false, okna: [], kolejka: [], t: 0, nastSpawn: 0, ostTick: 0};
+    stan = 'gra';
+    budujEkranGry();
+    odprawa();
+  }
+
+  // ---------------------------------------------------------- klawiatura: tylko na planszy (WCAG 2.1.4)
+  function kolumny(){
+    var s = '';
+    try { s = window.getComputedStyle(ui.plansza).gridTemplateColumns; } catch(e4){ s = ''; }
+    var n = s ? s.split(' ').length : 2;
+    return n > 0 ? n : 2;
+  }
+  c.addEventListener('keydown', function(e){
+    if(stan !== 'gra' || !gra || tryb !== 'czas' || gra.faza !== 'runda' || gra.pauza){ return; }
+    if(e.altKey || e.ctrlKey || e.metaKey || e.shiftKey){ return; }
+    var cel = e.target;
+    if(!cel || !cel.getAttribute || !cel.classList || !cel.classList.contains('mk-l-okno')){ return; }
+    var lista = gra.okna.filter(function(o){ return o.el.offsetWidth > 0; });
+    var i = -1;
+    for(var q = 0; q < lista.length; q++){ if(lista[q].el === cel){ i = q; break; } }
+    if(i < 0){ return; }
+    var n = lista.length, kol = kolumny(), j = i, k = e.key;
+    if(k === 'ArrowRight' || k === 'Right'){ j = Math.min(n - 1, i + 1); }
+    else if(k === 'ArrowLeft' || k === 'Left'){ j = Math.max(0, i - 1); }
+    else if(k === 'ArrowDown' || k === 'Down'){
+      if(i + kol <= n - 1){ j = i + kol; }
+      else if(Math.floor(i / kol) < Math.floor((n - 1) / kol)){ j = n - 1; }
+    }
+    else if(k === 'ArrowUp' || k === 'Up'){ if(i - kol >= 0){ j = i - kol; } }
+    else if(k === 'Home'){ j = 0; }
+    else if(k === 'End'){ j = n - 1; }
+    else if((k === 'Enter' || k === ' ' || k === 'Spacebar') && e.repeat){ e.preventDefault(); return; }
+    else { return; }
+    e.preventDefault();
+    if(j !== i){ lista[j].el.focus(); }
+  });
+
+  // ---------------------------------------------------------- ekran końcowy
+  function statystyki(){
+    var s = {};
+    TECH.forEach(function(t){ s[t.k] = {celN: 0, celOk: 0, nieN: 0, nieOk: 0, bledy: 0}; });
+    gra.log.forEach(function(r){
+      var x = s[r.tech];
+      if(r.cel){ x.celN++; if(r.ok){ x.celOk++; } } else { x.nieN++; if(r.ok){ x.nieOk++; } }
+      if(!r.ok){ x.bledy++; }
+    });
+    return s;
+  }
+  function wniosek(st){
+    var out = [T.wnA];
+    var wskazane = 0;
+    gra.log.forEach(function(r){ if(r.trafil){ wskazane++; } });
+    if(wskazane === 0){
+      out.push(T.wnNic);
+    } else if(gra.bledy.length === 0){
+      out.push(T.wnZero);
+    } else {
+      var naj = [], nn = 0;
+      TECH.forEach(function(t){
+        var bl = st[t.k].bledy;
+        if(bl > nn){ nn = bl; naj = [t.k]; } else if(bl === nn && bl > 0){ naj.push(t.k); }
+      });
+      var pokaz = naj.slice(0, 3);
+      var nazwy = pokaz.map(function(k){ return '\u201e' + TP[k].nazwa + '\u201d'; });
+      var lista = nazwy.length > 1 ? nazwy.slice(0, -1).join(', ') + ' i ' + nazwy[nazwy.length - 1] : nazwy[0];
+      var zdanie = wstaw(pokaz.length > 1 ? T.wnNajWiele : T.wnNaj, {t: lista, n: nn});
+      if(naj.length > pokaz.length){ zdanie += ' ' + T.wnInne; }
+      out.push(zdanie + ' ' + wstaw(T.wnZMini, {w: pokaz.map(function(k){ return TP[k].wsk; }).join('; ')}));
+    }
+    out.push(T.wnKostiumy);
+    out.push(T.wnC);
+    return out;
+  }
+  function komorka(tekstGdy, ilosc, tekstSr){
+    var td = document.createElement('td');
+    if(ilosc > 0){ td.textContent = tekstGdy; }
+    else {
+      td.appendChild(document.createTextNode('—'));
+      td.appendChild(el('span','mk-sr', ' ' + tekstSr));
+    }
+    return td;
+  }
+
+  function koniecGry(){
+    tickStop();
+    if(stan !== 'gra' || !gra){ return; }
+    stan = 'koniec';
+    var wczesnie = gra.tarcza <= 0;
+    var tr = tryb;
+    var poprzedni = Math.max(odczytajRekord(tr), rekordPamiec[tr]);
+    var nowy = gra.punkty > 0 && gra.punkty > poprzedni;
+    var zapisano = true;
+    if(gra.punkty > poprzedni){
+      rekordPamiec[tr] = gra.punkty;
+      zapisano = zapiszRekord(tr, gra.punkty);
+    }
+    var rekord = Math.max(poprzedni, gra.punkty);
+    var st = statystyki();
+
+    ekran.innerHTML = '';
+    ui = null;
+    var wyn = el('div','mk-l-koniec');
+    var h = el('h4','mk-l-wynik-h', wstaw(wczesnie ? T.koniecHWczesnie : T.koniecH, {p: gra.punkty}));
+    h.setAttribute('tabindex','-1');
+    wyn.appendChild(h);
+    wyn.appendChild(el('p', null, wstaw(T.trybInfo, {t: T.trybNazwy[tr]})));
+
+    var liczby = el('div','mk-l-hud mk-l-hud3');
+    var k1 = kafel(T.lPunkty, String(gra.punkty));
+    var k2 = kafel(T.lSeria, String(gra.najSeria));
+    var k3 = kafel(T.lRekord, String(rekord));
+    liczby.appendChild(k1.k); liczby.appendChild(k2.k); liczby.appendChild(k3.k);
+    wyn.appendChild(liczby);
+    if(nowy){ wyn.appendChild(el('p','mk-l-rekord', T.nowyRekord)); }
+    if(!zapisano){ wyn.appendChild(el('p','mk-licz', T.rekordBrakZapisu)); }
+
+    var tab = document.createElement('table');
+    tab.className = 'mk-l-tab';
+    var cap = document.createElement('caption');
+    cap.textContent = T.tabCap;
+    tab.appendChild(cap);
+    var thead = document.createElement('thead');
+    var trh = document.createElement('tr');
+    T.kol.forEach(function(nazwa){
+      var th = document.createElement('th');
+      th.setAttribute('scope','col');
+      th.textContent = nazwa;
+      trh.appendChild(th);
+    });
+    thead.appendChild(trh);
+    tab.appendChild(thead);
+    var tbody = document.createElement('tbody');
+    TECH.forEach(function(t){
+      var x = st[t.k];
+      var tr2 = document.createElement('tr');
+      var th2 = document.createElement('th');
+      th2.setAttribute('scope','row');
+      th2.textContent = miekkie(t.tab);
+      tr2.appendChild(th2);
+      tr2.appendChild(komorka(wstaw(T.tabTrafione, {a: x.celOk, b: x.celN}), x.celN, T.tabNieCelem));
+      tr2.appendChild(komorka(wstaw(T.tabPominiete, {a: x.nieOk, b: x.nieN}), x.nieN, T.tabBrakHasel));
+      tr2.appendChild(komorka(String(x.bledy), x.celN + x.nieN, T.tabBrakHasel));
+      tbody.appendChild(tr2);
+    });
+    tab.appendChild(tbody);
+    wyn.appendChild(tab);
+    wyn.appendChild(el('p','mk-licz', T.tabNota));
+
+    wyn.appendChild(el('h4','mk-l-sekcja', T.wnH));
+    wniosek(st).forEach(function(par){ wyn.appendChild(el('p', null, par)); });
+
+    wyn.appendChild(el('h4','mk-l-sekcja', T.pomH));
+    if(gra.bledy.length === 0){
+      wyn.appendChild(el('p','mk-l-gratulacje', T.pomBrak));
+    } else {
+      var ul = el('ul','mk-lista mk-l-pomylki');
+      gra.bledy.forEach(function(b){
+        var hs = HASLA[b.id];
+        var li = document.createElement('li');
+        var p1 = el('p', null);
+        p1.appendChild(el('strong', null, '„' + hs.tekst + '”'));
+        li.appendChild(p1);
+        li.appendChild(el('p','mk-l-co', wstaw(b.typ === 'zle' ? T.pomZle : T.pomPrzep,
+                                                 {r: b.r + 1, c: TP[gra.plan[b.r].tech].nazwa})));
+        li.appendChild(el('p','mk-l-wyj', hs.dlaczego));
+        ul.appendChild(li);
+      });
+      wyn.appendChild(ul);
+    }
+
+    var btny = el('div','mk-btny');
+    var jeszcze = el('button','mk-btn', T.jeszcze);
+    jeszcze.type = 'button';
+    jeszcze.addEventListener('click', zacznij);
+    var zmien = el('button','mk-btn mk-btn2', T.zmien);
+    zmien.type = 'button';
+    zmien.addEventListener('click', function(){
+      ekranStart();
+      var r = ekran.querySelector('input[type="radio"]:checked');
+      if(r){ r.focus(); }
+    });
+    btny.appendChild(jeszcze);
+    btny.appendChild(zmien);
+    wyn.appendChild(btny);
+    ekran.appendChild(wyn);
+    oglos('');
+    h.focus();
+  }
+
+  ekranStart();
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

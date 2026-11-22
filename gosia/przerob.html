@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Przerób nagłówek</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Przerób nagłówek</h1>
+<div class="mk mk-przerob" id="mk-przerob">Ćwiczenie „Przerób nagłówek” — trzy wymyślone nagłówki-przynęty do przerobienia na informacyjne. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-karta{border:1px solid #c9ccc8;border-left:4px solid #16181c;border-radius:3px;background:#fbfbfa;padding:16px 18px}\n.mk-karta > * + *{margin-top:12px}\n.mk-typ{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#4a4e55;font-weight:700}\n.mk-podglad > * + *{margin-top:6px}\n.mk-naglowek{font-size:18px;line-height:1.5;font-weight:600;border-left:3px solid #16181c;background:#fff;\n padding:10px 14px;border-radius:3px}\n.mk-stan{font-weight:700}\n.mk-stan-otwarta{color:#96261f}\n.mk-stan-zamknieta{color:#245a40}\n.mk-fs{border:1px solid #c9ccc8;border-radius:3px;padding:12px 14px;background:#fbfbfa;margin:0;min-width:0}\n.mk-fs > * + *{margin-top:8px}\n.mk-fraglabel{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#4a4e55;font-weight:700}\n.mk-opcja{display:flex;align-items:flex-start;gap:10px;border:1px solid #7d838a;border-radius:3px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-radio:checked){border-color:#16181c;border-width:2px;padding:8px 11px}\n.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-radio{width:18px;height:18px;accent-color:#b4322b;margin:3px 0 0;flex:none}\n.mk-fb{padding:11px 14px;border-radius:3px;background:#fff;border:1px solid #c9ccc8}\n.mk-fb:focus{outline:none}\n.mk-fb > * + *{margin-top:6px}\n.mk-fb-ok{border-left:4px solid #2c6a4c}\n.mk-fb-nie{border-left:4px solid #b4322b}\n.mk-werd{font-weight:700}\n.mk-fb-ok .mk-werd{color:#245a40}\n.mk-fb-nie .mk-werd{color:#96261f}\n.mk-wiersz{border-top:1px solid #c9ccc8;padding-top:10px;margin-top:10px}\n.mk-wiersz:first-child{border-top:0;padding-top:0;margin-top:0}\n.mk-wetyk{font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#4a4e55}\n.mk-nauka{font-weight:600;border-top:1px solid #c9ccc8;padding-top:14px}\n";
+var D = {"nad": "Ćwiczenie · clickbait", "tytul": "Przerób nagłówek", "lid": "Trzy wymyślone nagłówki, które celowo nie mówią wszystkiego. W każdym fragmencie wybierz inny wariant i zobacz, co dzieje się z luką informacyjną. Wybór można zmienić w każdej chwili.", "wprowadzenie": {"tytul": "Zanim przerobisz nagłówek", "akapity": ["Clickbait to nagłówek albo treść, które celowo otwierają lukę informacyjną i jej nie domykają. Domknięcie wymaga kliknięcia.", "Ciekawość to stan poznawczo wywołanego niedosytu — pojawia się, gdy uwaga skupia się na luce we własnej wiedzy (Loewenstein, 1994). Potrzebuje wstępnej, cząstkowej wiedzy: mała „dawka startowa” informacji potrafi ją gwałtownie wzmocnić. Gdy luka się domyka, ciekawość gaśnie.", "Analiza stu tysięcy nagłówków z dziesięciu duńskich portali informacyjnych (Blom i Hansen, 2015) nazywa ten zabieg „odniesieniem w przód”: zdanie wskazuje na informację, której jeszcze nie ujawniło. Na przykład zaimek bez odniesienia albo zapowiedź reakcji zamiast samego wydarzenia."]}, "naglowki": [{"etykieta": "Nagłówek portalu sportowego", "fragmenty": [{"warianty": [{"t": "Coś takiego nie zdarzyło się od lat.", "domyka": false, "wyjasnienie": "„Coś takiego” nie wskazuje, o jakie wydarzenie chodzi — wyrażenie bez konkretnego odniesienia."}, {"t": "Trybuny nie posiadały się z radości.", "domyka": false, "wyjasnienie": "Nadal nie wiadomo, kto grał ani jaki był wynik — zdanie mówi tylko o nastroju na trybunach."}, {"t": "Rezerwowy napastnik strzelił wyrównującego gola w 90. minucie.", "domyka": true}]}, {"warianty": [{"t": "Trenerzy do dziś o tym mówią.", "domyka": false, "wyjasnienie": "Zapowiada reakcję trenerów zamiast samego wydarzenia — to odniesienie w przód (Blom i Hansen, 2015)."}, {"t": "Mecz zakończył się remisem 2:2.", "domyka": true}, {"t": "Takiego wieczoru długo się nie zapomni.", "domyka": false, "wyjasnienie": "Nadal nie wiadomo, jaki był wynik meczu — zdanie mówi tylko o wrażeniu, nie o faktach."}]}]}, {"etykieta": "Nagłówek portalu ekonomicznego", "fragmenty": [{"warianty": [{"t": "Ceny znów poszybowały w górę.", "domyka": false, "wyjasnienie": "„Poszybowały” nie mówi, o ile ani czego dotyczy podwyżka — luka zostaje otwarta."}, {"t": "Ceny biletów kolejowych wzrosły o 12 procent.", "domyka": true}, {"t": "Podwyżka zaskoczyła całą branżę.", "domyka": false, "wyjasnienie": "Nadal nie wiadomo, jakiego produktu ani jakiej podwyżki to dotyczy."}]}, {"warianty": [{"t": "Odczuje to każde gospodarstwo domowe.", "domyka": false, "wyjasnienie": "Zapowiada skutek zamiast podać konkretną informację — to odniesienie w przód (Blom i Hansen, 2015)."}, {"t": "Skutki będzie widać już wkrótce.", "domyka": false, "wyjasnienie": "Nadal nie wiadomo, kiedy dokładnie zmiana wejdzie w życie."}, {"t": "Nowe stawki obowiązują od stycznia.", "domyka": true}]}]}, {"etykieta": "Nagłówek portalu podróżniczego", "fragmenty": [{"warianty": [{"t": "To miejsce za chwilę zniknie z mapy.", "domyka": false, "wyjasnienie": "„To miejsce” to zaimek wskazujący bez podanego odniesienia — nie wiadomo, o jaki obiekt chodzi."}, {"t": "Mieszkańcy nie mogą uwierzyć w to, co się dzieje.", "domyka": false, "wyjasnienie": "Nadal nie wiadomo, o jakie miejsce chodzi ani co się z nim dzieje."}, {"t": "Miejski basen w centrum zostanie zamknięty od marca.", "domyka": true}]}, {"warianty": [{"t": "Powód zwala z nóg.", "domyka": false, "wyjasnienie": "Zapowiada wrażenie, jakie zrobi powód, zamiast go podać — to odniesienie w przód (Blom i Hansen, 2015)."}, {"t": "Powodem jest awaria instalacji grzewczej.", "domyka": true}, {"t": "Trudno w to uwierzyć.", "domyka": false, "wyjasnienie": "Nadal nie wiadomo, dlaczego do tego doszło."}]}]}], "domkniete": "Fakty są już w nagłówku — nie trzeba klikać, żeby je poznać. Domknięcie luki gasi ciekawość (Loewenstein, 1994).", "zestawienieTytul": "Trzy nagłówki: przed i po", "nauka": "To ćwiczenie uczy rozpoznawać lukę informacyjną w nagłówku i nazywać wprost to, czego jej brakuje: kto, co, kiedy albo dlaczego."};
+function ensure(){
+  var w = document.getElementById('mk-przerob') || document.querySelector('.mk-przerob');
+  if(!w) return null;
+  w.id='mk-przerob'; w.className='mk mk-przerob';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-przerob"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-przerob');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  c.appendChild(el('p','mk-lid', D.lid));
+
+  var wpr = el('div','mk-blok');
+  wpr.appendChild(el('h4', null, D.wprowadzenie.tytul));
+  D.wprowadzenie.akapity.forEach(function(t){ wpr.appendChild(el('p', null, t)); });
+  c.appendChild(wpr);
+
+  function zloz(n, wyb){
+    var czesci = [];
+    n.fragmenty.forEach(function(f, gi){ czesci.push(f.warianty[wyb[gi]].t); });
+    return czesci.join(' ');
+  }
+  function przedTekst(n){
+    var zero = n.fragmenty.map(function(){ return 0; });
+    return zloz(n, zero);
+  }
+  function domknieta(n, wyb){
+    return n.fragmenty.every(function(f, gi){ return f.warianty[wyb[gi]].domyka === true; });
+  }
+
+  var zest = el('div','mk-blok');
+  zest.appendChild(el('h4', null, D.zestawienieTytul));
+  var zestTresc = document.createElement('div');
+  zest.appendChild(zestTresc);
+  var stany = [];
+  function odswiezZestawienie(){
+    zestTresc.innerHTML = '';
+    stany.forEach(function(s){
+      var wiersz = el('div','mk-wiersz');
+      wiersz.appendChild(el('p','mk-wetyk', s.n.etykieta));
+      wiersz.appendChild(el('p', null, 'Przed: „' + przedTekst(s.n) + '”'));
+      wiersz.appendChild(el('p', null, 'Po: „' + zloz(s.n, s.wyb) + '”'));
+      zestTresc.appendChild(wiersz);
+    });
+  }
+
+  D.naglowki.forEach(function(n, i){
+    var stanWyboru = n.fragmenty.map(function(){ return 0; });
+    stany.push({n: n, wyb: stanWyboru});
+
+    var karta = document.createElement('section');
+    karta.className = 'mk-karta';
+    var h = el('h4','mk-typ', n.etykieta);
+    h.id = 'mk-nk-' + i;
+    karta.setAttribute('aria-labelledby', h.id);
+    karta.appendChild(h);
+
+    var podglad = el('div','mk-podglad');
+    podglad.setAttribute('aria-live','polite');
+    var pNagl = el('p','mk-naglowek');
+    var pStan = el('p','mk-stan');
+    podglad.appendChild(pNagl);
+    podglad.appendChild(pStan);
+    karta.appendChild(podglad);
+
+    function odswiez(){
+      pNagl.textContent = '„' + zloz(n, stanWyboru) + '”';
+      var zamknieta = domknieta(n, stanWyboru);
+      pStan.textContent = 'Luka informacyjna: ' + (zamknieta ? 'zamknięta' : 'otwarta');
+      pStan.className = 'mk-stan ' + (zamknieta ? 'mk-stan-zamknieta' : 'mk-stan-otwarta');
+      odswiezZestawienie();
+    }
+
+    n.fragmenty.forEach(function(frag, gi){
+      var fs = document.createElement('fieldset');
+      fs.className = 'mk-fs';
+      var lg = document.createElement('legend');
+      lg.className = 'mk-sr';
+      lg.textContent = 'Fragment ' + (gi + 1) + ' z ' + n.fragmenty.length + ' nagłówka: wybierz wariant';
+      fs.appendChild(lg);
+      var etyk = el('p','mk-fraglabel', 'Fragment ' + (gi + 1) + ' z ' + n.fragmenty.length);
+      etyk.setAttribute('aria-hidden','true');
+      fs.appendChild(etyk);
+      frag.warianty.forEach(function(w, wi){
+        var id = 'mk-nk' + i + '-f' + gi + '-' + wi;
+        var lab = document.createElement('label');
+        lab.className = 'mk-opcja';
+        lab.setAttribute('for', id);
+        var inp = document.createElement('input');
+        inp.type = 'radio'; inp.name = 'mk-nk' + i + '-f' + gi; inp.id = id; inp.value = String(wi);
+        inp.className = 'mk-radio';
+        if(wi === 0){ inp.checked = true; }
+        inp.addEventListener('change', function(){ stanWyboru[gi] = wi; odswiez(); });
+        lab.appendChild(inp);
+        lab.appendChild(el('span', null, w.t));
+        fs.appendChild(lab);
+      });
+      karta.appendChild(fs);
+    });
+
+    var btn = el('button','mk-btn','Sprawdź');
+    btn.type = 'button';
+    karta.appendChild(btn);
+
+    var fb = el('div','mk-fb');
+    fb.hidden = true;
+    fb.setAttribute('tabindex','-1');
+    karta.appendChild(fb);
+
+    btn.addEventListener('click', function(){
+      var otwarte = [];
+      n.fragmenty.forEach(function(frag, gi){
+        var w = frag.warianty[stanWyboru[gi]];
+        if(!w.domyka){ otwarte.push(w); }
+      });
+      fb.innerHTML = '';
+      fb.hidden = false;
+      if(otwarte.length){
+        fb.className = 'mk-fb mk-fb-nie';
+        fb.appendChild(el('p','mk-werd','Luka informacyjna nadal otwarta.'));
+        otwarte.forEach(function(w){
+          fb.appendChild(el('p', null, '„' + w.t + '” — ' + w.wyjasnienie));
+        });
+      } else {
+        fb.className = 'mk-fb mk-fb-ok';
+        fb.appendChild(el('p','mk-werd','Luka informacyjna domknięta.'));
+        fb.appendChild(el('p', null, D.domkniete));
+      }
+      fb.focus();
+    });
+
+    odswiez();
+    c.appendChild(karta);
+  });
+
+  c.appendChild(zest);
+  c.appendChild(el('p','mk-nauka', D.nauka));
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

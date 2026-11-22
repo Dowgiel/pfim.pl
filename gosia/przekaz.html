@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Rozbierz przekaz na części</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Rozbierz przekaz na części</h1>
+<div class="mk mk-przekaz" id="mk-przekaz">Ćwiczenie „Rozbierz przekaz na części” — cztery krótkie przekazy do rozebrania. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-karta{border:1px solid #c9ccc8;border-left:4px solid #16181c;border-radius:3px;background:#fbfbfa;padding:16px 18px}\n.mk-karta > * + *{margin-top:12px}\n.mk-typ{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#4a4e55;font-weight:700}\n.mk-opis{font-size:14px;color:#4a4e55;font-style:italic}\n.mk-tekst{font-size:18px;line-height:1.5}\n.mk-frag{display:inline-block;max-width:100%;font:inherit;font-weight:600;color:#16181c;background:#fff;\n border:2px dashed #6b7078;border-radius:3px;padding:3px 8px;margin:3px 0;cursor:pointer;text-align:left;\n white-space:normal;min-height:36px}\n.mk-frag:hover{background:#eef0ee;border-style:solid}\n.mk-frag:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-frag-traf,.mk-frag-traf:hover{background:#e2efe7;border:2px solid #2c6a4c}\n.mk-frag-pudlo,.mk-frag-pudlo:hover{background:#f6e3e1;border:2px solid #b4322b}\n.mk-zad{font-weight:700}\n.mk-zad:focus{outline:none}\n.mk-fb{padding:11px 14px;border-radius:3px;background:#fff;border:1px solid #c9ccc8}\n.mk-fb > * + *{margin-top:6px}\n.mk-fb-ok{border-left:4px solid #2c6a4c}\n.mk-fb-nie{border-left:4px solid #b4322b}\n.mk-fb-info{border-left:4px solid #16181c}\n.mk-werd{font-weight:700}\n.mk-fb-ok .mk-werd{color:#245a40}\n.mk-fb-nie .mk-werd{color:#96261f}\n";
+var D = {"nad": "Ćwiczenie · mity i uproszczone narracje", "tytul": "Rozbierz przekaz na części", "lid": "Cztery krótkie przekazy: hasło z wiecu, spot, opakowanie i nagłówek. W każdym kliknij fragment, który pasuje do polecenia. Pomyłka nic nie kosztuje — przy każdym kliknięciu dowiesz się, co dany fragment robi.", "postep": "Rozebrane przekazy: {0} z {1}", "przekazy": [{"typ": "Hasło z wiecu", "czesci": [{"t": "Czas na zmianę!", "co": "obiecuje zmianę, ale nie mówi jaką, jak ani za ile. Każda osoba słuchająca dopowie sobie własną wersję."}, {"t": "Oddajmy głos zwykłym ludziom!", "co": "mówi o „zwykłych ludziach”, nie mówiąc, kim są ani kto im ten głos zabrał. Niemal każda osoba słuchająca może się w nich odnaleźć — i o to chodzi."}, {"t": "Pora działać, pora wygrywać!", "co": "powtórzenie i rytm sprawiają, że hasło łatwo zapamiętać i skandować. Brzmi jak zapowiedź, ale nie wiadomo, czego ma dotyczyć."}], "zadania": [{"polecenie": "Kliknij hasło, które coś obiecuje, ale niczego nie konkretyzuje.", "cel": 0}, {"polecenie": "Kliknij fragment, który ma zapaść w pamięć dzięki powtórzeniu.", "cel": 2}], "podsumowanie": "Trzy hasła i zero informacji o tym, co konkretnie ma się wydarzyć. Łatwo je wykrzyczeć, trudno z nimi dyskutować. Zanim przyjmiesz takie hasło za swoje, sprawdź, czy stoi za nim choć jeden konkret: kwota, termin albo sposób działania."}, {"typ": "Przemówienie prezesa klubu na jubileuszu", "opis": "Sala pełna kibiców i kibicek, na ekranie zdjęcia drużyny sprzed lat.", "czesci": [{"t": "Pamiętacie nasz pierwszy awans?", "co": "przywołuje wspólne wspomnienie zebranych. Zanim padnie jakakolwiek treść, sala jest już wzruszona."}, {"t": "Każdy mecz był wtedy świętem, a zawodnicy byli jednymi z nas.", "co": "maluje przeszłość bez żadnej wady — nie ma w niej porażek, pustych trybun ani sporów w klubie."}, {"t": "Przywróćmy klubowi jego prawdziwego ducha.", "co": "nazywa jedną wersję przeszłości „prawdziwym duchem”. Każda inna wizja klubu staje się z definicji fałszywa, a o szczegóły — skąd pieniądze i jak zbudować drużynę — nikt już nie pyta."}], "zadania": [{"polecenie": "Kliknij fragment, który pokazuje przeszłość bez żadnej wady.", "cel": 1}, {"polecenie": "Kliknij fragment, który przedstawia jedną wizję jako jedyną prawdziwą.", "cel": 2}], "podsumowanie": "Prezes nie przedstawia żadnego planu: działa obraz dawnych czasów i tęsknota sali. W badaniach nad nostalgią polityczną taki wzorzec nazywa się nostalgią restauratorską — przeszłość staje się złotym wiekiem do odbudowania, a nie czymś, co można ocenić krytycznie. Ten sam chwyt łatwo rozpoznać także poza polityką; tutaj wspomnienie ma zastąpić plan."}, {"typ": "Opakowanie jogurtu", "opis": "Na opakowaniu: drewniany płot, krowa na łące, napis stylizowany na pismo odręczne.", "czesci": [{"t": "Nowa receptura!", "co": "sugeruje ulepszenie, ale nie mówi, co zmieniono — ani czy zmiana wyszła na dobre."}, {"t": "Smak jak dawniej", "co": "odsyła do przyjemnego skojarzenia z przeszłością. Nie wiadomo, czym ten smak ma się różnić ani co znaczy „dawniej”."}, {"t": "— prosto z natury.", "co": "produkt z zakładu przemysłowego zostaje przedstawiony jako coś naturalnego i oczywistego. Pytanie o skład przestaje przychodzić do głowy."}], "zadania": [{"polecenie": "Kliknij fragment, który przedstawia produkt z fabryki jako coś naturalnego.", "cel": 2}, {"polecenie": "Kliknij fragment, który obiecuje ulepszenie, nie mówiąc, na czym polega.", "cel": 0}], "podsumowanie": "Na jednym opakowaniu stoją obok siebie „nowa receptura” i „smak jak dawniej” — i nikomu to nie przeszkadza, bo żadne z tych haseł nie jest informacją. Roland Barthes nazwał taki mechanizm naturalizacją: to, co wytworzone i umowne, zaczyna wyglądać na naturalne i oczywiste."}, {"typ": "Nagłówek z serwisu internetowego", "czesci": [{"t": "Tego nie uczą w szkołach:", "co": "sugeruje, że ktoś celowo ukrywa wiedzę. Brak czegoś w podręcznikach zaczyna wyglądać jak dowód spisku."}, {"t": "prawdziwa historia", "co": "zapowiada jedyną, „prawdziwą” wersję wydarzeń — jakby o przeszłości nie było już o czym dyskutować."}, {"t": "naszego wielkiego imperium", "co": "schlebia dumie z własnej grupy: kto czyta, dostaje wielką przeszłość na własność, więc niechętnie ją odda."}], "zadania": [{"polecenie": "Kliknij fragment, który sugeruje, że ktoś ukrywa prawdę.", "cel": 0}, {"polecenie": "Kliknij fragment, który odwołuje się do dumy z własnej grupy.", "cel": 2}], "podsumowanie": "Te same chwyty Marcin Napiórkowski rozbierał, analizując pseudohistoryczną książkę o rzekomym staropolskim imperium Lechitów: zarzut, że nauka ukrywa prawdę, fałszerstwa sprzed stuleci podawane jako dowody i odwołanie do narodowej megalomanii."}]};
+function ensure(){
+  var w = document.getElementById('mk-przekaz') || document.querySelector('.mk-przekaz');
+  if(!w) return null;
+  w.id='mk-przekaz'; w.className='mk mk-przekaz';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-przekaz"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-przekaz');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var N = D.przekazy.length, rozebrane = 0;
+  c.appendChild(el('p','mk-lid', D.lid));
+  var licz = el('p','mk-licz');
+  c.appendChild(licz);
+  function licznik(){
+    licz.textContent = D.postep.split('{0}').join(String(rozebrane)).split('{1}').join(String(N));
+  }
+  licznik();
+
+  D.przekazy.forEach(function(p, i){
+    var karta = document.createElement('section');
+    karta.className = 'mk-karta';
+    var h = el('h4','mk-typ', p.typ);
+    h.id = 'mk-kt-' + i;
+    karta.setAttribute('aria-labelledby', h.id);
+    karta.appendChild(h);
+    if(p.opis){ karta.appendChild(el('p','mk-opis', p.opis)); }
+
+    var tekst = el('p','mk-tekst');
+    var fr = [];
+    p.czesci.forEach(function(cz, j){
+      var b = el('button','mk-frag', cz.t);
+      b.type = 'button';
+      b.addEventListener('click', function(){ klik(j); });
+      tekst.appendChild(b);
+      if(j < p.czesci.length - 1){ tekst.appendChild(document.createTextNode(' ')); }
+      fr.push(b);
+    });
+    karta.appendChild(tekst);
+
+    var zad = el('p','mk-zad');
+    zad.setAttribute('tabindex','-1');
+    karta.appendChild(zad);
+    var fb = el('div','mk-fb');
+    fb.setAttribute('role','status');
+    fb.hidden = true;
+    karta.appendChild(fb);
+    var dalej = el('button','mk-btn mk-btn2','Następne zadanie');
+    dalej.type = 'button';
+    dalej.hidden = true;
+    karta.appendChild(dalej);
+    var pods = el('div','mk-blok mk-ok');
+    pods.hidden = true;
+    karta.appendChild(pods);
+
+    var t = 0;
+    function czysc(){ fr.forEach(function(b){ b.classList.remove('mk-frag-pudlo'); }); }
+    function zadanie(){
+      zad.textContent = 'Zadanie ' + (t + 1) + ' z ' + p.zadania.length + ': ' + p.zadania[t].polecenie;
+      fb.hidden = true;
+      dalej.hidden = true;
+      czysc();
+    }
+    function komunikat(klasa, werdykt, j){
+      fb.innerHTML = '';
+      fb.hidden = false;
+      fb.className = 'mk-fb ' + klasa;
+      fb.appendChild(el('p','mk-werd', werdykt));
+      fb.appendChild(el('p', null, '„' + p.czesci[j].t + '” — ' + p.czesci[j].co));
+    }
+    function klik(j){
+      czysc();
+      if(t >= p.zadania.length){ komunikat('mk-fb-info', 'Co robi ten fragment', j); return; }
+      if(j === p.zadania[t].cel){
+        fr[j].classList.add('mk-frag-traf');
+        komunikat('mk-fb-ok', 'Tak, to ten fragment.', j);
+        t++;
+        if(t < p.zadania.length){ dalej.hidden = false; }
+        else { koniec(); }
+      } else {
+        if(!fr[j].classList.contains('mk-frag-traf')){ fr[j].classList.add('mk-frag-pudlo'); }
+        komunikat('mk-fb-nie', 'Ten fragment robi coś innego. Spróbuj jeszcze raz.', j);
+      }
+    }
+    function koniec(){
+      dalej.hidden = true;
+      zad.textContent = 'Przekaz rozebrany. Kliknij dowolny fragment, żeby zobaczyć, co robi.';
+      pods.innerHTML = '';
+      pods.appendChild(el('h4', null, 'Co tu zastępuje informację'));
+      pods.appendChild(el('p', null, p.podsumowanie));
+      pods.hidden = false;
+      rozebrane++;
+      licznik();
+    }
+    dalej.addEventListener('click', function(){ zadanie(); zad.focus(); });
+    zadanie();
+    c.appendChild(karta);
+  });
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

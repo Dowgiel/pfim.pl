@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gra: Przewijaj albo sprawdź</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Gra: Przewijaj albo sprawdź</h1>
+<div class="mk mk-przewijaj" id="mk-przewijaj">Gra „Przewijaj albo sprawdź” — kanał z dwudziestoma wpisami, przy każdym trzeba zdecydować: sprawdzić czy udostępnić. Jeśli się nie wczyta (na przykład w aplikacji mobilnej Moodle), otwórz tę stronę w przeglądarce internetowej.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-g-ekran{display:flex;flex-direction:column;gap:14px;min-width:0;width:100%;max-width:46rem;\n margin-left:auto;margin-right:auto}\n.mk-g-ekran > *{min-width:0}\n.mk-g-lead{font-size:17px;max-width:62ch}\n.mk p.mk-g-czytnik{font-size:14px;color:#4a4e55;border-left:3px solid #7d838a;padding:8px 12px;background:#fbfbfa}\n.mk-g-pyt{font-weight:700}\n.mk-g-fs{border:1px solid #c9ccc8;border-radius:6px;padding:12px 14px;background:#fbfbfa;margin:0;min-width:0}\n.mk-g-fs > * + *{margin-top:8px}\n.mk-g-opcja{display:flex;align-items:flex-start;gap:10px;border:2px solid #7d838a;border-radius:6px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px;margin:0}\n.mk-g-opcja:hover{background:#eef0ee}\n.mk-g-opcja:has(.mk-g-radio:checked){border-color:#16181c;background:#f4f4f2}\n.mk-g-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-g-radio{width:20px;height:20px;accent-color:#b4322b;margin:2px 0 0;flex:none}\n.mk-g-opt{display:flex;flex-direction:column;gap:2px;min-width:0}\n.mk-g-optnazwa{font-weight:700}\n.mk-g-opttekst{color:#4a4e55;font-size:14px}\n.mk-g-szcz{border:1px solid #c9ccc8;border-radius:6px;background:#fbfbfa;padding:0 14px}\n.mk-g-szcz summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center;\n justify-content:space-between;gap:10px;padding:6px 0;list-style:none}\n.mk-g-szcz summary::-webkit-details-marker{display:none}\n.mk-g-szcz summary::after{content:'';flex:none;width:9px;height:9px;border-right:2px solid #16181c;\n border-bottom:2px solid #16181c;transform:rotate(45deg);margin:-4px 4px 0 10px}\n.mk-g-szcz[open] summary::after{transform:rotate(-135deg);margin-top:4px}\n.mk-g-szcz summary:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-g-szcz ul{padding-bottom:12px}\n.mk-g-start,.mk-g-wynik,.mk-g-dalej{font-size:18px;min-height:52px;width:100%}\n.mk-g-dalej{min-height:60px}\n.mk-g-pauza[aria-disabled=\"true\"]{cursor:not-allowed}\n.mk-g-hud{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}\n@media (min-width:560px){.mk-g-hud{grid-template-columns:repeat(4,minmax(0,1fr))}}\n.mk-g-hud3{grid-template-columns:repeat(3,minmax(0,1fr))}\n.mk-g-st{border:1px solid #c9ccc8;background:#fbfbfa;border-radius:6px;padding:8px 10px;min-width:0;\n display:flex;flex-direction:column;gap:2px;justify-content:flex-start}\n.mk-g-strz{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}\n.mk-g-stn{font-size:13px;font-weight:700;color:#4a4e55;line-height:20px}\n.mk-g-stw{font-size:22px;font-weight:700;line-height:1.15;color:#16181c}\n.mk-g-stw2{font-size:14px;line-height:1.3}\n.mk-g-mnoz{display:inline-block;background:#b4322b;color:#fff;font-size:12px;font-weight:700;\n padding:1px 8px;border-radius:11px;line-height:18px}\n.mk-g-mnoz-off{visibility:hidden}\n.mk-g-serca{display:flex;gap:4px;align-items:center}\n.mk-g-serca svg{display:block;width:24px;height:24px}\n.mk-g-czasrz{display:flex;align-items:center;gap:10px}\n.mk-g-pasek{flex:1 1 auto;min-width:0;height:16px;border-radius:8px;background:#e3e3e0;border:1px solid #7d838a;\n overflow:hidden}\n.mk-g-pasek-w{height:100%;width:100%;background:#16181c}\n.mk-g-pasek-w.mk-g-malo{background:#b4322b}\n.mk-g-pauza{flex:none}\n.mk p.mk-g-baner{font-weight:700;font-size:14px;text-align:center;color:#16181c;line-height:1.4;padding:2px 14px;\n border-radius:12px;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto}\n.mk p.mk-g-baner-up{background:#16181c;color:#f4f4f2}\n.mk-g-tel{width:100%;max-width:400px;margin:0 auto;border:3px solid #16181c;border-radius:28px;\n background:#ecece9;padding:12px 10px 16px;box-shadow:0 4px 0 #c9ccc8}\n.mk-g-tel::before{content:'';display:block;width:56px;height:6px;border-radius:3px;background:#16181c;\n margin:0 auto 10px}\n.mk-g-tel::after{content:'';display:block;width:84px;height:5px;border-radius:3px;background:#7d838a;\n margin:14px auto 0}\n.mk-g-wpis{background:#fff;border:1px solid #c9ccc8;border-radius:14px;padding:12px;min-height:150px;\n display:flex;flex-direction:column;gap:8px;min-width:0;overflow-wrap:anywhere}\n.mk-g-wnag{display:flex;align-items:center;gap:10px;min-width:0}\n.mk-g-wkol{min-width:0}\n.mk-g-awatar{flex:none;width:38px;height:38px;border-radius:50%;background:#16181c;color:#f4f4f2;display:flex;\n align-items:center;justify-content:center;font-weight:700;font-size:18px}\n.mk-g-autor{font-weight:700;line-height:1.25}\n.mk-g-typ{font-size:13px;color:#4a4e55;line-height:1.3}\n.mk-g-tresc{font-size:17px;line-height:1.45}\n.mk-g-foto{display:flex;align-items:center;gap:10px;min-height:72px;border:2px dashed #7d838a;border-radius:8px;\n background:#ecece9;padding:10px 12px;color:#16181c;font-size:15px}\n.mk-g-foto svg{flex:none}\n.mk p.mk-g-meta{font-size:13px;color:#4a4e55;margin-top:auto}\n.mk-g-pauzainfo{background:#fff;border:1px solid #c9ccc8;border-radius:14px;min-height:150px;display:flex;\n align-items:center;justify-content:center;padding:16px;text-align:center;font-weight:700}\n.mk-g-akcje{display:flex;flex-wrap:wrap;gap:10px}\n.mk-g-dec{flex:1 1 130px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;\n font-size:18px;font-weight:700;min-height:60px;padding:10px 8px;border:3px solid #16181c;border-radius:10px;\n cursor:pointer;text-align:center;margin:0}\n.mk-g-dec svg{flex:none}\n.mk-g-dec-spr{background:#fff;color:#16181c}\n.mk-g-dec-udo{background:#16181c;color:#f4f4f2}\n.mk-g-dec-spr:hover{background:#eef0ee}\n.mk-g-dec-udo:hover{background:#31353d;border-color:#31353d}\n.mk-g-dec:focus-visible{outline:3px solid #b4322b;outline-offset:3px}\n.mk-g-dec[aria-disabled=\"true\"]{cursor:not-allowed;background:#ecece9;color:#4a4e55;border-color:#7d838a}\n.mk-g-wer{border-left:5px solid #7d838a;background:#ecece9;border-radius:3px;padding:8px 12px;min-height:56px;\n font-weight:600}\n.mk-g-wer-ok{border-left-color:#2c6a4c;background:#e6f0ea}\n.mk-g-wer-zle{border-left-color:#b4322b;background:#f7e6e4}\n.mk-g-wer-pass{border-left-color:#7d838a;background:#ecece9}\n.mk-g-wer-brak{border-left-color:transparent;background:transparent}\n.mk-g-werp{color:#4a4e55;font-weight:700}\n.mk-g-podp{font-size:14px;color:#4a4e55}\n.mk-g-koniec{display:flex;flex-direction:column;gap:14px;min-width:0}\n.mk-g-koniec > *{min-width:0}\n.mk-g-wynik-h{font-size:22px;font-weight:700;line-height:1.25}\n.mk-g-wynik-h:focus{outline:none}\n.mk-g-wynik-h:focus-visible{outline:2px solid #16181c;outline-offset:3px}\n.mk h4.mk-g-sekcja{font-size:17px;font-weight:700;padding-top:6px}\n.mk-g-rekord{font-weight:700;color:#2c6a4c}\n.mk-g-tab{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;margin:0;color:#16181c}\n.mk-g-tab caption{caption-side:top;text-align:left;font-weight:700;padding:0 0 6px;font-size:15px;color:#16181c}\n.mk-g-tab th,.mk-g-tab td{border:1px solid #c9ccc8;padding:6px 4px;text-align:center;vertical-align:middle;\n overflow-wrap:anywhere;color:#16181c;font-size:inherit;line-height:1.35}\n.mk-g-tab thead th{background:#ecece9;font-weight:700;font-size:12px}\n.mk-g-tab thead th:nth-child(1){width:27%}\n.mk-g-tab thead th:nth-child(2){width:21%}\n.mk-g-tab thead th:nth-child(3){width:29%}\n.mk-g-tab thead th:nth-child(4){width:23%}\n.mk-g-tab tbody th{text-align:left;background:#fbfbfa;font-weight:700}\n.mk-g-tab td{background:#fff}\n.mk ul.mk-lista.mk-g-przep{gap:14px}\n.mk-g-przep li > * + *{margin-top:4px}\n.mk-g-wyj{color:#4a4e55}\n.mk p.mk-g-gratulacje{border-left:4px solid #2c6a4c;background:#fbfbfa;padding:10px 14px}\n@media (min-width:560px){\n .mk-g-tresc{font-size:18px}\n .mk-g-tab{font-size:14px}\n .mk-g-tab thead th{font-size:13px}\n}\n@media (max-width:420px){\n .mk-g-ekran{gap:10px}\n .mk-g-tel{padding:10px 6px 14px;border-radius:22px}\n .mk-g-tel::after{display:none}\n .mk-g-wpis{padding:10px}\n .mk-g-dec{font-size:17px;padding:10px 6px}\n .mk-g-dec svg{display:none}\n .mk-g-tresc{font-size:16px}\n .mk-g-st{padding:6px 8px}\n .mk-g-stw{font-size:20px}\n .mk-g-stw2{font-size:14px}\n}\n@media (prefers-reduced-motion: no-preference){\n .mk-g-wpis.mk-g-nowy{animation:mk-g-wjazd .2s ease-out}\n}\n@keyframes mk-g-wjazd{from{transform:translateY(20px)}to{transform:none}}\n@media (forced-colors: active){\n .mk-g-pasek{border-color:CanvasText}\n .mk-g-pasek-w{background:Highlight;forced-color-adjust:none}\n .mk-g-wer{border-left-color:CanvasText}\n}\n";
+var D = {"nad": "Gra", "tytul": "Przewijaj albo sprawdź", "tryby": [{"k": "bez", "etyk": "Bez limitu czasu", "pod": "Bez odliczania: wpis czeka na Twoją decyzję."}, {"k": "czas", "etyk": "Z limitem czasu", "pod": "Czas na wpis zależy od jego długości: od 13 do 22 sekund. Kanał przyspiesza. Pasek pokazuje, ile czasu zostało. Po każdej decyzji zegar staje: informację zwrotną czytasz w swoim tempie i idziesz dalej przyciskiem „Dalej”."}], "tempo": 1.0, "poziomy": [{"baza": 6.0, "naSlowo": 0.45}, {"baza": 5.5, "naSlowo": 0.4}, {"baza": 5.0, "naSlowo": 0.36}, {"baza": 4.5, "naSlowo": 0.33}], "wpisy": [{"poziom": 1, "fals": false, "autor": "Marta S.", "typ": "konto osobiste, od 8 lat", "tekst": "Od poniedziałku linia 12 w Jarzębinie jedzie objazdem przez ulicę Szkolną. Nowy rozkład wisi na przystankach i jest na stronie przewoźnika.", "meta": "udostępniono 41 razy", "czas": 20.0}, {"poziom": 1, "fals": true, "autor": "Kamil R.", "typ": "konto osobiste, od 5 lat", "tekst": "Nie wierzę, że to czytam!!! Sklep w Modrzewinie sprzedaje przeterminowane mleko!!! Przerażające, oburzające, ręce opadają!!!", "meta": "udostępniono 2,1 tys. razy", "sygnal": "silne emocje zamiast dowodu", "skrot": "wpis o przeterminowanym mleku", "wyjasnienie": "Wpis składa się z wykrzykników i oburzenia, a nie podaje nic, co da się sprawdzić: który sklep, kiedy, jaki dowód. Silna emocja to sygnał ostrzegawczy, nie dowód prawdziwości.", "czas": 17.5}, {"poziom": 1, "fals": false, "autor": "Przychodnia w Jarzębinie", "typ": "konto instytucji, od 6 lat", "tekst": "W upały pij wodę regularnie, nie czekaj na pragnienie. Ulotka z tą radą leży w rejestracji, kopia jest na stronie przychodni.", "meta": "udostępniono 87 razy", "czas": 20.5}, {"poziom": 1, "fals": false, "autor": "Hania B.", "typ": "konto osobiste, od 3 lat", "tekst": "Znaleziono małego brązowego psa w parku w Jarzębinie. Obroża bez adresu. Pies jest bezpieczny, czeka w schronisku przy ulicy Polnej. Zadzwoń z opisem psa.", "meta": "udostępniono 12 tys. razy", "czas": 22.0}, {"poziom": 1, "fals": true, "autor": "Ewa L.", "typ": "konto osobiste, od 2 lat", "tekst": "UDOSTĘPNIJ, ZANIM USUNĄ! Ładowarki z pewnych sklepów niszczą baterie telefonów. Ten wpis zniknie za godzinę, bo ktoś chce, żeby nikt o tym nie wiedział.", "meta": "udostępniono 640 razy", "sygnal": "pośpiech i wezwanie „udostępnij, zanim usuną”", "skrot": "wpis o ładowarkach, który „zniknie za godzinę”", "wyjasnienie": "Wezwanie do pośpiechu („zanim usuną”, „za godzinę”) ma Cię skłonić do udostępnienia, zanim sprawdzisz. Komunikat, który sam narzuca presję czasu, to sygnał, żeby zwolnić.", "czas": 21.5}, {"poziom": 2, "fals": true, "autor": "Tomek P.", "typ": "konto osobiste, od 4 lat", "tekst": "Aż 87% osób w Jarzębinie śpi gorzej przez nowe lampy uliczne. To oficjalne dane, więc nie ma o czym dyskutować.", "meta": "udostępniono 3,2 tys. razy", "sygnal": "liczba bez źródła", "skrot": "wpis o 87% osób, które gorzej śpią", "wyjasnienie": "Dokładny procent bez wskazania, kto go policzył i jak. „Oficjalne dane” bez nazwy to nie źródło. Liczba wraca do porządku dopiero wtedy, gdy sprawdzisz ją u źródła.", "czas": 18.0}, {"poziom": 2, "fals": false, "autor": "Szkoła Podstawowa nr 3 w Modrzewinie", "typ": "konto szkoły, od 6 lat", "tekst": "Wycieczka klas piątych odbędzie się w czwartek. Zgody trzeba oddać do wtorku w sekretariacie. Wzór zgody jest w dzienniku elektronicznym.", "meta": "udostępniono 24 razy", "czas": 19.0}, {"poziom": 2, "fals": true, "autor": "Biuro Prasowe Miasta Jarzębin", "typ": "konto założone 2 dni temu", "tekst": "KOMUNIKAT: jutro wszystkie szkoły w Jarzębinie są zamknięte z powodu awarii ogrzewania. Prosimy o przekazanie dalej.", "meta": "udostępniono 5 tys. razy", "sygnal": "konto podszywa się pod urząd", "skrot": "komunikat „Biura Prasowego” o zamkniętych szkołach", "wyjasnienie": "Konto podaje się za urząd, ale ma dwa dni i nikt inny nie potwierdza komunikatu. Sprawdź, czy ta sama informacja jest na oficjalnych kanałach urzędu.", "czas": 17.0}, {"poziom": 2, "fals": false, "autor": "Dominika W.", "typ": "konto osobiste, od 7 lat", "tekst": "Prognoza dla Modrzewina: sobota deszcz do 16:00, niedziela słonecznie, około 18 stopni. Dane z serwisu pogodowego, odczytane dziś o 7:00.", "meta": "udostępniono 15 razy", "czas": 17.5}, {"poziom": 2, "fals": true, "autor": "Ola T.", "typ": "konto osobiste, od 3 lat", "tekst": "Podobno w kranach w Jarzębinie jest skażona woda. Usłyszałam to od kogoś, kto zna kogoś z wodociągów. Lepiej nie pić, dopóki nie wiadomo.", "meta": "udostępniono 880 razy", "sygnal": "źródło z trzeciej ręki („podobno”)", "skrot": "wpis o skażonej wodzie w kranach", "wyjasnienie": "To informacja z trzeciej ręki („podobno”, „ktoś zna kogoś”), bez źródła pierwotnego. W sprawie wody liczy się oficjalny komunikat, nie domysły: sprawdź go, zanim cokolwiek udostępnisz.", "czas": 18.5}, {"poziom": 3, "fals": false, "autor": "Biblioteka w Jarzębinie", "typ": "konto instytucji, od 7 lat", "tekst": "W sobotę biblioteka jest otwarta od 9:00 do 14:00. Wystarczy karta biblioteczna.", "meta": "udostępniono 18 razy", "czas": 13.5}, {"poziom": 3, "fals": true, "autor": "Bartek Z.", "typ": "konto osobiste, od 6 lat", "tekst": "Tak wyglądał dziś rynek w Modrzewinie po burzy! Zdjęcie dostałem od znajomej.", "foto": "zalany rynek", "meta": "zdjęcie bez daty i autora", "sygnal": "zdjęcie bez daty i autora", "skrot": "wpis ze zdjęciem zalanego rynku", "wyjasnienie": "Zdjęcie jest opisane jako dzisiejsze, ale nie ma daty ani autora. Wyszukiwanie obrazem pokazuje, gdzie i kiedy zdjęcie pojawiło się wcześniej; bywa, że krąży w sieci od lat w zupełnie innym kontekście.", "czas": 14.5}, {"poziom": 3, "fals": false, "autor": "Piotr G.", "typ": "konto osobiste, od 9 lat", "tekst": "Remont ulicy Polnej w Modrzewinie potrwa dwa tygodnie. Autobusy jadą objazdem, zmienione przystanki są oznaczone na słupkach.", "meta": "udostępniono 52 razy", "czas": 14.5}, {"poziom": 3, "fals": true, "autor": "Bystre Zdrowie", "typ": "portal zdrowotny, od 2 lat", "tekst": "Ta jedna rzecz w Twojej kuchni szkodzi bardziej, niż myślisz. Nie uwierzysz, co to takiego!", "meta": "udostępniono 14 tys. razy", "sygnal": "nagłówek-przynęta", "skrot": "wpis „Ta jedna rzecz w Twojej kuchni”", "wyjasnienie": "Nagłówek zapowiada coś ważnego, ale nie mówi co. Jeśli z samego nagłówka nie wiesz, o co chodzi, to nie jest niezręczność, tylko projekt: luka ma się domknąć dopiero po kliknięciu.", "czas": 14.5}, {"poziom": 3, "fals": false, "autor": "Zofia M.", "typ": "konto osobiste, od 5 lat", "tekst": "Znaleziono klucze z brelokiem-żółwiem na przystanku Rynek w Jarzębinie. Są w biurze rzeczy znalezionych, opisz brelok.", "meta": "udostępniono 33 razy", "czas": 14.5}, {"poziom": 4, "fals": true, "autor": "Marek D.", "typ": "konto osobiste, od 2 miesięcy", "tekst": "Nagranie z ratusza w Jarzębinie: „Awarię wody ukryjemy do poniedziałku”. Tylko u nas, innych źródeł brak.", "meta": "nagranie 0:14 · udostępniono 7 tys. razy", "sygnal": "nagranie bez potwierdzenia", "skrot": "wpis z nagraniem z ratusza", "wyjasnienie": "To jedno nagranie bez niezależnego potwierdzenia z innego źródła. Podróbkę trudno odróżnić gołym okiem (w badaniu z modułu 5 trafność wyniosła 57,6%), więc zanim uznasz nagranie za autentyczne, poszukaj potwierdzenia.", "czas": 14.0}, {"poziom": 4, "fals": false, "autor": "Dworzec w Jarzębinie", "typ": "konto instytucji, od 5 lat", "tekst": "Od poniedziałku pociąg 6:42 do Modrzewina odjeżdża o 6:48. Zmiana jest w tabeli odjazdów na dworcu.", "meta": "udostępniono 27 razy", "czas": 13.5}, {"poziom": 4, "fals": true, "autor": "Karolina M.", "typ": "konto osobiste, od 6 lat", "tekst": "Autobusy w Jarzębinie NIGDY nie jeżdżą na czas. Zawsze to samo, od lat nic się nie zmienia.", "meta": "udostępniono 460 razy", "sygnal": "słowa bez wyjątków", "skrot": "wpis o spóźnionych autobusach", "wyjasnienie": "„Nigdy” i „zawsze” to słowa bez wyjątków. Spróbuj podstawić liczbę: ile kursów z ilu się spóźniło? Jeśli odpowiedzi nie ma, to nie jest twierdzenie o świecie, tylko o czyichś emocjach.", "czas": 13.5}, {"poziom": 4, "fals": false, "autor": "Sklep przy Polnej w Modrzewinie", "typ": "konto sklepu, od 4 lat", "tekst": "Przecena pieczywa o 30% po 18:00, jak co czwartek. Informacja wisi na drzwiach sklepu.", "meta": "udostępniono 11 razy", "czas": 13.5}, {"poziom": 4, "fals": true, "autor": "Weronika N.", "typ": "konto osobiste, od 3 lat", "tekst": "Ten napar poprawia sen! Udostępniło go już 40 tysięcy osób, więc coś w tym jest.", "meta": "udostępniono 40 tys. razy", "sygnal": "popularność zamiast dowodu", "skrot": "wpis o naparze, który „poprawia sen”", "wyjasnienie": "Liczba udostępnień mówi, ile osób puściło wpis dalej, a nie czy jest prawdziwy. Popularność łatwo pomylić z wiarygodnością.", "czas": 13.0}], "t": {"start": "Przed Tobą kanał z 20 wpisami. Przy każdym zdecyduj: udostępnić czy najpierw sprawdzić. Kanał będzie przyspieszał.", "trybLegend": "Tryb gry", "czytnik": "Osoby korzystające z czytnika ekranu powinny wybrać tryb bez limitu czasu.", "zacznij": "Zacznij", "zasadyTytul": "Jak liczymy punkty", "zasady": ["Udostępnienie rzetelnego wpisu albo sprawdzenie wpisu bez pokrycia: 10 punktów.", "Sprawdzenie rzetelnego wpisu: 5 punktów. To nie jest błąd, więc seria trwa, ale nie rośnie.", "Udostępnienie wpisu bez pokrycia: tracisz jedno z trzech serc zaufania, a seria się przerywa. Gdy zaufanie spadnie do zera, gra się kończy.", "Brak decyzji przed końcem czasu: wpis zostaje przewinięty, dostajesz 0 punktów, a seria się przerywa.", "Seria rośnie, gdy udostępnisz rzetelny wpis albo sprawdzisz wpis bez pokrycia. Po trzech takich decyzjach z rzędu kolejne punkty liczą się podwójnie (Seria ×2)."], "hudEtyk": "Stan gry", "punkty": "Punkty", "seria": "Seria", "mnoz": "Seria ×2", "zaufanie": "Zaufanie: {z} z {max}", "poziom": "Poziom {p} z {ile}", "wpisNr": "Wpis {n} z {ile}", "baner": "Poziom {p} z {ile} · {t} s na wpis", "banerUp": "Kanał przyspiesza!", "banerBez": "Poziom {p} z {ile} · bez limitu", "poziomOgl": "Poziom {p} z {ile}: {t} s na ten wpis.", "poziomOglBez": "Poziom {p} z {ile}.", "sprawdz": "Sprawdź", "udostepnij": "Udostępnij", "pauza": "Pauza", "wznow": "Wznów", "pauzaInfoR": "Gra wstrzymana. Naciśnij „Wznów”, żeby wrócić do wpisu.", "pauzaInfoK": "Gra wstrzymana, bo karta przeglądarki była ukryta. Naciśnij „Wznów”, żeby wrócić do wpisu.", "pauzaOgl": "Gra wstrzymana.", "wznowOgl": "Gra wznowiona.", "podpowiedz": "Podpowiedź: strzałka w lewo to „Sprawdź”, strzałka w prawo to „Udostępnij”. Skróty działają, gdy fokus jest w grze.", "wpisEtyk": "Wpis {n} z {ile}", "zdjecie": "Zdjęcie", "zobaczWynik": "Zobacz wynik", "dalej": "Dalej", "werPrefiks": "Wpis {n}:", "udoOk": "Udostępnione. Wpis był rzetelny.", "sprFals": "Dobrze, że sprawdzasz. Sygnał ostrzegawczy: {s}.", "udoFals": "Udostępniłeś/aś wpis bez pokrycia: {s}.", "sprOk": "Sprawdzone, wpis rzetelny. Sprawdzanie zawsze się opłaca, choć kosztuje chwilę.", "brak": "Przewinięte. Bez decyzji nie ma punktów, a seria się przerywa.", "pkt": "+{p} punktów", "pktMnoz": "+{p} punktów ({m})", "zaufanieSpadlo": "Tracisz zaufanie. Zaufanie: {z} z {max}.", "koniecH": "Koniec gry. Wynik: {p} punktów.", "koniecHWczesnie": "Koniec gry: zaufanie spadło do zera. Wynik: {p} punktów.", "trybNazwy": {"czas": "z limitem czasu", "bez": "bez limitu czasu"}, "trybInfo": "Tryb gry: {t}.", "lPunkty": "Punkty", "lSeria": "Najlepsza seria", "lRekord": "Rekord w tym trybie", "nowyRekord": "Nowy rekord!", "rekordBrakZapisu": "Ta przeglądarka nie pozwala zapisać rekordu na stałe, więc obowiązuje on tylko do zamknięcia strony.", "tabCap": "Wyniki po poziomach", "kol": ["Poziom i średni czas na wpis", "Trafne decyzje", "Udostęp|nione bez pokrycia", "Przewi|nięte"], "wiersz": "Poziom {p} ({t})", "czasWiersza": "ok. {t} s", "bezLimitu": "bez limitu", "nieRozegrano": "nie rozegrano", "tabNota": "Do trafnych decyzji liczy się też sprawdzenie rzetelnego wpisu: to nie błąd, tylko mniej punktów.", "wnH": "Co z tego wynika o przebodźcowaniu", "wnA": "Materiał „Przebodźcowanie i wyjście z bańki” opisuje przebodźcowanie jako stan, w którym ilość bodźców przekracza zdolność ich przetworzenia. Skutki są mierzalne: spada jakość decyzji, wydłuża się czas reakcji, a myślenie przestawia się z analitycznego na uproszczone i emocjonalne.", "wnLicz": "Udostępnione wpisy bez pokrycia przy {cw} s na wpis: {bw} z {fw}. Przy {cs} s na wpis: {bs} z {fs}.", "wnZero": "Nie udostępniłeś/aś żadnego wpisu bez pokrycia, także przy najkrótszym czasie na wpis. Tempo nie zepsuło Twoich decyzji.", "wnGorzej": "Szybsze tempo kosztowało Cię więcej błędów. Pasuje to do opisu z materiału: gdy bodźców przybywa szybciej, niż da się je przetworzyć, myślenie przestawia się na uproszczone i emocjonalne. To jedna rozgrywka, więc traktuj ją jak ilustrację, a nie dowód.", "wnRowno": "Tempo nie zmieniło odsetka Twoich błędów, a wpisy bez pokrycia przechodziły także wtedy, gdy czasu było więcej. Materiał przypomina, że nowość i silna emocja skłaniają do kliknięcia „udostępnij” szybciej niż namysł nad tym, czy to prawda.", "wnLepiej": "W tej rozgrywce szybsze tempo nie pogorszyło Twoich decyzji: błędów było proporcjonalnie mniej niż przy wolniejszym. To jedna rozgrywka, a materiał przypomina, że nowość i silna emocja skłaniają do kliknięcia „udostępnij” szybciej niż namysł nad tym, czy to prawda.", "wnNic": "Wszystkie wpisy przewinęły się bez Twojej decyzji, więc ta rozgrywka nie pokazuje, jak podejmujesz decyzje. Zagraj jeszcze raz i zdecyduj przy każdym wpisie.", "wnZeroPrz": "Nie udostępniłeś/aś żadnego wpisu bez pokrycia, ale część wpisów przewinęła się bez Twojej decyzji.", "wnWczesnie": "Gra skończyła się przed szybszymi poziomami, bo udostępnione wpisy bez pokrycia wyczerpały zaufanie. Udostępnione wpisy bez pokrycia przy {cw} s na wpis: {bw} z {fw}.", "wnBezZero": "Grałeś/aś bez limitu czasu, więc ta rozgrywka nie pokaże wpływu pośpiechu. Nie udostępniłeś/aś żadnego wpisu bez pokrycia.", "wnBezBledy": "Grałeś/aś bez limitu czasu, więc ta rozgrywka nie pokaże wpływu pośpiechu. Liczba udostępnionych wpisów bez pokrycia: {n}.", "wnBezKoniec": "Spróbuj trybu z limitem czasu i porównaj wyniki: według materiału im więcej bodźców naraz, tym mniej zostaje uwagi na sprawdzenie, czy to, co widać, jest prawdziwe.", "wnPrz": "Wpisy przewinięte bez decyzji ({n}) to bodźce, których nie dało się przetworzyć w danym czasie.", "wnC": "Co z tym zrobić? Miniwykład „Czterdzieści siedem sekund” radzi: nie sprawdzaj wszystkiego. Sprawdzenie źródła zajmuje zwykle dwie, trzy minuty, więc wybierz to, co zamierzasz podać dalej, i tylko na to poświęć pełne trzy minuty. Kurs podpowiada też, co robić, gdy coś Cię mocno poruszy: emocjonalny ton to sygnał, żeby sprawdzić fakty dokładniej.", "przepH": "Wpisy bez pokrycia, które przepuściłeś/aś", "przepBrak": "Nie przepuściłeś/aś żadnego wpisu bez pokrycia. Gratulacje: ani razu nie udostępniłeś/aś wpisu, który wymagał sprawdzenia.", "przepNic": "Żaden wpis nie został udostępniony, więc nie ma wpisów bez pokrycia do omówienia.", "jeszcze": "Zagraj jeszcze raz", "zmien": "Zmień tryb"}};
+function ensure(){
+  var w = document.getElementById('mk-przewijaj') || document.querySelector('.mk-przewijaj');
+  if(!w) return null;
+  w.id='mk-przewijaj'; w.className='mk mk-przewijaj';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-przewijaj"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-przewijaj');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var T = D.t;
+  var P = D.poziomy;
+  var NS = 'http://www.w3.org/2000/svg';
+  var ZAUFANIE_MAX = 3;
+  var KLUCZ = {czas: 'mk-przewijaj-rekord-czas', bez: 'mk-przewijaj-rekord-bez'};
+  var SERCE = 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 '
+            + '3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z';
+
+  var ekran = el('div','mk-g-ekran');
+  var glos = el('div','mk-sr');
+  glos.setAttribute('aria-live','polite');
+  glos.setAttribute('aria-atomic','true');
+  c.appendChild(ekran);
+  c.appendChild(glos);
+
+  var stan = 'start';          // start | gra | koniec
+  var tryb = 'bez';            // czas | bez (domyślnie bez limitu czasu)
+  var gra = null;
+  var ui = null;
+  var zegar = null;
+  var wstrzymane = null;
+  var rekordPamiec = {czas: 0, bez: 0};
+  var ostSzer = 0;
+  var tmResize = 0;
+  var ruchOgr = false;
+  try { ruchOgr = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); }
+  catch(e1){ ruchOgr = false; }
+
+  // ---------------------------------------------------------- pomocnicze
+  function wstaw(s, m){
+    var out = s;
+    for(var k in m){
+      if(Object.prototype.hasOwnProperty.call(m, k)){ out = out.split('{' + k + '}').join(String(m[k])); }
+    }
+    return out;
+  }
+  function wielka(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+  function sek(x){ return String(x).replace('.', ','); }
+  // średni czas wpisów z podanych poziomów (z pola `czas` wpisu), do 0,5 s; do tabeli i wniosku na ekranie końcowym
+  function srCzas(poz){
+    var suma = 0, n = 0;
+    for(var i = 0; i < D.wpisy.length; i++){
+      if(poz.indexOf(D.wpisy[i].poziom) >= 0){ suma += D.wpisy[i].czas; n++; }
+    }
+    return n ? Math.floor(suma / n * 2 + 0.5) / 2 : 0;
+  }
+  function kropka(s){
+    var k = s.charAt(s.length - 1);
+    return (k === '.' || k === '!' || k === '?' || k === '”') ? s : s + '.';
+  }
+  function tasuj(tab){
+    var a = tab.slice();
+    for(var i = a.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function ulozKolejke(){
+    var k = [];
+    for(var p = 0; p < P.length; p++){
+      var grupa = [];
+      for(var i = 0; i < D.wpisy.length; i++){ if(D.wpisy[i].poziom === p + 1){ grupa.push(i); } }
+      k = k.concat(tasuj(grupa));
+    }
+    return k;
+  }
+  function oglos(tekst, opoznienie){
+    if(opoznienie){ setTimeout(function(){ glos.textContent = tekst; }, opoznienie); }
+    else { glos.textContent = tekst; }
+  }
+  function svg(w, h, vb){
+    var s = document.createElementNS(NS, 'svg');
+    s.setAttribute('width', String(w)); s.setAttribute('height', String(h));
+    s.setAttribute('viewBox', vb);
+    s.setAttribute('aria-hidden', 'true'); s.setAttribute('focusable', 'false');
+    return s;
+  }
+  function elSvg(nazwa, atr){
+    var e = document.createElementNS(NS, nazwa);
+    for(var k in atr){ if(Object.prototype.hasOwnProperty.call(atr, k)){ e.setAttribute(k, atr[k]); } }
+    return e;
+  }
+  function ikonaLupa(){
+    var s = svg(22, 22, '0 0 24 24');
+    s.appendChild(elSvg('circle', {cx: '10', cy: '10', r: '6.5', fill: 'none', stroke: 'currentColor',
+                                   'stroke-width': '2.2'}));
+    s.appendChild(elSvg('path', {d: 'M15.5 15.5L21 21', fill: 'none', stroke: 'currentColor',
+                                 'stroke-width': '2.2', 'stroke-linecap': 'round'}));
+    return s;
+  }
+  function ikonaUdo(){
+    var s = svg(22, 22, '0 0 24 24');
+    s.appendChild(elSvg('path', {d: 'M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5',
+                                 fill: 'none', stroke: 'currentColor', 'stroke-width': '2.2',
+                                 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}));
+    return s;
+  }
+  function ikonaFoto(){
+    var s = svg(34, 34, '0 0 24 24');
+    s.appendChild(elSvg('circle', {cx: '8', cy: '8', r: '2', fill: '#4a4e55'}));
+    s.appendChild(elSvg('path', {d: 'M3 20l6-8 4 5 3-3 5 6z', fill: '#4a4e55'}));
+    return s;
+  }
+  function serce(pelne){
+    var s = svg(24, 24, '0 0 24 24');
+    s.appendChild(elSvg('path', {d: SERCE, fill: pelne ? '#b4322b' : 'none',
+                                 stroke: pelne ? '#b4322b' : '#4a4e55', 'stroke-width': '2'}));
+    return s;
+  }
+
+  // ---------------------------------------------------------- rekord (localStorage, każdy dostęp w try/catch)
+  function odczytajRekord(tr){
+    try {
+      var v = window.localStorage.getItem(KLUCZ[tr]);
+      var n = parseInt(v, 10);
+      return (isNaN(n) || n < 0) ? 0 : n;
+    } catch(e2){ return 0; }
+  }
+  function zapiszRekord(tr, n){
+    try { window.localStorage.setItem(KLUCZ[tr], String(n)); return true; }
+    catch(e3){ return false; }
+  }
+
+  // ---------------------------------------------------------- zegar (setTimeout + Date.now; w ukrytej karcie klatki animacji stoją)
+  function krokZegara(){ return ruchOgr ? 500 : 100; }
+  function zegarStop(){
+    if(zegar){ clearTimeout(zegar.tm); zegar = null; }
+  }
+  function zegarPlanuj(){
+    if(!zegar){ return; }
+    var z = zegar;
+    var ile = z.koniec - Date.now();
+    if(ile <= 0){
+      zegar = null;
+      if(z.tykaj){ z.tykaj(0, z.calosc); }
+      z.cb();
+      return;
+    }
+    if(z.tykaj){ z.tykaj(ile, z.calosc); }
+    z.tm = setTimeout(zegarPlanuj, Math.max(15, Math.min(krokZegara(), ile)));
+  }
+  function zegarStart(ms, cb, tykaj, calosc){
+    zegarStop();
+    zegar = {koniec: Date.now() + ms, cb: cb, tykaj: tykaj, calosc: calosc || ms, tm: 0};
+    zegarPlanuj();
+  }
+  function zegarWstrzymaj(){
+    if(!zegar){ return null; }
+    clearTimeout(zegar.tm);
+    var p = {pozostalo: Math.max(0, zegar.koniec - Date.now()), cb: zegar.cb, tykaj: zegar.tykaj,
+             calosc: zegar.calosc};
+    zegar = null;
+    return p;
+  }
+  function tykajPasek(ile, calosc){
+    if(!ui || !ui.pasekW){ return; }
+    var proc = Math.max(0, Math.min(100, Math.round(ile / calosc * 100)));
+    ui.pasekW.style.width = proc + '%';
+    if(proc <= 30){ ui.pasekW.classList.add('mk-g-malo'); } else { ui.pasekW.classList.remove('mk-g-malo'); }
+  }
+
+  // ---------------------------------------------------------- ekran startowy
+  function ekranStart(){
+    zegarStop();
+    wstrzymane = null;
+    gra = null;
+    ui = null;
+    stan = 'start';
+    ekran.innerHTML = '';
+    ekran.appendChild(el('p','mk-g-lead', T.start));
+
+    var fs = document.createElement('fieldset');
+    fs.className = 'mk-g-fs';
+    var lg = document.createElement('legend');
+    lg.className = 'mk-sr';
+    lg.textContent = T.trybLegend;
+    fs.appendChild(lg);
+    var pt = el('p','mk-g-pyt', T.trybLegend);
+    pt.setAttribute('aria-hidden','true');
+    fs.appendChild(pt);
+    D.tryby.forEach(function(t){
+      var id = 'mk-g-tryb-' + t.k;
+      var lab = document.createElement('label');
+      lab.className = 'mk-g-opcja';
+      lab.setAttribute('for', id);
+      var inp = document.createElement('input');
+      inp.type = 'radio'; inp.name = 'mk-g-tryb'; inp.id = id; inp.value = t.k;
+      inp.className = 'mk-g-radio';
+      if(t.k === tryb){ inp.checked = true; }
+      inp.addEventListener('change', function(){ if(inp.checked){ tryb = t.k; } });
+      var box = el('span','mk-g-opt');
+      box.appendChild(el('span','mk-g-optnazwa', t.etyk));
+      box.appendChild(el('span','mk-g-opttekst', t.pod));
+      lab.appendChild(inp);
+      lab.appendChild(box);
+      fs.appendChild(lab);
+    });
+    ekran.appendChild(fs);
+    ekran.appendChild(el('p','mk-g-czytnik', T.czytnik));
+
+    var det = document.createElement('details');
+    det.className = 'mk-g-szcz';
+    var sum = document.createElement('summary');
+    sum.textContent = T.zasadyTytul;
+    det.appendChild(sum);
+    var ul = el('ul','mk-lista');
+    T.zasady.forEach(function(z){ ul.appendChild(el('li', null, z)); });
+    det.appendChild(ul);
+    ekran.appendChild(det);
+
+    var btn = el('button','mk-btn mk-g-start', T.zacznij);
+    btn.type = 'button';
+    btn.addEventListener('click', zacznij);
+    ekran.appendChild(btn);
+  }
+
+  // ---------------------------------------------------------- ekran gry
+  function przycisk(kod, napis, ikona, skrot){
+    var b = el('button','mk-g-dec mk-g-dec-' + kod);
+    b.type = 'button';
+    b.setAttribute('aria-keyshortcuts', skrot);
+    b.appendChild(ikona);
+    b.appendChild(el('span', null, napis));
+    b.addEventListener('click', function(){ decyduj(kod); });
+    return b;
+  }
+  function kafel(etykieta, wartosc){
+    var k = el('div','mk-g-st');
+    var e = el('span','mk-g-stn', etykieta);
+    k.appendChild(e);
+    var w = null;
+    if(wartosc !== null){ w = el('span','mk-g-stw', wartosc); k.appendChild(w); }
+    return {k: k, e: e, w: w};
+  }
+  function budujEkranGry(){
+    ekran.innerHTML = '';
+    ui = {};
+    var hud = el('div','mk-g-hud');
+    hud.setAttribute('role','group');
+    hud.setAttribute('aria-label', T.hudEtyk);
+    var kP = kafel(T.punkty, '0');
+    ui.punkty = kP.w;
+    hud.appendChild(kP.k);
+    var kS = el('div','mk-g-st');
+    var wS = el('div','mk-g-strz');
+    wS.appendChild(el('span','mk-g-stn', T.seria));
+    ui.mnoz = el('span','mk-g-mnoz mk-g-mnoz-off', T.mnoz);
+    wS.appendChild(ui.mnoz);
+    kS.appendChild(wS);
+    ui.seria = el('span','mk-g-stw','0');
+    kS.appendChild(ui.seria);
+    hud.appendChild(kS);
+    var kZ = kafel('', null);
+    ui.zauf = kZ.e;
+    ui.serca = el('span','mk-g-serca');
+    ui.serca.setAttribute('aria-hidden','true');
+    kZ.k.appendChild(ui.serca);
+    hud.appendChild(kZ.k);
+    var kL = kafel('', '');
+    ui.poz = kL.e;
+    ui.wpisNr = kL.w;
+    ui.wpisNr.className = 'mk-g-stw mk-g-stw2';
+    hud.appendChild(kL.k);
+    ekran.appendChild(hud);
+
+    if(tryb === 'czas'){
+      var wiersz = el('div','mk-g-czasrz');
+      var pasek = el('div','mk-g-pasek');
+      pasek.setAttribute('aria-hidden','true');
+      ui.pasekW = el('div','mk-g-pasek-w');
+      pasek.appendChild(ui.pasekW);
+      wiersz.appendChild(pasek);
+      ui.pauza = el('button','mk-btn mk-btn2 mk-g-pauza', T.pauza);
+      ui.pauza.type = 'button';
+      ui.pauza.addEventListener('click', function(){
+        if(gra && gra.pauza){ wznow(); } else { pauza('reczna'); }   // w informacji po decyzji pauza() nic nie robi
+      });
+      wiersz.appendChild(ui.pauza);
+      ekran.appendChild(wiersz);
+    }
+
+    ui.baner = el('p','mk-g-baner');
+    ui.baner.setAttribute('aria-hidden','true');
+    ekran.appendChild(ui.baner);
+
+    var tel = el('div','mk-g-tel');
+    ui.wpis = el('article','mk-g-wpis');
+    var nag = el('div','mk-g-wnag');
+    ui.awatar = el('span','mk-g-awatar');
+    ui.awatar.setAttribute('aria-hidden','true');
+    nag.appendChild(ui.awatar);
+    var kol = el('div','mk-g-wkol');
+    ui.autor = el('p','mk-g-autor');
+    ui.typ = el('p','mk-g-typ');
+    kol.appendChild(ui.autor);
+    kol.appendChild(ui.typ);
+    nag.appendChild(kol);
+    ui.wpis.appendChild(nag);
+    ui.tresc = el('p','mk-g-tresc');
+    ui.wpis.appendChild(ui.tresc);
+    ui.foto = el('div','mk-g-foto');
+    ui.foto.hidden = true;
+    ui.fotoTxt = el('span',null);
+    ui.foto.appendChild(ikonaFoto());
+    ui.foto.appendChild(ui.fotoTxt);
+    ui.wpis.appendChild(ui.foto);
+    ui.meta = el('p','mk-g-meta');
+    ui.wpis.appendChild(ui.meta);
+    tel.appendChild(ui.wpis);
+    ui.pauzaInfo = el('div','mk-g-pauzainfo');
+    ui.pauzaInfo.hidden = true;
+    ui.pauzaTxt = el('p', null);
+    ui.pauzaInfo.appendChild(ui.pauzaTxt);
+    tel.appendChild(ui.pauzaInfo);
+    ekran.appendChild(tel);
+
+    ui.akcje = el('div','mk-g-akcje');
+    ui.spr = przycisk('spr', T.sprawdz, ikonaLupa(), 'ArrowLeft');
+    ui.udo = przycisk('udo', T.udostepnij, ikonaUdo(), 'ArrowRight');
+    ui.akcje.appendChild(ui.spr);
+    ui.akcje.appendChild(ui.udo);
+    ekran.appendChild(ui.akcje);
+
+    ui.wynikBtn = el('button','mk-btn mk-g-wynik', T.zobaczWynik);
+    ui.wynikBtn.type = 'button';
+    ui.wynikBtn.hidden = true;
+    ui.wynikBtn.addEventListener('click', koniecGry);
+    ekran.appendChild(ui.wynikBtn);
+
+    ui.dalej = el('button','mk-btn mk-g-dalej', T.dalej);
+    ui.dalej.type = 'button';
+    ui.dalej.hidden = true;
+    ui.dalej.addEventListener('click', function(){
+      if(!gra || stan !== 'gra' || gra.faza !== 'info' || gra.pauza){ return; }
+      ui.dalej.hidden = true;
+      ui.akcje.hidden = false;
+      nastepny();
+      ui.spr.focus();
+    });
+    ekran.appendChild(ui.dalej);
+
+    ui.wer = el('div','mk-g-wer');
+    ui.wer.setAttribute('aria-hidden','true');
+    ekran.appendChild(ui.wer);
+
+    ekran.appendChild(el('p','mk-g-podp', T.podpowiedz));
+    wyrownajWysokosc();
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){ if(stan === 'gra' && ui){ wyrownajWysokosc(); } });
+    }
+  }
+
+  // wszystkie wpisy mają zajmować tyle samo miejsca, żeby przyciski nie skakały między wpisami
+  function wyrownajWysokosc(){
+    if(!ui || !ui.wpis){ return; }
+    var byl = ui.wpis.hidden;
+    ui.wpis.hidden = false;
+    ui.wpis.style.minHeight = '';
+    var maks = 0;
+    for(var i = 0; i < D.wpisy.length; i++){
+      wypelnijWpis(D.wpisy[i]);
+      var h = ui.wpis.offsetHeight;
+      if(h > maks){ maks = h; }
+    }
+    if(gra && gra.biezacy){ wypelnijWpis(gra.biezacy); }
+    if(maks > 80){
+      ui.wpis.style.minHeight = maks + 'px';
+      ui.pauzaInfo.style.minHeight = maks + 'px';
+    }
+    ui.wpis.hidden = byl;
+    ostSzer = ekran.clientWidth;
+  }
+  window.addEventListener('resize', function(){
+    clearTimeout(tmResize);
+    tmResize = setTimeout(function(){
+      if(stan === 'gra' && ui && ekran.clientWidth !== ostSzer){ wyrownajWysokosc(); }
+    }, 150);
+  });
+
+  function wypelnijWpis(w){
+    ui.awatar.textContent = w.autor.charAt(0).toUpperCase();
+    ui.autor.textContent = w.autor;
+    ui.typ.textContent = w.typ;
+    ui.tresc.textContent = w.tekst;
+    if(w.foto){ ui.foto.hidden = false; ui.fotoTxt.textContent = T.zdjecie + ': ' + w.foto; }
+    else { ui.foto.hidden = true; ui.fotoTxt.textContent = ''; }
+    ui.meta.textContent = w.meta || '';
+    ui.meta.hidden = !w.meta;
+  }
+  function ustawPrzyciski(aktywne){
+    ui.spr.setAttribute('aria-disabled', aktywne ? 'false' : 'true');
+    ui.udo.setAttribute('aria-disabled', aktywne ? 'false' : 'true');
+  }
+  // pauza ma sens tylko podczas wpisu; w informacji po decyzji zegar i tak stoi (wzorzec gry: aria-disabled, nie disabled)
+  function ustawPauze(aktywna){
+    if(ui && ui.pauza){ ui.pauza.setAttribute('aria-disabled', aktywna ? 'false' : 'true'); }
+  }
+  function aktualizujHud(){
+    ui.punkty.textContent = String(gra.punkty);
+    ui.seria.textContent = String(gra.seria);
+    ui.mnoz.className = 'mk-g-mnoz' + (gra.seria >= 3 ? '' : ' mk-g-mnoz-off');
+    ui.zauf.textContent = wstaw(T.zaufanie, {z: gra.zaufanie, max: ZAUFANIE_MAX});
+    ui.serca.innerHTML = '';
+    for(var i = 0; i < ZAUFANIE_MAX; i++){ ui.serca.appendChild(serce(i < gra.zaufanie)); }
+    var w = gra.biezacy;
+    ui.poz.textContent = wstaw(T.poziom, {p: w ? w.poziom : 1, ile: P.length});
+    ui.wpisNr.textContent = wstaw(T.wpisNr, {n: gra.n + 1, ile: gra.kolejka.length});
+  }
+  function tekstWpisu(w, n){
+    var s = wstaw(T.wpisEtyk, {n: n, ile: gra.kolejka.length}) + '. ' + kropka(w.autor + ', ' + w.typ) + ' '
+          + kropka(w.tekst);
+    if(w.foto){ s += ' ' + T.zdjecie + ': ' + kropka(w.foto); }
+    if(w.meta){ s += ' ' + wielka(kropka(w.meta)); }
+    return s;
+  }
+  function pokazWerdykt(klasa, tekst, nrWpisu){
+    ui.wer.innerHTML = '';
+    ui.wer.className = 'mk-g-wer mk-g-wer-' + klasa;
+    if(!tekst){ return; }
+    ui.wer.appendChild(el('span','mk-g-werp', wstaw(T.werPrefiks, {n: nrWpisu})));
+    ui.wer.appendChild(document.createTextNode(' ' + tekst));
+  }
+
+  function pokazWpis(pierwszy){
+    var w = D.wpisy[gra.kolejka[gra.n]];
+    var poprzedni = gra.n > 0 ? D.wpisy[gra.kolejka[gra.n - 1]] : null;
+    var nowyPoziom = !poprzedni || poprzedni.poziom !== w.poziom;
+    var czas = w.czas;
+    gra.faza = 'wpis';
+    gra.biezacy = w;
+    ui.wpis.setAttribute('aria-label', wstaw(T.wpisEtyk, {n: gra.n + 1, ile: gra.kolejka.length}));
+    wypelnijWpis(w);
+    ui.wpis.classList.remove('mk-g-nowy');
+    void ui.wpis.offsetWidth;
+    ui.wpis.classList.add('mk-g-nowy');
+    var przysp = tryb === 'czas' && nowyPoziom && w.poziom > 1;
+    if(tryb === 'czas'){
+      ui.baner.textContent = przysp ? T.banerUp : wstaw(T.baner, {p: w.poziom, ile: P.length, t: sek(czas)});
+    } else {
+      ui.baner.textContent = wstaw(T.banerBez, {p: w.poziom, ile: P.length});
+    }
+    ui.baner.className = 'mk-g-baner' + (przysp ? ' mk-g-baner-up' : '');
+    aktualizujHud();
+    ustawPrzyciski(true);
+    ustawPauze(true);
+    if(tryb !== 'czas' && gra.ostatniWerdykt){
+      pokazWerdykt(gra.ostatniWerdykt.klasa, gra.ostatniWerdykt.tekst, gra.ostatniWerdykt.nr);
+    } else {
+      pokazWerdykt('brak', '', 0);
+    }
+
+    var ogl = '';
+    if(gra.ostatniaInfo){ ogl += gra.ostatniaInfo + ' '; gra.ostatniaInfo = ''; }
+    if(nowyPoziom){
+      ogl += (tryb === 'czas' ? wstaw(T.poziomOgl, {p: w.poziom, ile: P.length, t: sek(czas)})
+                              : wstaw(T.poziomOglBez, {p: w.poziom, ile: P.length})) + ' ';
+    }
+    ogl += tekstWpisu(w, gra.n + 1);
+    oglos(ogl, pierwszy ? 350 : 0);
+
+    if(tryb === 'czas'){
+      ui.pasekW.style.width = '100%';
+      ui.pasekW.classList.remove('mk-g-malo');
+      zegarStart(czas * 1000, przewin, tykajPasek, czas * 1000);
+    }
+  }
+
+  function przewin(){ decyduj('brak'); }
+
+  function decyduj(co){
+    if(!gra || stan !== 'gra' || gra.faza !== 'wpis' || gra.pauza){ return; }
+    zegarStop();
+    var w = gra.biezacy;
+    var mn = gra.seria >= 3 ? 2 : 1;
+    var pkt = 0, msg, klasa, dodatek = '';
+    if(co === 'udo' && !w.fals){
+      pkt = 10 * mn; gra.seria++; msg = T.udoOk; klasa = 'ok';
+    } else if(co === 'spr' && w.fals){
+      pkt = 10 * mn; gra.seria++; msg = wstaw(T.sprFals, {s: w.sygnal}); klasa = 'ok';
+    } else if(co === 'udo' && w.fals){
+      gra.zaufanie--; gra.seria = 0; msg = wstaw(T.udoFals, {s: w.sygnal}); klasa = 'zle';
+      dodatek = wstaw(T.zaufanieSpadlo, {z: gra.zaufanie, max: ZAUFANIE_MAX});
+      gra.przepuszczone.push(w);
+    } else if(co === 'spr'){
+      pkt = 5 * mn; msg = T.sprOk; klasa = 'ok';
+    } else {
+      gra.seria = 0; msg = T.brak; klasa = 'pass';
+    }
+    if(gra.seria > gra.najSeria){ gra.najSeria = gra.seria; }
+    gra.punkty += pkt;
+    if(pkt > 0){
+      dodatek = kropka(wstaw(mn === 2 ? T.pktMnoz : T.pkt, {p: pkt, m: T.mnoz}));
+    }
+    gra.log.push({poziom: w.poziom, fals: w.fals, dec: co, pkt: pkt});
+    var tekst = msg + (dodatek ? ' ' + dodatek : '');
+    var nr = gra.n + 1;
+    var pelny = wstaw(T.werPrefiks, {n: nr}) + ' ' + tekst;
+    gra.faza = 'info';
+    gra.ostatniWerdykt = {klasa: klasa, tekst: tekst, nr: nr};
+    aktualizujHud();
+    pokazWerdykt(klasa, tekst, nr);
+    ustawPrzyciski(false);
+    var koniec = gra.zaufanie <= 0 || gra.n >= gra.kolejka.length - 1;
+    if(tryb === 'czas'){
+      // zegar stoi, werdykt zostaje na ekranie i jest ogłaszany od razu; dalej idzie się przyciskiem „Dalej”
+      ustawPauze(false);
+      oglos(pelny);
+      ui.akcje.hidden = true;
+      if(koniec){
+        ui.wynikBtn.hidden = false;
+        ui.wynikBtn.focus();
+      } else {
+        ui.dalej.hidden = false;
+        ui.dalej.focus();
+      }
+    } else if(koniec){
+      oglos(pelny);
+      gra.ostatniaInfo = '';
+      ui.akcje.hidden = true;
+      ui.wynikBtn.hidden = false;
+      ui.wynikBtn.focus();
+    } else {
+      gra.ostatniaInfo = pelny;
+      nastepny();
+    }
+  }
+  function nastepny(){
+    gra.n++;
+    pokazWpis(false);
+  }
+
+  // ---------------------------------------------------------- pauza (WCAG 2.2.1 / 2.2.2)
+  function pauza(powod){
+    if(!gra || stan !== 'gra' || tryb !== 'czas' || gra.pauza || gra.faza !== 'wpis'){ return; }
+    wstrzymane = zegarWstrzymaj();
+    gra.pauza = true;
+    ui.wpis.hidden = true;
+    ui.pauzaInfo.hidden = false;
+    ui.pauzaTxt.textContent = powod === 'karta' ? T.pauzaInfoK : T.pauzaInfoR;
+    ui.pauza.textContent = T.wznow;
+    ustawPrzyciski(false);
+    oglos(T.pauzaOgl);
+  }
+  function wznow(){
+    if(!gra || !gra.pauza){ return; }
+    gra.pauza = false;
+    ui.wpis.hidden = false;
+    ui.pauzaInfo.hidden = true;
+    ui.pauza.textContent = T.pauza;
+    ustawPrzyciski(gra.faza === 'wpis');
+    var ogl = T.wznowOgl;
+    if(gra.faza === 'wpis'){ ogl += ' ' + tekstWpisu(gra.biezacy, gra.n + 1); }
+    oglos(ogl);
+    if(wstrzymane){
+      var w = wstrzymane;
+      wstrzymane = null;
+      zegarStart(w.pozostalo, w.cb, w.tykaj, w.calosc);
+    }
+  }
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden || document.visibilityState === 'hidden'){ pauza('karta'); }
+  });
+
+  // ---------------------------------------------------------- klawiatura: tylko wewnątrz gry (WCAG 2.1.4)
+  c.addEventListener('keydown', function(e){
+    if(stan !== 'gra' || !gra){ return; }
+    if(e.altKey || e.ctrlKey || e.metaKey || e.shiftKey){ return; }
+    var k = e.key;
+    if(k === 'ArrowLeft' || k === 'Left'){
+      e.preventDefault();
+      if(!e.repeat){ decyduj('spr'); }
+    } else if(k === 'ArrowRight' || k === 'Right'){
+      e.preventDefault();
+      if(!e.repeat){ decyduj('udo'); }
+    } else if((k === 'Enter' || k === ' ' || k === 'Spacebar') && e.repeat){
+      e.preventDefault();
+    }
+  });
+
+  // ---------------------------------------------------------- start / koniec
+  function zacznij(){
+    gra = {kolejka: ulozKolejke(), n: 0, punkty: 0, seria: 0, najSeria: 0, zaufanie: ZAUFANIE_MAX, log: [],
+           przepuszczone: [], faza: 'wpis', pauza: false, ostatniaInfo: '', ostatniWerdykt: null, biezacy: null};
+    wstrzymane = null;
+    stan = 'gra';
+    budujEkranGry();
+    pokazWpis(true);
+    ui.spr.focus();
+  }
+
+  function podsumuj(){
+    var per = P.map(function(p, i){ return {czas: srCzas([i + 1]), ile: 0, trafne: 0, bledy: 0, przew: 0, fals: 0}; });
+    gra.log.forEach(function(r){
+      var s = per[r.poziom - 1];
+      s.ile++;
+      if(r.fals){ s.fals++; }
+      if(r.dec === 'brak'){ s.przew++; }
+      else if(r.dec === 'udo' && r.fals){ s.bledy++; }
+      else { s.trafne++; }
+    });
+    return per;
+  }
+  function wniosek(per, bl, prz, dec){
+    var out = [T.wnA];
+    var blW = per[0].bledy + per[1].bledy, blS = per[2].bledy + per[3].bledy;
+    var fW = per[0].fals + per[1].fals, fS = per[2].fals + per[3].fals;
+    var cw = 'ok. ' + sek(srCzas([1, 2])), cs = 'ok. ' + sek(srCzas([3, 4]));
+    if(tryb === 'bez'){
+      out.push(bl === 0 ? T.wnBezZero : wstaw(T.wnBezBledy, {n: bl}));
+      out.push(T.wnBezKoniec);
+    } else if(dec === 0){
+      out.push(T.wnNic);
+    } else if(fS === 0){
+      out.push(wstaw(T.wnWczesnie, {cw: cw, bw: blW, fw: fW}));
+    } else {
+      var licz = wstaw(T.wnLicz, {cw: cw, bw: blW, fw: fW, cs: cs, bs: blS, fs: fS});
+      var rW = fW ? blW / fW : 0, rS = blS / fS;
+      var ocena;
+      if(bl === 0){ ocena = prz === 0 ? T.wnZero : T.wnZeroPrz; }
+      else if(rS > rW){ ocena = T.wnGorzej; }
+      else if(rS < rW){ ocena = T.wnLepiej; }
+      else { ocena = T.wnRowno; }
+      out.push(licz + ' ' + ocena);
+    }
+    if(tryb === 'czas' && prz >= 3 && dec > 0){ out.push(wstaw(T.wnPrz, {n: prz})); }
+    out.push(T.wnC);
+    return out;
+  }
+
+  function koniecGry(){
+    zegarStop();
+    wstrzymane = null;
+    stan = 'koniec';
+    var per = podsumuj();
+    var bl = 0, prz = 0;
+    per.forEach(function(s){ bl += s.bledy; prz += s.przew; });
+    var wczesnie = gra.zaufanie <= 0;
+    var dec = gra.log.length - prz;
+    var tr = tryb;
+    var poprzedni = Math.max(odczytajRekord(tr), rekordPamiec[tr]);
+    var nowy = gra.punkty > 0 && gra.punkty > poprzedni;
+    var zapisano = true;
+    if(gra.punkty > poprzedni){
+      rekordPamiec[tr] = gra.punkty;
+      zapisano = zapiszRekord(tr, gra.punkty);
+    }
+    var rekord = Math.max(poprzedni, gra.punkty);
+
+    ekran.innerHTML = '';
+    ui = null;
+    var wyn = el('div','mk-g-koniec');
+    var h = el('h4','mk-g-wynik-h', wstaw(wczesnie ? T.koniecHWczesnie : T.koniecH, {p: gra.punkty}));
+    h.setAttribute('tabindex','-1');
+    wyn.appendChild(h);
+    wyn.appendChild(el('p', null, wstaw(T.trybInfo, {t: T.trybNazwy[tr]})));
+
+    var liczby = el('div','mk-g-hud mk-g-hud3');
+    var k1 = kafel(T.lPunkty, String(gra.punkty));
+    var k2 = kafel(T.lSeria, String(gra.najSeria));
+    var k3 = kafel(T.lRekord, String(rekord));
+    liczby.appendChild(k1.k); liczby.appendChild(k2.k); liczby.appendChild(k3.k);
+    wyn.appendChild(liczby);
+    if(nowy){ wyn.appendChild(el('p','mk-g-rekord', T.nowyRekord)); }
+    if(!zapisano){ wyn.appendChild(el('p','mk-licz', T.rekordBrakZapisu)); }
+
+    var tab = document.createElement('table');
+    tab.className = 'mk-g-tab';
+    var cap = document.createElement('caption');
+    cap.textContent = T.tabCap;
+    tab.appendChild(cap);
+    var thead = document.createElement('thead');
+    var trh = document.createElement('tr');
+    T.kol.forEach(function(nazwa){
+      var th = document.createElement('th');
+      th.setAttribute('scope','col');
+      th.textContent = nazwa.split('|').join('\u00ad');
+      trh.appendChild(th);
+    });
+    thead.appendChild(trh);
+    tab.appendChild(thead);
+    var tbody = document.createElement('tbody');
+    per.forEach(function(s, i){
+      var tr2 = document.createElement('tr');
+      var th2 = document.createElement('th');
+      th2.setAttribute('scope','row');
+      var czasTxt = tr === 'czas' ? wstaw(T.czasWiersza, {t: sek(s.czas)}) : T.bezLimitu;
+      th2.textContent = wstaw(T.wiersz, {p: i + 1, t: czasTxt});
+      tr2.appendChild(th2);
+      var wart = s.ile === 0 ? null : [s.trafne + ' z ' + s.ile, s.bledy + ' z ' + s.fals, s.przew + ' z ' + s.ile];
+      for(var j = 0; j < 3; j++){
+        var td = document.createElement('td');
+        if(wart){ td.textContent = wart[j]; }
+        else {
+          td.appendChild(document.createTextNode('—'));
+          td.appendChild(el('span','mk-sr', ' ' + T.nieRozegrano));
+        }
+        tr2.appendChild(td);
+      }
+      tbody.appendChild(tr2);
+    });
+    tab.appendChild(tbody);
+    wyn.appendChild(tab);
+    wyn.appendChild(el('p','mk-licz', T.tabNota));
+
+    wyn.appendChild(el('h4','mk-g-sekcja', T.wnH));
+    wniosek(per, bl, prz, dec).forEach(function(par){ wyn.appendChild(el('p', null, par)); });
+
+    wyn.appendChild(el('h4','mk-g-sekcja', T.przepH));
+    if(gra.przepuszczone.length === 0){
+      wyn.appendChild(el('p','mk-g-gratulacje', dec === 0 ? T.przepNic : T.przepBrak));
+    } else {
+      var ul = el('ul','mk-lista mk-g-przep');
+      gra.przepuszczone.forEach(function(w){
+        var li = document.createElement('li');
+        var p1 = el('p', null);
+        p1.appendChild(el('strong', null, wielka(w.sygnal)));
+        p1.appendChild(document.createTextNode(' — ' + w.skrot + ' (' + w.autor + ')'));
+        li.appendChild(p1);
+        li.appendChild(el('p','mk-g-wyj', w.wyjasnienie));
+        ul.appendChild(li);
+      });
+      wyn.appendChild(ul);
+    }
+
+    var btny = el('div','mk-btny');
+    var jeszcze = el('button','mk-btn', T.jeszcze);
+    jeszcze.type = 'button';
+    jeszcze.addEventListener('click', zacznij);
+    var zmien = el('button','mk-btn mk-btn2', T.zmien);
+    zmien.type = 'button';
+    zmien.addEventListener('click', function(){
+      ekranStart();
+      var r = ekran.querySelector('input[type="radio"]:checked');
+      if(r){ r.focus(); }
+    });
+    btny.appendChild(jeszcze);
+    btny.appendChild(zmien);
+    wyn.appendChild(btny);
+    ekran.appendChild(wyn);
+    oglos('');
+    h.focus();
+  }
+
+  ekranStart();
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

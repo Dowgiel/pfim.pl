@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Kaskada dostępności</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Kaskada dostępności</h1>
+<div class="mk mk-kaskada" id="mk-kaskada">Ćwiczenie „Kaskada dostępności” — siedem chwil wymyślonej historii miasteczka do ułożenia we właściwej kolejności eskalacji. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-hist{border:1px solid #c9ccc8;border-left:4px solid #16181c;border-radius:3px;\n background:#fbfbfa;padding:14px 16px}\n.mk-hist > * + *{margin-top:12px}\n.mk-krokilista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;min-width:0}\n.mk-krok{border:1px solid #c9ccc8;border-radius:3px;background:#fff;padding:12px 14px;min-width:0}\n.mk-krok > * + *{margin-top:8px}\n.mk-poz{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#4a4e55;font-weight:700}\n.mk-tresc{font-size:16.5px;line-height:1.55}\n.mk-wyniklista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}\n.mk-wpis{border:1px solid #c9ccc8;border-radius:3px;background:#fff;padding:10px 13px}\n.mk-wpis > * + *{margin-top:6px}\n.mk-wpis-ok{border-left:4px solid #2c6a4c}\n.mk-wpis-nie{border-left:4px solid #b4322b}\n.mk-werd{font-weight:700}\n.mk-wpis-ok .mk-werd{color:#245a40}\n.mk-wpis-nie .mk-werd{color:#96261f}\n.mk-blok:focus{outline:none}\n";
+var D = {"nad": "Ćwiczenie · kaskada dostępności", "tytul": "Kaskada dostępności", "lid": "Krótka, w całości wymyślona historia małego miasteczka. Siedem chwil jednej sprawy, pokazanych w innej kolejności, niż naprawdę się wydarzyły. Ułóż je w kolejności eskalacji przyciskami „Wyżej” i „Niżej”, a potem sprawdź. Nazwy etapów zobaczysz dopiero po sprawdzeniu.", "tytulHistorii": "Zjeżdżalnia w miejskim parku", "kroki": [{"etykieta": "Iskra", "tresc": "Jedna z mieszkanek Kalinowej Górki pisze w internetowej grupie sąsiedzkiej, że jej dziecko po zjechaniu z nowej zjeżdżalni w miejskim parku poczuło przez chwilę zawroty głowy.", "wyjasnienie": "Kaskada zaczyna się od wyrażonej publicznie opinii o zagrożeniu. Kuran i Sunstein opisują, jak taka wypowiedź uruchamia reakcję łańcuchową, w której opinia wydaje się coraz bardziej wiarygodna, bo coraz częściej się ją słyszy."}, {"etykieta": "Podchwycenie", "tresc": "Lokalny portal „Głos Kalinowej Górki” publikuje krótką notatkę zatytułowaną Niebezpieczna zjeżdżalnia w parku, powołując się na wpis zaniepokojonej mieszkanki.", "wyjasnienie": "Sprawa trafia w kolejne miejsce debaty publicznej, choć nie przybyło żadnego nowego dowodu — to właśnie rosnąca obecność w obiegu jest jądrem tego, co Kuran i Sunstein nazywają kaskadą dostępności."}, {"etykieta": "Motyw wizerunkowy", "tresc": "Jeszcze tego samego dnia pod notatką odzywają się kolejni rodzice, którzy piszą, że oni też to zauważyli — żadne z nich nie chce wypaść na kogoś, komu bezpieczeństwo dzieci jest obojętne.", "wyjasnienie": "To drugi z dwóch motywów opisanych przez Kurana i Sunsteina obok motywu informacyjnego: ludzie dopasowują to, co mówią publicznie, do tego, czego — jak sądzą — oczekuje od nich otoczenie, niezależnie od własnej, prywatnej oceny skali zagrożenia."}, {"etykieta": "Samonapędzanie", "tresc": "W kolejnych dniach temat dobrze się czyta, więc ukazują się następne teksty w mediach regionalnych — część z nich powtarza wcześniejsze ustalenia, nie dodając żadnego nowego faktu.", "wyjasnienie": "To jest sedno mechanizmu: sama częstość pojawiania się tematu zaczyna uchodzić za dowód jego wagi, mimo że w kolejnych tekstach nie przybywa nowych informacji o realnym ryzyku."}, {"etykieta": "Przedsiębiorca dostępności", "tresc": "Gdy o sprawie piszą już wszystkie media w regionie, stowarzyszenie zajmujące się bezpieczeństwem publicznym zgłasza się do nich z gotowym komentarzem i apelem o kontrolę wszystkich podobnych urządzeń w okolicy.", "wyjasnienie": "Kuran i Sunstein nazywają taką rolę „przedsiębiorcą dostępności” — kimś, kto świadomie wykorzystuje rosnącą widoczność tematu, żeby przybliżyć własny cel, niezależnie od tego, czy jego motywacja akurat jest słuszna."}, {"etykieta": "Presja na decydentów", "tresc": "Na najbliższej sesji rady miasteczka kilkoro mieszkańców domaga się natychmiastowej reakcji, powołując się na to, że „wszyscy już o tym mówią”.", "wyjasnienie": "Kaskada przenosi się z debaty publicznej do instytucji, która ma podjąć decyzję — presja rośnie wprost z widoczności tematu, nie z żadnego nowego pomiaru ryzyka."}, {"etykieta": "Decyzja pod wpływem kaskady", "tresc": "Jeszcze na tej samej sesji rada głosuje za natychmiastowym demontażem zjeżdżalni, zanim niezależny przegląd techniczny zdążył ustalić, czy urządzenie rzeczywiście było wadliwe.", "wyjasnienie": "To punkt, przed którym ostrzegają Kuran i Sunstein: decyzja zapada, kiedy temat jest wszędzie, niekoniecznie wtedy, kiedy zmierzono już realne ryzyko. Czy zjeżdżalnia faktycznie była wadliwa, zostaje pytaniem osobnym — nierozstrzygniętym przez to, ile się o niej mówiło."}], "start": [3, 0, 5, 1, 6, 2, 4], "podsumowanie": "Kaskada dostępności niczego nie rozstrzyga o tym, czy zagrożenie jest realne. Czasem wzmacnia alarm, który był w pełni zasadny, a czasem rozdmuchuje coś błahego do rozmiarów katastrofy — mechanizm w obu przypadkach wygląda identycznie. Rosnący rozgłos wokół tematu nie jest więc dowodem ani w jedną, ani w drugą stronę: jest tylko rozgłosem."};
+function ensure(){
+  var w = document.getElementById('mk-kaskada') || document.querySelector('.mk-kaskada');
+  if(!w) return null;
+  w.id='mk-kaskada'; w.className='mk mk-kaskada';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-kaskada"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-kaskada');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  c.appendChild(el('p','mk-lid', D.lid));
+
+  var N = D.kroki.length;
+
+  var sek = document.createElement('section');
+  sek.className = 'mk-hist';
+  var h = el('h4', null, D.tytulHistorii);
+  h.id = 'mk-hist';
+  sek.setAttribute('aria-labelledby', h.id);
+  sek.appendChild(h);
+
+  var lista = document.createElement('ol');
+  lista.className = 'mk-krokilista';
+  lista.setAttribute('aria-label', D.tytulHistorii + ' — kroki do ułożenia');
+  sek.appendChild(lista);
+
+  var glos = el('p','mk-sr');
+  glos.setAttribute('role','status');
+  sek.appendChild(glos);
+
+  var bSpr = el('button','mk-btn','Sprawdź kolejność');
+  bSpr.type = 'button';
+  sek.appendChild(bSpr);
+
+  var wynik = el('div','mk-blok');
+  wynik.hidden = true;
+  wynik.setAttribute('tabindex','-1');
+  sek.appendChild(wynik);
+
+  var kolejnosc = D.start.map(function(idx){
+    return {krok: D.kroki[idx], poprawnyIndeks: idx, li: null, up: null, down: null, poz: null};
+  });
+
+  function renderPozycje(){
+    kolejnosc.forEach(function(item, i){
+      item.poz.textContent = 'Krok na pozycji ' + (i + 1) + ' z ' + N;
+      item.up.setAttribute('aria-disabled', i === 0 ? 'true' : 'false');
+      item.down.setAttribute('aria-disabled', i === N - 1 ? 'true' : 'false');
+    });
+  }
+
+  function wyczyscWynikPoZmianie(){
+    if(wynik.hidden) return;
+    wynik.hidden = true;
+    wynik.innerHTML = '';
+  }
+
+  function przesun(item, kierunek){
+    var i = kolejnosc.indexOf(item);
+    var j = i + kierunek;
+    if(j < 0 || j >= N) return;
+    kolejnosc[i] = kolejnosc[j];
+    kolejnosc[j] = item;
+    kolejnosc.forEach(function(it){ lista.appendChild(it.li); });
+    renderPozycje();
+    glos.textContent = 'Krok przeniesiony na pozycję ' + (j + 1) + ' z ' + N;
+    (kierunek < 0 ? item.up : item.down).focus();
+    wyczyscWynikPoZmianie();
+  }
+
+  kolejnosc.forEach(function(item){
+    var li = document.createElement('li');
+    li.className = 'mk-krok';
+    var poz = el('p','mk-poz','');
+    poz.id = 'mk-poz-' + item.poprawnyIndeks;
+    li.appendChild(poz);
+    li.appendChild(el('p','mk-tresc', item.krok.tresc));
+
+    var btny = el('div','mk-btny');
+    var up = el('button','mk-btn mk-btn2','↑ Wyżej');
+    up.type = 'button';
+    up.setAttribute('aria-label','Przesuń wyżej: ' + item.krok.tresc);
+    up.setAttribute('aria-describedby', poz.id);
+    up.addEventListener('click', function(){
+      if(up.getAttribute('aria-disabled') === 'true') return;
+      przesun(item, -1);
+    });
+    var down = el('button','mk-btn mk-btn2','↓ Niżej');
+    down.type = 'button';
+    down.setAttribute('aria-label','Przesuń niżej: ' + item.krok.tresc);
+    down.setAttribute('aria-describedby', poz.id);
+    down.addEventListener('click', function(){
+      if(down.getAttribute('aria-disabled') === 'true') return;
+      przesun(item, 1);
+    });
+    btny.appendChild(up);
+    btny.appendChild(down);
+    li.appendChild(btny);
+
+    item.li = li; item.up = up; item.down = down; item.poz = poz;
+    lista.appendChild(li);
+  });
+  renderPozycje();
+
+  bSpr.addEventListener('click', function(){
+    var traf = 0;
+    var ol = document.createElement('ol');
+    ol.className = 'mk-wyniklista';
+    kolejnosc.forEach(function(item, i){
+      var ok = (item.poprawnyIndeks === i);
+      if(ok){ traf++; }
+      var wpis = document.createElement('li');
+      wpis.className = 'mk-wpis ' + (ok ? 'mk-wpis-ok' : 'mk-wpis-nie');
+      wpis.appendChild(el('p','mk-werd',
+        (ok ? '✓ trafne miejsce — ' : '✗ niewłaściwe miejsce — ') + item.krok.etykieta));
+      wpis.appendChild(el('p', null, item.krok.wyjasnienie));
+      ol.appendChild(wpis);
+    });
+    wynik.innerHTML = '';
+    wynik.appendChild(el('h4', null, 'Zgodne miejsca: ' + traf + ' z ' + N));
+    wynik.appendChild(ol);
+    wynik.appendChild(el('h4', null, 'Co warto z tego zapamiętać'));
+    wynik.appendChild(el('p', null, D.podsumowanie));
+    wynik.hidden = false;
+    glos.textContent = '';
+    wynik.focus();
+  });
+
+  c.appendChild(sek);
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

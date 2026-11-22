@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Wybierz zakres wykresu</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Wybierz zakres wykresu</h1>
+<div class="mk mk-zakres" id="mk-zakres">Ćwiczenie „Wybierz zakres wykresu” — dobierz zakres lat na wykresie wymyślonych danych, żeby sprawdzić dwa sprzeczne nagłówki. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-etapy > * + *{margin-top:20px}\n.mk-etap > * + *{margin-top:12px}\n.mk-etaptyt{font-size:18px}\n.mk-etaptyt:focus{outline:none}\n.mk-cyt-naglowek{font-size:20px;font-weight:700;line-height:1.3;background:#fff;\n border:1px solid #c9ccc8;border-left:4px solid #16181c;padding:12px 16px;margin:0}\n.mk-fs{border:0;border-radius:3px;padding:0;background:transparent;margin:0;min-width:0}\n.mk-wiersz-lata{display:flex;flex-wrap:wrap;gap:12px 16px;margin:0}\n.mk-pole{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1 1 120px}\n.mk-etyk{font-weight:600}\n.mk-sel{font:inherit;font-size:16px;color:#16181c;background:#fff;border:1px solid #6b7078;\n border-radius:3px;padding:8px 10px;min-height:44px;max-width:100%}\n.mk-sel:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-wykres{width:100%;min-width:0}\n.mk-wykres svg{width:100%;height:auto;display:block}\n.mk-opis-zakres{font-weight:600;margin:10px 0 0}\n.mk-werd{font-weight:700}\n.mk-ok .mk-werd{color:#245a40}\n.mk-uwaga .mk-werd{color:#96261f}\n.mk-blok:focus{outline:none}\n.mk-tabela-wrap{overflow-x:auto;max-width:100%}\n.mk-tabela{width:100%;border-collapse:collapse;font-size:14px;background:#fff}\n.mk-tabela caption{text-align:left;font-weight:700;padding-bottom:8px;color:#16181c}\n.mk-tabela th,.mk-tabela td{border:1px solid #7d838a;padding:6px 8px;text-align:left;\n overflow-wrap:anywhere}\n.mk-tabela tbody tr:nth-child(even){background:#f4f4f2}\n";
+var D = {"nad": "Ćwiczenie · cherry-picking", "tytul": "Wybierz zakres wykresu", "lid": "Miasto „Klonowiec” nie istnieje. Liczby poniżej są wymyślone na potrzeby tego ćwiczenia — nie pochodzą z żadnego prawdziwego systemu rowerów miejskich. Wykres pokazuje, jak zmieniały się roczne wypożyczenia rowerów miejskich w Klonowcu. W dwóch zadaniach dobierasz rok początkowy i końcowy tak, żeby wskazany nagłówek pasował do wybranego fragmentu wykresu. Sprawdzenie porównuje wyłącznie pierwszy i ostatni rok wybranego zakresu — nie to, co dzieje się pomiędzy nimi. To również uproszczenie, dokładnie takie, jakim żywią się prawdziwe wykresy w nagłówkach. Same dane przez cały czas zostają takie same — zmienia się tylko wybrany fragment.", "dane": [{"rok": 2010, "w": 62}, {"rok": 2011, "w": 78}, {"rok": 2012, "w": 101}, {"rok": 2013, "w": 88}, {"rok": 2014, "w": 96}, {"rok": 2015, "w": 124}, {"rok": 2016, "w": 142}, {"rok": 2017, "w": 118}, {"rok": 2018, "w": 137}, {"rok": 2019, "w": 168}, {"rok": 2020, "w": 190}, {"rok": 2021, "w": 149}, {"rok": 2022, "w": 205}], "tabela_capt": "Wypożyczenia rowerów miejskich w Klonowcu, 2010–2022, w tysiącach rocznie.", "tabela_rok": "Rok", "tabela_w": "Wypożyczenia (tysiące)", "btn_tabela_pokaz": "Pokaż dane w tabeli", "btn_tabela_ukryj": "Ukryj dane w tabeli", "etyk_pocz": "Rok początkowy", "etyk_kon": "Rok końcowy", "opt_wybierz": "wybierz rok", "btn_sprawdz": "Sprawdź", "puste": "Wybierz oba lata, żeby zobaczyć zakres.", "niechronologicznie": "Rok końcowy „{end}” nie jest późniejszy niż rok początkowy „{start}”. Wybierz dwa różne lata w kolejności chronologicznej.", "zdanie_zakresu": "W wybranym zakresie {start}–{end} liczba wypożyczeń zmieniła się z {wstart} na {wend} tysięcy rocznie.", "etapy": [{"tytul": "Zadanie 1 z 2", "naglowek": "Wypożyczenia spadają!", "polecenie": "Dobierz rok początkowy i końcowy tak, żeby ten nagłówek był prawdziwy dla wybranego zakresu.", "kierunek": "spadek", "prawda": "Prawdziwy dla tego zakresu. Między {start} a {end} liczba wypożyczeń rzeczywiście spadła, z {wstart} do {wend} tysięcy rocznie. Kawałek dalej dane znowu rosną — ten nagłówek pokazuje wyłącznie wąskie okno, nie cały wykres.", "falsz": "Nieprawdziwy dla tego zakresu. Między {start} a {end} liczba wypożyczeń wzrosła, z {wstart} do {wend} tysięcy rocznie. Poszukaj fragmentu, w którym słupki wyraźnie opadają.", "dalej": "Przejdź do zadania 2"}, {"tytul": "Zadanie 2 z 2", "naglowek": "Wypożyczeń jest coraz więcej!", "polecenie": "Teraz dobierz rok początkowy i końcowy tak, żeby prawdziwy był ten nagłówek.", "kierunek": "wzrost", "prawda": "Prawdziwy dla tego zakresu. Między {start} a {end} wypożyczenia wzrosły, z {wstart} do {wend} tysięcy rocznie. To ten sam wykres, który przed chwilą „udowodnił” spadek — zmienił się tylko wybrany fragment, nie same dane.", "falsz": "Nieprawdziwy dla tego zakresu. Między {start} a {end} liczba wypożyczeń spadła, z {wstart} do {wend} tysięcy rocznie. Poszukaj fragmentu, w którym słupki wyraźnie rosną.", "dalej": "Zobacz cały okres"}], "final_tytul": "Ten sam wykres, dwa nagłówki", "final_btn": "Pokaż cały okres", "final_zdanie": "Cały okres, {start}–{end}: wypożyczenia zmieniły się z {wstart} na {wend} tysięcy rocznie.", "final_wyjasnienie": "Trend długoterminowy rośnie — ale po drodze są wyraźne spadki, takie jak ten, który przed chwilą posłużył za dowód spadku. Obydwa nagłówki wyżej były prawdziwe. Żadna liczba w danych się nie zmieniła — zmieniał się wyłącznie wybrany fragment czasu. Każdy rok na wykresie to jedna dana z całej serii, a wybór zakresu lat to wybór, które dane pokazać, a które zostawić poza kadrem. To jest dobór wybiórczy, po angielsku cherry-picking: pokazanie fragmentu danych pasującego do z góry przyjętej tezy i milczenie o reszcie. Odbiorca nie widzi, że coś pominięto — a samo to pominięcie robi całą robotę.", "final_pytania_naglowek": "Zanim uwierzysz wykresowi, warto zapytać:", "final_pytania": ["Od kiedy do kiedy sięgają pokazane dane?", "Dlaczego akurat od tego roku, a nie wcześniej albo później?", "Co zostało poza kadrem wykresu?"], "final_koniec": "To ćwiczenie uczy: sam wybór zakresu dat potrafi odwrócić przekaz wykresu, nawet gdy żadna liczba się nie zmienia."};
+function ensure(){
+  var w = document.getElementById('mk-zakres') || document.querySelector('.mk-zakres');
+  if(!w) return null;
+  w.id='mk-zakres'; w.className='mk mk-zakres';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-zakres"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-zakres');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  c.appendChild(el('p','mk-lid', D.lid));
+
+  function elS(t, attrs){
+    var e = document.createElementNS('http://www.w3.org/2000/svg', t);
+    if(attrs){ for(var k in attrs){ e.setAttribute(k, String(attrs[k])); } }
+    return e;
+  }
+
+  // --- alternatywa tekstowa: tabela z danymi (wspolna dla calego cwiczenia) ---
+  var btnTab = el('button','mk-btn mk-btn2', D.btn_tabela_pokaz);
+  btnTab.type = 'button';
+  btnTab.setAttribute('aria-expanded','false');
+  c.appendChild(btnTab);
+  var tabWrap = el('div','mk-tabela-wrap');
+  tabWrap.hidden = true;
+  c.appendChild(tabWrap);
+
+  var tabela = document.createElement('table');
+  tabela.className = 'mk-tabela';
+  var capt = document.createElement('caption');
+  capt.textContent = D.tabela_capt;
+  tabela.appendChild(capt);
+  var thead = document.createElement('thead');
+  var trh = document.createElement('tr');
+  var th1 = document.createElement('th'); th1.setAttribute('scope','col'); th1.textContent = D.tabela_rok;
+  var th2 = document.createElement('th'); th2.setAttribute('scope','col'); th2.textContent = D.tabela_w;
+  trh.appendChild(th1); trh.appendChild(th2);
+  thead.appendChild(trh);
+  tabela.appendChild(thead);
+  var tbody = document.createElement('tbody');
+  D.dane.forEach(function(d){
+    var tr = document.createElement('tr');
+    var rth = document.createElement('th'); rth.setAttribute('scope','row'); rth.textContent = String(d.rok);
+    var td = document.createElement('td'); td.textContent = String(d.w);
+    tr.appendChild(rth); tr.appendChild(td);
+    tbody.appendChild(tr);
+  });
+  tabela.appendChild(tbody);
+  tabWrap.appendChild(tabela);
+
+  btnTab.addEventListener('click', function(){
+    var otwarta = btnTab.getAttribute('aria-expanded') === 'true';
+    btnTab.setAttribute('aria-expanded', otwarta ? 'false' : 'true');
+    tabWrap.hidden = otwarta;
+    btnTab.textContent = otwarta ? D.btn_tabela_pokaz : D.btn_tabela_ukryj;
+  });
+
+  // --- wykres SVG ---
+  var N = D.dane.length;
+  var maxW = 0;
+  D.dane.forEach(function(d){ if(d.w > maxW){ maxW = d.w; } });
+  var niceMax = Math.ceil(maxW / 50) * 50;
+
+  function narysujWykres(host, si, ei){
+    host.innerHTML = '';
+    // Geometria dobrana pod najwezszy realny kontener (~218 px w karcie .mk-blok przy ekranie
+    // 320 px - zmierzone w przegladarce), nie pod caly viewBox: skala tam wychodzi bliska 1:1,
+    // wiec font-size w jednostkach viewBox ~= px na ekranie. Etykiety lat co trzeci rok (nie co
+    // drugi) - przy czytelnym rozmiarze czcionki co drugi by na siebie nachodzil.
+    var xStart = 34, xEnd = 214, yTop = 8, yBase = 98;
+    var plotW = xEnd - xStart, plotH = yBase - yTop;
+    var slot = plotW / N, barW = slot * 0.62;
+    var walidny = (si !== null && ei !== null && ei > si);
+    var pierwszy = D.dane[0], ostatni = D.dane[N - 1];
+    var svg = elS('svg', {viewBox:'0 0 220 124', role:'img'});
+    var opis = walidny
+      ? ('Zaznaczony zakres: ' + D.dane[si].rok + '–' + D.dane[ei].rok + '.')
+      : 'Zakres jeszcze nie wybrany — pokazane są wszystkie lata.';
+    svg.setAttribute('aria-label', 'Wykres słupkowy: wypożyczenia rowerów w Klonowcu, ' + pierwszy.rok +
+      '–' + ostatni.rok + ', w tysiącach rocznie. ' + opis);
+    svg.appendChild(elS('line', {x1:xStart, y1:yBase, x2:xEnd, y2:yBase, stroke:'#16181c', 'stroke-width':1}));
+    [0, niceMax / 2, niceMax].forEach(function(t){
+      var y = yBase - (t / niceMax) * plotH;
+      var txt = elS('text', {x:xStart - 5, y:y + 4, 'text-anchor':'end', 'font-size':15, fill:'#4a4e55'});
+      txt.textContent = String(Math.round(t));
+      svg.appendChild(txt);
+    });
+    D.dane.forEach(function(d, i){
+      var h = (d.w / niceMax) * plotH;
+      var x = xStart + i * slot + (slot - barW) / 2;
+      var y = yBase - h;
+      var wybrany = walidny && i >= si && i <= ei;
+      svg.appendChild(elS('rect', {x:x, y:y, width:barW, height:h, fill: wybrany ? '#b4322b' : '#4a4e55'}));
+      if(i % 3 === 0){
+        var lx = elS('text', {x:x + barW / 2, y:yBase + 18, 'text-anchor':'middle',
+          'font-size':15, fill:'#16181c'});
+        lx.textContent = String(d.rok);
+        svg.appendChild(lx);
+      }
+    });
+    host.appendChild(svg);
+  }
+
+  function opisZakresu(si, ei){
+    if(si === null || ei === null){ return D.puste; }
+    if(ei <= si){
+      return D.niechronologicznie
+        .split('{start}').join(String(D.dane[si].rok))
+        .split('{end}').join(String(D.dane[ei].rok));
+    }
+    return D.zdanie_zakresu
+      .split('{start}').join(String(D.dane[si].rok))
+      .split('{end}').join(String(D.dane[ei].rok))
+      .split('{wstart}').join(String(D.dane[si].w))
+      .split('{wend}').join(String(D.dane[ei].w));
+  }
+
+  var kontener = el('div','mk-etapy');
+  c.appendChild(kontener);
+
+  function etap(n){
+    var e = D.etapy[n];
+    var sek = document.createElement('section');
+    sek.className = 'mk-etap';
+    var h = el('h4','mk-etaptyt', e.tytul + ': „' + e.naglowek + '”');
+    h.id = 'mk-et-' + n;
+    h.setAttribute('tabindex','-1');
+    sek.setAttribute('aria-labelledby', h.id);
+    sek.appendChild(h);
+    sek.appendChild(el('p', null, e.polecenie));
+    sek.appendChild(el('p','mk-cyt-naglowek', '„' + e.naglowek + '”'));
+
+    var fs = document.createElement('fieldset');
+    fs.className = 'mk-fs';
+    var lg = document.createElement('legend');
+    lg.className = 'mk-sr';
+    lg.textContent = 'Wybór zakresu dla nagłówka: „' + e.naglowek + '”';
+    fs.appendChild(lg);
+    var wiersz = el('div','mk-wiersz-lata');
+    fs.appendChild(wiersz);
+    sek.appendChild(fs);
+
+    function selectLat(etyk, sufiks){
+      var pole = el('div','mk-pole');
+      var lab = el('label','mk-etyk', etyk);
+      var selId = 'mk-sel-' + n + '-' + sufiks;
+      lab.setAttribute('for', selId);
+      var s = document.createElement('select');
+      s.id = selId; s.className = 'mk-sel';
+      var o0 = document.createElement('option'); o0.value = ''; o0.textContent = D.opt_wybierz;
+      s.appendChild(o0);
+      D.dane.forEach(function(d){
+        var o = document.createElement('option'); o.value = String(d.rok); o.textContent = String(d.rok);
+        s.appendChild(o);
+      });
+      pole.appendChild(lab); pole.appendChild(s);
+      wiersz.appendChild(pole);
+      return s;
+    }
+    var selPocz = selectLat(D.etyk_pocz, 'p');
+    var selKon = selectLat(D.etyk_kon, 'k');
+
+    var wykresBlok = el('div','mk-blok');
+    wykresBlok.setAttribute('aria-live','polite');
+    var wykresHost = el('div','mk-wykres');
+    wykresBlok.appendChild(wykresHost);
+    var opisP = el('p','mk-opis-zakres', D.puste);
+    wykresBlok.appendChild(opisP);
+    sek.appendChild(wykresBlok);
+    narysujWykres(wykresHost, null, null);
+
+    var bSpr = el('button','mk-btn', D.btn_sprawdz);
+    bSpr.type = 'button';
+    bSpr.setAttribute('aria-disabled','true');
+    sek.appendChild(bSpr);
+
+    var glos = el('p','mk-sr');
+    glos.setAttribute('role','status');
+    sek.appendChild(glos);
+
+    var fb = el('div','mk-blok');
+    fb.hidden = true;
+    fb.setAttribute('tabindex','-1');
+    sek.appendChild(fb);
+
+    function idxWybor(sel){
+      if(!sel.value){ return null; }
+      var idx = null;
+      D.dane.forEach(function(d, i){ if(String(d.rok) === sel.value){ idx = i; } });
+      return idx;
+    }
+    function odswiez(){
+      var si = idxWybor(selPocz), ei = idxWybor(selKon);
+      narysujWykres(wykresHost, si, ei);
+      opisP.textContent = opisZakresu(si, ei);
+      bSpr.setAttribute('aria-disabled', (si !== null && ei !== null && ei > si) ? 'false' : 'true');
+      fb.hidden = true;
+      fb.innerHTML = '';
+    }
+    selPocz.addEventListener('change', odswiez);
+    selKon.addEventListener('change', odswiez);
+
+    bSpr.addEventListener('click', function(){
+      var si = idxWybor(selPocz), ei = idxWybor(selKon);
+      if(si === null || ei === null){
+        var brakPocz = si === null;
+        glos.textContent = D.puste + ' Przenoszę kursor do pola „' +
+          (brakPocz ? D.etyk_pocz : D.etyk_kon) + '”.';
+        (brakPocz ? selPocz : selKon).focus();
+        return;
+      }
+      if(ei <= si){
+        glos.textContent = opisZakresu(si, ei) + ' Przenoszę kursor do roku końcowego.';
+        selKon.focus();
+        return;
+      }
+      glos.textContent = '';
+      var prawda = e.kierunek === 'spadek' ? (D.dane[ei].w < D.dane[si].w) : (D.dane[ei].w > D.dane[si].w);
+      var tekst = (prawda ? e.prawda : e.falsz)
+        .split('{start}').join(String(D.dane[si].rok))
+        .split('{end}').join(String(D.dane[ei].rok))
+        .split('{wstart}').join(String(D.dane[si].w))
+        .split('{wend}').join(String(D.dane[ei].w));
+      fb.innerHTML = '';
+      fb.hidden = false;
+      fb.className = 'mk-blok ' + (prawda ? 'mk-ok' : 'mk-uwaga');
+      fb.appendChild(el('p','mk-werd', prawda ? 'Prawda.' : 'Nieprawda.'));
+      fb.appendChild(el('p', null, tekst));
+      if(prawda){
+        var dalej = el('button','mk-btn mk-btn2', e.dalej);
+        dalej.type = 'button';
+        fb.appendChild(dalej);
+        dalej.addEventListener('click', function(){
+          dalej.hidden = true;
+          if(n === 0){
+            etap(1);
+            document.getElementById('mk-et-1').focus();
+          } else {
+            finalBlok();
+            document.getElementById('mk-final').focus();
+          }
+        });
+      }
+      fb.focus();
+    });
+
+    kontener.appendChild(sek);
+  }
+
+  function finalBlok(){
+    var sek = document.createElement('section');
+    sek.className = 'mk-etap';
+    var h = el('h4','mk-etaptyt', D.final_tytul);
+    h.id = 'mk-final';
+    h.setAttribute('tabindex','-1');
+    sek.setAttribute('aria-labelledby', h.id);
+    sek.appendChild(h);
+
+    var btnCaly = el('button','mk-btn mk-btn2', D.final_btn);
+    btnCaly.type = 'button';
+    sek.appendChild(btnCaly);
+
+    btnCaly.addEventListener('click', function(){
+      btnCaly.hidden = true;
+      var blok = el('div','mk-blok');
+      blok.setAttribute('tabindex','-1');
+      var wykresHost = el('div','mk-wykres');
+      blok.appendChild(wykresHost);
+      narysujWykres(wykresHost, 0, N - 1);
+      var zdanie = D.final_zdanie
+        .split('{start}').join(String(D.dane[0].rok))
+        .split('{end}').join(String(D.dane[N - 1].rok))
+        .split('{wstart}').join(String(D.dane[0].w))
+        .split('{wend}').join(String(D.dane[N - 1].w));
+      blok.appendChild(el('p','mk-opis-zakres', zdanie));
+      blok.appendChild(el('p', null, D.final_wyjasnienie));
+      blok.appendChild(el('h4', null, D.final_pytania_naglowek));
+      var ul = el('ul','mk-lista');
+      D.final_pytania.forEach(function(q){ ul.appendChild(el('li', null, q)); });
+      blok.appendChild(ul);
+      blok.appendChild(el('p','mk-licz', D.final_koniec));
+      sek.appendChild(blok);
+      blok.focus();
+    });
+
+    kontener.appendChild(sek);
+  }
+
+  etap(0);
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Fakt, opinia czy zabieg</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Fakt, opinia czy zabieg</h1>
+<div class="mk mk-naglowki" id="mk-naglowki">Ćwiczenie „Fakt, opinia czy zabieg” — osiem nagłówków do rozstrzygnięcia. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-fs{border:1px solid #c9ccc8;border-radius:3px;padding:14px 16px;background:#fbfbfa;margin:0}\n.mk-poz{border-left:4px solid #16181c}\n.mk-nag{font-size:17px;font-weight:600;line-height:1.4;margin-bottom:12px}\n.mk-kat{display:flex;flex-wrap:wrap;gap:8px}\n.mk-opcja{display:flex;align-items:center;gap:9px;border:1px solid #7d838a;border-radius:3px;\n padding:9px 13px;cursor:pointer;background:#fff;min-height:44px}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-radio:checked){border-color:#16181c;border-width:2px;padding:8px 12px}\n.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-mini{font-weight:600}\n.mk-radio{width:18px;height:18px;accent-color:#b4322b;margin:0;flex:none}\n.mk-fb{margin-top:12px;padding:11px 14px;border-radius:3px;background:#fff;\n border:1px solid #c9ccc8}\n.mk-fb > * + *{margin-top:7px}\n.mk-fb-ok{border-left:4px solid #2c6a4c}\n.mk-fb-nie{border-left:4px solid #b4322b}\n.mk-werd{font-weight:700}\n.mk-fb-ok .mk-werd{color:#245a40}\n.mk-fb-nie .mk-werd{color:#96261f}\n";
+var D = {"nad": "Ćwiczenie · fakty i opinie", "tytul": "Fakt, opinia czy zabieg", "kategorie": [["fakt", "Fakt", "Twierdzenie sprawdzalne: da się wskazać źródło i zweryfikować."], ["opinia", "Opinia", "Ocena lub sąd wartościujący. Uczciwa, gdy podpisana i oznaczona."], ["manipulacja", "Zabieg", "Forma pracuje na wrażenie inne niż fakty: clickbait, anonimowy autorytet, fałszywa równowaga, liczba bez kontekstu."]], "pozycje": [{"t": "Inflacja w sierpniu wyniosła 4,1 procent rok do roku — podał GUS.", "k": "fakt", "w": "Jest źródło (GUS), jest liczba, jest okres. Każdy element da się sprawdzić w komunikacie urzędu. To, że informacja jest niewygodna albo nas martwi, nie zmienia jej statusu."}, {"t": "Rząd wreszcie zrobił coś sensownego z cenami energii.", "k": "opinia", "w": "„Wreszcie” i „coś sensownego” to oceny, nie fakty. Zdanie może być uczciwe jako komentarz — pod warunkiem że jest podpisane i oznaczone jako komentarz, a nie podane jako wiadomość."}, {"t": "SZOK! Nie uwierzysz, co naukowcy odkryli o kawie", "k": "manipulacja", "w": "Nagłówek nie zawiera informacji — zawiera obietnicę informacji. „Nie uwierzysz” to polecenie kliknięcia, nie opis odkrycia. Klasyczna luka ciekawości: im mniej treści w nagłówku, tym więcej kliknięć."}, {"t": "Ponad połowa badanych popiera zmianę — wynika z sondażu na grupie 312 osób.", "k": "fakt", "w": "Jest liczba, jest wielkość próby. Mała próba to powód do ostrożności przy wnioskach, ale sam nagłówek podaje sprawdzalne dane i nie ukrywa słabości badania."}, {"t": "Eksperci ostrzegają: to może być początek końca polskiej gospodarki", "k": "manipulacja", "w": "„Eksperci” bez nazwiska to nikt. „Może być” zabezpiecza przed odpowiedzialnością — jeśli nic się nie stanie, nagłówek nadal był prawdziwy. Trzy sygnały naraz: anonimowy autorytet, asekuracja i katastrofa."}, {"t": "Cena biletu wzrosła o 100 procent — z 4 do 8 złotych.", "k": "fakt", "w": "Liczba jest prawdziwa i podana razem z wartościami wyjściowymi, więc można samodzielnie ocenić skalę. Gdyby zostało samo „wzrost o 100 procent”, byłby to już zabieg — to samo zdanie brzmi inaczej bez punktu odniesienia."}, {"t": "Czy szczepionki są bezpieczne? Naukowcy są podzieleni.", "k": "manipulacja", "w": "Zabieg nazywa się **fałszywą równowagą**. Zdanie sugeruje, że opinie rozkładają się po połowie, podczas gdy zgoda naukowa jest przytłaczająca. Forma pytania zwalnia z odpowiedzialności za twierdzenie, którego nikt nie postawił wprost."}, {"t": "Nowy film reżysera to najlepsza polska produkcja tego roku.", "k": "opinia", "w": "Ocena wartościująca — i to jest w porządku, jeśli stoi w recenzji pod nazwiskiem. Problem zaczyna się wtedy, gdy takie zdanie trafia do serwisu informacyjnego bez podpisu."}], "postep": "Rozstrzygnięte: {0} z {1}", "trafnie": "Trafnie.", "nietrafnie": "Tu chodziło o coś innego."};
+function ensure(){
+  var w = document.getElementById('mk-naglowki') || document.querySelector('.mk-naglowki');
+  if(!w) return null;
+  w.id='mk-naglowki'; w.className='mk mk-naglowki';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-naglowki"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-naglowki');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var N = D.pozycje.length, zrobione = 0;
+  c.appendChild(el('p','mk-lid',
+    'Przy każdym nagłówku wybierz jedną z trzech odpowiedzi. Wyjaśnienie pojawia się od razu.'));
+
+  var leg = el('div','mk-blok');
+  leg.appendChild(el('h4',null,'Trzy kategorie'));
+  var ul = el('ul','mk-lista');
+  D.kategorie.forEach(function(k){
+    var li=document.createElement('li');
+    var s=document.createElement('strong'); s.textContent = k[1] + ' — ';
+    li.appendChild(s); li.appendChild(document.createTextNode(k[2]));
+    ul.appendChild(li);
+  });
+  leg.appendChild(ul); c.appendChild(leg);
+
+  var licz = el('p','mk-licz');
+  licz.textContent = D.postep.split('{0}').join('0').split('{1}').join(String(N));
+  c.appendChild(licz);
+
+  D.pozycje.forEach(function(p, i){
+    var fs = document.createElement('fieldset'); fs.className='mk-fs mk-poz';
+    var lg = document.createElement('legend'); lg.className='mk-sr';
+    lg.textContent = 'Nagłówek ' + (i+1) + ' z ' + N; fs.appendChild(lg);
+    var nag = el('p','mk-nag');
+    nag.setAttribute('aria-hidden','false');
+    nag.textContent = '„' + p.t + '”';
+    fs.appendChild(nag);
+    var row = el('div','mk-kat');
+    D.kategorie.forEach(function(k, j){
+      var id='mk-p'+i+'-'+j;
+      var lab=document.createElement('label'); lab.className='mk-opcja mk-mini';
+      lab.setAttribute('for', id);
+      var inp=document.createElement('input');
+      inp.type='radio'; inp.name='mk-poz-'+i; inp.id=id; inp.value=k[0]; inp.className='mk-radio';
+      lab.appendChild(inp); lab.appendChild(el('span',null,k[1]));
+      inp.addEventListener('change', function(){ oceny(i, p, k[0], fs); });
+      row.appendChild(lab);
+    });
+    fs.appendChild(row);
+    var fb = el('div','mk-fb'); fb.id='mk-fb-'+i; fb.hidden=true;
+    fb.setAttribute('role','status');
+    fs.appendChild(fb);
+    c.appendChild(fs);
+  });
+
+  function oceny(i, p, wybor, fs){
+    var fb = document.getElementById('mk-fb-'+i);
+    var traf = (wybor === p.k);
+    fb.innerHTML=''; fb.hidden=false;
+    fb.className = 'mk-fb ' + (traf ? 'mk-fb-ok' : 'mk-fb-nie');
+    var w = el('p','mk-werd');
+    w.textContent = traf ? D.trafnie : D.nietrafnie;
+    fb.appendChild(w);
+    var wyj = el('p');
+    p.w.split('**').forEach(function(cz, k){
+      if(k % 2){ var s=document.createElement('strong'); s.textContent=cz; wyj.appendChild(s); }
+      else wyj.appendChild(document.createTextNode(cz));
+    });
+    fb.appendChild(wyj);
+    if(!fs.getAttribute('data-zrob')){
+      fs.setAttribute('data-zrob','1'); zrobione++;
+      licz.textContent = D.postep.split('{0}').join(String(zrobione)).split('{1}').join(String(N));
+    }
+  }
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

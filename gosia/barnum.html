@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Horoskop dla Ciebie</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Horoskop dla Ciebie</h1>
+<div class="mk mk-barnum" id="mk-barnum">Ćwiczenie „Horoskop dla Ciebie”. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-fs{border:1px solid #c9ccc8;border-radius:3px;padding:14px 16px;background:#fbfbfa;margin:0}\n.mk-fs legend{font-weight:700;font-size:15px;padding:0 6px;color:#16181c}\n.mk-siatka{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:8px}\n.mk-chip{display:flex;align-items:center;gap:8px;border:1px solid #7d838a;border-radius:3px;\n padding:9px 11px;cursor:pointer;background:#fff;min-height:44px}\n.mk-chip:hover{background:#eef0ee}\n.mk-chip:has(.mk-radio:checked){border-color:#16181c;border-width:2px;background:#ecece9;padding:8px 10px}\n.mk-radio{width:18px;height:18px;accent-color:#b4322b;margin:0;flex:none}\n.mk-chip:focus-within,.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-strefa{display:flex;flex-direction:column;gap:14px}\n.mk-strefa:empty{display:none}\n.mk-horo{border-left:4px solid #6b5f9e;background:#f7f6fb}\n.mk-horo p + p{margin-top:9px}\n.mk-skala{display:flex;flex-direction:column;gap:7px}\n.mk-opcja{display:flex;align-items:center;gap:10px;border:1px solid #7d838a;border-radius:3px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-radio:checked){border-color:#16181c;border-width:2px;padding:8px 11px}\n.mk-cyfra{font-weight:700;min-width:20px;font-variant-numeric:tabular-nums}\n.mk-wynik{font-weight:700;font-size:17px}\n.mk-dom{border-top:1px solid #c9ccc8;padding-top:11px}\n";
+var D = {"nad": "Ćwiczenie · test osobowości", "tytul": "Horoskop dla Ciebie", "znaki": ["Baran", "Byk", "Bliźnięta", "Rak", "Lew", "Panna", "Waga", "Skorpion", "Strzelec", "Koziorożec", "Wodnik", "Ryby"], "opis": "Wybierz swój znak zodiaku. Za chwilę dostaniesz przygotowany dla niego tekst.", "horoskop": ["Zależy Ci na tym, żeby inni Cię lubili i podziwiali, a mimo to potrafisz surowo oceniać siebie.", "Masz w sobie niewykorzystane możliwości — i czasem Cię to uwiera.", "Na zewnątrz trzymasz dyscyplinę i opanowanie, w środku bywa niepewnie i niespokojnie.", "Zdarza Ci się poważnie wątpić, czy podjęta przez Ciebie decyzja była właściwa.", "Lubisz zmianę i różnorodność; ograniczenia i zakazy męczą Cię bardziej niż innych.", "Szczycisz się tym, że myślisz niezależnie, i nie przyjmujesz cudzych twierdzeń bez dowodu.", "Uważasz, że nadmierna otwartość wobec innych bywa nierozsądna.", "Masz w sobie i towarzyskość, i potrzebę odosobnienia — raz górę bierze jedno, raz drugie.", "Część Twoich oczekiwań jest raczej nierealistyczna.", "Jedną z Twoich potrzeb życiowych jest bezpieczeństwo."], "skala": [["1", "zupełnie nietrafny"], ["2", "raczej nietrafny"], ["3", "trudno powiedzieć"], ["4", "raczej trafny"], ["5", "bardzo trafny"]], "pytanie": "Na ile ten opis pasuje do Ciebie?", "ujawnienie": {"tytul": "Coś, czego nie było widać na starcie", "akapity": ["Ten sam tekst dostaje każda osoba, niezależnie od wybranego znaku. Nie ma dwunastu wersji — jest jedna. Twój wybór na początku nie wpłynął na ani jedno słowo.", "To jest **efekt Barnuma** (nazywany też efektem Forera). W 1948 roku psycholog Bertram Forer dał studentom i studentkom „indywidualne wyniki testu osobowości” — w rzeczywistości wszyscy dostali ten sam tekst, zlepiony z gazetowych horoskopów. Studenci i studentki ocenili trafność średnio na **4,26 na 5**. Eksperyment powtarzano od tego czasu wielokrotnie, w wielu krajach i kontekstach, z podobnym wynikiem.", "Mechanizm ma trzy części, wszystkie widoczne w przeczytanym przed chwilą tekście:"], "mechanizm": [["Zdania dwustronne", "„I towarzyskość, i potrzeba odosobnienia” — pasuje do wszystkich, bo obejmuje obie możliwości naraz."], ["Pochlebstwo", "„Myślisz niezależnie”, „masz niewykorzystane możliwości” — przyjmujemy chętniej to, co nam schlebia, i mniej to sprawdzamy."], ["Ogólność podana jako szczegół", "„Jedną z Twoich potrzeb jest bezpieczeństwo” brzmi jak diagnoza, a jest twierdzeniem prawdziwym o niemal każdym człowieku."]], "domkniecie": "To nie jest wyłącznie sprawa horoskopów. Ten sam chwyt pracuje w opisach „typów osobowości” przy rekrutacji, w reklamie celowanej („to jest dokładnie dla Ciebie”), w testach w mediach społecznościowych i w każdej wróżbie. Pytanie diagnostyczne brzmi: czy to zdanie mogłoby być nieprawdziwe o kimkolwiek? Jeśli nie może — nic nie mówi."}, "porownanie": "Twoja ocena: {0} z 5. Średnia w badaniu Forera: 4,26 z 5.", "bez_oceny": "Bez zaznaczonej oceny — tekst i tak był ten sam dla wszystkich."};
+function ensure(){
+  var w = document.getElementById('mk-barnum') || document.querySelector('.mk-barnum');
+  if(!w) return null;
+  w.id='mk-barnum'; w.className='mk mk-barnum';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-barnum"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-barnum');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var stan = {ocena:null};
+  var opis = el('p','mk-lid', D.opis); c.appendChild(opis);
+
+  // --- wybor znaku
+  var fsZ = document.createElement('fieldset');
+  fsZ.className = 'mk-fs';
+  var lgZ = document.createElement('legend'); lgZ.textContent = 'Twój znak zodiaku';
+  fsZ.appendChild(lgZ);
+  var siatka = el('div','mk-siatka');
+  D.znaki.forEach(function(z, i){
+    var id = 'mk-znak-' + i;
+    var lab = document.createElement('label'); lab.className='mk-chip'; lab.setAttribute('for', id);
+    var inp = document.createElement('input');
+    inp.type='radio'; inp.name='mk-znak'; inp.id=id; inp.value=z; inp.className='mk-radio';
+    var sp = el('span',null,z);
+    lab.appendChild(inp); lab.appendChild(sp);
+    inp.addEventListener('change', function(){ pokazHoroskop(z); });
+    siatka.appendChild(lab);
+  });
+  fsZ.appendChild(siatka); c.appendChild(fsZ);
+
+  var strefa = el('div','mk-strefa'); c.appendChild(strefa);
+  var glos = el('p','mk-sr'); glos.setAttribute('role','status'); c.appendChild(glos);
+
+  function pokazHoroskop(znak){
+    strefa.innerHTML = '';
+    var b = el('div','mk-blok mk-horo');
+    var h = el('h4', null, 'Horoskop na najbliższy tydzień — ' + znak);
+    b.appendChild(h);
+    D.horoskop.forEach(function(z){ b.appendChild(el('p',null,z)); });
+    strefa.appendChild(b);
+
+    // --- ocena trafnosci
+    var fs = document.createElement('fieldset'); fs.className='mk-fs';
+    var lg = document.createElement('legend'); lg.textContent = D.pytanie; fs.appendChild(lg);
+    var lista = el('div','mk-skala');
+    D.skala.forEach(function(par, i){
+      var id='mk-oc-'+i;
+      var lab=document.createElement('label'); lab.className='mk-opcja'; lab.setAttribute('for',id);
+      var inp=document.createElement('input');
+      inp.type='radio'; inp.name='mk-ocena'; inp.id=id; inp.value=par[0]; inp.className='mk-radio';
+      lab.appendChild(inp);
+      lab.appendChild(el('span','mk-cyfra', par[0]));
+      lab.appendChild(el('span',null, par[1]));
+      inp.addEventListener('change', function(){ stan.ocena = par[0]; });
+      lista.appendChild(lab);
+    });
+    fs.appendChild(lista); strefa.appendChild(fs);
+
+    var btny = el('div','mk-btny');
+    var b1 = el('button','mk-btn','Gotowe — oddaję ocenę');
+    b1.type='button';
+    b1.addEventListener('click', function(){ ujawnij(); });
+    btny.appendChild(b1); strefa.appendChild(btny);
+    glos.textContent = 'Horoskop wczytany. Poniżej ocena trafności.';
+  }
+
+  function ujawnij(){
+    if(document.getElementById('mk-ujaw')) return;
+    var U = D.ujawnienie;
+    var b = el('div','mk-blok mk-uwaga'); b.id='mk-ujaw';
+    b.setAttribute('tabindex','-1');
+    var echo = el('p','mk-sr');
+    echo.setAttribute('data-echo','1');
+    echo.textContent = stan.ocena ? D.porownanie.split('{0}').join(stan.ocena) : D.bez_oceny;
+    b.appendChild(echo);
+    b.appendChild(el('h4',null,U.tytul));
+    if(stan.ocena){
+      var wyn = el('p','mk-wynik');
+      wyn.setAttribute('aria-hidden','true');
+      wyn.textContent = D.porownanie.split('{0}').join(stan.ocena);
+      b.appendChild(wyn);
+    }
+    U.akapity.forEach(function(a){
+      var p = el('p');
+      a.split('**').forEach(function(cz, i){
+        if(i % 2){ var s=document.createElement('strong'); s.textContent=cz; p.appendChild(s); }
+        else p.appendChild(document.createTextNode(cz));
+      });
+      b.appendChild(p);
+    });
+    var ul = el('ul','mk-lista');
+    U.mechanizm.forEach(function(par){
+      var li=document.createElement('li');
+      var s=document.createElement('strong'); s.textContent = par[0] + '. ';
+      li.appendChild(s); li.appendChild(document.createTextNode(par[1]));
+      ul.appendChild(li);
+    });
+    b.appendChild(ul);
+    b.appendChild(el('p','mk-dom', U.domkniecie));
+    strefa.appendChild(b);
+    b.focus();
+  }
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Czego nie ma w tej historii?</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Czego nie ma w tej historii?</h1>
+<div class="mk mk-brakuje" id="mk-brakuje">Ćwiczenie „Czego nie ma w tej historii?” — cztery historie z pewnym siebie wnioskiem, przy każdej lista informacji, które mogą być brakujące. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-hist > * + *{margin-top:12px}\n.mk-histtyt{font-size:17px}\n.mk-opis{line-height:1.5}\n.mk-cyt{margin:0;border-left:3px solid #16181c;background:#fff;padding:10px 14px;font-size:16px;\n line-height:1.5;font-weight:600;font-style:italic}\n.mk-fs{border:1px solid #c9ccc8;border-radius:3px;padding:12px 14px;background:#fbfbfa;margin:0;\n min-width:0}\n.mk-fs > * + *{margin-top:8px}\n.mk-pol{font-weight:600}\n.mk-opcja{display:flex;align-items:flex-start;gap:10px;border:1px solid #7d838a;border-radius:3px;\n padding:9px 12px;cursor:pointer;background:#fff;min-height:44px;min-width:0}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-check:checked){border-color:#16181c;border-width:2px;padding:8px 11px}\n.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-check{width:18px;height:18px;accent-color:#b4322b;margin:3px 0 0;flex:none}\n.mk-op-ok,.mk-op-ok:hover{border-color:#2c6a4c;background:#e2efe7}\n.mk-op-nie,.mk-op-nie:hover{border-color:#b4322b;background:#f6e3e1}\n.mk-op-ok::after{content:'✓';margin-left:auto;padding-left:8px;font-weight:700;color:#245a40}\n.mk-op-nie::after{content:'✗';margin-left:auto;padding-left:8px;font-weight:700;color:#96261f}\n.mk-fb:focus{outline:none}\n.mk-fb > * + *{margin-top:8px}\n.mk-wynik{font-weight:700}\n";
+var D = {"nad": "Ćwiczenie · niepełne historie", "tytul": "Czego nie ma w tej historii?", "lid": "Cztery krótkie historie. Każda kończy się pewnym siebie wnioskiem. Przy każdej — sześć informacji, których może w niej brakować. Zaznacz te, bez których wniosek nie jest uprawniony, i sprawdź. Wybór można poprawiać dowolną liczbę razy.", "histNagl": "Historia {0}", "polecenie": "Zaznacz, których informacji brakuje, żeby ten wniosek był uprawniony.", "btnTekst": "Sprawdź", "btnTekstPonownie": "Sprawdź ponownie", "wynikOk": "Wszystkie pozycje ocenione trafnie. Przeczytaj wyjaśnienia poniżej.", "wynikNie": "Przy części pozycji wybór jest inny, niż wymaga ten wniosek. Zobacz wyjaśnienia przy znakach ✗ i popraw wybór.", "licznik": "Sprawdzone historie: {0} z {1}.", "podsumTytul": "Czego uczy to ćwiczenie", "podsumAkapity": ["Żadna z czterech historii powyżej nie powiedziała nieprawdy — problem był w tym, czego nie powiedziała. Pewny siebie wniosek i brakująca informacja świetnie się ze sobą godzą: umysł, który dostaje spójną opowieść, sam z siebie rzadko pyta, czego mu nie pokazano.", "Zasada, która to opisuje, nazywa się WYSIATI — to skrót angielskiego zdania, które znaczy „to, co widzisz, to wszystko, co jest”: ocena powstaje z tego, co akurat jest pod ręką, nie z tego, czego w niej brakuje. Zanim pewny siebie wniosek zostanie przyjęty dalej, warto zadać jedno pytanie: jakich informacji w tej historii nie ma?"], "historie": [{"opis": "Firma „Skupiona Głowa” przez dwa tygodnie testowała nowy suplement na koncentrację na stu osobach. Po tym czasie badani zgłaszali lepsze skupienie niż na początku.", "wniosek": "Suplement poprawia koncentrację.", "pozycje": [{"opis": "Czy była grupa, która przez ten sam czas nie brała suplementu?", "brakuje": true, "wyjasnienie": "Bez grupy porównawczej nie wiadomo, czy skupienie poprawiłoby się i tak, samo z siebie — na przykład wraz z rutyną testowania."}, {"opis": "Czy skupienie mierzono jakimś testem, czy tylko pytano o odczucie?", "brakuje": true, "wyjasnienie": "Odczucie łatwo ulega oczekiwaniom: kto wie, że bierze suplement na koncentrację, spodziewa się lepszego skupienia. Obiektywny test mówiłby więcej niż deklaracja."}, {"opis": "Ile kosztuje opakowanie suplementu?", "brakuje": false, "wyjasnienie": "Cena nic nie mówi o tym, czy suplement działa — to szczegół bez znaczenia dla tego wniosku."}, {"opis": "Czy w tym czasie badani nie zmienili też, na przykład, ilości snu albo liczby wypitej kawy?", "brakuje": true, "wyjasnienie": "Inna, niezauważona zmiana w tym samym okresie mogłaby tłumaczyć poprawę równie dobrze jak suplement."}, {"opis": "Czy producent ma staranną, profesjonalnie wyglądającą stronę internetową?", "brakuje": false, "wyjasnienie": "Staranna strona mówi o budżecie na marketing, nie o tym, czy suplement działa."}, {"opis": "Czy badanie przeprowadził ktoś niezależny od producenta?", "brakuje": true, "wyjasnienie": "Firma, która sama bada własny produkt i sama ogłasza wynik, ma powód, żeby zobaczyć w danych to, co jej odpowiada."}]}, {"opis": "W mieście Wierzbogród po wybudowaniu nowego ronda liczba wypadków na tym skrzyżowaniu spadła z kilkunastu do zaledwie kilku w ciągu roku.", "wniosek": "Nowe rondo rozwiązało problem wypadków w całym mieście.", "pozycje": [{"opis": "Czy w tym samym roku ograniczono też prędkość na innych ulicach miasta?", "brakuje": true, "wyjasnienie": "Inna zmiana wprowadzona w tym samym czasie mogłaby obniżyć liczbę wypadków niezależnie od ronda."}, {"opis": "Czy liczba wypadków spadła też na innych skrzyżowaniach, czy tylko na tym jednym?", "brakuje": true, "wyjasnienie": "Wniosek mówi o „całym mieście”, a dane dotyczą jednego skrzyżowania — to dokładnie ta różnica, którą trzeba sprawdzić."}, {"opis": "Ilu radnych głosowało za budową ronda?", "brakuje": false, "wyjasnienie": "Wynik dawnego głosowania nie ma wpływu na to, czy rondo faktycznie zmniejszyło liczbę wypadków."}, {"opis": "Czy w tym roku na drodze było ogółem mniej samochodów, na przykład z powodu innej inwestycji?", "brakuje": true, "wyjasnienie": "Mniejszy ruch sam z siebie zmniejsza liczbę wypadków, niezależnie od tego, czy rondo pomogło."}, {"opis": "Ile kosztowała budowa ronda?", "brakuje": false, "wyjasnienie": "Koszt ma znaczenie dla budżetu miasta, ale nie mówi nic o tym, czy rondo zmniejszyło liczbę wypadków."}, {"opis": "Czy dane liczono za pełny rok przed budową i pełny rok po, czy za różne okresy?", "brakuje": true, "wyjasnienie": "Porównanie okresów o różnej długości albo porze roku łatwo zawyża albo zaniża różnicę."}]}, {"opis": "Nowa osoba w zespole spóźniła się do pracy dwa razy w pierwszym tygodniu.", "wniosek": "To ktoś niesolidny.", "pozycje": [{"opis": "Czy ktoś zapytał tę osobę, jaki był powód spóźnień?", "brakuje": true, "wyjasnienie": "Ocena powstała bez zapytania zainteresowanej osoby o wyjaśnienie — a to najprostsze źródło brakującej informacji."}, {"opis": "Czy oba spóźnienia miały wspólną, jednorazową przyczynę, na przykład objazd na trasie dojazdu?", "brakuje": true, "wyjasnienie": "Jedna wspólna, przejściowa przyczyna to coś innego niż cecha charakteru — a wniosek mówi właśnie o charakterze."}, {"opis": "Czy ta osoba zrobiła dobre wrażenie na rozmowie o pracę?", "brakuje": false, "wyjasnienie": "Wrażenie z rozmowy nic nie mówi o punktualności. Za to łatwo się na nią rozlewa: dobre skłania do bagatelizowania spóźnień, złe — do ich wyolbrzymiania."}, {"opis": "Czy inne osoby w zespole też się kiedyś spóźniały i jak wtedy zareagowano?", "brakuje": true, "wyjasnienie": "Bez punktu odniesienia nie wiadomo, czy to reakcja na samo spóźnienie, czy na to, że spóźniła się akurat osoba nowa."}, {"opis": "Ile lat doświadczenia zawodowego ma ta osoba?", "brakuje": false, "wyjasnienie": "Staż zawodowy nic nie mówi o tym, czy ktoś przychodzi punktualnie."}, {"opis": "Czy spóźnienia powtórzyły się w kolejnych tygodniach, czy zdarzyły się tylko raz?", "brakuje": true, "wyjasnienie": "Ocena „niesolidny” zakłada wzorzec, a na razie wiadomo tylko o jednym tygodniu."}]}, {"opis": "W sieci krąży krótkie nagranie: przed sklepem stoi tłum, a podpis głosi, że ludzie masowo wykupują towar.", "wniosek": "W kraju kończą się zapasy.", "pozycje": [{"opis": "Czy sprawdzono, kiedy dokładnie nagrano ten materiał?", "brakuje": true, "wyjasnienie": "Nagranie mogło powstać dużo wcześniej i krążyć teraz z nowym, dopasowanym podpisem."}, {"opis": "Czy sprawdzono, gdzie dokładnie to nagrano?", "brakuje": true, "wyjasnienie": "Miejsce z podpisu i miejsce z nagrania nie muszą być tym samym miejscem."}, {"opis": "Czy tłum mógł mieć inny, zwyczajny powód — na przykład promocję albo otwarcie sklepu?", "brakuje": true, "wyjasnienie": "Tłum przed sklepem ma zwykle bardzo prozaiczne wytłumaczenia, dużo częstsze niż brak zapasów w całym kraju."}, {"opis": "Czy nagranie ma dobrą jakość obrazu?", "brakuje": false, "wyjasnienie": "Ostry obraz nie potwierdza podpisu. Nawet bardzo wyraźne nagranie nie mówi, kiedy i gdzie powstało ani dlaczego ludzie stoją przed sklepem."}, {"opis": "Czy tę samą informację potwierdzają inne, niezależne źródła?", "brakuje": true, "wyjasnienie": "Jedno nagranie z jednym podpisem to nie to samo co potwierdzenie z kilku niezależnych miejsc."}, {"opis": "Ile osób udostępniło to nagranie dalej?", "brakuje": false, "wyjasnienie": "Liczba udostępnień pokazuje popularność, nie prawdziwość treści."}]}]};
+function ensure(){
+  var w = document.getElementById('mk-brakuje') || document.querySelector('.mk-brakuje');
+  if(!w) return null;
+  w.id='mk-brakuje'; w.className='mk mk-brakuje';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-brakuje"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-brakuje');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  var N = D.historie.length, zrobioneN = 0, podsumowanieDodane = false;
+  c.appendChild(el('p','mk-lid', D.lid));
+  var licz = el('p','mk-licz');
+  licz.setAttribute('role','status');
+  c.appendChild(licz);
+  function licznik(){
+    licz.textContent = D.licznik.split('{0}').join(String(zrobioneN)).split('{1}').join(String(N));
+  }
+  licznik();
+
+  function dodajPodsumowanie(){
+    var b = el('div','mk-blok mk-ok');
+    b.appendChild(el('h4', null, D.podsumTytul));
+    D.podsumAkapity.forEach(function(a){ b.appendChild(el('p', null, a)); });
+    c.appendChild(b);
+  }
+
+  D.historie.forEach(function(hist, hi){
+    var sek = document.createElement('section');
+    sek.className = 'mk-hist';
+    var h = el('h4','mk-histtyt', D.histNagl.split('{0}').join(String(hi + 1)));
+    h.id = 'mk-h-' + hi;
+    sek.setAttribute('aria-labelledby', h.id);
+    sek.appendChild(h);
+    sek.appendChild(el('p','mk-opis', hist.opis));
+    var cyt = document.createElement('blockquote');
+    cyt.className = 'mk-cyt';
+    cyt.textContent = hist.wniosek;
+    sek.appendChild(cyt);
+
+    var fs = document.createElement('fieldset');
+    fs.className = 'mk-fs';
+    var lg = document.createElement('legend');
+    lg.className = 'mk-sr';
+    lg.textContent = 'Historia ' + (hi + 1) + '. ' + D.polecenie;
+    fs.appendChild(lg);
+    var pol = el('p','mk-pol', D.polecenie);
+    pol.setAttribute('aria-hidden','true');
+    fs.appendChild(pol);
+
+    var boxy = [];
+    hist.pozycje.forEach(function(poz, pi){
+      var id = 'mk-p' + hi + '-' + pi;
+      var lab = document.createElement('label');
+      lab.className = 'mk-opcja';
+      lab.setAttribute('for', id);
+      var inp = document.createElement('input');
+      inp.type = 'checkbox'; inp.id = id; inp.className = 'mk-check';
+      lab.appendChild(inp);
+      lab.appendChild(el('span', null, poz.opis));
+      fs.appendChild(lab);
+      var rec = {inp: inp, lab: lab, poz: poz};
+      boxy.push(rec);
+      inp.addEventListener('change', function(){
+        lab.classList.remove('mk-op-ok','mk-op-nie');
+        if(!fb.hidden){ fb.hidden = true; fb.innerHTML = ''; }
+      });
+    });
+    sek.appendChild(fs);
+
+    var btn = el('button','mk-btn', D.btnTekst);
+    btn.type = 'button';
+    sek.appendChild(btn);
+
+    var fb = el('div','mk-blok mk-fb');
+    fb.hidden = true;
+    fb.setAttribute('tabindex','-1');
+    sek.appendChild(fb);
+
+    btn.addEventListener('click', function(){
+      var trafne = 0;
+      fb.innerHTML = '';
+      fb.hidden = false;
+      boxy.forEach(function(b){
+        b.lab.classList.remove('mk-op-ok','mk-op-nie');
+        var ok = (b.inp.checked === b.poz.brakuje);
+        if(ok){ trafne++; b.lab.classList.add('mk-op-ok'); }
+        else { b.lab.classList.add('mk-op-nie'); }
+        var p = document.createElement('p');
+        var s = document.createElement('strong');
+        s.textContent = ok ? '✓ Trafne. ' : '✗ Nietrafne. ';
+        p.appendChild(s);
+        p.appendChild(document.createTextNode('„' + b.poz.opis + '” — ' + b.poz.wyjasnienie));
+        fb.appendChild(p);
+      });
+      var wyn = el('p','mk-wynik', trafne === boxy.length ? D.wynikOk : D.wynikNie);
+      fb.insertBefore(wyn, fb.firstChild);
+      btn.textContent = D.btnTekstPonownie;
+      fb.focus();
+      if(!fs.getAttribute('data-zrob')){
+        fs.setAttribute('data-zrob','1');
+        zrobioneN++;
+        licznik();
+        if(zrobioneN === N && !podsumowanieDodane){
+          podsumowanieDodane = true;
+          dodajPodsumowanie();
+        }
+      }
+    });
+
+    c.appendChild(sek);
+  });
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

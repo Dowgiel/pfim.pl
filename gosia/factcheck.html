@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Sprawdź informację w pięć minut</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Sprawdź informację w pięć minut</h1>
+<div class="mk mk-factcheck" id="mk-factcheck">Narzędzie „Sprawdź informację w pięć minut” — sześć pytań i przegląd organizacji fact-checkingowych. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-sekcja{font-size:17px;font-weight:700;border-bottom:2px solid #16181c;padding-bottom:6px}\n.mk-kroki{list-style:none;display:flex;flex-direction:column;gap:9px;counter-reset:k}\n.mk-krok{display:flex;gap:13px;align-items:flex-start;border:1px solid #c9ccc8;\n background:#fbfbfa;border-radius:3px;padding:12px 14px}\n.mk-krok-nr{flex:none;width:28px;height:28px;border-radius:50%;background:#16181c;\n color:#f4f4f2;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}\n.mk-krok-t strong{display:block;margin-bottom:4px;font-size:15px}\n.mk-krok-t p{color:#31353d}\n.mk-portale{display:flex;flex-direction:column;gap:8px}\n.mk-portal{border:1px solid #7d838a;border-radius:3px;background:#fff;overflow:hidden}\n.mk-portal.mk-otw{border-color:#16181c;border-width:2px}\n.mk-ptyt{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;\n font:inherit;text-align:left;background:#fff;border:0;border-left:4px solid #b4322b;\n padding:13px 15px;cursor:pointer;min-height:52px;color:#16181c}\n.mk-ptyt:hover{background:#eef0ee}\n.mk-ptyt:focus-visible{outline:3px solid #b4322b;outline-offset:-3px}\n.mk-ptyt[aria-expanded=\"true\"]{background:#16181c;color:#f4f4f2;border-left-color:#e8a49f}\n.mk-pnaz{font-weight:700;font-size:16px}\n.mk-pstr{font-size:12px;letter-spacing:.07em;text-transform:uppercase}\n.mk-pszczegoly{padding:13px 15px;border-top:1px solid #c9ccc8;background:#fbfbfa;\n display:flex;flex-direction:column;gap:9px}\n.mk-wiersz{display:grid;grid-template-columns:minmax(120px,150px) 1fr;gap:6px 14px}\n.mk-etyk{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#4a4e55;\n font-weight:700;padding-top:2px}\n.mk-wart{color:#16181c}\n.mk-link{color:#8c3029;text-decoration:underline;overflow-wrap:anywhere}\n.mk-link:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n@media (max-width:560px){.mk-wiersz{grid-template-columns:1fr}}\n";
+var D = {"nad": "Ćwiczenie · sprawdzanie informacji", "tytul": "Sprawdź informację w pięć minut", "kroki": [{"t": "Kto to mówi", "o": "Znajdź autora z imienia i nazwiska albo instytucję. Jeśli nie da się ustalić autora — to nie jest źródło, tylko nośnik. Gadacz nazywa to wprost: internet jest nośnikiem informacji, nie jej źródłem."}, {"t": "Skąd on to wie", "o": "Szukaj odesłania do danych, dokumentu, badania. „Eksperci mówią” i „z badań wynika” bez wskazania konkretnych osób ani badań to sygnał ostrzegawczy, nie argument."}, {"t": "Kiedy to powstało", "o": "Data publikacji i data wydarzenia to dwie różne rzeczy. Zdjęcie sprzed sześciu lat podpisane dzisiejszą datą to najczęstsza forma dezinformacji wizualnej."}, {"t": "Czego tu nie ma", "o": "Czego brakuje, żeby ocenić sprawę? Punktu odniesienia przy liczbie? Drugiej strony? Informacji, kto finansował badanie?"}, {"t": "Kto na tym zyskuje", "o": "Nie chodzi o teorię spiskową, tylko o zwykłe pytanie o interes. Kto zyskuje, jeśli w to uwierzę i przekażę dalej?"}, {"t": "Sprawdzenie krzyżowe", "o": "Ta sama informacja w co najmniej dwóch niezależnych źródłach. Niezależnych — czyli nie trzy portale przedrukowujące tę samą depeszę."}], "portale": [{"nazwa": "Demagog", "www": "https://demagog.org.pl/", "kto": "Stowarzyszenie Demagog, organizacja pozarządowa (Warszawa)", "utrzymanie": "Granty, darowizny, zbiórki publiczne — sprawozdania finansowe są jawne", "metoda": "Weryfikacja wypowiedzi polityków i polityczek oraz treści z sieci; każda analiza ma wypisane źródła i skalę ocen (prawda / fałsz / manipulacja / częściowa prawda)", "mocne": "Pierwsza polska organizacja w międzynarodowej sieci fact-checkingowej IFCN; jawna metodologia i pełne wykazy źródeł", "slabe": "Zasięg tematyczny skupiony głównie na polityce krajowej"}, {"nazwa": "Konkret24", "www": "https://konkret24.tvn24.pl/", "kto": "Serwis prowadzony w ramach TVN24", "utrzymanie": "Środki nadawcy komercyjnego", "metoda": "Sprawdzanie wiadomości krążących w sieci i wypowiedzi publicznych; osobne wyjaśnienia mechanizmów dezinformacji", "mocne": "Zaplecze dużej redakcji ogólnokrajowej (TVN24); partner międzynarodowej platformy CEDMO", "slabe": "Należy do grupy medialnej, więc przy sprawach dotyczących tej grupy warto sięgnąć po drugie źródło — to zwykła zasada, która dotyczy każdego serwisu sprawdzającego sam siebie. Nie figuruje też na liście zweryfikowanych organizacji EFCSN, w odróżnieniu od Demagoga"}, {"nazwa": "AFP Sprawdzam", "www": "https://sprawdzam.afp.com/", "kto": "Agence France-Presse, francuska agencja prasowa", "utrzymanie": "Przychody agencji; część działań fact-checkingowych finansowana ze współpracy z platformami społecznościowymi", "metoda": "Weryfikacja zdjęć i nagrań (w tym wyszukiwanie wstecz obrazem), analiza treści krążących międzynarodowo", "mocne": "Certyfikat IFCN; duże doświadczenie w weryfikacji zdjęć i nagrań dzięki globalnej sieci agencyjnej", "slabe": "Finansowanie częściowo od platform, które sama sprawdza — warto o tym wiedzieć; mniej treści o polskiej polityce lokalnej"}, {"nazwa": "Fakenews.pl", "www": "https://fakenews.pl/", "kto": "Fundacja Przeciwdziałamy Dezinformacji", "utrzymanie": "Darowizny i granty", "metoda": "Analizy fałszywych informacji krążących w sieci, prowadzone przez zespół fundacji", "mocne": "Członek międzynarodowej sieci fact-checkingowej IFCN od 2021 roku; zdywersyfikowane i jawne finansowanie", "slabe": "Krótsza historia działania niż Demagog — fundacja powstała w 2020 roku"}], "naglowek_kroki": "Sześć pytań do każdej informacji", "naglowek_portale": "Kto sprawdza zawodowo — i za czyje pieniądze", "nota": "Pytanie o finansowanie nie służy podważaniu tych organizacji. Służy temu, żebyś umiał je zadać przy każdym źródle — także przy tym, któremu ufasz.", "etykiety": {"kto": "Kto za tym stoi", "utrzymanie": "Z czego się utrzymuje", "metoda": "Jak sprawdza", "mocne": "Mocna strona", "slabe": "Na co uważać", "www": "Adres"}};
+function ensure(){
+  var w = document.getElementById('mk-factcheck') || document.querySelector('.mk-factcheck');
+  if(!w) return null;
+  w.id='mk-factcheck'; w.className='mk mk-factcheck';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-factcheck"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-factcheck');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+function buduj(c, root){
+  c.appendChild(el('p','mk-lid',
+    'Wracaj tu, ilekroć coś wygląda na zbyt dobre albo zbyt oburzające, żeby było prawdziwe.'));
+
+  c.appendChild(el('h4','mk-sekcja', D.naglowek_kroki));
+  var ol=document.createElement('ol'); ol.className='mk-kroki';
+  D.kroki.forEach(function(k, i){
+    var li=document.createElement('li'); li.className='mk-krok';
+    var nr=el('span','mk-krok-nr', String(i+1)); nr.setAttribute('aria-hidden','true');
+    var tre=el('div','mk-krok-t');
+    var s=document.createElement('strong'); s.textContent=k.t;
+    tre.appendChild(s); tre.appendChild(el('p',null,k.o));
+    li.appendChild(nr); li.appendChild(tre); ol.appendChild(li);
+  });
+  c.appendChild(ol);
+
+  c.appendChild(el('h4','mk-sekcja', D.naglowek_portale));
+  c.appendChild(el('p','mk-lid', D.nota));
+  var lista=el('div','mk-portale');
+  D.portale.forEach(function(p, i){
+    var art=document.createElement('article'); art.className='mk-portal';
+    var btn=document.createElement('button');
+    btn.type='button'; btn.className='mk-ptyt';
+    btn.setAttribute('aria-expanded','false');
+    var tid='mk-pt-'+i;
+    btn.setAttribute('aria-controls', tid);
+    btn.appendChild(el('span','mk-pnaz', p.nazwa));
+    btn.appendChild(el('span','mk-pstr', 'rozwiń'));
+    var sz=el('div','mk-pszczegoly'); sz.id=tid; sz.hidden=true;
+    ['kto','utrzymanie','metoda','mocne','slabe'].forEach(function(kl){
+      var w=el('div','mk-wiersz');
+      w.appendChild(el('span','mk-etyk', D.etykiety[kl]));
+      w.appendChild(el('span','mk-wart', p[kl]));
+      sz.appendChild(w);
+    });
+    var wl=el('div','mk-wiersz');
+    wl.appendChild(el('span','mk-etyk', D.etykiety.www));
+    var a=document.createElement('a'); a.className='mk-link';
+    a.href=p.www; a.textContent=p.www;
+    a.setAttribute('target','_blank'); a.setAttribute('rel','noopener noreferrer');
+    var sr=el('span','mk-sr',' (otwiera się w nowej karcie)');
+    var kont=el('span','mk-wart'); kont.appendChild(a); kont.appendChild(sr);
+    wl.appendChild(kont); sz.appendChild(wl);
+    btn.addEventListener('click', function(){
+      var byl = btn.getAttribute('aria-expanded')==='true';
+      btn.setAttribute('aria-expanded', byl?'false':'true');
+      sz.hidden = byl;
+      btn.querySelector('.mk-pstr').textContent = byl ? 'rozwiń' : 'zwiń';
+      art.className = 'mk-portal' + (byl ? '' : ' mk-otw');
+    });
+    art.appendChild(btn); art.appendChild(sz); lista.appendChild(art);
+  });
+  c.appendChild(lista);
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ćwiczenie: Oszacuj, zanim sprawdzisz</title>
+<link rel="stylesheet" href="zasoby/cwiczenie.css">
+</head>
+<body>
+<main class="cw">
+<p class="cw-kurs">Myślenie krytyczne, czyli jak nie ulegać manipulacji</p>
+<h1>Ćwiczenie: Oszacuj, zanim sprawdzisz</h1>
+<div class="mk mk-szacuj" id="mk-szacuj">Ćwiczenie „Oszacuj, zanim sprawdzisz” — oszacuj cztery liczby z badań nad deepfake, potem porównaj je z wynikiem. Jeśli się nie wczyta, włącz JavaScript.</div>
+<script>
+// <![CDATA[
+(function(){
+'use strict';
+var CSS = "\n.mk{all:initial;display:block;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,\n 'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:#16181c;\n background:#f4f4f2;border:1px solid #c9ccc8;border-radius:3px;padding:0;margin:1.4em 0;\n box-sizing:border-box;overflow-x:clip}\n.mk *,.mk *::before,.mk *::after{box-sizing:border-box}\n.mk p,.mk h3,.mk h4,.mk ul,.mk ol,.mk li,.mk figure{margin:0;padding:0}\n.mk-glowa{background:#16181c;color:#f4f4f2;padding:14px 20px;display:flex;\n flex-wrap:wrap;gap:4px 14px;align-items:baseline}\n.mk-glowa .mk-nad{font-size:11px;letter-spacing:.14em;text-transform:uppercase;\n color:#e8a49f;font-weight:700}\n.mk-glowa h3{font-size:20px;font-weight:700;line-height:1.25;color:#f4f4f2;width:100%}\n.mk-cialo{padding:20px}\n.mk-cialo > * + *{margin-top:14px}\n.mk-lid{color:#4a4e55;max-width:62ch}\n.mk-zlec{border-left:3px solid #b4322b;background:#ecece9;padding:12px 16px}\n.mk-zlec .mk-od{font-size:11px;letter-spacing:.1em;text-transform:uppercase;\n color:#8c3029;font-weight:700;margin-bottom:5px}\n.mk-btn{display:inline-block;font:inherit;font-weight:600;color:#f4f4f2;background:#16181c;\n border:2px solid #16181c;border-radius:3px;padding:10px 18px;cursor:pointer;min-height:44px;\n text-align:center}\n.mk-btn:hover{background:#31353d;border-color:#31353d}\n.mk-btn:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-btn[aria-disabled=\"true\"]{background:#565b63;border-color:#565b63;cursor:not-allowed}\n.mk-btn2[aria-disabled=\"true\"]{background:#e3e3e0;color:#4a4e55;border-color:#7d838a}\n.mk-btn2{background:#f4f4f2;color:#16181c}\n.mk-btn2:hover{background:#e3e3e0}\n.mk-btny{display:flex;flex-wrap:wrap;gap:10px}\n.mk-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;\n clip:rect(0 0 0 0);white-space:nowrap;border:0}\n.mk-blok{border:1px solid #c9ccc8;background:#fbfbfa;padding:16px 18px;border-radius:3px}\n.mk-blok > * + *{margin-top:10px}\n.mk-blok h4{font-size:16px;font-weight:700}\n.mk-ok{border-left:4px solid #2c6a4c}\n.mk-uwaga{border-left:4px solid #b4322b}\n.mk-licz{font-size:13px;color:#4a4e55}\n.mk-mono{font-family:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;font-size:13px}\n.mk ul.mk-lista{list-style:none;display:flex;flex-direction:column;gap:8px}\n.mk ul.mk-lista > li{padding-left:18px;position:relative}\n.mk ul.mk-lista > li::before{content:'';position:absolute;left:0;top:.62em;\n width:7px;height:7px;background:#b4322b;border-radius:1px}\n@media (max-width:520px){.mk-cialo{padding:15px}.mk-glowa{padding:12px 15px}}\n.mk[hidden],.mk [hidden]{display:none!important}\n\n.mk-wartc + .mk-wartc{margin-top:14px}\n.mk-etyk{font-size:17px;font-weight:700;margin-bottom:8px}\n.mk-fs{border:1px solid #c9ccc8;border-left:4px solid #16181c;border-radius:3px;\n padding:14px 16px;background:#fbfbfa;margin:0;min-width:0}\n.mk-fs > * + *{margin-top:12px}\n.mk-pyt{font-size:16px;line-height:1.5}\n.mk-suwrz{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}\n.mk-range{flex:1 1 140px;min-width:120px;height:44px;accent-color:#b4322b}\n.mk-range:focus-visible{outline:3px solid #b4322b;outline-offset:3px}\n.mk-numwrap{display:flex;align-items:center;gap:8px;flex:0 0 auto}\n.mk-etykn{font-size:14px;color:#4a4e55;white-space:nowrap}\n.mk-pole{width:5em;min-width:64px;min-height:44px;padding:8px 10px;border:1px solid #7d838a;\n border-radius:3px;font:inherit;font-size:16px}\n.mk-pole:focus-visible{outline:3px solid #b4322b;outline-offset:2px}\n.mk-jedn{font-size:14px;color:#4a4e55}\n.mk-wynik svg{width:100%;height:auto;display:block}\n.mk-wynik:focus{outline:none}\n.mk-zdanie{font-weight:700}\n.mk-opcje{display:flex;flex-direction:column;gap:8px}\n.mk-opcja{display:flex;align-items:flex-start;gap:10px;border:1px solid #7d838a;border-radius:3px;\n padding:10px 13px;cursor:pointer;background:#fff;min-height:44px}\n.mk-opcja:hover{background:#eef0ee}\n.mk-opcja:has(.mk-radio:checked){border-color:#16181c;border-width:2px;padding:9px 12px}\n.mk-opcja:focus-within{outline:3px solid #b4322b;outline-offset:2px}\n.mk-radio{width:18px;height:18px;accent-color:#b4322b;margin:3px 0 0;flex:none}\n.mk-syn{min-height:24px}\n.mk-syn:focus{outline:none}\n";
+var D = {"nad": "Ćwiczenie · deepfake", "tytul": "Oszacuj, zanim sprawdzisz", "lid": "Poniżej cztery liczby z badań nad deepfake. Najpierw oszacuj każdą — suwakiem albo wpisując liczbę. Potem sprawdź wynik. Szacunek można zmienić i porównać ponownie, ile razy trzeba.", "pewnosc": {"pytanie": "Jak dobrze, Twoim zdaniem, odróżniasz nagranie prawdziwe od deepfake'u?", "poziomy": [{"k": "bardzo", "t": "Prawie zawsze to rozpoznaję."}, {"k": "czesto", "t": "Zwykle rozpoznaję, ale czasem się mylę."}, {"k": "srodek", "t": "Czasem tak, czasem nie — pół na pół."}, {"k": "rzadko", "t": "Rzadko rozpoznaję, częściej zgaduję."}, {"k": "nigdy", "t": "Prawie nigdy nie potrafię tego rozpoznać."}]}, "wartosci": [{"klucz": "trafnosc", "etykieta": "Trafność rozpoznawania", "pytanie": "W eksperymencie 210 osób oceniało szesnaście nagrań wideo — połowa autentyczna, połowa wygenerowana jako deepfake. Ile procent ocen trafnie wskazało, które nagranie jest prawdziwe?", "jednostka": "%", "typ": "procent", "min": 0, "max": 100, "krok": 1, "start": 50, "wynik": 57.6, "dokladny": true, "wyjasnienie": "Köbis, Doležalová i Soraperra (2021), czasopismo iScience: średnia trafność wyniosła 57,6 procent — ledwie powyżej poziomu przypadkowego zgadywania. Ani zachęta finansowa, ani wcześniejsze ostrzeżenie o zagrożeniu nie poprawiły wyniku."}, {"klucz": "nadmierna_pewnosc", "etykieta": "Zbyt duża pewność", "pytanie": "Ci sami badani wiedzieli z góry, że dokładnie połowa z szesnastu nagrań jest fałszywa. Ile procent nagrań mimo to ocenili jako autentyczne?", "jednostka": "%", "typ": "procent", "min": 0, "max": 100, "krok": 1, "start": 50, "wynik": 67.4, "dokladny": true, "wyjasnienie": "To samo badanie: Köbis, Doležalová i Soraperra (2021). Badani ocenili jako autentyczne aż 67,4 procent nagrań — więcej, niż wynikało ze znanej im proporcji pół na pół. Do tego przeceniali własną trafność — najbardziej ci, którym szło najgorzej."}, {"klucz": "pornografia", "etykieta": "Do czego naprawdę służy", "pytanie": "Firma Sensity analizowała nagrania deepfake krążące w sieci. Jaki odsetek wykrytych we wrześniu 2019 roku filmów deepfake stanowiła pornografia stworzona bez zgody osoby przedstawionej?", "jednostka": "%", "typ": "procent", "min": 0, "max": 100, "krok": 1, "start": 50, "wynik": 96, "dokladny": true, "wyjasnienie": "Dane firmy Sensity, przytoczone w raporcie Europol Innovation Lab (2022, aktualizacja 2024): 96 procent wykrytych wtedy filmów deepfake to pornografia bez zgody osoby przedstawionej. Polityka budzi więcej rozgłosu, ale liczebnie nie przeważa."}, {"klucz": "nask_polska", "etykieta": "Skala w Polsce", "pytanie": "NASK śledzi, ilu polskich osób publicznych wizerunek wykorzystano bez zgody w fałszywych nagraniach reklamujących inwestycje. W drugiej połowie czerwca 2024 roku takich osób było 84. Ile ich NASK rozpoznał kilka tygodni później?", "jednostka": "osób", "typ": "osoby", "min": 0, "max": 200, "krok": 1, "start": 100, "wynik": 121, "dokladny": true, "wyjasnienie": "Komunikat NASK z 22 lipca 2024 roku: w ciągu kilku tygodni liczba rozpoznanych polskich osób publicznych, których wizerunek bezprawnie wykorzystano w takich oszustwach, wzrosła z 84 do 121. Najczęściej były to osoby ze świata dziennikarstwa — 32 procent."}], "synteza": {"brak": "Zaznacz jedną z opcji wyżej — zobaczysz, jak deklarowana pewność wypada na tle badania.", "wysoka": "Zadeklarowano wysoką pewność siebie. W badaniu Köbisa, Doležalovej i Soraperry (2021) badani przeceniali, ile nagrań rozpoznali trafnie — i to najbardziej ci, którym szło najgorzej (zależność przeceniania się od trafności: r = –0,475). Sama pewność nie jest dowodem trafności.", "srodek": "Zadeklarowano pewność pośrednią. To ostrożne stanowisko dobrze zgadza się z danymi: w badaniu Köbisa, Doležalovej i Soraperry (2021) średnia trafność wyniosła tylko 57,6 procent — ledwie powyżej przypadkowego zgadywania.", "niska": "Zadeklarowano niską pewność. Badanie Köbisa, Doležalovej i Soraperry (2021) potwierdza, że to trzeźwa ocena: średnia trafność badanych wyniosła 57,6 procent, a najbardziej przeceniali się ci, którym szło najgorzej (r = –0,475)."}, "podsumowanie": "To ćwiczenie uczy: intuicyjny szacunek często odbiega od wyniku badań, a poczucie pewności nie chroni przed pomyłką."};
+function ensure(){
+  var w = document.getElementById('mk-szacuj') || document.querySelector('.mk-szacuj');
+  if(!w) return null;
+  w.id='mk-szacuj'; w.className='mk mk-szacuj';
+  return w;
+}
+function stylKiedys(){
+  if(document.querySelector('style[data-mk="mk-szacuj"]')) return;
+  var st=document.createElement('style');
+  st.setAttribute('data-mk','mk-szacuj');
+  st.appendChild(document.createTextNode(CSS));
+  (document.head||document.documentElement).appendChild(st);
+}
+function el(t,k,tx){var e=document.createElement(t); if(k) e.className=k;
+  if(tx!==undefined && tx!==null) e.textContent=tx; return e;}
+function glowa(root){
+  var g=el('div','mk-glowa');
+  if(D.nad){var n=el('p','mk-nad',D.nad); g.appendChild(n);}
+  g.appendChild(el('h3',null,D.tytul));
+  root.appendChild(g);
+  var c=el('div','mk-cialo'); root.appendChild(c); return c;
+}
+function zlecenie(c){
+  if(!D.zlecenie) return;
+  var z=el('div','mk-zlec');
+  z.appendChild(el('p','mk-od', D.zlecenie.od || 'Zlecenie z redakcji'));
+  z.appendChild(el('p',null, D.zlecenie.tresc));
+  c.appendChild(z);
+}
+
+var SVGNS = 'http://www.w3.org/2000/svg';
+
+function pl(n){ return String(n).replace('.', ','); }
+
+function clamp(n, lo, hi){ return Math.min(hi, Math.max(lo, n)); }
+
+function osobForma(n){
+  n = Math.abs(Math.round(n));
+  if(n === 1){ return 'osoba'; }
+  var dziesiatki = n % 100, jednosci = n % 10;
+  if(dziesiatki >= 12 && dziesiatki <= 14){ return 'osób'; }
+  if(jednosci >= 2 && jednosci <= 4){ return 'osoby'; }
+  return 'osób';
+}
+
+function jednostkaSlowna(w, val){
+  return w.typ === 'procent' ? 'procent' : osobForma(val);
+}
+
+function formatWartosc(w, val){
+  return pl(val) + ' ' + jednostkaSlowna(w, val);
+}
+
+function formatWynik(w){
+  var przedrostek = w.dokladny ? '' : 'ponad ';
+  return przedrostek + pl(w.wynik) + ' ' + jednostkaSlowna(w, w.wynik);
+}
+
+function udzial(w, val){
+  return clamp((val - w.min) / (w.max - w.min), 0, 1);
+}
+
+function elS(tag, attrs){
+  var e = document.createElementNS(SVGNS, tag);
+  for(var k in attrs){ if(Object.prototype.hasOwnProperty.call(attrs, k)){ e.setAttribute(k, attrs[k]); } }
+  return e;
+}
+
+function svgPorownanie(w, twoj, opis){
+  var X0 = 1, TORW = 268, TORH = 16;
+  var svg = elS('svg', {viewBox: '0 0 300 120', width: '100%', role: 'img', 'aria-label': opis});
+
+  function tor(y){
+    svg.appendChild(elS('rect', {x: X0, y: y, width: TORW, height: TORH, rx: 2, fill: '#f4f4f2', stroke: '#c9ccc8'}));
+  }
+  function pasek(y, frakcja, kolor){
+    var szer = Math.max(3, frakcja * TORW);
+    svg.appendChild(elS('rect', {x: X0, y: y, width: szer, height: TORH, rx: 2, fill: kolor}));
+  }
+  function tekst(x, y, tresc, kolor, rozmiar, gruby){
+    var t = elS('text', {x: x, y: y, fill: kolor, 'font-size': rozmiar || 12});
+    if(gruby){ t.setAttribute('font-weight', '700'); }
+    t.textContent = tresc;
+    svg.appendChild(t);
+  }
+
+  tekst(X0, 12, 'Twój szacunek', '#4a4e55', 11);
+  tor(16);
+  pasek(16, udzial(w, twoj), '#16181c');
+  tekst(X0, 50, formatWartosc(w, twoj), '#16181c', 15, true);
+
+  tekst(X0, 66, 'Wynik badania', '#4a4e55', 11);
+  tor(70);
+  pasek(70, udzial(w, w.wynik), '#b4322b');
+  if(!w.dokladny){
+    var koniec = X0 + Math.max(3, udzial(w, w.wynik) * TORW);
+    tekst(koniec + 4, 82, '+', '#b4322b', 14, true);
+  }
+  tekst(X0, 104, formatWynik(w), '#b4322b', 15, true);
+
+  return svg;
+}
+
+function polaczKontrolki(w, inpR, inpN){
+  function odswiez(val){
+    val = Math.round(clamp(val, w.min, w.max));
+    inpR.value = String(val);
+    inpR.setAttribute('aria-valuetext', formatWartosc(w, val));
+    return val;
+  }
+  inpR.addEventListener('input', function(){
+    var val = odswiez(Number(inpR.value));
+    inpN.value = String(val);
+  });
+  inpN.addEventListener('input', function(){
+    if(inpN.value === ''){ return; }
+    var n = Number(inpN.value);
+    if(isNaN(n)){ return; }
+    odswiez(n);
+  });
+  inpN.addEventListener('change', function(){
+    var n = Number(inpN.value);
+    if(inpN.value === '' || isNaN(n)){ n = w.start; }
+    var val = odswiez(n);
+    inpN.value = String(val);
+  });
+  odswiez(w.start);
+  inpN.value = String(w.start);
+}
+
+function kartaWartosci(c, w, i){
+  var sek = document.createElement('section');
+  sek.className = 'mk-wartc';
+  var naglowek = el('h4', 'mk-etyk', w.etykieta);
+  naglowek.id = 'mk-w-' + i;
+  sek.setAttribute('aria-labelledby', naglowek.id);
+  sek.appendChild(naglowek);
+
+  var fs = document.createElement('fieldset');
+  fs.className = 'mk-fs';
+  var lg = document.createElement('legend');
+  lg.className = 'mk-sr';
+  lg.textContent = w.pytanie;
+  fs.appendChild(lg);
+  var widoczne = el('p', 'mk-pyt', w.pytanie);
+  widoczne.setAttribute('aria-hidden', 'true');
+  fs.appendChild(widoczne);
+
+  var idR = 'mk-r-' + i, idN = 'mk-n-' + i;
+  var rzad = el('div', 'mk-suwrz');
+
+  var labR = document.createElement('label');
+  labR.setAttribute('for', idR);
+  labR.className = 'mk-sr';
+  labR.textContent = 'Suwak — ' + w.etykieta;
+  var inpR = document.createElement('input');
+  inpR.type = 'range'; inpR.id = idR; inpR.className = 'mk-range';
+  inpR.min = String(w.min); inpR.max = String(w.max); inpR.step = String(w.krok);
+  rzad.appendChild(labR);
+  rzad.appendChild(inpR);
+
+  var numWrap = el('div', 'mk-numwrap');
+  var labN = document.createElement('label');
+  labN.setAttribute('for', idN);
+  labN.className = 'mk-etykn';
+  labN.textContent = 'Twój szacunek';
+  var inpN = document.createElement('input');
+  inpN.type = 'number'; inpN.id = idN; inpN.className = 'mk-pole';
+  inpN.min = String(w.min); inpN.max = String(w.max); inpN.step = String(w.krok);
+  inpN.setAttribute('inputmode', 'numeric');
+  inpN.setAttribute('aria-label', 'Twój szacunek — ' + w.etykieta);
+  numWrap.appendChild(labN);
+  numWrap.appendChild(inpN);
+  numWrap.appendChild(el('span', 'mk-jedn', w.jednostka));
+  rzad.appendChild(numWrap);
+
+  fs.appendChild(rzad);
+  polaczKontrolki(w, inpR, inpN);
+
+  var btn = el('button', 'mk-btn', 'Pokaż wynik');
+  btn.type = 'button';
+  fs.appendChild(btn);
+
+  var wynikBlok = el('div', 'mk-blok mk-wynik');
+  wynikBlok.hidden = true;
+  wynikBlok.setAttribute('tabindex', '-1');
+  fs.appendChild(wynikBlok);
+
+  btn.addEventListener('click', function(){
+    var twoj = Number(inpR.value);
+    var zdanie = 'Twój szacunek: ' + formatWartosc(w, twoj) + '. Wynik: ' + formatWynik(w) + '.';
+    wynikBlok.innerHTML = '';
+    wynikBlok.hidden = false;
+    wynikBlok.appendChild(svgPorownanie(w, twoj, zdanie));
+    wynikBlok.appendChild(el('p', 'mk-zdanie', zdanie));
+    wynikBlok.appendChild(el('p', null, w.wyjasnienie));
+    wynikBlok.focus();
+    btn.textContent = 'Porównaj ponownie';
+  });
+
+  sek.appendChild(fs);
+  c.appendChild(sek);
+}
+
+function blokPewnosci(c){
+  var fs = document.createElement('fieldset');
+  fs.className = 'mk-fs';
+  var lg = document.createElement('legend');
+  lg.className = 'mk-sr';
+  lg.textContent = D.pewnosc.pytanie;
+  fs.appendChild(lg);
+  var widoczne = el('p', 'mk-pyt', D.pewnosc.pytanie);
+  widoczne.setAttribute('aria-hidden', 'true');
+  fs.appendChild(widoczne);
+
+  var opcje = el('div', 'mk-opcje');
+  D.pewnosc.poziomy.forEach(function(p, j){
+    var id = 'mk-pew-' + j;
+    var lab = document.createElement('label');
+    lab.className = 'mk-opcja';
+    lab.setAttribute('for', id);
+    var inp = document.createElement('input');
+    inp.type = 'radio'; inp.name = 'mk-pewnosc'; inp.id = id; inp.value = p.k;
+    inp.className = 'mk-radio';
+    inp.addEventListener('change', function(){ syntezuj(p.k); });
+    lab.appendChild(inp);
+    lab.appendChild(el('span', null, p.t));
+    opcje.appendChild(lab);
+  });
+  fs.appendChild(opcje);
+  c.appendChild(fs);
+
+  var syn = el('div', 'mk-blok mk-syn');
+  syn.setAttribute('aria-live', 'polite');
+  syn.appendChild(el('p', null, D.synteza.brak));
+  c.appendChild(syn);
+
+  function syntezuj(k){
+    var grupa = (k === 'bardzo' || k === 'czesto') ? 'wysoka' : (k === 'rzadko' || k === 'nigdy') ? 'niska' : 'srodek';
+    syn.innerHTML = '';
+    syn.appendChild(el('p', null, D.synteza[grupa]));
+  }
+}
+
+function buduj(c, root){
+  c.appendChild(el('p', 'mk-lid', D.lid));
+  blokPewnosci(c);
+  D.wartosci.forEach(function(w, i){ kartaWartosci(c, w, i); });
+  c.appendChild(el('p', null, D.podsumowanie));
+}
+
+function start(){
+  var root=ensure();
+  if(!root || root.getAttribute('data-mk-init')) return;
+  root.setAttribute('data-mk-init','1');
+  root.setAttribute('lang','pl');
+  stylKiedys();
+  root.innerHTML='';
+  var c=glowa(root);
+  zlecenie(c);
+  buduj(c, root);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', start);
+else start();
+})();
+// ]]>
+</script>
+</main>
+</body>
+</html>
