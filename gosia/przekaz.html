@@ -132,7 +132,7 @@ function buduj(c, root){
       rozebrane++;
       licznik();
     }
-    dalej.addEventListener('click', function(){ zadanie(); zad.focus(); });
+    dalej.addEventListener('click', function(){ if(t >= p.zadania.length) return; zadanie(); zad.focus(); });
     zadanie();
     c.appendChild(karta);
   });
